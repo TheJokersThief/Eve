@@ -4,6 +4,7 @@
 .env
 .vagrant/
 /vendor
+!/vendor/autoload.php
 /node_modules
 composer.lock
 public/css/app*
