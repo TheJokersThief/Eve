@@ -48,7 +48,7 @@ MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
 
 DEV_EMAIL=netsoc@uccsocieties.ie
-SITE_TITLE=Netsoc softwareproject
+SITE_TITLE=Netsocsoftwareproject
 ```
 
 ### Node and Gulp
