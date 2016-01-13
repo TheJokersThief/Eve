@@ -33,6 +33,11 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "./public", "/var/www/html", :owner=> 'www-data', :group=>'www-data'
 
   config.vm.provision "shell", inline: <<-SHELL
+    sudo apt-get -y remove mysql-server
+    sudo apt-get -y autoremove
+    sudo apt-get -y install mysql-client-5.6 mysql-client-core-5.6
+    sudo apt-get -y install mysql-server-5.6
+
     # Create our database and give root all permissions
     mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS #{project_name};"
     mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root';"
@@ -44,12 +49,8 @@ Vagrant.configure(2) do |config|
     sudo /sbin/swapon /var/swap.1
 
     # Update laravel and create all the DB tables
-    cd /var/www/
-    sudo composer install
-    sudo chmod -R 777 /var/www/storage
-    sudo composer update
-    sudo php artisan migrate
-    sudo php artisan db:seed
+    sudo chmod +x /var/www/install/install.sh
+    sudo /var/www/install/install.sh
 
   SHELL
 end
