@@ -45,7 +45,7 @@ Vagrant.configure(2) do |config|
 
     # Update laravel and create all the DB tables
     cd /var/www/
-    sudo composer self-update
+    sudo composer install
     sudo chmod -R 777 /var/www/storage
     sudo composer update
     sudo php artisan migrate
