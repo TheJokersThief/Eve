@@ -33,10 +33,12 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "./public", "/var/www/html", :owner=> 'www-data', :group=>'www-data'
 
   config.vm.provision "shell", inline: <<-SHELL
+    sudo service mysql stop
     sudo apt-get -y remove mysql-server
     sudo apt-get -y autoremove
     sudo apt-get -y install mysql-client-5.6 mysql-client-core-5.6
     sudo apt-get -y install mysql-server-5.6
+    sudo service mysql start
 
     # Create our database and give root all permissions
     mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS #{project_name};"
