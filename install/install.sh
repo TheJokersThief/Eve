@@ -7,6 +7,10 @@ if [ ! -d "/var/www/vendor" ]; then
 	if [ ! -d "/var/www/storage/framework/views" ]; then
 		mkdir /var/www/storage/framework/views
 	fi
+
+	if [ ! -d "/var/www/storage" ]; then
+		mkdir /var/www/storage
+	fi
 fi
 
 chmod -R 777 storage
