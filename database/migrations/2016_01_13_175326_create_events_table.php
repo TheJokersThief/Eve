@@ -24,7 +24,6 @@ class CreateEventsTable extends Migration
             $table->foreign('location_id')
                     ->references('id')
                     ->on('locations');
-                    //onDelete('cascade')?
         });
     }
 
