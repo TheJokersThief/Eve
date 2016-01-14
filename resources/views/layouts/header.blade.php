@@ -11,13 +11,13 @@
 
 	
 	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') }}/css/font-awesome.min.css">
-	<link rel="stylesheet" href="{{ URL::to('/') }}/css/normalize.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') }}/css/app.css">
 	@yield('extra-css')
 	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 	<script type="text/javascript" src="{{ URL::to('/') }}/js/main.js"></script>
 	@yield('extra-js')
 
@@ -31,7 +31,7 @@
 			<div class="nav-wrapper container">
 			  <a href="{{ URL::to('/home') }}" class="brand-logo">
 			  	<figure>
-					<img src="images/logo.png" alt="{{ env( 'SITE_TITLE' ) }}" class="logo">
+					<img src="images/logo.png" alt="{{ env( 'SITE_TITLE' ) }}" class="logo" width="20%">
 					<figcaption class="sr-only">
 						<h1> {{ env( 'SITE_TITLE' ) }}</h1>
 					</figcaption>
@@ -40,10 +40,10 @@
 			  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  <ul class="right hide-on-med-and-down">
 			  	@if( Auth::check( ) )
-			  		<li><a href="{{ URL::to( 'home' ) }}">Home</a></li>
+			  		<li><a href="{{ URL::to( '/' ) }}">Home</a></li>
 			  	@else 
 					<li class="login"><a class="waves-effect waves-light modal-trigger" href="#login-modal">Login</a></li>
-					<li><a href="{{ URL::route('register') }}">Register</a></li>
+					<li><a href="{{ URL::to('register') }}">Register</a></li>
 			  	@endif
 			  </ul>
 			  <ul class="side-nav" id="mobile-demo">
@@ -52,7 +52,7 @@
 			  		<li><a href="{{ URL::to( 'home' ) }}">Home</a></li>
 			  	@else 
 					<li class="login"><a class="waves-effect waves-light modal-trigger" href="#login-modal">Login</a></li>
-					<li><a href="{{ URL::route('register') }}">Register</a></li>
+					<li><a href="{{ URL::to('register') }}">Register</a></li>
 			  	@endif
 			 
 			  </ul>
