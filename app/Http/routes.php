@@ -19,6 +19,8 @@ Route::get('/partners', function () {
 	return view('partners');
 });
 
+Route::resource('events', 'EventsController');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
