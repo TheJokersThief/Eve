@@ -18,4 +18,8 @@ class Event extends Model
     public function location(){
     	return $this->belongsTo('App\Location');
     }
+
+    public function partners(){
+        return $this->belongsToMany('App\Partner', 'event_partners');
+    }
 }

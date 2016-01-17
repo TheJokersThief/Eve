@@ -12,7 +12,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'is_admin',
+        'is_staff', 'profile_pic', 'bio', 'language'
     ];
 
     /**
@@ -23,4 +24,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function profile_pic(){
+        $this->hasOne('App\Media');
+    }
 }

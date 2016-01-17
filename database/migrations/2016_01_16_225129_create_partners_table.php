@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEventsTable extends Migration
+class CreatePartnersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,20 +12,15 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('partners', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('type');
+            $table->float('price');
             $table->text('description');
             $table->integer('location_id');
-            $table->dateTime('start_datetime');
-            $table->dateTime('end_datetime');
-            $table->string('title');
+            $table->float('distance'); // in kilometres
+            $table->string('email');
             $table->timestamps();
-
-            // To be introduced after Location exists
-            // (separate migration)
-            // $table->foreign('location_id')
-            //         ->references('id')
-            //         ->on('locations');
         });
     }
 
@@ -36,6 +31,6 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('events');
+        Schema::drop('partners');
     }
 }
