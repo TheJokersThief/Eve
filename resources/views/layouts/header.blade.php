@@ -15,12 +15,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') }}/css/app.css">
 	@yield('extra-css')
-	
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-	<script type="text/javascript" src="{{ URL::to('/') }}/js/main.js"></script>
-	@yield('extra-js')
-
 
 	@yield('extra-head')
 </head>
@@ -30,12 +24,7 @@
     	<nav>
 			<div class="nav-wrapper container">
 			  <a href="{{ URL::to('/home') }}" class="brand-logo">
-			  	<figure>
-					<img src="images/logo.png" alt="{{ env( 'SITE_TITLE' ) }}" class="logo" width="20%">
-					<figcaption class="sr-only">
-						<h1> {{ env( 'SITE_TITLE' ) }}</h1>
-					</figcaption>
-				</figure>
+				<img src="{{URL::to('/images/logo.png')}}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo" width="20%">
 			  </a>
 			  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  <ul class="right hide-on-med-and-down">
