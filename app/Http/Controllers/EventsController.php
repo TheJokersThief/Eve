@@ -6,15 +6,18 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Event;
 
 class EventsController extends Controller
 {
     public function index(){
-    	return view('events.index');
+        $events = Event::orderBy('start_datetime', 'ASC')->get();
+    	return view('events.index', ['events' => $events]);
     }
 
-    public function show(){
-    	return view('events.show');
+    public function show($id){
+        $event = Event::findOrFail($id);
+        return view('events.show', compact('event'));
     }
 
     public function create(){
