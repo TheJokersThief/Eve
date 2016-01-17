@@ -28,8 +28,9 @@ Vagrant.configure(2) do |config|
   #   The sync will persist as you edit files, you won't have
   #   to destroy and re-up the VM each time you make a change
   #   
-  config.vm.synced_folder "./", "/var/www", :owner=> 'www-data', :group=>'www-data', :mount_options=> ["dmode=777,fmode=777"]
-  config.vm.synced_folder "./public", "/var/www/html", :owner=> 'www-data', :group=>'www-data', :mount_options=> ["dmode=777,fmode=777"]
+  config.vm.synced_folder "./", "/var/www", :owner=> 'www-data', :group=>'www-data', :mount_options=> ["dmode=777,fmode=775"]
+  config.vm.synced_folder "./public", "/var/www/html", :owner=> 'www-data', :group=>'www-data', :mount_options=> ["dmode=777,fmode=775"]
+  config.vm.synced_folder "./storage", "/var/www/storage", :owner=> 'www-data', :group=>'www-data', :mount_options=> ["dmode=777,fmode=777"]
 
   config.vm.provision "shell", inline: <<-SHELL
 
