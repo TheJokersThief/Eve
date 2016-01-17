@@ -2,13 +2,13 @@
 
 ### Vagrant Box
 
-```bash
-# Adds the box permanently to our collection as well as downloads it
-vagrant box add Netsoc https://dl.dropboxusercontent.com/u/20999985/Vagrant%20Boxes/Netsoc.box
+To use the vagrant box, simply clone this repo to your local machine, open a terminal and navigate to the folder. Then run:
 
-# Launches the Virtual Machine
+```bash
 vagrant up
 ```
+
+This will automagically download the relevant virtual machine and start you running :) 
 
 ### Add an entry to your hosts file
 
