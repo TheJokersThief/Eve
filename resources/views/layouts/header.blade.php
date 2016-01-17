@@ -18,7 +18,7 @@
 
 	@yield('extra-head')
 </head>
-<body>
+<body class="@yield('body-class')">
     
     <header>
     	<nav>

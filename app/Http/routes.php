@@ -32,6 +32,12 @@ Route::group(['middleware' => ['web']], function () {
 	Route::resource('events', 'EventsController');
 });
 
+Route::group(['prefix' => 'api'], function () {
+    Route::group(['prefix' => 'install'], function () {
+	    Route::post('createuser', 'ApiController@installCreateUser');
+	});
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes

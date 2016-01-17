@@ -26,3 +26,27 @@ body{
 	clip: rect(0,0,0,0);
 	border: 0;
 }
+
+body{
+	&.install-page{
+		img{
+			width: 100%;
+
+			&.install-logo{
+				width: 50%;
+				margin: 0 auto;
+			}
+		}
+
+		.errors-list li{
+			list-style-type: disc;
+		    margin-left: 60px;
+		}
+	}
+
+	.progress .determinate{
+		width: 0;
+	    transition: all 2s;
+	    transition-timing-function: ease;
+	}
+}
