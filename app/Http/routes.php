@@ -11,15 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['middleware' => ['web']], function () {
+	Route::auth();
+	Route::get('/home', 'HomeController@index');
+
 });
 
-Route::get('/partners', function () {
-	return view('partners');
-});
+Route::group(['middleware' => ['web']], function () {
+	Route::get('/', 'HomeController@index');
 
-Route::resource('events', 'EventsController');
+	Route::group(['prefix' => 'install'], function () {
+		Route::get('/', ['as' => 'install', 'uses' => 'InstallationController@index']);
+	});
+
+	Route::get('/partners', function () {
+		return view('partners');
+	});
+
+	Route::resource('events', 'EventsController');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -34,10 +45,4 @@ Route::resource('events', 'EventsController');
 
 Route::group(['middleware' => ['web']], function () {
     //
-});
-
-Route::group(['middleware' => 'web'], function () {
-    Route::auth();
-
-    Route::get('/home', 'HomeController@index');
 });
