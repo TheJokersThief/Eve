@@ -12,6 +12,7 @@ class Partner extends Model
      * @var array
      */
     protected $fillable = [
+        'name',
         'type',
 		'price',
 		'description',
