@@ -17,11 +17,11 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password', 60);
-            $table->enum('is_admin', ['yes', 'no']);
-            $table->enum('is_staff', ['yes', 'no']);
+            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_staff')->default(false);
             $table->integer('media_id'); // Profile picture
             $table->text('bio');
-            $table->string('language', 2); // Language code
+            $table->string('language', 2)->default("en"); // Language code
             $table->rememberToken();
             $table->timestamps();
 
