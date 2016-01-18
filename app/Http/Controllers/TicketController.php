@@ -58,7 +58,7 @@ class TicketController extends Controller
      */
     public function validate($code){
     	if( Auth::user()->is_admin ){
-	    	$ticket = Ticket::hasCode($code)->first();
+	    	$ticket = Ticket::hasCode($code)->firstOrFail();
 	    	if( $ticket->used ){
 	    		// Return error
 	    	} else {
