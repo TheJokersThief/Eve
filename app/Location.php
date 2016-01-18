@@ -13,7 +13,7 @@ class Location extends Model
     	'name','coordinates','capacity'
     ];
 
-    public function Event(){
-    	return $this->hasOne('App/Location');
+    public function event(){
+    	return $this->hasMany('App/Event');
     }
 }
