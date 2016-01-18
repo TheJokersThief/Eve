@@ -2,15 +2,31 @@
 
 @section('body-class') install-page @endsection
 
+@section('extra-js')
+	<script type="text/javascript">
+		$(document).ready(function(){
+			checkProgress( );
+		});
+	</script>
+@endsection
+
 @section('content')
 	<main class="row">
 		<div class="col s12 l8 offset-l2 card white">
 			<div class="col s12">
 				<ul class="tabs">
-					<li class="tab col s3"><a href="#info">Info</a></li>
-					<li class="tab col s3"><a href="#personalDetails">Your Details</a></li>
-					<li class="tab col s3"><a href="#companyDetails">Company Details</a></li>
-					<li class="tab col s3"><a href="#firstEvent">Your First Event</a></li>
+					<li class="tab col s3" onclick="moveToSection( 'info', 1, 4 );">
+						<a href="#info">Info</a>
+					</li>
+					<li class="tab col s3" onclick="moveToSection( 'personalDetails', 2, 4 );">
+						<a href="#personalDetails">Your Details</a>
+					</li>
+					<li class="tab col s3" onclick="moveToSection( 'companyDetails', 3, 4 );">
+						<a href="#companyDetails">Company Details</a>
+					</li>
+					<li class="tab col s3" onclick="moveToSection( 'firstEvent', 4, 4 );">
+						<a href="#firstEvent">Your First Event</a>
+					</li>
 				</ul>
 				<div class="progress">
 				      <div class="determinate" id="progressBar"></div>

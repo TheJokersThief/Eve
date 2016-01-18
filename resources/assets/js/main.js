@@ -53,7 +53,29 @@ function createUser( ){
  * @param  {int} 	totalSections Total number of sections
  */
 function moveToSection( sectionId, sectionNumber, totalSections ){
-	window.history.pushState({},"", "#"+sectionId);
-	$('ul.tabs').tabs('select_tab', sectionId);
-	updateProgressBar('progressBar', (100/totalSections) * (sectionNumber - 1) );
+	if( window.location.hash != '#' + sectionId ){
+		window.history.pushState({},"", "#"+sectionId);
+		$('ul.tabs').tabs('select_tab', sectionId);
+		updateProgressBar('progressBar', (100/totalSections) * (sectionNumber - 1) );
+	}
+}
+
+/**
+ * When a user reloads the page, ensure the progress bar is
+ * at the correct position
+ */
+function checkProgress( ){
+	switch( window.location.hash ){
+		case '#personalDetails':
+			updateProgressBar( 'progressBar', 25 );
+			break;
+
+		case '#companyDetails':
+			updateProgressBar( 'progressBar', 50 );
+			break;
+
+		case '#firstEvent':
+			updateProgressBar( 'progressBar', 75 );
+			break;
+	}
 }
