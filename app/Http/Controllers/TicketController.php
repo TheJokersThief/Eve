@@ -57,7 +57,7 @@ class TicketController extends Controller
      * @return View       		Name badge for the user corresponding to the ticket.
      */
     public function validate($code){
-    	if( Auth::user()->is_admin ){
+    	if( Auth::user()->is_staff || Auth::user()->is_admin ){
 	    	$ticket = Ticket::hasCode($code)->firstOrFail();
 	    	if( $ticket->used ){
 	    		// Return error
