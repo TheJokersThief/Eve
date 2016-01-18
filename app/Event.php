@@ -22,4 +22,8 @@ class Event extends Model
     public function partners(){
         return $this->belongsToMany('App\Partner', 'event_partners');
     }
+
+    public function tickets(){
+        $this->hasMany('App\Ticket');
+    }
 }

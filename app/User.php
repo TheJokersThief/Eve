@@ -28,4 +28,8 @@ class User extends Authenticatable
     public function profile_pic(){
         $this->hasOne('App\Media');
     }
+
+    public function tickets(){
+        $this->hasMany('App\Ticket');
+    }
 }
