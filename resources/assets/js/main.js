@@ -137,6 +137,10 @@ function autofillInformation( ){
 					// registers as filled with materializecss
 					$('label[for='+key+']').addClass('active');
 				}
+
+				if( key == 'email' && data[key] != "" ){
+					$("[name=email]").attr('disabled', "true");
+				}
 			}
 		},
 	});
