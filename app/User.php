@@ -13,7 +13,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'is_admin',
-        'is_staff', 'profile_pic', 'bio', 'language'
+        'is_staff', 'profile_picture', 'bio', 'language'
     ];
 
     /**
@@ -24,10 +24,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function profile_pic(){
-        $this->hasOne('App\Media');
-    }
 
     public function tickets(){
         $this->hasMany('App\Ticket');

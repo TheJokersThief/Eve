@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->boolean('is_admin')->default(false);
             $table->boolean('is_staff')->default(false);
-            $table->integer('media_id'); // Profile picture
+            $table->integer('profile_picture'); // Profile picture
             $table->text('bio');
             $table->string('language', 2)->default("en"); // Language code
             $table->rememberToken();
