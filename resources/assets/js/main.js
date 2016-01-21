@@ -68,7 +68,7 @@ function createCompany( ){
 				});
 			} else {
 				// Otherwise, move to the next section
-				moveToSection( 'firstEvent', 4, 4 );
+				redirectToFirstEvent( );
 				autofillInformation( );
 			}
 		},
@@ -107,6 +107,7 @@ function checkProgress( ){
 
 		case '#firstEvent':
 			updateProgressBar( 'progressBar', 75 );
+			redirectToFirstEvent( );
 			break;
 
 		default:
@@ -145,4 +146,8 @@ function autofillInformation( ){
 			}
 		},
 	});
+}
+
+function redirectToFirstEvent( ){
+	window.location = $('#first-event-link').attr('href');
 }

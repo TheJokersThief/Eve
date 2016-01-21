@@ -168,13 +168,15 @@
 				</div>
 
 
-				<button class="btn waves-effect waves-light right" type="button" name="next" onclick='createCompany();'>Next
+				<button class="btn waves-effect waves-light right" type="button" name="next" onclick='createCompany();'>Next 
 					<i class="mdi-content-send right"></i>
 				</button>
 
 				{!! Form::close() !!}
 			</div>
-			<div id="firstEvent" class="col s12">Your First Event</div>
+			<div id="firstEvent" class="col s12">
+				<a href="{{ URL::route('event.create') }}" id="first-event-link">Go create your first event!</a>
+			</div>
 		</div>
 	</main>
 @endsection
