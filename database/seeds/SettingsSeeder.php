@@ -12,6 +12,7 @@ class SettingsSeeder extends Seeder
 	 */
 	public function run(){
 
-		Setting::firstOrCreate(['name' => 'is_installed', 'setting' => 'no']);	
+		Setting::firstOrCreate(['name' => 'is_installed', 'setting' => 'no']);
+		Setting::firstOrCreate(['name' => 'default_profile_picture', 'setting' => '/images/default_profile_image.png' ] );
 	}
 }

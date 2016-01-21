@@ -41,6 +41,7 @@ function createUser( ){
 			} else {
 				// Otherwise, move to the next section
 				moveToSection( 'companyDetails', 3, 4 );
+				autofillInformation( );
 			}
 		},
 	});
@@ -84,4 +85,30 @@ function checkProgress( ){
 			updateProgressBar( 'progressBar', 0 );
 			break;
 	}
+}
+
+function autofillInformation( ){
+	$.ajax({
+		url: '/api/install/getInstallUserInfo',
+		type: 'get',
+		cache: false,
+        contentType: false,
+        processData: false,
+        beforeSend: function( ){
+        	
+        },
+		success: function(data) {
+			for( var key in data ){
+
+				if( key == 'profile_picture' ){
+					$('#profle-picture-preview').attr( 'src', data.profile_picture );
+				} else{
+					$('[name='+key+']').val( data[key] );
+
+					// registers as filled with materializecss
+					$('label[for='+key+']').addClass('active');
+				}
+			}
+		},
+	});
 }

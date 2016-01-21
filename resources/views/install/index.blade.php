@@ -6,6 +6,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			checkProgress( );
+			autofillInformation( );
 
 			// Add event listener for "back" button
 			window.addEventListener('popstate', function(event){
@@ -129,6 +130,45 @@
 			</div>
 			<div id="companyDetails" class="col s12">
 				<h3>Company Details</h3>
+
+				{!! Form::open( array('url' => '#!', 'id' => 'companyDetails-form', 'method' => 'post', 'class' => 'row col s12', 'enctype'=>"multipart/form-data" ) ) 		!!}
+
+				<div class="row">
+					<div class="input-field col s12">
+						{!! Form::label('name','Company Name')									!!}
+						{!! Form::text('name')	!!}
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="input-field col s12">
+						{!! Form::textarea('description', null, ['class' => 'materialize-textarea'] ) !!}
+						{!! Form::label('description','Description') !!}
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col s12 m3">
+						<img src="{{ App\Setting::where('name', 'default_profile_picture')->first()->setting }}" id="profle-picture-preview">
+					</div>
+
+					<div class="file-field input-field col m9 s12">
+						<div class="btn">
+							<span>Upload A Profile Picture</span>
+							{!! Form::file('company_logo')	!!}
+						</div>
+						<div class="file-path-wrapper">
+							<input class="file-path validate" type="text">
+						</div>
+					</div>
+				</div>
+
+
+				<button class="btn waves-effect waves-light right" type="button" name="next" onclick='createUser();'>Next
+					<i class="mdi-content-send right"></i>
+				</button>
+
+				{!! Form::close() !!}
 			</div>
 			<div id="firstEvent" class="col s12">Your First Event</div>
 		</div>

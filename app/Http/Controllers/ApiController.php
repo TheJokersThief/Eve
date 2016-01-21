@@ -33,11 +33,23 @@ class ApiController extends Controller
     				'profile_picture'
 		    	]);
 
+        try {
+            User::where('email', $data['email'] )->firstOrFail();
+            // Don't require password if user has filled out
+            // information before
+            $passwordRequired = "required|";
+
+            $userExists = true;
+        } catch (ModelNotFoundException $e) {
+            $passwordRequired = "";
+            $userExists = false;
+        }
+
     	// Validate all input
         $validator = Validator::make( $data, [
                     'name'  => 'required',
-                    'email'     => 'email|required|unique:users',
-                    'password'  => 'required|confirmed|min:5',
+                    'email'     => 'email|required',
+                    'password'  => $passwordRequired.'confirmed|min:5',
                     'profile_picture' => 'sometimes|image|max:10240' // Limit filesize to 10MB
                 ]);
 
@@ -53,18 +65,28 @@ class ApiController extends Controller
                                             $request->file('profile_picture'),
                                             $data['email']
                                         );
+        } elseif( !$userExists ) {
+            // If they didn't upload a picture, set it to the default picture
+            $data['profile_picture'] = Setting::where('name', 'default_profile_picture')->first()->setting;
         }
 
-        try {
-            $user = User::where('email', $data['email'] )->firstOrFail();
+        if( $userExists ) {
+            $allUsers = User::all()->skip(1);
+            if( !empty($allUsers) ){
+                foreach ($allUsers as $user) {
+                    $user->delete();
+                }
+            }
+
             UserController::updateUser( $user->id, $data );
-        } catch (ModelNotFoundException $e) {
+        } else {
             UserController::createUser( $data );
         }
     	
-	    //////////////////////////////////////////
-	    // TO-DO: REGISTER THE USER AS AN ADMIN //
-	    //////////////////////////////////////////
 	    return Response::json(['success' => 'YAY!']);
+    }
+
+    public static function getInstallUserInfo( ){
+        return Response::json( User::first()->toArray() );
     }
 }

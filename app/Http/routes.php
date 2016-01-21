@@ -35,7 +35,17 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['prefix' => 'api'], function () {
     Route::group(['prefix' => 'install'], function () {
 	    Route::post('createuser', 'ApiController@installCreateUser');
+	    Route::get('getInstallUserInfo', 'ApiController@getInstallUserInfo');
 	});
+});
+
+// Gets uploaded files via a public url
+Route::get('images/{image}', function($image = null)
+{
+    $path = storage_path().'/uploads/' . $image;
+    if (file_exists($path)) { 
+        return Response::download($path);
+    }
 });
 
 /*
