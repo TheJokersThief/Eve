@@ -124,4 +124,12 @@ class UserController extends Controller
                     $fitDimensions = [500, 500] 
                 );
     }
+
+    /**
+     * Debug function: returns details on the currently logged in user
+     * @return String:  JSON description of user or "false"
+     */
+    public function me(){
+        return Auth::check() ? Auth::user() : "false";
+    }
 }

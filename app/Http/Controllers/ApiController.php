@@ -82,8 +82,12 @@ class ApiController extends Controller
             UserController::updateUser( $user->id, $data );
         } else {
             UserController::createUser( $data );
-        }
-    	
+            // Make this first User staff and admin.
+            $user = User::first();
+            $user->is_admin = 1;
+            $user->is_staff = 1;
+            $user->save();
+        }    	
 	    return Response::json(['success']);
     }
 
