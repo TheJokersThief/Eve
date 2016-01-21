@@ -27,11 +27,9 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/', ['as' => 'install', 'uses' => 'InstallationController@index']);
 	});
 
-	Route::get('/partners', function () {
-		return view('partners');
-	});
-
 	Route::resource('events', 'EventsController');
+
+	Route::resource('partners', 'PartnersController');
 });
 
 Route::group(['prefix' => 'api'], function () {
