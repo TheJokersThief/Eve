@@ -31,8 +31,6 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "./", "/var/www", :owner=> 'www-data', :group=>'www-data', :mount_options=> ["dmode=777,fmode=775"]
   config.vm.synced_folder "./public", "/var/www/html", :owner=> 'www-data', :group=>'www-data', :mount_options=> ["dmode=777,fmode=775"]
   config.vm.synced_folder "./storage", "/var/www/storage", :owner=> 'www-data', :group=>'www-data', :mount_options=> ["dmode=777,fmode=777"]
-  config.vm.synced_folder "./vendor/composer", "/var/www/vendor/composer", :owner=> 'www-data', :group=>'www-data', :mount_options=> ["dmode=777,fmode=777"]
-   config.vm.synced_folder "./vendor", "/var/www/vendor", :owner=> 'www-data', :group=>'www-data', :mount_options=> ["dmode=777,fmode=777"]
   config.vm.synced_folder "./public/css", "/var/www/html", :owner=> 'www-data', :group=>'www-data', :mount_options=> ["dmode=777,fmode=777"]
 
   config.vm.provision "shell", inline: <<-SHELL

@@ -10,7 +10,7 @@
 	<link rel="shortcut icon" href="{{ URL::to('/') }}/images/favicon.png">
 
 	
-	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') }}/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<!-- Compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') }}/css/app.css">
@@ -19,7 +19,7 @@
 	@yield('extra-head')
 </head>
 <body class="@yield('body-class')">
-    
+    @yield('before-page')
     <header>
     	<nav>
 			<div class="nav-wrapper container">
@@ -31,8 +31,12 @@
 			  	@if( Auth::check( ) )
 			  		<li><a href="{{ URL::to( '/' ) }}">Home</a></li>
 			  	@else 
-					<li class="login"><a class="waves-effect waves-light modal-trigger" href="#login-modal">Login</a></li>
-					<li><a href="{{ URL::to('register') }}">Register</a></li>
+					<li class="login">
+						<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">Login</a>
+					</li>
+					<li class="register">
+						<a href="{{ URL::to('register') }}" class="btn">Signup</a>
+					</li>
 			  	@endif
 			  </ul>
 			  <ul class="side-nav" id="mobile-demo">
@@ -40,8 +44,12 @@
 			  	@if( Auth::check( ) )
 			  		<li><a href="{{ URL::to( 'home' ) }}">Home</a></li>
 			  	@else 
-					<li class="login"><a class="waves-effect waves-light modal-trigger" href="#login-modal">Login</a></li>
-					<li><a href="{{ URL::to('register') }}">Register</a></li>
+					<li class="login">
+						<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">Login</a>
+					</li>
+					<li class="register">
+						<a href="{{ URL::to('register') }}" class="btn">Signup</a>
+					</li>
 			  	@endif
 			 
 			  </ul>
