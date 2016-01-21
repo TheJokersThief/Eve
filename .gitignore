@@ -7,5 +7,5 @@
 /node_modules
 composer.lock
 public/css/app*
-public/js/
+public/js/compiled/
 storage/
