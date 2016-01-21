@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Event;
+use Redirect;
+use Illuminate\Support\Facades\Request;
+use Validator;
+
 
 class EventsController extends Controller
 {
@@ -25,7 +29,58 @@ class EventsController extends Controller
     }
 
     public function store(){
-    	return view('events.store');
+
+        $data = Request::only( [
+                    'title',
+                    'description',
+                    'start_date',
+                    'end_date',
+                    'start_time',
+                    'end_time',
+                    'location_id'
+                ]);
+
+        // Validate all input
+        $validator = Validator::make( $data, [
+                    'title'  => 'required',
+                    'description'  => 'required',
+                    'start_date'  => 'required',
+                    'end_date'  => 'required',
+                    'start_time'  => 'required',
+                    'end_time' => 'required',
+                    'location_id'  => 'required',
+                ]);
+
+        if( $validator->fails( ) ){
+            // If validation fails, redirect back to 
+            // registration form with errors
+            return Redirect::to( 'events' )
+                    ->withErrors( $validator )
+                    ->withInput( );
+        }
+
+        $start_datetime = $data['start_date'] . ' ' . $data['start_time'] . ':' . '00';
+        $end_datetime = $data['end_date'] . ' ' . $data['end_time'] . ':' . '00';
+
+        $newData = array(
+                "title" => $data["title"],
+                "description" => $data["description"],
+                "start_datetime" => $start_datetime,
+                "end_datetime" => $end_datetime,
+                "location_id" => $data["location_id"]
+            );   
+        
+        // Create the new event
+        $newEvent = Event::create( $data );
+
+        return Redirect::to( 'events' );
+        
+        // If unsuccessful, return with errors
+        return Redirect::back( )
+                    ->withErrors( [
+                        'message' => 'We\'re sorry but event creation failed, please try again later.' 
+                    ] )
+                    ->withInput( );
     }
 
     public function edit(){
