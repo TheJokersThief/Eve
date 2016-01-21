@@ -131,30 +131,34 @@
 			<div id="companyDetails" class="col s12">
 				<h3>Company Details</h3>
 
+				<ul id="company-details-errors" class="errors-list red-text">
+
+				</ul>
+
 				{!! Form::open( array('url' => '#!', 'id' => 'companyDetails-form', 'method' => 'post', 'class' => 'row col s12', 'enctype'=>"multipart/form-data" ) ) 		!!}
 
 				<div class="row">
 					<div class="input-field col s12">
-						{!! Form::label('name','Company Name')									!!}
-						{!! Form::text('name')	!!}
+						{!! Form::label('company_name','Company Name') !!}
+						{!! Form::text('company_name')	!!}
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="input-field col s12">
-						{!! Form::textarea('description', null, ['class' => 'materialize-textarea'] ) !!}
-						{!! Form::label('description','Description') !!}
+						{!! Form::textarea('description', null, ['class' => 'materialize-textarea', 'length' => '250'] ) !!}
+						{!! Form::label('description', 'Description') !!}
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="col s12 m3">
-						<img src="{{ App\Setting::where('name', 'default_profile_picture')->first()->setting }}" id="profle-picture-preview">
+						<img src="{{ App\Setting::where('name', 'default_profile_picture')->first()->setting }}" id="company-logo-preview">
 					</div>
 
 					<div class="file-field input-field col m9 s12">
 						<div class="btn">
-							<span>Upload A Profile Picture</span>
+							<span>Upload A Company Logo</span>
 							{!! Form::file('company_logo')	!!}
 						</div>
 						<div class="file-path-wrapper">
@@ -164,7 +168,7 @@
 				</div>
 
 
-				<button class="btn waves-effect waves-light right" type="button" name="next" onclick='createUser();'>Next
+				<button class="btn waves-effect waves-light right" type="button" name="next" onclick='createCompany();'>Next
 					<i class="mdi-content-send right"></i>
 				</button>
 

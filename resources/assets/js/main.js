@@ -5,7 +5,8 @@ $( document ).ready(function($){
 
 	$('.datepicker').pickadate({
 	    selectMonths: true, // Creates a dropdown to control month
-	    selectYears: 15 // Creates a dropdown of 15 years to control year
+	    selectYears: 15, // Creates a dropdown of 15 years to control year
+	    format: 'yyyy-mm-dd' // Formats the date
 	});
         
 	$('select').material_select();
@@ -41,6 +42,33 @@ function createUser( ){
 			} else {
 				// Otherwise, move to the next section
 				moveToSection( 'companyDetails', 3, 4 );
+				autofillInformation( );
+			}
+		},
+	});
+}
+
+function createCompany( ){
+	var formData = new FormData($('#companyDetails-form')[0]);
+	$.ajax({
+		url: '/api/install/createCompany',
+		type: 'post',
+		cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,	
+        beforeSend: function( ){
+        	$('#company-details-errors').empty();
+        },
+		success: function(data) {
+			if( data.errors ){
+				// If we have validation errors, display them
+				data.errors.forEach( function( error ){
+					$('#company-details-errors').append('<li>'+error+'</li>');
+				});
+			} else {
+				// Otherwise, move to the next section
+				moveToSection( 'firstEvent', 4, 4 );
 				autofillInformation( );
 			}
 		},
@@ -102,11 +130,17 @@ function autofillInformation( ){
 
 				if( key == 'profile_picture' ){
 					$('#profle-picture-preview').attr( 'src', data.profile_picture );
+				} else if( key == 'company_logo') {
+					$('#company-logo-preview').attr( 'src', data.company_logo );
 				} else{
 					$('[name='+key+']').val( data[key] );
 
 					// registers as filled with materializecss
 					$('label[for='+key+']').addClass('active');
+				}
+
+				if( key == 'email' && data[key] != "" ){
+					$("[name=email]").attr('disabled', "true");
 				}
 			}
 		},
