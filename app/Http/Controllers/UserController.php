@@ -129,4 +129,12 @@ class UserController extends Controller
 
         return (string) "/images/". $file_name;
     }
+
+    /**
+     * Debug function: returns details on the currently logged in user
+     * @return String:  JSON description of user or "false"
+     */
+    public function me(){
+        return Auth::check() ? Auth::user() : "false";
+    }
 }
