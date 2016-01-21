@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use QrCode;
+use Crypt;
 
 class Ticket extends Model
 {
@@ -20,10 +22,15 @@ class Ticket extends Model
      */
     public function code(){
     	$arr = [  "id"     => $this->id,
-    			"user_id"  => $this->userId,
-    			"event_id" => $this->eventId ];
+    			"user_id"  => $this->user_id,
+    			"event_id" => $this->event_id ];
 
     	return Crypt::encrypt( json_encode($arr) ); 
+    }
+
+    public function qr(){
+        QrCode::size(300);
+        return QrCode::generate( "http://" . $_SERVER["HTTP_HOST"] . "/ticket/verify/" . $this->code() );
     }
 
     /**

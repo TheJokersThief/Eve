@@ -9,7 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Ticket;
 use App\Event;
 use App\User;
-
+use Auth;
+use Crypt;
 
 class TicketController extends Controller
 {
@@ -23,7 +24,7 @@ class TicketController extends Controller
         				->where('event_id', $eventId)
         				->firstOrFail();
 
-        return $ticket;
+        return $ticket->qr();
         // return view('tickets.show', $ticket);
     }
 
@@ -56,17 +57,17 @@ class TicketController extends Controller
      * @param  String 	$code 	QR code value of the ticket.
      * @return View       		Name badge for the user corresponding to the ticket.
      */
-    public function validate($code){
+    public function verify($code){
     	if( Auth::user()->is_staff || Auth::user()->is_admin ){
 	    	$ticket = Ticket::hasCode($code)->firstOrFail();
 	    	if( $ticket->used ){
-	    		// Return error
+	    		return "Ticket used!";
 	    	} else {
 	    		$ticket->used = true;
 	    		$ticket->save();
 
 	    		// Return name badge for printing.
-	    		return view('tickets.badge', $ticket);
+	    		return "Ticket Verified!";
 	    	}
     	} else {
     		// user is admin, cannot validate tickets.
