@@ -12,6 +12,8 @@ use App\User;
 use App\Ticket;
 use App\Setting;
 
+use App\Http\Controllers\MediaController;
+
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -96,9 +98,13 @@ class UserController extends Controller
             $userInfo['password'] = Hash::make( $userInfo['password'] );
         }
 
+        $ignoredFields = ['password_confirmation'];
+
         $user = User::find( $userID );
         foreach ($userInfo as $key => $value) {
-            $user->$key = $value;
+            if( !in_array($key, $ignoredFields) ){
+                $user->$key = $value;
+            }
         }
         $user->save();
         return $user;
@@ -110,23 +116,12 @@ class UserController extends Controller
      * @return string           URL-friendly path to image
      */
     public static function uploadProfilePicture( $image, $email ){
-        // Get the file from the request
-        $file = $image;
-
-        $destination_path = storage_path() .'/uploads/';
-        // Create a filename by hashing the user's username. This
-        // will mean each user only has one profile picture residing
-        // on our filesystem
-        $file_name = hash('ripemd160', $email ) .'_picture.'. $file->getClientOriginalExtension();
-        // Move the file to our server
-        $movement = $image->move($destination_path, $file_name);
-
-        // Perform an image intervention, getting best fit from image
-        // and saving it again
-        $image = Image::make( storage_path(). '/uploads/'. $file_name);
-        $image->fit( 500, 500 );
-        $image->save(storage_path(). '/uploads/'. $file_name);
-
-        return (string) "/images/". $file_name;
+        return MediaController::uploadImage( 
+                    $image,
+                    $email,
+                    $directory = "uploads",
+                    $bestFit = true,
+                    $fitDimensions = [500, 500] 
+                );
     }
 }
