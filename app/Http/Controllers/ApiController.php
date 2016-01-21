@@ -146,6 +146,13 @@ class ApiController extends Controller
 	        	$setting->save();
         	}
         }
+
+        // Mark software as installed
+        $installed = Setting::where('name', 'is_installed')->first();
+        $installed->setting = "yes";
+        $installed->save();
+
         return Response::json( ['success'] );
     }
+
 }
