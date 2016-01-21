@@ -71,7 +71,7 @@ class EventsController extends Controller
             );   
         
         // Create the new event
-        $newEvent = Event::create( $data );
+        $newEvent = Event::create( $newData );
 
         return Redirect::to( 'events' );
         
