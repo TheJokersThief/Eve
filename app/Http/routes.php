@@ -36,6 +36,11 @@ Route::group(['middleware' => ['web']], function () {
 	Route::resource('partners', 'PartnersController');
 });
 
+Route::group(['prefix' => 'ticket', 'middleware' => 'web'], function(){
+	Route::get('{id}', 'TicketController@show');
+	Route::get('verify/{code}', 'TicketController@verify');
+});
+
 Route::group(['prefix' => 'api'], function () {
     Route::group(['prefix' => 'install'], function () {
 	    Route::post('createuser', 'ApiController@installCreateUser');
