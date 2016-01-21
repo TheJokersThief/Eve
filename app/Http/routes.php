@@ -36,13 +36,14 @@ Route::group(['prefix' => 'api'], function () {
     Route::group(['prefix' => 'install'], function () {
 	    Route::post('createuser', 'ApiController@installCreateUser');
 	    Route::get('getInstallUserInfo', 'ApiController@getInstallUserInfo');
+	    Route::post('createCompany', 'ApiController@createCompany');
 	});
 });
 
 // Gets uploaded files via a public url
-Route::get('images/{image}', function($image = null)
+Route::get('{directory}/{image}', function( $directory, $image = null)
 {
-    $path = storage_path().'/uploads/' . $image;
+    $path = storage_path(). '/'. $directory .'/' . $image;
     if (file_exists($path)) { 
         return Response::download($path);
     }

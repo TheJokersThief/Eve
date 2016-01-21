@@ -47,6 +47,33 @@ function createUser( ){
 	});
 }
 
+function createCompany( ){
+	var formData = new FormData($('#companyDetails-form')[0]);
+	$.ajax({
+		url: '/api/install/createCompany',
+		type: 'post',
+		cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,	
+        beforeSend: function( ){
+        	$('#company-details-errors').empty();
+        },
+		success: function(data) {
+			if( data.errors ){
+				// If we have validation errors, display them
+				data.errors.forEach( function( error ){
+					$('#company-details-errors').append('<li>'+error+'</li>');
+				});
+			} else {
+				// Otherwise, move to the next section
+				moveToSection( 'firstEvent', 4, 4 );
+				autofillInformation( );
+			}
+		},
+	});
+}
+
 /**
  * Move the tab focus to the specified section
  * @param  {string} sectionId     ID of the section to focus
@@ -102,6 +129,8 @@ function autofillInformation( ){
 
 				if( key == 'profile_picture' ){
 					$('#profle-picture-preview').attr( 'src', data.profile_picture );
+				} else if( key == 'company_logo') {
+					$('#company-logo-preview').attr( 'src', data.company_logo );
 				} else{
 					$('[name='+key+']').val( data[key] );
 
