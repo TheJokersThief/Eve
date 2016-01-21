@@ -6,6 +6,31 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			checkProgress( );
+
+			// Add event listener for "back" button
+			window.addEventListener('popstate', function(event){
+				var sectionNumber = 0;
+				var totalSections = 4;
+				switch( window.location.hash ){
+					case '#personalDetails':
+						sectionNumber = 2;
+						break;
+
+					case '#companyDetails':
+						sectionNumber = 3;
+						break;
+
+					case '#firstEvent':
+						sectionNumber = 4;
+						break;
+
+					default:
+						sectionNumber = 1;
+						break;
+				}
+				console.log( window.location.hash.replace('#', ''), sectionNumber, totalSections );
+			    moveToSection( window.location.hash.replace('#', ''), sectionNumber, totalSections, true );
+			});
 		});
 	</script>
 @endsection
@@ -15,16 +40,16 @@
 		<div class="col s12 l8 offset-l2 card white">
 			<div class="col s12">
 				<ul class="tabs">
-					<li class="tab col s3" onclick="moveToSection( 'info', 1, 4 );">
+					<li class="tab col s3" onclick="moveToSection('info', 1, 4, false );">
 						<a href="#info">Info</a>
 					</li>
-					<li class="tab col s3" onclick="moveToSection( 'personalDetails', 2, 4 );">
+					<li class="tab col s3" onclick="moveToSection('personalDetails', 2, 4, false );">
 						<a href="#personalDetails">Your Details</a>
 					</li>
-					<li class="tab col s3" onclick="moveToSection( 'companyDetails', 3, 4 );">
+					<li class="tab col s3" onclick="moveToSection('companyDetails', 3, 4, false );">
 						<a href="#companyDetails">Company Details</a>
 					</li>
-					<li class="tab col s3" onclick="moveToSection( 'firstEvent', 4, 4 );">
+					<li class="tab col s3" onclick="moveToSection('firstEvent', 4, 4, false );">
 						<a href="#firstEvent">Your First Event</a>
 					</li>
 				</ul>
@@ -39,11 +64,11 @@
 					
 					<div class="row col s12 red lighten-3">
 						<figure class="col s12 m6 offset-m3">
-							<img src="/images/logo.png"/>
+							<img src="/images/logo_full.png"/>
 						</figure>
 					</div>
 
-					<button class="btn waves-effect waves-light right" type="button" onclick="moveToSection('personalDetails', 2, 4);">Next
+					<button class="btn waves-effect waves-light right" type="button" onclick="moveToSection('personalDetails', 2, 4, false);">Next
 						<i class="mdi-content-send right"></i>
 					</button>
 				</div>
@@ -96,13 +121,15 @@
 				</div>
 
 
-				<button class="btn waves-effect waves-light right" type="button" name="action" onclick='createUser();'>Next
+				<button class="btn waves-effect waves-light right" type="button" name="next" onclick='createUser();'>Next
 					<i class="mdi-content-send right"></i>
 				</button>
 
 				{!! Form::close() 													!!}
 			</div>
-			<div id="companyDetails" class="col s12">Company Details</div>
+			<div id="companyDetails" class="col s12">
+				<h3>Company Details</h3>
+			</div>
 			<div id="firstEvent" class="col s12">Your First Event</div>
 		</div>
 	</main>

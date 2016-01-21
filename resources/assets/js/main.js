@@ -52,9 +52,11 @@ function createUser( ){
  * @param  {int} 	sectionNumber Number of current section
  * @param  {int} 	totalSections Total number of sections
  */
-function moveToSection( sectionId, sectionNumber, totalSections ){
-	if( window.location.hash != '#' + sectionId ){
-		window.history.pushState({},"", "#"+sectionId);
+function moveToSection( sectionId, sectionNumber, totalSections, fromBackButton ){
+	if( window.location.hash != '#' + sectionId || fromBackButton ){
+		if( !fromBackButton ){
+			window.history.pushState({},"", "#"+sectionId);
+		}
 		$('ul.tabs').tabs('select_tab', sectionId);
 		updateProgressBar('progressBar', (100/totalSections) * (sectionNumber - 1) );
 	}
@@ -76,6 +78,10 @@ function checkProgress( ){
 
 		case '#firstEvent':
 			updateProgressBar( 'progressBar', 75 );
+			break;
+
+		default:
+			updateProgressBar( 'progressBar', 0 );
 			break;
 	}
 }
