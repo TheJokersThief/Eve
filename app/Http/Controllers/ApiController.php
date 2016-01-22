@@ -152,6 +152,9 @@ class ApiController extends Controller
         $installed->setting = "yes";
         $installed->save();
 
+        // Log the user in as the user created in the last step
+        Auth::login( User::first() );
+
         return Response::json( ['success'] );
     }
 
