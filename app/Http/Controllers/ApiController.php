@@ -114,7 +114,8 @@ class ApiController extends Controller
         $fields = [
                     'company_name',
                     'description',
-                    'company_logo'
+                    'company_logo',
+                    'company_logo_white'
                     ];
 
         $data = $request->only($fields);
@@ -133,9 +134,12 @@ class ApiController extends Controller
         }
 
         if ($request->hasFile('company_logo')){
-        	$data['company_logo'] = MediaController::uploadImage( $request->file('company_logo'), $data['company_name'] );
+        	$logo_path = MediaController::uploadLogo( $request->file('company_logo') );
+            $data['company_logo'] = $logo_path["normal"];
+            $data['company_logo_white'] = $logo_path["white"];
         } else {
         	$data['company_logo'] = Setting::where('name', 'company_logo')->first()->setting;
+            $data['company_logo_white'] = Setting::where('name', 'company_logo_white')->first()->setting;
         }
 
 

@@ -24,7 +24,17 @@
     	<nav>
 			<div class="nav-wrapper container">
 			  <a href="{{ URL::to('/home') }}" class="brand-logo">
-				<img src="{{URL::to('/images/logo.png')}}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo" width="20%">
+			
+			  	@if( ($logo = App\Setting::where('name', 'company_logo')->first()->setting) != '' )
+
+			  		@if( ! Route::current()->getName() == null )
+						<img src="{{URL::to($logo)}}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo" width="20%">
+					@else
+						<img src="{{URL::to( App\Setting::where('name', 'company_logo_white')->first()->setting )}}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo" width="20%">
+					@endif
+				@else
+					<img src="{{URL::to('/images/logo.png')}}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo" width="20%">
+				@endif
 			  </a>
 			  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  <ul class="right hide-on-med-and-down">
