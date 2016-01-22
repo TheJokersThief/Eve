@@ -1,7 +1,17 @@
+// Google Fonts
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200|Oxygen:400,300);
+
 @off-white: #FFFFF8;
-@off-black: #444;
+@off-black: #282C35;
+
+
+h1, h2, h3, h4, h5, h6{
+	font-family: 'Oxygen', sans-serif;
+	font-weight: 400;
+}
 
 body{
+	font-family: 'Source Sans Pro', sans-serif;
 	margin:0;
 	padding:0;
 }
@@ -37,7 +47,7 @@ body{
 	    background: @off-black;
 	    background-image: linear-gradient(to right, @off-white, @off-black, @off-white);
 	}
-	
+
 	&.install-page{
 		img{
 			width: 100%;
@@ -54,134 +64,7 @@ body{
 		}
 	}
 		
-	&.home-page{
-		nav{
-			background: none;
-			box-shadow: none;
-			margin-bottom: 30px;
-		}
-
-		video{
-			opacity:0.2;
-		}
-
-
-		nav ul{
-			&.side-nav li a{
-				color: @off-black !important;
-			}
-
-			li {
-				&>a {
-					color: @off-white !important;
-				}
-
-				.dropdown-content li a{
-					color: #26A69A !important;
-				}
-			}
-		}
-		
-		nav .button-collapse{
-			color: white;
-			margin-top: 11px;
-		}
-
-		.welcome-page-hero{
-			height: 400px;
-
-			h1{
-			    font-weight: 100;
-			    font-size: 6em;
-
-			    @media screen and (max-width:600px){
-			    	font-size: 4em;
-			    }
-			    color: @off-white;
-			}
-
-			h2{
-				font-weight: 100;
-			    font-size: 2em;
-			    text-transform: uppercase;
-			    letter-spacing: 9px;
-			    color: @off-white;
-			}
-
-			hr{
-				background-image: linear-gradient(to right, rgba(255,255,255,0), @off-white, rgba(255,255,255,0));
-			}
-
-			.btn-large{
-				margin-bottom:1em;
-			}
-		}
-
-		.welcome-page-parallax{
-			height: 750px;
-
-			.parallax{
-				background:black;
-			}
-		}
-
-		.event-cards .row{
-			margin-bottom: 0px;
-			padding-top: 10px;
-		}
-		
-		#description{
-			background-size: cover;
-			background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAADCAYAAABfwxXFAAAAUklEQVQIWx3FQQ5AMBRF0fsTViMxNLIX2zKwE8uwBSbGaLX9fRJncuxYBm1r4LkgOUQXudq/rVOvcxelEXeCXCFJxGrYPHby1ggu3mq4QRG4xAdfVy7M5RO/BwAAAABJRU5ErkJggg==");
-			padding: 70px 0;
-			color: @off-white;
-			margin-top: 0;
-			margin-bottom: 0;
-
-			.material-icons{
-				font-size:inherit;
-			}
-		}
-
-		#call-to-action {
-			margin-bottom: 0;
-			padding:1em;
-		    background: linear-gradient(116deg, #210024, #8f001f);
-		    background-position: 0px 0px;
-		    background-size: 400%;
-		    animation:RotatingGradient 8s ease infinite;
-
-			.form-wrapper{
-				width:92%;
-				max-width:600px;
-				margin:0 auto;
-				margin-bottom:1em;
-			
-				.input-field{
-					label{
-						color:@off-white;
-					}
-					
-					input{
-						border-bottom: 1px solid @off-white;
-					}
-				}
-			}
-		}
-
-		footer.page-footer{
-		    background: linear-gradient(116deg, #210024, #8f001f);
-		    background-position: 0px 0px;
-		    background-size: 400%;
-		    animation:RotatingGradient 8s ease infinite;
-
-			margin:0;
-
-			a:link, a:visited, a:hover, a:active{
-				color: @off-white;
-			}
-		}
-	}
+	@import "_home.less";
 
 	&.create-event{
 		.clockpicker-popover{

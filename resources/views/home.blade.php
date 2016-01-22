@@ -2,7 +2,6 @@
 
 @section('body-class') home-page @endsection
 
-
 @section('before-page')
 <header class="parallax-container welcome-page-parallax z-depth-2">
     <div class="parallax">
@@ -41,121 +40,81 @@
 <!-- End Parallax container -->
 </header>
 
-<div class="row">
-    <div class="col s12 m8 offset-m2">
-        <h2>Upcoming Events</h2>
-        <div class="col s12 m4">
-            <div class="card">
-                <div class="card-image">
-                    <img src="http://placehold.it/500x500">
-                    <span class="card-title">Event Title</span>
+<div class="row z-depth-2" id="events">
+    <div class="parallax-container">
+        <div class="parallax"><img src="{{ URL::to('/') . '/images/red-geometric-background.png'}}"></div>
+        <div class="col s12 m10 offset-m1">
+            <h3>Upcoming Events</h3>
+            @for($i=1; $i <= 3; $i++ )
+                <div class="col s12 m4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="http://placehold.it/500x500">
+                            <span class="card-title">Lorem ipsum Est quis dolor ex fugiat veniam tempor ullamco incididunt quis id in eiusmod ut quis Excepteur.</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Lorem ipsum Ut in eiusmod pariatur reprehenderit minim esse reprehenderit ea in sunt ad cupidatat commodo enim id voluptate in eu Duis sint reprehenderit quis sed magna dolor do irure qui sit eu reprehenderit aliqua enim.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#" class="red-text text-lighten-2">View Event &rarr;</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-content">
-                    <p>Lorem ipsum Ut in eiusmod pariatur reprehenderit minim esse reprehenderit ea in sunt ad cupidatat commodo enim id voluptate in eu Duis sint reprehenderit quis sed magna dolor do irure qui sit eu reprehenderit aliqua enim.</p>
-                </div>
-                <div class="card-action">
-                    <a href="#">This is a link</a>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m4">
-            <div class="card">
-                <div class="card-image">
-                    <img src="http://placehold.it/500x500">
-                    <span class="card-title">Event Title</span>
-                </div>
-                <div class="card-content">
-                    <p>Lorem ipsum Ut in eiusmod pariatur reprehenderit minim esse reprehenderit ea in sunt ad cupidatat commodo enim id voluptate in eu Duis sint reprehenderit quis sed magna dolor do irure qui sit eu reprehenderit aliqua enim.</p>
-                </div>
-                <div class="card-action">
-                    <a href="#">This is a link</a>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m4">
-            <div class="card">
-                <div class="card-image">
-                    <img src="http://placehold.it/500x500">
-                    <span class="card-title">Event Title</span>
-                </div>
-                <div class="card-content">
-                    <p>Lorem ipsum Ut in eiusmod pariatur reprehenderit minim esse reprehenderit ea in sunt ad cupidatat commodo enim id voluptate in eu Duis sint reprehenderit quis sed magna dolor do irure qui sit eu reprehenderit aliqua enim.</p>
-                </div>
-                <div class="card-action">
-                    <a href="#">This is a link</a>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m4">
-            <div class="card">
-                <div class="card-image">
-                    <img src="http://placehold.it/500x500">
-                    <span class="card-title">Event Title</span>
-                </div>
-                <div class="card-content">
-                    <p>Lorem ipsum Ut in eiusmod pariatur reprehenderit minim esse reprehenderit ea in sunt ad cupidatat commodo enim id voluptate in eu Duis sint reprehenderit quis sed magna dolor do irure qui sit eu reprehenderit aliqua enim.</p>
-                </div>
-                <div class="card-action">
-                    <a href="#">This is a link</a>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m4">
-            <div class="card">
-                <div class="card-image">
-                    <img src="http://placehold.it/500x500">
-                    <span class="card-title">Event Title</span>
-                </div>
-                <div class="card-content">
-                    <p>Lorem ipsum Ut in eiusmod pariatur reprehenderit minim esse reprehenderit ea in sunt ad cupidatat commodo enim id voluptate in eu Duis sint reprehenderit quis sed magna dolor do irure qui sit eu reprehenderit aliqua enim.</p>
-                </div>
-                <div class="card-action">
-                    <a href="#">This is a link</a>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m4">
-            <div class="card">
-                <div class="card-image">
-                    <img src="http://placehold.it/500x500">
-                    <span class="card-title">Event Title</span>
-                </div>
-                <div class="card-content">
-                    <p>Lorem ipsum Ut in eiusmod pariatur reprehenderit minim esse reprehenderit ea in sunt ad cupidatat commodo enim id voluptate in eu Duis sint reprehenderit quis sed magna dolor do irure qui sit eu reprehenderit aliqua enim.</p>
-                </div>
-                <div class="card-action">
-                    <a href="#">This is a link</a>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m4">
-            <div class="card">
-                <div class="card-image">
-                    <img src="http://placehold.it/500x500">
-                    <span class="card-title">Event Title</span>
-                </div>
-                <div class="card-content">
-                    <p>Lorem ipsum Ut in eiusmod pariatur reprehenderit minim esse reprehenderit ea in sunt ad cupidatat commodo enim id voluptate in eu Duis sint reprehenderit quis sed magna dolor do irure qui sit eu reprehenderit aliqua enim.</p>
-                </div>
-                <div class="card-action">
-                    <a href="#">This is a link</a>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m4">
-            <div class="card">
-                <div class="card-image">
-                    <img src="http://placehold.it/500x500">
-                    <span class="card-title">Event Title</span>
-                </div>
-                <div class="card-content">
-                    <p>Lorem ipsum Ut in eiusmod pariatur reprehenderit minim esse reprehenderit ea in sunt ad cupidatat commodo enim id voluptate in eu Duis sint reprehenderit quis sed magna dolor do irure qui sit eu reprehenderit aliqua enim.</p>
-                </div>
-                <div class="card-action">
-                    <a href="#">This is a link</a>
-                </div>
-            </div>
+            @endfor
         </div>
     </div>
+</div>
+
+<div class="row remove-col-padding" id="venues">
+    <h3>Latest Venues</h3>
+
+    @for( $i = 1; $i < 9; $i++)
+        <div class="col s6 m3">
+            <div class="card hoverable">
+                <div class="card-image">
+                    <a href="#!">
+                        <img src="{{ URL::to('/') . '/images/sample_images/hotels/'.$i.'.jpg' }}" />
+                        <span class="card-title">Venue {{ $i }}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    @endfor
+</div>
+
+<div class="row" id="latest">
+    <div class="parallax-container">
+        <div class="parallax"><img src="{{ URL::to('/') . '/images/gray-geometric-background.jpg'}}"></div>
+
+        <div class="col s12 m10 offset-m1">
+            <h3 class="card">Latest News</h3>
+
+            @for( $i = 1; $i < 7; $i++)
+                <div class="col s6 m4">
+                    <div class="card">
+                        <div class="card-content">
+                            <h5>News Title {{ $i }}</h5>
+                            <p class="red-text text-lighten-2">{{ date( 'M m, Y') }}</p>
+                            <p>Lorem ipsum Ut in eiusmod pariatur reprehenderit minim esse reprehenderit ea in sunt ad cupidatat commodo enim id voluptate in eu Duis sint reprehenderit quis sed magna dolor do irure qui sit eu reprehenderit aliqua enim.</p>
+                            <a href="#!" class="waves-effect waves-light btn red lighten-1">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            @endfor
+        </div>
+
+    </div>
+</div>
+
+<div class="row remove-col-padding" id="photos">
+    @for( $i = 1; $i <= 12; $i++)
+        <div class="col s6 m3">
+            <div class="card hoverable">
+                <div class="card-image center-cropped" style="background-image: url('{{ URL::to('/') . '/images/sample_images/event_photos/'.$i.'.jpg' }}');">
+                    <img src="{{ URL::to('/') . '/images/sample_images/event_photos/'.$i.'.jpg' }}" id="{{$i}}-image" />
+                </div>
+            </div>
+        </div>
+    @endfor
 </div>
 @endsection

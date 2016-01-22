@@ -2,6 +2,7 @@ $( document ).ready(function($){
 	// Materialize Setup
 	$(".button-collapse").sideNav();
 	$('.modal-trigger').leanModal();
+	$('.parallax').parallax();
 
 	$('.datepicker').pickadate({
 	    selectMonths: true, // Creates a dropdown to control month
