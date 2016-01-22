@@ -22,7 +22,7 @@ class MediaController extends Controller
         // Get the file from the request
         $file = $image;
 
-        $destination_path = storage_path() .'/uploads/';
+        $destination_path = storage_path() . '/'. $directory .'/';
         // Create a filename by hashing the user's username. This
         // will mean each user only has one profile picture residing
         // on our filesystem
@@ -39,5 +39,28 @@ class MediaController extends Controller
         $image->save(storage_path(). '/'. $directory .'/' . $file_name);
 
         return (string) '/'. $directory .'/'. $file_name;
+    }
+
+    public static function uploadLogo( $image ){
+        // Get the file from the request
+        $file = $image;
+        $folder = '/company/';
+
+        $destination_path = storage_path() . $folder;
+
+        $file_name = 'company_logo.'. $file->getClientOriginalExtension();
+        $file_name_white = 'company_logo_white.'. $file->getClientOriginalExtension();
+        // Move the file to our server
+        $movement = $image->move($destination_path, $file_name);
+
+        MediaController::whiteOverlay( $destination_path . $file_name, $destination_path . $file_name_white );
+
+        return [ "normal" => (string) $folder. $file_name, "white" => (string) $folder. $file_name_white ];
+    }
+
+    public static function whiteOverlay( $source, $destination ){
+        $image = Image::make( $source );
+        $image->colorize( 100, 100, 100 );
+        $image->save( $destination );
     }
 }
