@@ -49,7 +49,7 @@
                 <div class="col s12 m4">
                     <div class="card">
                         <div class="card-image">
-                            <img src="http://placehold.it/500x500">
+                            <img src="{{ URL::to('/') . '/images/sample_images/event_photos/event'.$i.'.jpg' }}">
                             <span class="card-title">Lorem ipsum Est quis dolor ex fugiat veniam tempor ullamco incididunt quis id in eiusmod ut quis Excepteur.</span>
                         </div>
                         <div class="card-content">
