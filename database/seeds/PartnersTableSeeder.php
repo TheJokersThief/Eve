@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Partner;
 
 class PartnersTableSeeder extends Seeder
 {
@@ -11,7 +12,7 @@ class PartnersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('partners')->insert([
+        Partner::firstOrCreate([
          	'name' => "McDonald's",
             'type' => 'Food',
             'price' => 5.99,
@@ -21,7 +22,7 @@ class PartnersTableSeeder extends Seeder
             'email' => 'mcd@gmail.com',   
         ]);
 
-        DB::table('partners')->insert([
+        Partner::firstOrCreate([
          	'name' => "Bewley's",
             'type' => 'Hotel',
             'price' => 64.99,
@@ -31,7 +32,7 @@ class PartnersTableSeeder extends Seeder
             'email' => 'mr.bewley@gmail.com',   
         ]);
 
-        DB::table('partners')->insert([
+        Partner::firstOrCreate([
          	'name' => "Ramen",
             'type' => 'Food',
             'price' => 6.00,
