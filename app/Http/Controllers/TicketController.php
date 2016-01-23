@@ -24,8 +24,7 @@ class TicketController extends Controller
         				->where('event_id', $eventId)
         				->firstOrFail();
 
-        return $ticket->qr();
-        // return view('tickets.show', $ticket);
+        return view('tickets.show', $ticket);
     }
 
     /**

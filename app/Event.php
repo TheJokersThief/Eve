@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Event extends Model
 {
@@ -20,10 +21,26 @@ class Event extends Model
     }
 
     public function partners(){
-        return $this->belongsToMany('App\Partner', 'event_partners');
+        return $this->hasMany('App\Partner', 'event_partners');
     }
 
     public function tickets(){
         $this->hasMany('App\Ticket');
+    }
+
+    /**
+     * Start time string for humans.
+     */
+    public function hrStartTime(){
+        $carbon = new Carbon($start_datetime);
+        return $carbon->toDayDateTimeString();
+    }
+
+    /**
+     * End time string for humans.
+     */
+    public function hrEndTime(){
+        $carbon = new Carbon($end_datetime);
+        return $carbon->toDayDateTimeString();
     }
 }

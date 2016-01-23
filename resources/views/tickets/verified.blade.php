@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('body-class') ticket-verify @endsection
 
 @section('content')
 	<h1 class="green-text">Ticket verified!</h1>
