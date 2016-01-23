@@ -178,3 +178,9 @@ function createLocation( ){
 		},
 	});
 }
+
+/* ADMIN FUNCTIONS */
+
+function initAdmin(){
+	$('.scrollspy').scrollSpy();
+}
