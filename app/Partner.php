@@ -24,10 +24,10 @@ class Partner extends Model
 
 
     public function location(){
-        $this->hasOne('App\Location');
+        return $this->hasOne('App\Location', 'location_id', 'id');
     }
 
     public function events(){
-        $this->belongsToMany('App\Event', 'event_partners');
+        return $this->belongsToMany('App\Event', 'event_partners');
     }
 }

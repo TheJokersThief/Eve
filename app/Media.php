@@ -17,6 +17,6 @@ class Media extends Model
     ]
 
     public function event(){
-    	$this->hasOne('App\Event');
+    	return $this->hasOne('App\Event');
     }
 }
