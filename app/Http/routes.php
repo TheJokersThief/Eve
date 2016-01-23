@@ -26,7 +26,7 @@ Route::group(['middleware' => ['web']], function () {
 		'auth' => 'Auth\AuthController',
 		'password' => 'Auth\PasswordController',
 	]);
-	
+
 	Route::get('/', 'HomeController@index');
 
 	Route::group(['prefix' => 'install'], function () {
@@ -41,6 +41,10 @@ Route::group(['middleware' => ['web']], function () {
 					]);
 
 	Route::resource('partners', 'PartnersController');
+
+	Route::group(['prefix' => 'admin'], function( ){
+		Route::get('/', ['as' => 'admin.home', 'uses' => 'AdminController@index']);
+	});
 });
 
 Route::group(['prefix' => 'ticket', 'middleware' => 'web'], function(){
