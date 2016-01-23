@@ -14,18 +14,8 @@ class CreateEventPartnersPivotTable extends Migration
     {
         Schema::create('event_partners', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('event_id');
-            $table->integer('partner_id');
-
-            // To be introduced after Event and Partner exists
-            // (separate migration)
-            // $table->foreign('event_id')
-            //       ->references('id')
-            //       ->on('events');
-
-            // $table->foreign('partner_id')
-            //       ->references('id')
-            //       ->on('partners');
+            $table->integer('event_id')->unsigned();
+            $table->integer('partner_id')->unsigned();
         });
     }
 

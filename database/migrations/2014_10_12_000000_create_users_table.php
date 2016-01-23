@@ -24,11 +24,6 @@ class CreateUsersTable extends Migration
             $table->string('language', 2)->default("en"); // Language code
             $table->rememberToken();
             $table->timestamps();
-
-            // To be introduced after Media exists
-            // $table->foreign('profile_pic')
-            //       ->references('id')
-            //       ->on('media');
         });
     }
 
