@@ -152,3 +152,29 @@ function autofillInformation( ){
 function redirectToFirstEvent( ){
 	window.location = $('#first-event-link').attr('href');
 }
+
+function createLocation( ){
+	var formData = new FormData($('#locationForm form')[0]);
+	$.ajax({
+		url: '/api/location/create',
+		type: 'post',
+		cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,	
+		success: function(data) {
+			if( data.errors ){
+				// If we have validation errors, display them
+				data.errors.forEach( function( error ){
+					$('#location-errors').append('<li>'+error+'</li>');
+				});
+			} else {
+				$newItem = $("<option value='"+ data.id + "'>"+ data.name + "</option>");
+				$('#location-select').append($newItem);
+				$('#location-select').val(data.id);
+				$('#location-select').material_select();
+				$("locationForm").closeModal();
+			}
+		},
+	});
+}

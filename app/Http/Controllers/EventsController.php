@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Event;
+use App\Location;
 use Redirect;
 use Illuminate\Support\Facades\Request;
 use Validator;
@@ -25,7 +26,7 @@ class EventsController extends Controller
     }
 
     public function create(){
-    	return view('events.create');
+    	return view('events.create', ['locations' => Location::all()]);
     }
 
     public function store(){

@@ -9,6 +9,7 @@ use Image;
 use App\User;
 use App\Ticket;
 use App\Setting;
+use App\Location;
 use Response;
 
 use Illuminate\Http\Request;
@@ -160,6 +161,33 @@ class ApiController extends Controller
         Auth::login( User::first() );
 
         return Response::json( ['success'] );
+    }
+
+    ///////////////////////
+    /// CREATE LOCATION ///
+    ///////////////////////
+
+    public static function createLocation( Request $request ){
+        $data = $request->only([
+                    'name',
+                    'coordinates',
+                    'capacity'
+                ]);
+
+        $validator = Validator::make( $data, [
+                    'name'  => 'required',
+                    'coordinates'   => 'required',
+                    'capacity'  => 'required|numeric'
+                ]);
+
+        if( $validator->fails( ) ){
+            // If validation fails, return json array of errors 
+            return Response::json(['errors' => $validator->errors()->all()]);
+        }
+
+        $location = Location::firstOrCreate($data);
+
+        return Response::json( $location->toArray() );
     }
 
 }

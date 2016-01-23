@@ -48,6 +48,11 @@ Route::group(['prefix' => 'api'], function () {
 	    Route::get('getInstallUserInfo', 'ApiController@getInstallUserInfo');
 	    Route::post('createCompany', 'ApiController@createCompany');
 	});
+    Route::group(['prefix' => 'location'], function () {
+		Route::post('create', 'ApiController@createLocation');
+	});
+
+
 });
 
 // Gets uploaded files via a public url
