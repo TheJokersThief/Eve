@@ -15,17 +15,11 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->text('description');
-            $table->integer('location_id');
+            $table->integer('location_id')->unsigned();
             $table->dateTime('start_datetime');
             $table->dateTime('end_datetime');
             $table->string('title');
             $table->timestamps();
-
-            // To be introduced after Location exists
-            // (separate migration)
-            // $table->foreign('location_id')
-            //         ->references('id')
-            //         ->on('locations');
         });
     }
 

@@ -1,19 +1,25 @@
 // Google Fonts
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200|Oxygen:400,300);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:900,700,600,400,300,200|Oxygen:400,300);
 
 @off-white: #FFFFF8;
 @off-black: #282C35;
 
+@heading-stack: 'Oxygen', sans-serif;
+@text-stack: 'Source Sans Pro', sans-serif;
 
 h1, h2, h3, h4, h5, h6{
-	font-family: 'Oxygen', sans-serif;
+	font-family: @heading-stack;
 	font-weight: 400;
 }
 
 body{
-	font-family: 'Source Sans Pro', sans-serif;
+	font-family: @text-stack;
 	margin:0;
 	padding:0;
+}
+
+strong{
+	font-weight: 600;
 }
 
 /* Nav Logo */
@@ -42,6 +48,9 @@ body{
 }
 
 body{
+	@import "_home.less";
+	@import "_admin.less";
+
 	hr{
 		border: 0;
 	    height: 1px;
@@ -64,8 +73,6 @@ body{
 		    margin-left: 60px;
 		}
 	}
-		
-	@import "_home.less";
 
 	&.create-event{
 		.clockpicker-popover{

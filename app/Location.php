@@ -10,7 +10,7 @@ class Location extends Model
     *	Mass assignable attributes
     */
     protected $fillable = [
-    	'name','coordinates','capacity'
+    	'name','coordinates','capacity','updated_at', 'created_at'
     ];
 
     public function event(){

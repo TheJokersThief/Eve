@@ -15,8 +15,12 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(SettingsSeeder::class);
+        $this->call(LocationSeeder::class);
         $this->call(EventsTableSeeder::class);
+        $this->call(MediaTableSeeder::class);
         $this->call(PartnersTableSeeder::class);
+        $this->call(LocationsTableSeeder::class);
+        $this->call(EventPartnersTableSeeder::class);
 
         Model::reguard();
     }

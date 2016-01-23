@@ -15,10 +15,11 @@ class CreateMediaTable extends Migration
         Schema::create('media', function (Blueprint $table) {
             $table->increments('id');
             $table->string('file_location');
-			$table->integer('event_id');
+			$table->integer('event_id')->unsigned();
 			$table->text('description');
 			$table->string('name');
 			$table->integer('view_count');
+            $table->boolean('approved'); 
             $table->timestamps();
         });
     }

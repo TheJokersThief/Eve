@@ -12,10 +12,11 @@ class Media extends Model
 		'event_id',
 		'description',
 		'name',
-		'view_count'
-    ]
+		'view_count',
+        'approved'      // Whether a piece of media should be publicly viewable
+    ];
 
     public function event(){
-    	$this->hasOne('App\Event');
+    	return $this->hasOne('App\Event');
     }
 }
