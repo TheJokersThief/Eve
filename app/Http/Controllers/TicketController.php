@@ -46,7 +46,7 @@ class TicketController extends Controller
     					]
     				);
 
-    	return $ticket;
+    	return $this->show($ticket->id);
         // return view('tickets.show', $ticket);
     }
 
@@ -59,18 +59,23 @@ class TicketController extends Controller
      */
     public function verify($code){
     	if( Auth::user()->is_staff || Auth::user()->is_admin ){
-	    	$ticket = Ticket::hasCode($code)->firstOrFail();
+            try{
+	    	  $ticket = Ticket::hasCode($code)->firstOrFail();  
+            } catch (ModelNotFoundException $e) {
+                return view("tickets.unverifiable", ['error' => 'Ticket code invalid.']);
+            }
 	    	if( $ticket->used ){
-	    		return "Ticket used!";
+	    		return view("tickets.unverifiable", ['error' => 'Ticket already used.']);
 	    	} else {
 	    		$ticket->used = true;
 	    		$ticket->save();
 
 	    		// Return name badge for printing.
-	    		return "Ticket Verified!";
+                return view("tickets.verified", ['ticket' => $ticket]);
 	    	}
     	} else {
     		// user is admin, cannot validate tickets.
+            return view("tickets.unverifiable", ['error' => 'You are not allowed to verify tickets; are you logged in?']);
     	}
     }
 }
