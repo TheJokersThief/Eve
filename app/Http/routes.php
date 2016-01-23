@@ -21,6 +21,12 @@ Route::group(['middleware' => ['web']], function () {
 
 
 Route::group(['middleware' => ['web']], function () {
+	// Basic auth controls such as password reset
+	Route::controllers([
+		'auth' => 'Auth\AuthController',
+		'password' => 'Auth\PasswordController',
+	]);
+	
 	Route::get('/', 'HomeController@index');
 
 	Route::group(['prefix' => 'install'], function () {
