@@ -24,7 +24,7 @@ class Partner extends Model
 
 
     public function location(){
-        return $this->hasOne('App\Location', 'location_id', 'id');
+        return $this->belongsTo('App\Location');
     }
 
     public function events(){
