@@ -30,4 +30,8 @@ class Partner extends Model
     public function events(){
         return $this->belongsToMany('App\Event', 'event_partners');
     }
+
+    public function media(){
+        return $this->hasOne('App\Media', 'id', 'picture');
+    }
 }
