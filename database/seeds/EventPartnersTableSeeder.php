@@ -13,17 +13,17 @@ class EventPartnersTableSeeder extends Seeder
     {
         DB::table('event_partners')->insert([
          	'event_id' => 1,
-            'partner_id' => 3,
+            'partner_id' => 1,
         ]);
 
         DB::table('event_partners')->insert([
          	'event_id' => 1,
-            'partner_id' => 4,
+            'partner_id' => 2,
         ]);
 
         DB::table('event_partners')->insert([
          	'event_id' => 2,
-            'partner_id' => 5,
+            'partner_id' => 3,
         ]);
     }
 }

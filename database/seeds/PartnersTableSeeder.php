@@ -44,5 +44,16 @@ class PartnersTableSeeder extends Seeder
             'distance' => 89,
             'email' => 'ramen@gmail.com',   
         ]);
+
+        Partner::firstOrCreate([
+            'name' => "Rament",
+            'picture' => 3,
+            'type' => 'Food',
+            'price' => 6.00,
+            'description' => 'Asian street food better than Ramen',
+            'location_id' => 4,
+            'distance' => 89,
+            'email' => 'rament@gmail.com',   
+        ]);
     }
 }
