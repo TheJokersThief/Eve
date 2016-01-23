@@ -14,7 +14,7 @@ class Media extends Model
 		'name',
 		'view_count',
         'approved'      // Whether a piece of media should be publicly viewable
-    ]
+    ];
 
     public function event(){
     	return $this->hasOne('App\Event');
