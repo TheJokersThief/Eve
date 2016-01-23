@@ -28,6 +28,11 @@ class Ticket extends Model
     	return Crypt::encrypt( json_encode($arr) ); 
     }
 
+    /**
+     * Returns a code for an SVG QR code pointing to
+     * the ticket's validate page. 
+     * @return string As above
+     */
     public function qr(){
         QrCode::size(300);
         return QrCode::generate( "http://" . $_SERVER["HTTP_HOST"] . "/ticket/verify/" . $this->code() );
