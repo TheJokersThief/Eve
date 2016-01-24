@@ -130,6 +130,12 @@ class UserController extends Controller
      * @return String:  JSON description of user or "false"
      */
     public function me(){
+
         return Auth::check() ? Auth::user() : "false";
     }
+
+    public function myEvents(){
+        return view('user.myEvents');
+    }
+
 }

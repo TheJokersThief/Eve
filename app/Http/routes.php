@@ -45,6 +45,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::group(['prefix' => 'admin'], function( ){
 		Route::get('/', ['as' => 'admin.home', 'uses' => 'AdminController@index']);
 	});
+	
+	Route::resource('user/myEvents', 'UserController@myEvents');
+
 });
 
 Route::group(['prefix' => 'ticket', 'middleware' => 'web'], function(){
