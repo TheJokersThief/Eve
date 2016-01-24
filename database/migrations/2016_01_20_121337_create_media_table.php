@@ -19,7 +19,8 @@ class CreateMediaTable extends Migration
 			$table->text('description');
 			$table->string('name');
 			$table->integer('view_count');
-            $table->boolean('approved'); 
+            $table->boolean('approved');
+            $table->boolean('processed');
             $table->timestamps();
         });
     }
