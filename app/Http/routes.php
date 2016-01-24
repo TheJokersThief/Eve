@@ -42,9 +42,15 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::resource('partners', 'PartnersController');
 
+	Route::resource('users/myEvents', 'UserController@myEvents');
+
+<<<<<<< Updated upstream
 	Route::group(['prefix' => 'admin'], function( ){
 		Route::get('/', ['as' => 'admin.home', 'uses' => 'AdminController@index']);
 	});
+=======
+	Route::resource('user/myEvents', 'UserController@myEvents');
+>>>>>>> Stashed changes
 });
 
 Route::group(['prefix' => 'ticket', 'middleware' => 'web'], function(){
