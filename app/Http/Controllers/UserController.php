@@ -135,7 +135,7 @@ class UserController extends Controller
     }
 
     public function myEvents(){
-        return view('users.myEvents');
+        return view('user.myEvents');
     }
 
 }
