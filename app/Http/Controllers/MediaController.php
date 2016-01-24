@@ -9,6 +9,7 @@ use Image;
 use Hash;
 use Response;
 use App\User;
+use App\Media;
 use App\Ticket;
 use App\Setting;
 
@@ -18,6 +19,14 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MediaController extends Controller
 {
+
+    public static function approveMedia( $mediaID, $isApproved ){
+        $media = Media::find( $mediaID );
+        $media->approved = $isApproved;
+        $media->processed = true;
+        $media->save();
+    }
+
     public static function uploadImage( $image, $hashSeed, $directory = "uploads", $bestFit = false, $fitDimensions = false ){
         // Get the file from the request
         $file = $image;

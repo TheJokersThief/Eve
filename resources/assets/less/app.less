@@ -22,6 +22,14 @@ strong{
 	font-weight: 600;
 }
 
+.off-white{
+	background: @off-white;
+}
+
+.off-black{
+	background: @off-black;
+}
+
 /* Nav Logo */
 .brand-logo{
 	line-height:58px;
@@ -84,5 +92,17 @@ body{
 		width: 0;
 	    transition: all 1s;
 	    transition-timing-function: ease;
+	}
+
+	.dimmed-card-image{
+		&.card{
+			.card-image{
+				background: @off-black;
+				img{
+					opacity: 0.4;
+					transition: opacity 1s;
+				}
+			}
+		}
 	}
 }

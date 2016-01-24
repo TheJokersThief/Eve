@@ -184,3 +184,17 @@ function createLocation( ){
 function initAdmin(){
 	$('.scrollspy').scrollSpy();
 }
+
+function approveMedia( encryptedID, isApproved, elementID ){
+	$.ajax({
+		url: '/api/media/approve',
+		type: 'post',
+		cache: false,
+		dataType: 'json',
+        data: {
+        	"encryptedID" : encryptedID,
+        	"isApproved"  : isApproved
+        }
+	});
+	$("#"+elementID).hide();
+}

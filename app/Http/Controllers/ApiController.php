@@ -6,6 +6,7 @@ use Validator;
 use Redirect;
 use Auth;
 use Image;
+use Crypt;
 use App\User;
 use App\Ticket;
 use App\Setting;
@@ -188,6 +189,21 @@ class ApiController extends Controller
         $location = Location::firstOrCreate($data);
 
         return Response::json( $location->toArray() );
+    }
+
+    ///////////
+    // MEDIA //
+    ///////////
+    public static function approveMedia( Request $request ){
+        $data = $request->only([
+                    'encryptedID',
+                    'isApproved'
+                ]);
+
+        $mediaID = Crypt::decrypt( $data["encryptedID"] );
+        $isApproved = ( $data["isApproved"] == 'true' ? true : false );
+
+        MediaController::approveMedia( $mediaID, $isApproved );
     }
 
 }

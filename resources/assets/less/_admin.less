@@ -7,4 +7,31 @@
 	    position: fixed;
 	    width: 19%;
 	}
+
+	#media{
+		.card{
+			.card-content{
+				.card-title{
+					opacity:1;
+					transition: opacity 0.3s;
+				}
+
+				.card-image{
+					&:hover {
+						.card-title{
+							opacity: 0;
+						}
+
+						img{
+							opacity: 1;
+						}
+					}
+				}
+
+				.card-title {
+				    line-height: 26px;
+				}
+			}
+		}
+	}
 }

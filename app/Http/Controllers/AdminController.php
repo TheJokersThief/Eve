@@ -14,6 +14,8 @@ use App\Ticket;
 use App\Setting;
 use App\Event;
 use App\Partner;
+use App\Media;
+use App\News;
 
 use App\Http\Controllers\MediaController;
 
@@ -40,11 +42,17 @@ class AdminController extends Controller
 
 	public function index( ){
 
-		$data = [];
+		$totalNumber = 5; // number of items to take for each section
 
-		$data["events"] = Event::where('end_datetime', '>', date(time()) )->get()->take(5);
+		$data = [
+			"events" 	=> Event::where('end_datetime', '>', date(time()) )->get()->take( $totalNumber ),
+			"partners" 	=> Partner::all()->take( $totalNumber ),
+			"news" 		=> News::all()->take( $totalNumber ),
+			"media"		=> Media::where('processed', 0)->get()->take( $totalNumber )->chunk(3),
+			"staffs"	=> User::where('is_staff', 1)->get()->take( $totalNumber ),
 
-		$data["partners"] = Partner::all()->take(5);
+		];
+
 
 
 		return View::make('admin.index')->with($data);
