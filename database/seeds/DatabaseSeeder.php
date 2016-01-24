@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LocationsTableSeeder::class);
         $this->call(EventPartnersTableSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(NewsSeeder::class);
 
         Model::reguard();
     }
