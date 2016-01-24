@@ -13,7 +13,8 @@ class Media extends Model
 		'description',
 		'name',
 		'view_count',
-        'approved'      // Whether a piece of media should be publicly viewable
+        'approved',      // Whether a piece of media should be publicly viewable
+        'processed'      // Whether the media has been approved/rejected at all
     ];
 
     public function event(){
