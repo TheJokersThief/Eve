@@ -33,32 +33,11 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/', ['as' => 'install', 'uses' => 'InstallationController@index']);
 	});
 
-	Route::resource('events', 'EventsController', [
-									'names' => [
-									    'create' 	=> 'event.create',
-									    'show'		=> 'event.show',
-									    'edit'		=> 'event.edit',
-									    'index'		=> 'event.index'
-									]
-					]);
+	Route::resource('events', 'EventsController');
 
-	Route::resource('partners', 'PartnersController', [
-									'names' => [
-									    'create' 	=> 'partner.create',
-									    'show'		=> 'partner.show',
-									    'edit'		=> 'partner.edit',
-									    'index'		=> 'partner.index'
-									]
-					]);
+	Route::resource('partners', 'PartnersController');
 
-	Route::resource('news', 'NewsController', [
-									'names' => [
-									    'create' 	=> 'news.create',
-									    'show'		=> 'news.show',
-									    'edit'		=> 'news.edit',
-									    'index'		=> 'news.index'
-									]
-					]);
+	Route::resource('news', 'NewsController');
 
 	Route::group(['prefix' => 'admin'], function( ){
 		Route::get('/', ['as' => 'admin.home', 'uses' => 'AdminController@index']);

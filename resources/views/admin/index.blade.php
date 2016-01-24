@@ -32,7 +32,7 @@
 			<div class="row scrollspy" id="events">
 				<ul class="collection with-header">
 					<li class="collection-header">
-						<a href="{{ URL::route('event.create') }}" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New Event</a>
+						<a href="{{ URL::route('events.create') }}" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New Event</a>
 						<h4>Events</h4>
 					</li>
 
@@ -42,7 +42,7 @@
 								<strong>{{ $event->title }}</strong>
 								<br /><small>({{ date('d M, Y', strtotime($event->start_datetime)) }} &rarr; {{ date('d M, Y', strtotime($event->end_datetime)) }})</small>
 								<div class="secondary-content">
-									<a href="{{ URL::route('event.edit', ['event'=>$event->id]) }}">
+									<a href="{{ URL::route('events.edit', ['event'=>$event->id]) }}">
 										<i class="fa fa-pencil teal-text" alt="Edit Event"></i> &nbsp;
 									</a>
 									<a href="#!">
@@ -53,13 +53,13 @@
 						</li>
 					@endforeach
 				</ul>
-				<a href="{{ URL::route('event.index') }}" class="waves-effect waves-light btn right">View All Events &rarr;</a>
+				<a href="{{ URL::route('events.index') }}" class="waves-effect waves-light btn right">View All Events &rarr;</a>
 			</div>
 
 			<div class="row scrollspy" id="partners">
 				<ul class="collection with-header">
 					<li class="collection-header">
-						<a href="{{ URL::route('partner.create') }}" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New Partner</a>
+						<a href="{{ URL::route('partners.create') }}" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New Partner</a>
 						<h4>Partners</h4>
 					</li>
 
@@ -69,7 +69,7 @@
 								<strong>{{ $partner->name }}</strong>
 								<br /><small>({{ $partner->location->name }})</small>
 								<div class="secondary-content">
-									<a href="{{ URL::route('partner.edit', ['partner'=>$partner->id]) }}">
+									<a href="{{ URL::route('partners.edit', ['partner'=>$partner->id]) }}">
 										<i class="fa fa-pencil teal-text" alt="Edit Partner"></i> &nbsp;
 									</a>
 									<a href="#!">
@@ -80,7 +80,7 @@
 						</li>
 					@endforeach
 				</ul>
-				<a href="{{ URL::route('partner.index') }}" class="waves-effect waves-light btn right">View All Partners &rarr;</a>
+				<a href="{{ URL::route('partners.index') }}" class="waves-effect waves-light btn right">View All Partners &rarr;</a>
 			</div>
 			
 			<div class="row scrollspy" id="news">
