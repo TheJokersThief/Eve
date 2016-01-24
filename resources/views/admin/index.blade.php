@@ -32,7 +32,7 @@
 			<div class="row scrollspy" id="events">
 				<ul class="collection with-header">
 					<li class="collection-header">
-						<a href="#!" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New Event</a>
+						<a href="{{ URL::route('event.create') }}" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New Event</a>
 						<h4>Events</h4>
 					</li>
 
@@ -41,21 +41,25 @@
 							<div>
 								<strong>{{ $event->title }}</strong>
 								<br /><small>({{ date('d M, Y', strtotime($event->start_datetime)) }} &rarr; {{ date('d M, Y', strtotime($event->end_datetime)) }})</small>
-								<a href="#!" class="secondary-content">
-									<i class="fa fa-pencil"></i> &nbsp;
-									<i class="fa fa-times red-text"></i>
-								</a>
+								<div class="secondary-content">
+									<a href="{{ URL::route('event.edit', ['event'=>$event->id]) }}">
+										<i class="fa fa-pencil teal-text" alt="Edit Event"></i> &nbsp;
+									</a>
+									<a href="#!">
+										<i class="fa fa-times red-text" alt="Delete Event"></i>
+									</a>
+								</div>
 							</div>
 						</li>
 					@endforeach
 				</ul>
-				<a href="#!" class="waves-effect waves-light btn right">View All Events &rarr;</a>
+				<a href="{{ URL::route('event.index') }}" class="waves-effect waves-light btn right">View All Events &rarr;</a>
 			</div>
 
 			<div class="row scrollspy" id="partners">
 				<ul class="collection with-header">
 					<li class="collection-header">
-						<a href="#!" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New Partner</a>
+						<a href="{{ URL::route('partner.create') }}" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New Partner</a>
 						<h4>Partners</h4>
 					</li>
 
@@ -64,21 +68,25 @@
 							<div>
 								<strong>{{ $partner->name }}</strong>
 								<br /><small>({{ $partner->location->name }})</small>
-								<a href="#!" class="secondary-content">
-									<i class="fa fa-pencil"></i> &nbsp;
-									<i class="fa fa-times red-text"></i>
-								</a>
+								<div class="secondary-content">
+									<a href="{{ URL::route('partner.edit', ['partner'=>$partner->id]) }}">
+										<i class="fa fa-pencil teal-text" alt="Edit Partner"></i> &nbsp;
+									</a>
+									<a href="#!">
+										<i class="fa fa-times red-text" alt="Delete Partner"></i>
+									</a>
+								</div>
 							</div>
 						</li>
 					@endforeach
 				</ul>
-				<a href="#!" class="waves-effect waves-light btn right">View All Partners &rarr;</a>
+				<a href="{{ URL::route('partner.index') }}" class="waves-effect waves-light btn right">View All Partners &rarr;</a>
 			</div>
 			
 			<div class="row scrollspy" id="news">
 				<ul class="collection with-header">
 					<li class="collection-header">
-						<a href="#!" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New New</a>
+						<a href="{{ URL::route('news.create') }}" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New News</a>
 						<h4>News</h4>
 					</li>
 
@@ -87,15 +95,19 @@
 							<div>
 								<strong>{{ $new->title }}</strong>
 								<br /><small>({{ str_limit($new->content, 150) }})</small>
-								<a href="#!" class="secondary-content">
-									<i class="fa fa-pencil"></i> &nbsp;
-									<i class="fa fa-times red-text"></i>
-								</a>
+								<div class="secondary-content">
+									<a href="{{ URL::route('news.edit', ['news'=>$new->id]) }}">
+										<i class="fa fa-pencil teal-text" alt="Edit News"></i> &nbsp;
+									</a>
+									<a href="#!">
+										<i class="fa fa-times red-text" alt="Delete News"></i>
+									</a>
+								</div>
 							</div>
 						</li>
 					@endforeach
 				</ul>
-				<a href="#!" class="waves-effect waves-light btn right">View All News &rarr;</a>
+				<a href="{{ URL::route('news.index') }}" class="waves-effect waves-light btn right">View All News &rarr;</a>
 			</div>
 
 			<div class="row scrollspy" id="media">

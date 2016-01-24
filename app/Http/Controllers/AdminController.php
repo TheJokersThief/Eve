@@ -48,7 +48,7 @@ class AdminController extends Controller
 			"events" 	=> Event::where('end_datetime', '>', date(time()) )->get()->take( $totalNumber ),
 			"partners" 	=> Partner::all()->take( $totalNumber ),
 			"news" 		=> News::all()->take( $totalNumber ),
-			"media"		=> Media::where('processed', 0)->get()->take( $totalNumber )->chunk(3),
+			"media"		=> Media::where('processed', 0)->get()->take( $totalNumber*2 )->chunk(3),
 			"staffs"	=> User::where('is_staff', 1)->get()->take( $totalNumber ),
 
 		];
