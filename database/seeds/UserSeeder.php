@@ -16,10 +16,26 @@ class UserSeeder extends Seeder
 
     	$defaultProfileImage = "/images/default_profile_image.png";
 
+	    //////////////////////////
+    	// MAIN ADMIN TEST USER //
+	    //////////////////////////
+    	User::firstOrCreate([
+    		'id'				=> 1,
+        	'name' 				=> "DEECM",
+        	'email' 			=> "auditor@netsoc.co",
+        	'password' 			=> Hash::make('password'),
+        	'is_admin' 			=> 1,
+        	'is_staff' 			=> 1,
+        	'profile_picture' 	=> $defaultProfileImage,
+        	'bio' 				=> 'Lorem ipsum Nostrud ea laboris sunt dolor velit id Ut id qui qui officia consectetur Ut deserunt minim ut laborum proident sunt laborum in consectetur ullamco ullamco cupidatat do in exercitation occaecat non laboris nisi sint Duis officia aliqua dolor id.',
+        	'language' 			=> 'EN'
+        ]);
+
 	    //////////////////////
     	// FOUR STAFF USERS //
 	    //////////////////////
         User::firstOrCreate([
+        	'id'				=> 2,
         	'name' 				=> "Douglas Adams",
         	'email' 			=> "doug@hitchhikersguide.galaxy",
         	'password' 			=> Hash::make('TheAnswerIs42'),
@@ -31,6 +47,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::firstOrCreate([
+        	'id'				=> 3,
         	'name' 				=> "William E. Henley",
         	'email' 			=> "willy@invictus.net",
         	'password' 			=> Hash::make('unconquerable'),
@@ -42,6 +59,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::firstOrCreate([
+        	'id'				=> 4,
         	'name' 				=> "Kanye West",
         	'email' 			=> "kanye@thecentreofthe.world",
         	'password' 			=> Hash::make('IAmGod'),
@@ -53,6 +71,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::firstOrCreate([
+        	'id'				=> 5,
         	'name' 				=> "Jaden Smith",
         	'email' 			=> "whatIs@an.email",
         	'password' 			=> Hash::make('hashtagyeezys'),
