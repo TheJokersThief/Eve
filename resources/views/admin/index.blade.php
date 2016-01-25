@@ -40,6 +40,11 @@
 						<li class="collection-item">
 							<div>
 								<strong>{{ $event->title }}</strong>
+								@if( $event->mediaCount > 0 )
+									<a href="{{ URL::route('media.unprocessedForEvent', ['eventID'=>$event->id]) }}" alt="Unprocessed Media">
+										<span class="new badge">{{ $event->mediaCount }}</span>
+									</a>
+								@endif
 								<br /><small>({{ date('d M, Y', strtotime($event->start_datetime)) }} &rarr; {{ date('d M, Y', strtotime($event->end_datetime)) }})</small>
 								<div class="secondary-content">
 									<a href="{{ URL::route('events.edit', ['event'=>$event->id]) }}">

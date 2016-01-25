@@ -53,6 +53,13 @@ class AdminController extends Controller
 
 		];
 
+		$i = 0;
+		foreach ($data['events'] as $event) {
+			$mediaCount = count( Media::where('processed', false)->where('event_id', $event->id)->get() );
+			$data['events'][$i]->mediaCount = $mediaCount;
+			$i++;
+		}
+
 
 
 		return View::make('admin.index')->with($data);
