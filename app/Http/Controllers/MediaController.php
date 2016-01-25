@@ -7,6 +7,7 @@ use Redirect;
 use Auth;
 use Image;
 use Hash;
+use View;
 use Response;
 use App\User;
 use App\Media;
@@ -19,6 +20,16 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MediaController extends Controller
 {
+
+    public function viewUnprocessedMedia( ){
+        $media = Media::where('processed', false)->get()->chunk(6);
+        return View::make('media.unprocessed')->with('media', $media);
+    }
+
+    public function viewUnprocessedMediaForEvent( $eventID ){
+        $media = Media::where('event_id', $eventID)->where('processed', false)->get()->chunk(6);
+        return View::make('media.unprocessed')->with('media', $media);
+    }
 
     public static function approveMedia( $mediaID, $isApproved ){
         $media = Media::find( $mediaID );

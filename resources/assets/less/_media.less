@@ -1,0 +1,39 @@
+&.unprocessed-media-page{
+	.card{
+		margin: 0;
+		padding: 0;
+		
+		.card-title{
+			opacity:0;
+			transition: opacity 0.3s;
+			line-height: 26px;
+		}
+
+		.card-image{
+			background: @off-black;
+
+			img{
+				opacity: 1;
+				transition: opacity 1s;
+			}
+			&:hover {
+				.card-title{
+					opacity: 1;
+				}
+
+				img{
+					opacity: 0.4;
+				}
+			}
+		}
+	}
+
+	.row .col{
+		margin: 0;
+		padding: 0;
+	}
+
+	.grid-item{
+		width: 30%;
+	}
+}
