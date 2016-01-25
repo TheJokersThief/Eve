@@ -47,7 +47,8 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 
-Route::group(['prefix' => 'ticket', 'middleware' => 'web'], function(){
+Route::group(['prefix' => 'tickets', 'middleware' => 'web'], function(){
+	Route::post('/', 'TicketController@store');
 	Route::get('{id}', 'TicketController@show');
 	Route::get('verify/{code}', 'TicketController@verify');
 });

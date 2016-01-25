@@ -32,7 +32,7 @@ class Event extends Model
      * Start time string for humans.
      */
     public function hrStartTime(){
-        $carbon = new Carbon($start_datetime);
+        $carbon = new Carbon($this->start_datetime);
         return $carbon->toDayDateTimeString();
     }
 
@@ -40,7 +40,7 @@ class Event extends Model
      * End time string for humans.
      */
     public function hrEndTime(){
-        $carbon = new Carbon($end_datetime);
+        $carbon = new Carbon($this->end_datetime);
         return $carbon->toDayDateTimeString();
     }
 }

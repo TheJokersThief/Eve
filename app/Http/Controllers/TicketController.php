@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -24,7 +24,7 @@ class TicketController extends Controller
         				->where('event_id', $eventId)
         				->firstOrFail();
 
-        return view('tickets.show', $ticket);
+        return view('tickets.show', compact('ticket'));
     }
 
     /**
@@ -34,8 +34,9 @@ class TicketController extends Controller
      * @param  Integer 	$eventId 	ID of the event for the ticket.
      * @return View 		        Ticket View
      */
-    public function store($eventId){
-    	$event = Event::firstOrFail($eventId);
+    public function store(){
+        $data = Request::only( ["event_id"] );
+    	$event = Event::findOrFail($data["event_id"]);
     	$user  = Auth::user();
 
     	$ticket = Ticket::firstOrCreate(

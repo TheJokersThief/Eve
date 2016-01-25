@@ -3,9 +3,17 @@
 @section('content')
 
 	<div class="container">
-        <div class="col s12">
-        	<h2>{{ $event->title }}</h2>
-        </div>
+		<div class="row">
+	        <div class="col s12 m10">
+	        	<h2>{{ $event->title }}</h2>
+	        </div>
+	        @if(Auth::check())
+				{!! Form::open( ['url' => 'tickets', "class" => "col s12 m2 get_ticket_button"] ) !!}
+					{!! Form::hidden('event_id', $event->id) !!}
+					{!! Form::submit('Get Ticket', ['class' => 'btn btn-primary form-control']) !!}
+				{!! Form::close() !!}
+			@endif
+		</div>
 		<div class="divider"></div>
   			<div class="section">
 		    <p>{{ $event->description }}</p>
@@ -23,14 +31,14 @@
   			<div class="section">
   			<div class="row">
   				<div class="col s2"><h5>Location:<h5></div>
-			    <div class="col s10"><p>{{ $location_name }}</p></div>
+			    <div class="col s10"><p>{{ $event->location->name }}</p></div>
 			</div>
 		</div>
 		<div class="divider"></div>
   			<div class="section">
 			    <h5>Event Partners</h5>
 			    <div class="row">
-				    @foreach($partners as $partner)
+				    @foreach($event->partners as $partner)
 				    	<div class="col s4">
 							<div class="card small">
 					            <div class="card-image">
