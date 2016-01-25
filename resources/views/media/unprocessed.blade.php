@@ -6,13 +6,17 @@
 	<script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$('.grid').masonry({
+			var $grid = $('.grid').masonry({
 				itemSelector: '.grid-item',
 				// percentPosition: true,
 				gutter:0,
 				fitWidth: true,
 				// containerStyle: null
 			});
+
+			setInterval(function(){
+				$grid.masonry();
+			}, 500);
 		});
 	</script>
 @endsection
