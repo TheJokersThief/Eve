@@ -13,7 +13,7 @@ class MediaTableSeeder extends Seeder
     public function run()
     {
         Media::firstOrCreate([
-         	'file_location' => 'images/sample_images/hotels/1.jpg',
+         	'file_location' => '/images/sample_images/hotels/1.jpg',
          	'event_id' => 1,
          	'description' => 'A photo description',
          	'name' => 'Photo 1',
@@ -23,7 +23,7 @@ class MediaTableSeeder extends Seeder
         ]);
 
         Media::firstOrCreate([
-         	'file_location' => 'images/sample_images/hotels/2.jpg',
+         	'file_location' => '/images/sample_images/hotels/2.jpg',
          	'event_id' => 2,
          	'description' => 'A photo description',
          	'name' => 'Photo 2',
@@ -33,7 +33,7 @@ class MediaTableSeeder extends Seeder
         ]);
 
         Media::firstOrCreate([
-         	'file_location' => 'images/sample_images/hotels/3.jpg',
+         	'file_location' => '/images/sample_images/hotels/3.jpg',
          	'event_id' => 3,
          	'description' => 'A photo description',
          	'name' => 'Photo 3',
@@ -48,7 +48,7 @@ class MediaTableSeeder extends Seeder
 
         for ($i=1; $i <= 12; $i++) { 
             Media::firstOrCreate([
-                'file_location' => 'images/sample_images/event_photos/'.$i.'.jpg',
+                'file_location' => '/images/sample_images/event_photos/'.$i.'.jpg',
                 'event_id' => 3,
                 'description' => 'A photo description',
                 'name' => 'Event Photo '.$i,
