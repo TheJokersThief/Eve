@@ -45,6 +45,8 @@ Route::group(['middleware' => ['web']], function () {
 	
 	Route::resource('user/myEvents', 'UserController@myEvents');
 
+	Route::get('unprocessed', ['as' => 'media.unprocessed', 'uses' => 'MediaController@viewUnprocessedMedia']);
+
 });
 
 Route::group(['prefix' => 'ticket', 'middleware' => 'web'], function(){

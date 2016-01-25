@@ -139,7 +139,7 @@
 					</div>
 				</div>
 
-				<a href="#!" class="waves-effect waves-light btn right">View All Unprocessed Media &rarr;</a>
+				<a href="{{ URL::route('media.unprocessed') }}" class="waves-effect waves-light btn right">View All Unprocessed Media &rarr;</a>
 			</div>
 
 
