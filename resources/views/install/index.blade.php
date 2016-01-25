@@ -175,7 +175,7 @@
 				{!! Form::close() !!}
 			</div>
 			<div id="firstEvent" class="col s12">
-				<a href="{{ URL::route('event.create') }}" id="first-event-link">Go create your first event!</a>
+				<a href="{{ URL::route('events.create') }}" id="first-event-link">Go create your first event!</a>
 			</div>
 		</div>
 	</main>
