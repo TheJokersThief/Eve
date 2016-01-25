@@ -30,14 +30,7 @@ class AdminController extends Controller
 	 */
 	public function __construct(){
 	    $this->middleware('auth');
-	}
-
-	public static function checkPrivilege( ){
-		if( Auth::user()->is_admin ){
-			return;
-		} else{
-			Redirect::back();
-		}
+	    $this->middleware('admin');
 	}
 
 	public function index( ){
