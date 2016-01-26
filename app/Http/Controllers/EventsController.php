@@ -22,7 +22,11 @@ class EventsController extends Controller
 
     public function show($id){
         $event = Event::findOrFail($id);
-        return view('events.show', compact('event'));
+        $location = $event->location;
+        $location_name = $location->name;
+        $partners = $event->partners;
+        $locationName = Location::findOrFail($event->id);
+        return view('events.show', compact('event', 'location_name', 'partners'));
     }
 
     public function create(){
@@ -69,7 +73,7 @@ class EventsController extends Controller
                 "start_datetime" => $start_datetime,
                 "end_datetime" => $end_datetime,
                 "location_id" => $data["location_id"]
-            );   
+            );
         
         // Create the new event
         $newEvent = Event::create( $newData );
