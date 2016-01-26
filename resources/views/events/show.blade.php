@@ -40,21 +40,21 @@
 			    <div class="row">
 				    @foreach($event->partners as $partner)
 				    	<div class="col s4">
-							<div class="card small">
-					            <div class="card-image">
-					              	<img src="{{ URL::to('/') }}/{{$partner->media->file_location}}">
-					              	<span class="card-title">{{$partner->name}}</span>
-					            </div>
-					            <div class="card-content">
-					              	<p>{{$partner->description}}</p>
-					              	<p>Price: {{$partner->price}}</p>
-					              	<p>Distance: {{$partner->distance}}</p>
-					            </div>
-					            <div class="card-action">
-					              	<a href="/partners/{{$partner->id}} ">more info</a>
-					            </div>
-				            </div>
-			          	</div>
+		            <div class="card">
+					    <div class="card-image waves-effect waves-block waves-light">
+					    	<img class="activator" src="{{ URL::to('/') }}/{{$partner->media->file_location}}">
+					    </div>
+					    <div class="card-content">
+					    	<span class="card-title activator grey-text text-darken-4">{{$partner->name}}<i class="material-icons right">more</i></span>
+					      	<p><a href="{{action('PartnersController@show', [$partner->id])}}">visit page</a></p>
+					    </div>
+					    <div class="card-reveal">
+					      <span class="card-title grey-text text-darken-4">{{$partner->name}}<i class="material-icons right">close</i></span>
+					      <p><a href="{{action('PartnersController@show', [$partner->id])}}">visit page</a></p>
+					      <p>{{$partner->description}}</p>
+					    </div>
+					</div>
+	          	</div>
 					@endforeach
 				</div>
 			</div>
