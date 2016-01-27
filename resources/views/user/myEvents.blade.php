@@ -7,8 +7,8 @@
 		<nav class="oldEvents">
 	    	<div class="nav-wrapper" >
 	      			<div class="col s12">
-	      				<a href="http://softwareproject.dev/user/myEvents" class="breadcrumb">Upcoming Events</a>
-	       				<a href="http://softwareproject.dev/user/pastEvents" class="breadcrumb">  </a>
+	      				<a href="{{URL::to('/')}}/user/myEvents" class="breadcrumb">Upcoming Events</a>
+	       				<a href="{{URL::to('/')}}/user/pastEvents" class="breadcrumb">  </a>
 	      			</div>
 	   			</div>
 	  		</nav>
