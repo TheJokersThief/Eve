@@ -26,7 +26,7 @@
 							<!--temporarily not linked to users registered events-->
 							<div class="row">
 					            @for($i=1; $i <= 3; $i++ )
-					                <div class="col s12 m4">
+					                <div class="col s12 m6 l4">
 					                    <div class="card">
 					                        <div class="card-image">
 					                            <img src="{{ URL::to('/') . '/images/sample_images/event_photos/event'.$i.'.jpg' }}">
@@ -47,7 +47,7 @@
 					        </div>
 					        <div class="row">
 					            @for($i=1; $i <= 2; $i++ )
-				                <div class="col s12 m4">
+				                <div class="col s12 m6 l4">
 				                    <div class="card">
 				                        <div class="card-image">
 				                            <img src="{{ URL::to('/') . '/images/sample_images/event_photos/event'.$i.'.jpg' }}">
