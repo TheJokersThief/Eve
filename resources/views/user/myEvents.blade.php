@@ -4,10 +4,18 @@
 
 @section('content')
 	<main class="row">
+		<nav class="oldEvents">
+	    	<div class="nav-wrapper" >
+	      			<div class="col s12">
+	      				<a href="http://softwareproject.dev/user/myEvents" class="breadcrumb">Upcoming Events</a>
+	       				<a href="http://softwareproject.dev/user/pastEvents" class="breadcrumb">  </a>
+	      			</div>
+	   			</div>
+	  		</nav>
 		<div class="col l10 push-l1 s12 card white">
 			<div class="row">
-				<div class="col m3 s12" id="userInfo">
-					<div class="card white">
+				<div class="col m3 s12, hide-on-small-only" id="userInfo">
+					<div class="collection">
 						<div class="hide-on-med-and-down">
 							<img src={{$me->profile_picture}}>
 						</div>

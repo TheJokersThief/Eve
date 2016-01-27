@@ -139,4 +139,8 @@ class UserController extends Controller
         return view('user.myEvents', ['me' => $me]);
     }
 
+    public function pastEvents(){
+        return view('user.pastEvents');
+    }
+
 }
