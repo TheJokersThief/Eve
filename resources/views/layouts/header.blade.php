@@ -40,7 +40,7 @@
 			  <ul class="right hide-on-med-and-down">
 			  	@if( Auth::check( ) )
 			  		<li><a href="{{ URL::to( 'home' ) }}">Home</a></li>
-			  		<li><a href="{{ URL::to('user/myEvents') }}"><i class="material-icons">today</i></li>
+			  		<li><a href="{{ URL::route('myEvents') }}"><i class="material-icons">today</i></li>
 			  	@else 
 					<li class="login">
 						<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">Login</a>
