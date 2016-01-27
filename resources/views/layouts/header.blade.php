@@ -9,7 +9,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<link rel="shortcut icon" href="{{ URL::to('/') }}/images/favicon.png">
 
-	
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<!-- Compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
@@ -39,7 +39,8 @@
 			  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  <ul class="right hide-on-med-and-down">
 			  	@if( Auth::check( ) )
-			  		<li><a href="{{ URL::to( '/' ) }}">Home</a></li>
+			  		<li><a href="{{ URL::to( 'home' ) }}">Home</a></li>
+			  		<li><a href="{{ URL::to('user/myEvents') }}"><i class="material-icons">today</i></li>
 			  	@else 
 					<li class="login">
 						<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">Login</a>

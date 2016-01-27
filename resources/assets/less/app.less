@@ -111,12 +111,34 @@ body{
 		}
 	}
 	&.usersEvent-page{	
+		#userInfo{
+			max-width:372px;
+		}
 		#userInfo img{
-			margin:3%
+			margin:3%;
+			width:254px;
+			height:255px;
+		}
+		#upComingEvents .card-title{
+			font-size:65% !important;
+		}
+		.oldEvents{
+			margin:0.5%;
+			background-color:white;
+			box-shadow:none;
+			margin-left:8%;
+		}
+		.breadcrumb, .breadcrumb:before{
+			color:grey; 
 		}
 		@media screen and (max-width: 1438px){
 			#userInfo img{
 				display:none;
+			}
+		}
+		@media screen and (max-width: 600px){
+			#upComingEvents .card-title{
+				font-size:100% !important;
 			}
 		}
 	}
