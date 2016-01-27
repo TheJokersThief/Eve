@@ -88,8 +88,18 @@ class EventsController extends Controller
                     ->withInput( );
     }
 
-    public function edit(){
-    	return view('events.edit');
+    public function edit($id){
+        $event = Event::findOrFail($id);
+        $locations = Location::all();
+        $location = $event->location;
+        $startDateTime = $event->start_datetime;
+        $endDateTime = $event->end_datetime;
+        $startDate = substr($startDateTime, 0, 10);
+        $endDate = substr($endDateTime, 0, 10);
+        $startTime = substr($startDateTime, 11, 5);
+        $endTime = substr($endDateTime, 11, 5);
+    	return view('events.edit', compact('event', 'locations', 'location', 'startDate',
+             'endDate', 'startTime', 'endTime'));
     }
 
     public function update(){

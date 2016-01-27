@@ -2,9 +2,7 @@
 
 @section('content')
 
-{!! Form::model($event, ['method' => 'PATCH', 'action' => ['EventsController@update', $event->id]]) !!}
-
-	@section('body-class') edit-event @endsection
+@section('body-class') edit-event @endsection
 
 @section('extra-css')
 	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') . '/css/clockpicker.css' }}">
@@ -24,6 +22,8 @@
 @endsection
 
 @section('content')
+
+{!! Form::model($event, ['method' => 'PATCH', 'action' => ['EventsController@update', $event->id]]) !!}
 
 <div class="row">
 	<div class="col m8 offset-m2">
@@ -52,12 +52,12 @@
 
 				<div class="col m6 s6">
 					<label for="start_date">Start Date</label>
-					<input name="start_date" id="start_date" type="date" class="datepicker">
+					<input name="start_date" id="start_date" value="{{$startDate}}" type="date" class="datepicker">
 				</div>
 
 				<div class="col m6 s6">
 					<label for="input_enddate">End Date</label>
-					<input name="end_date" id="input_enddate" type="date" class="datepicker">
+					<input name="end_date" id="input_enddate" value="{{$endDate}}" type="date" class="datepicker">
 				</div>
 
 			</div>
@@ -65,7 +65,7 @@
 	      	<div class="row">
 		      	<div class="input-field col s12">
 		    		<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();}">
-		      			<option value="" disabled selected>Choose location</option>
+		      			<option value="" disabled selected>{{$location->name}}</option>
 						@foreach($locations as $location)
 							<option value="{{$location->id}}">{{$location->name}}</option>
 						@endforeach
@@ -79,7 +79,7 @@
 				<div class="col s4">
 					<label for="start_time">Start Time</label>
 					<div id="start_time" class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-					    <input name="start_time" type="text" class="form-control" value="08:30">
+					    <input name="start_time" type="text" class="form-control" value="{{$startTime}}">
 					    <span class="input-group-addon">
 					        <span class="glyphicon glyphicon-time"></span>
 					    </span>
@@ -88,7 +88,7 @@
 				<div class="col s4">
 					<label for="end_time">End Time</label>
 					<div id="end_time" class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-					    <input name="end_time" type="text" class="form-control" value="16:00">
+					    <input name="end_time" type="text" class="form-control" value="{{$endTime}}">
 					    <span class="input-group-addon">
 					        <span class="glyphicon glyphicon-time"></span>
 					    </span>
