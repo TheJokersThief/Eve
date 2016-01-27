@@ -135,7 +135,8 @@ class UserController extends Controller
     }
 
     public function myEvents(){
-        return view('user.myEvents');
+        $me = Auth::user();
+        return view('user.myEvents', ['me' => $me]);
     }
 
 }

@@ -12,7 +12,7 @@ class EventsTableSeeder extends Seeder
     public function run()
     {
         DB::table('events')->insert([
-            'description' => 'Our very first event. Everyone is welcome to come along. Except Darragh. Darragh smells.',
+            'description' => 'Our very first event. Everyone is welcome to come along. Except Eimear. Eimear smells.',
             'location_id' => 1,
             'start_datetime' => '2016:01:01 09:00:00',
             'end_datetime' => '2016:01:03 22:00:00',
