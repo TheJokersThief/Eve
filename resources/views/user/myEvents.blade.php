@@ -17,13 +17,13 @@
 				<div class="col m3 s12, hide-on-small-only" id="userInfo">
 					<div class="collection">
 						<div class="hide-on-med-and-down">
-							<img src={{$me->profile_picture}}>
+							<img src=>
 						</div>
 
 						<div class="row">
 							<div class="col s10">
-								<span class="card-title">User Name: {{$me->name}}</span>
-								<p>{{$me->bio}}</p>
+								<span class="card-title">User Name:</span>
+								<p></p>
 							</div>
 						</div>
 					</div>
