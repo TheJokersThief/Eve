@@ -8,7 +8,7 @@
 	        	<h2>{{ $event->title }}</h2>
 	        </div>
 	        <div class="col s3 m3">
-		        <a href="#">
+		        <a href="{{ action('EventsController@edit', [$event->id]) }}">
 		        	<h2>Update</h2>
 		        </a>
 		    </div>

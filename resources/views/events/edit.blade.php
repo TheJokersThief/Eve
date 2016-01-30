@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('content')
-
 @section('body-class') edit-event @endsection
 
 @section('extra-css')
@@ -98,7 +96,7 @@
 			<div class="row">
 				<div class="col s2 push-s10">
 					<div class='form-group'>
-					{!! Form::submit('Create Event', ['class' => 'btn btn-primary form-control']) !!}
+					{!! Form::submit('Update Event', ['class' => 'btn btn-primary form-control']) !!}
 					</div>
 				</div>
 			</div>
