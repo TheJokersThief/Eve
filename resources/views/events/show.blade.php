@@ -4,9 +4,14 @@
 
 	<div class="container">
 		<div class="row">
-	        <div class="col s12 m10">
+	        <div class="col s9 m9">
 	        	<h2>{{ $event->title }}</h2>
 	        </div>
+	        <div class="col s3 m3">
+		        <a href="#">
+		        	<h2>Update</h2>
+		        </a>
+		    </div>
 	        @if(Auth::check())
 				{!! Form::open( ['url' => 'tickets', "class" => "col s12 m2 get_ticket_button"] ) !!}
 					{!! Form::hidden('event_id', $event->id) !!}
