@@ -9,8 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Event;
 use App\Location;
 use Redirect;
-use Illuminate\Support\Facades\Request;
+//use Illuminate\Support\Facades\Request;
 use Validator;
+use Illuminate\Http\Request;
 
 
 class EventsController extends Controller
@@ -102,7 +103,10 @@ class EventsController extends Controller
              'endDate', 'startTime', 'endTime'));
     }
 
-    public function update(){
-    	return view('events.update');
+    public function update($id, Request $request){
+    	$event = Event::findOrFail($id);
+        $event->update($request->all());
+
+        return redirect('events');
     }
 }
