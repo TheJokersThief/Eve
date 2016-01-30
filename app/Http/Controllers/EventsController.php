@@ -9,9 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Event;
 use App\Location;
 use Redirect;
-//use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Request;
 use Validator;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
 
 class EventsController extends Controller
@@ -103,9 +103,55 @@ class EventsController extends Controller
              'endDate', 'startTime', 'endTime'));
     }
 
-    public function update($id, Request $request){
+    public function update($id){
     	$event = Event::findOrFail($id);
-        $event->update($request->all());
+
+        $data = Request::only( [
+                    'title',
+                    'description',
+                    'start_date',
+                    'end_date',
+                    'start_time',
+                    'end_time',
+                    'location_id'
+                ]);
+
+        $validator = Validator::make( $data, [
+                    'title'  => 'required',
+                    'description'  => 'required',
+                    'start_date'  => 'required',
+                    'end_date'  => 'required',
+                    'start_time'  => 'required',
+                    'end_time' => 'required',
+                    'location_id'  => 'required',
+                ]);
+
+        if( $validator->fails( ) ){
+            // If validation fails, redirect back to 
+            // registration form with errors
+            return Redirect::to( 'events' )
+                    ->withErrors( $validator )
+                    ->withInput( );
+        }
+
+        $start_datetime = $data['start_date'] . ' ' . $data['start_time'] . ':' . '00';
+        $end_datetime = $data['end_date'] . ' ' . $data['end_time'] . ':' . '00';
+
+        $newData = array(
+                "title" => $data["title"],
+                "description" => $data["description"],
+                "start_datetime" => $start_datetime,
+                "end_datetime" => $end_datetime,
+                "location_id" => $data["location_id"]
+            );
+
+        $event->title = ($newData["title"]);
+        $event->description = ($newData["description"]);
+        $event->start_datetime = ($newData["start_datetime"]);
+        $event->end_datetime = ($newData["end_datetime"]);
+        $event->location_id = ($newData["location_id"]);
+
+        $event->save();
 
         return redirect('events');
     }
