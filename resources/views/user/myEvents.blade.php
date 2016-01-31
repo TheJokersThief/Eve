@@ -33,47 +33,26 @@
 						<h3 class="center-align">Upcoming Events</h3>
 							<!--temporarily not linked to users registered events-->
 							<div class="row">
-					            @for($i=1; $i <= 3; $i++ )
+					            @foreach($me->tickets as $ticket)
 					                <div class="col s12 m6 l4">
 					                    <div class="card">
 					                        <div class="card-image">
-					                            <img src="{{ URL::to('/') . '/images/sample_images/event_photos/event'.$i.'.jpg' }}">
-					                            <span class="card-title">Lorem ipsum Est quis dolor ex fugiat veniam tempor ullamco incididunt quis id in eiusmod ut quis Excepteur.</span>
+					                            <img src="{{ URL::to('/') . '/images/sample_images/event_photos/event'.$ticket->event->id.'.jpg' }}">
+					                            <span class="card-title">{{$ticket->event->title}}</span>
 					                        </div>
 					                        <div class="card-content">
-					                            <p>Lorem ipsum Ut in eiusmod pariatur reprehenderit minim esse reprehenderit ea in sunt ad cupidatat commodo enim id voluptate in eu Duis sint reprehenderit quis sed magna dolor do irure qui sit eu reprehenderit aliqua enim.</p>
+					                            <p>{{$ticket->event->description}}</p>
 					                        </div>
 					                        <div class="card-action">
-					                            <a href="#" class="red-text text-lighten-2">View Event &rarr;</a>
+					                            <a href="{{action('EventsController@show', $ticket->event->id)}}" class="red-text text-lighten-2">View Event &rarr;</a>
 					                        </div>
 					                        <div class="card-action">
-					                            <a href="#" class="red-text text-lighten-2">View Info Pack &rarr;</a>
+					                            <a href="{{action('TicketController@show', $ticket->id)}}" class="red-text text-lighten-2">View Info Pack &rarr;</a>
 					                        </div>
 					                    </div>
 					                </div>
-					            @endfor
+					            @endforeach
 					        </div>
-					        <div class="row">
-					            @for($i=1; $i <= 2; $i++ )
-				                <div class="col s12 m6 l4">
-				                    <div class="card">
-				                        <div class="card-image">
-				                            <img src="{{ URL::to('/') . '/images/sample_images/event_photos/event'.$i.'.jpg' }}">
-				                            <span class="card-title">Lorem ipsum Est quis dolor ex fugiat veniam tempor ullamco incididunt quis id in eiusmod ut quis Excepteur.</span>
-				                        </div>
-				                        <div class="card-content">
-				                            <p>Lorem ipsum Ut in eiusmod pariatur reprehenderit minim esse reprehenderit ea in sunt ad cupidatat commodo enim id voluptate in eu Duis sint reprehenderit quis sed magna dolor do irure qui sit eu reprehenderit aliqua enim.</p>
-				                        </div>
-				                        <div class="card-action">
-				                            <a href="#" class="red-text text-lighten-2">View Event &rarr;</a>
-				                        </div>
-				                        <div class="card-action">
-				                            <a href="#" class="red-text text-lighten-2">View Info Pack &rarr;</a>
-				                        </div>
-				                    </div>
-				                </div>
-				           		 @endfor
-			           		</div>
 					</div>
 				</div>
 			</div>
