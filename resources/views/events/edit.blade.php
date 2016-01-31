@@ -63,7 +63,7 @@
 	      	<div class="row">
 		      	<div class="input-field col s12">
 		    		<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();}">
-		      			<option value="" disabled selected>{{$location->name}}</option>
+		      			<option value="{{$location->id}}" disabled selected>{{$location->name}}</option>
 						@foreach($locations as $location)
 							<option value="{{$location->id}}">{{$location->name}}</option>
 						@endforeach
