@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use QrCode;
 use Crypt;
+use App\User;
 
 class Ticket extends Model
 {
@@ -62,6 +63,11 @@ class Ticket extends Model
     public function user(){
     	return $this->belongsTo('App\User');
     }
+
+    public function getScannedByAttribute($value){
+        return User::firstOrFail($value);
+    }
+
 
     public function event(){
     	return $this->belongsTo('App\Event');
