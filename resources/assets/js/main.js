@@ -11,6 +11,23 @@ $( document ).ready(function($){
 	});
         
 	$('select').material_select();
+
+	// Rewrite iCal Links to be integrated to services
+	if( $(".ical").length ){
+
+		$(".ical").each(function(){
+			var link = $(this).attr('href');
+
+			var link = link.replace(window.location.protocol + "//", "webcal://");
+			
+			if(navigator.platform.toUpperCase().indexOf('LINUX')>=0 || navigator.platform.toUpperCase().indexOf('WIN')>=0){
+				link = "https://www.google.com/calendar/render?cid=" + link;
+			}
+
+			$(this).attr('href', link);
+		});
+	}
+
 });
 
 function updateProgressBar( elementId, newValue ){
