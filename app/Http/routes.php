@@ -43,9 +43,10 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/', ['as' => 'admin.home', 'uses' => 'AdminController@index']);
 	});
 	
-	Route::get('user/myEvents', ['as' => 'myEvents', 'uses' => 'UserController@myEvents'] );
-	Route::get('user/pastEvents', ['as' => 'pastEvents', 'uses' => 'UserController@pastEvents'] );
-
+	Route::group(['middleware' => ['auth']], function(){
+		Route::get('user/myEvents', ['as' => 'myEvents', 'uses' => 'UserController@myEvents'] );
+		Route::get('user/pastEvents', ['as' => 'pastEvents', 'uses' => 'UserController@pastEvents'] );
+	});
 	Route::get('unprocessed', ['as' => 'media.unprocessed', 'uses' => 'MediaController@viewUnprocessedMedia']);
 	Route::get('unprocessed/{eventID}', ['as' => 'media.unprocessedForEvent', 'uses' => 'MediaController@viewUnprocessedMediaForEvent']);
 

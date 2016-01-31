@@ -144,7 +144,9 @@ class UserController extends Controller
     }
 
     public function pastEvents(){
-        return view('user.pastEvents');
+        $me = Auth::user();
+        return view('user.pastEvents', compact('me'));
+
     }
 
 }
