@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Be right back.</title>
+        @if(!isset($error))
+            <title>You don't have permission to access this.</title>
+        @else
+            <title>{{$error}}</title>
+        @endif
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -40,7 +44,11 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">You are not an admin. For shame.</div>
+                @if(!isset($error))
+                    <div class="title">You don't have permission to access this.</div>
+                @else
+                    <div class="title">{{$error}}</div>
+                @endif
             </div>
         </div>
     </body>

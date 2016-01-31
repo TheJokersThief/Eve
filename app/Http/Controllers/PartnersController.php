@@ -24,10 +24,7 @@ class PartnersController extends Controller
 
     public function create(){
         if(! Auth::check() || ! Auth::user()->is_admin ){
-            return Redirect::back( )->withErrors(
-                [
-                    'message' => 'You do not have permission to edit partners.' 
-                ] );
+            return response(view('errors.403', ['error' => 'You do not have permission to edit partners.']), 403);
         }
 
     	return view('partners.create');
@@ -35,10 +32,7 @@ class PartnersController extends Controller
 
     public function store(){
         if(! Auth::check() || ! Auth::user()->is_admin ){
-            return Redirect::back( )->withErrors(
-                [
-                    'message' => 'You do not have permission to edit partners.' 
-                ] );
+            return response(view('errors.403', ['error' => 'You do not have permission to edit partners.']), 403);
         }
 
     	return view('partners.store');
@@ -46,10 +40,7 @@ class PartnersController extends Controller
 
     public function edit(){
         if(! Auth::check() || ! Auth::user()->is_admin ){
-            return Redirect::back( )->withErrors(
-                [
-                    'message' => 'You do not have permission to edit partners.' 
-                ] );
+            return response(view('errors.403', ['error' => 'You do not have permission to edit partners.']), 403);
         }
 
 
@@ -58,10 +49,7 @@ class PartnersController extends Controller
 
     public function update(){
         if(! Auth::check() || ! Auth::user()->is_admin ){
-            return Redirect::back( )->withErrors(
-                [
-                    'message' => 'You do not have permission to edit partners.' 
-                ] );
+            return response(view('errors.403', ['error' => 'You do not have permission to edit partners.']), 403);
         }
 
     	return view('partners.update');

@@ -94,10 +94,7 @@ class UserController extends Controller
      */
     public static function updateUser( $userID, $userInfo ){
         if(! Auth::check() || ! (Auth::user()->id == $userID || Auth::user()->is_admin) ){
-            return Redirect::back( )->withErrors(
-                [
-                    'message' => 'You do not have permission to edit users.' 
-                ] );
+            return response(view('errors.403', ['error' => 'You do not have permission to edit users.']), 403);
         }
 
 
@@ -138,7 +135,6 @@ class UserController extends Controller
      * @return String:  JSON description of user or "false"
      */
     public function me(){
-
         return Auth::check() ? Auth::user() : "false";
     }
 

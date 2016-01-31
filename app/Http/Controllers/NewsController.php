@@ -23,10 +23,7 @@ class NewsController extends Controller
 
     public function create(){
         if(! Auth::check() || ! Auth::user()->is_admin ){
-            return Redirect::back( )->withErrors(
-                [
-                    'message' => 'You do not have permission to edit news.' 
-                ] );
+            return response(view('errors.403', ['error' => 'You do not have permission to edit news.']), 403);
         }
 
     	return view('news.create');
@@ -34,10 +31,7 @@ class NewsController extends Controller
 
     public function store(){
         if(! Auth::check() || ! Auth::user()->is_admin ){
-            return Redirect::back( )->withErrors(
-                [
-                    'message' => 'You do not have permission to edit news.' 
-                ] );
+            return response(view('errors.403', ['error' => 'You do not have permission to edit news.']), 403);
         }
 
     	return view('news.store');
@@ -45,10 +39,7 @@ class NewsController extends Controller
 
     public function edit(){
         if(! Auth::check() || ! Auth::user()->is_admin ){
-            return Redirect::back( )->withErrors(
-                [
-                    'message' => 'You do not have permission to edit news.' 
-                ] );
+            return response(view('errors.403', ['error' => 'You do not have permission to edit news.']), 403);
         }
 
     	return view('news.edit');
@@ -56,10 +47,7 @@ class NewsController extends Controller
 
     public function update(){
         if(! Auth::check() || ! Auth::user()->is_admin ){
-            return Redirect::back( )->withErrors(
-                [
-                    'message' => 'You do not have permission to edit news.' 
-                ] );
+            return response(view('errors.403', ['error' => 'You do not have permission to edit news.']), 403);
         }
 
     	return view('news.update');

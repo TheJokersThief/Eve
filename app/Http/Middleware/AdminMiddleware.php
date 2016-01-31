@@ -21,7 +21,7 @@ class AdminMiddleware
         if( Auth::check() && Auth::user()->is_admin ){
             return $next($request);
         } else{
-            return View::make('admin.notAnAdmin');
+            return  response(view('errors.403', ['error' => 'You do not have permission to access this resource.']), 403);
         }
     }
 }

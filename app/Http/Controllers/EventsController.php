@@ -53,10 +53,7 @@ class EventsController extends Controller
 
     public function store(){
         if(! Auth::check() || ! Auth::user()->is_admin ){
-            return Redirect::back( )->withErrors(
-                [
-                    'message' => 'You do not have permission to edit events.' 
-                ] );
+            return response(view('errors.403', ['error' => 'You do not have permission to edit events.']), 403);
         }
 
         $data = Request::only( [
@@ -114,10 +111,7 @@ class EventsController extends Controller
 
     public function edit($id){
         if(! Auth::check() || ! Auth::user()->is_admin ){
-            return Redirect::back( )->withErrors(
-                [
-                    'message' => 'You do not have permission to edit events.' 
-                ] );
+            return response(view('errors.403', ['error' => 'You do not have permission to edit events.']), 403);
         }
 
         $event = Event::findOrFail($id);
@@ -135,13 +129,17 @@ class EventsController extends Controller
 
     public function update($id){
         if(! Auth::check() || ! Auth::user()->is_admin ){
-            return Redirect::back( )->withErrors(
-                [
-                    'message' => 'You do not have permission to edit events.' 
-                ] );
+            return response(view('errors.403', ['error' => 'You do not have permission to edit events.']), 403);
         }
 
-    	$event = Event::findOrFail($id);
+        try{
+    	   $event = Event::findOrFail($id); 
+        } catch (ModelNotFoundException $e) {
+            return Redirect::back( )->withErrors(
+                [
+                    'message' => 'The event you tried to edit could not be found.' 
+                ] );
+        }
 
         $data = Request::only( [
                     'title',
@@ -166,7 +164,7 @@ class EventsController extends Controller
         if( $validator->fails( ) ){
             // If validation fails, redirect back to 
             // registration form with errors
-            return Redirect::to( 'events' )
+            return Redirect::back()
                     ->withErrors( $validator )
                     ->withInput( );
         }

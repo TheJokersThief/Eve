@@ -41,7 +41,13 @@ class TicketController extends Controller
 	 */
 	public function store(){
 		$data = Request::only( ["event_id"] );
-		$event = Event::findOrFail($data["event_id"]);
+		try{
+			$event = Event::findOrFail($data["event_id"]);
+		} catch (ModelNotFoundException $e) {
+			Redirect::back()->withErrors([
+				'message' => 'We can\'t find the event that you requested.'
+				]);
+		}
 		$user  = Auth::user();
 
 		$ticket = Ticket::firstOrCreate(
