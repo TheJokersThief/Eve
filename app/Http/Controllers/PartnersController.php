@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Partner;
+use Redirect;
+
 
 class PartnersController extends Controller
 {
