@@ -22,16 +22,37 @@ class MediaController extends Controller
 {
 
     public function viewUnprocessedMedia( ){
+        if(! Auth::check() || ! Auth::user()->is_admin ){
+            return Redirect::back( )->withErrors(
+                [
+                    'message' => 'You do not have permission to edit media.' 
+                ] );
+        }
+ 
         $media = Media::where('processed', false)->get()->chunk(6);
         return View::make('media.unprocessed')->with('media', $media);
     }
 
     public function viewUnprocessedMediaForEvent( $eventID ){
+        if(! Auth::check() || ! Auth::user()->is_admin ){
+            return Redirect::back( )->withErrors(
+                [
+                    'message' => 'You do not have permission to edit media.' 
+                ] );
+        }
+
         $media = Media::where('event_id', $eventID)->where('processed', false)->get()->chunk(6);
         return View::make('media.unprocessed')->with('media', $media);
     }
 
     public static function approveMedia( $mediaID, $isApproved ){
+        if(! Auth::check() || ! Auth::user()->is_admin ){
+            return Redirect::back( )->withErrors(
+                [
+                    'message' => 'You do not have permission to edit media.' 
+                ] );
+        }
+
         $media = Media::find( $mediaID );
         $media->approved = $isApproved;
         $media->processed = true;

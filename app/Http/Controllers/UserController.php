@@ -93,6 +93,14 @@ class UserController extends Controller
      * @return User             User object we just updated
      */
     public static function updateUser( $userID, $userInfo ){
+        if(! Auth::check() || ! (Auth::user()->id == $userID || Auth::user()->is_admin) ){
+            return Redirect::back( )->withErrors(
+                [
+                    'message' => 'You do not have permission to edit users.' 
+                ] );
+        }
+
+
         if( isset( $userInfo['password'] ) ){
             // If the password's being updated, we need to hash it
             $userInfo['password'] = Hash::make( $userInfo['password'] );

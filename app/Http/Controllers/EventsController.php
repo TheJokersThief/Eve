@@ -52,6 +52,12 @@ class EventsController extends Controller
     }
 
     public function store(){
+        if(! Auth::check() || ! Auth::user()->is_admin ){
+            return Redirect::back( )->withErrors(
+                [
+                    'message' => 'You do not have permission to edit events.' 
+                ] );
+        }
 
         $data = Request::only( [
                     'title',
@@ -107,6 +113,13 @@ class EventsController extends Controller
     }
 
     public function edit($id){
+        if(! Auth::check() || ! Auth::user()->is_admin ){
+            return Redirect::back( )->withErrors(
+                [
+                    'message' => 'You do not have permission to edit events.' 
+                ] );
+        }
+
         $event = Event::findOrFail($id);
         $locations = Location::all();
         $location = $event->location;
@@ -121,6 +134,13 @@ class EventsController extends Controller
     }
 
     public function update($id){
+        if(! Auth::check() || ! Auth::user()->is_admin ){
+            return Redirect::back( )->withErrors(
+                [
+                    'message' => 'You do not have permission to edit events.' 
+                ] );
+        }
+
     	$event = Event::findOrFail($id);
 
         $data = Request::only( [

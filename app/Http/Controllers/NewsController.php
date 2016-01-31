@@ -21,18 +21,46 @@ class NewsController extends Controller
     }
 
     public function create(){
+        if(! Auth::check() || ! Auth::user()->is_admin ){
+            return Redirect::back( )->withErrors(
+                [
+                    'message' => 'You do not have permission to edit news.' 
+                ] );
+        }
+
     	return view('news.create');
     }
 
     public function store(){
+        if(! Auth::check() || ! Auth::user()->is_admin ){
+            return Redirect::back( )->withErrors(
+                [
+                    'message' => 'You do not have permission to edit news.' 
+                ] );
+        }
+
     	return view('news.store');
     }
 
     public function edit(){
+        if(! Auth::check() || ! Auth::user()->is_admin ){
+            return Redirect::back( )->withErrors(
+                [
+                    'message' => 'You do not have permission to edit news.' 
+                ] );
+        }
+
     	return view('news.edit');
     }
 
     public function update(){
+        if(! Auth::check() || ! Auth::user()->is_admin ){
+            return Redirect::back( )->withErrors(
+                [
+                    'message' => 'You do not have permission to edit news.' 
+                ] );
+        }
+
     	return view('news.update');
     }
 }
