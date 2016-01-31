@@ -66,4 +66,22 @@
 			  </ul>
 			</div>
 		</nav>
+		@if(isset($errors) && !empty($errors->all()))
+			<div class="container">
+		      <div class="row">
+		        <div class="col s12 m6">
+		          <div class="card red darken-1">
+		            <div class="card-content white-text">
+		              <span class="card-title">Errors</span>
+		              <p>
+		              	@foreach($errors->all() as $error)
+							<li>{{$error}}</li>
+						@endforeach				
+					  </p>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+			</div>
+		@endif
 	</header>

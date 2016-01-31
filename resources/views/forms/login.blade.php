@@ -1,9 +1,3 @@
-@if ( isset($errors) )
-	@foreach ($errors->all() as $message)
-		{{$message}}
-	@endforeach
-@endif
-
 {!! Form::open( array('url' => 'login', 'method' => 'post', 'class' => 'row col s12') ) 		!!}
 
 <div class="row">
