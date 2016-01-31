@@ -6,8 +6,8 @@
 		<div class="row">
 			<div class="col s6"><h5>Start:</h5></div>
   		<div class="col s6"><h5>End:</h5></div>
-	    <div class="col s6">{{ $event->start_datetime }}</div>
-  		<div class="col s6">{{ $event->end_datetime }}</div>
+	    <div class="col s6">{{ $event->hrStartTime() }}</div>
+  		<div class="col s6">{{ $event->hrEndTime() }}</div>
   	</div>
 </div>
 <div class="divider"></div>
