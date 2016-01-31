@@ -73,6 +73,7 @@ class TicketController extends Controller
 				return view("tickets.unverifiable", ['error' => 'Ticket already used.']);
 			} else {
 				$ticket->used = true;
+				$ticket->scanned_by = Auth::user()->id;
 				$ticket->save();
 
 				// Return name badge for printing.
