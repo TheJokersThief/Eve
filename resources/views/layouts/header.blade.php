@@ -39,6 +39,9 @@
 			  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  <ul class="right hide-on-med-and-down">
 			  	@if( Auth::check( ) )
+			  		@if( Auth::user()->is_admin )
+						<li><a href="{{ URL::route('admin.home') }}">Admin</a></li>
+			  		@endif
 			  		<li><a href="{{ URL::to( 'home' ) }}">Home</a></li>
 			  		<li><a href="{{ URL::route('myEvents') }}"><i class="material-icons">today</i></li>
 			  	@else 
@@ -53,6 +56,9 @@
 			  <ul class="side-nav" id="mobile-demo">
 
 			  	@if( Auth::check( ) )
+			  		@if( Auth::user()->is_admin )
+						<li><a href="{{ URL::route('admin.home') }}">Admin</a></li>
+			  		@endif
 			  		<li><a href="{{ URL::to( 'home' ) }}">Home</a></li>
 			  	@else 
 					<li class="login">
