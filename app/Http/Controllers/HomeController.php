@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use Redirect;
 use App\Setting;
+use App\Event;
 
 class HomeController extends Controller
 {

@@ -34,7 +34,7 @@ class Ticket extends Model
      * @return string As above
      */
     public function qr(){
-        QrCode::size(300);
+        QrCode::size(225);
         return QrCode::generate( "http://" . $_SERVER["HTTP_HOST"] . "/tickets/verify/" . $this->code() );
     }
 

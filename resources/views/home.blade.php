@@ -45,22 +45,22 @@
         <div class="parallax"><img src="{{ URL::to('/') . '/images/red-geometric-background.png'}}"></div>
         <div class="col s12 m10 offset-m1">
             <h3>Upcoming Events</h3>
-            @for($i=1; $i <= 3; $i++ )
+            @foreach(App\Event::take(3)->get() as $event)
                 <div class="col s12 m4">
                     <div class="card">
                         <div class="card-image">
-                            <img src="{{ URL::to('/') . '/images/sample_images/event_photos/event'.$i.'.jpg' }}">
-                            <span class="card-title">Lorem ipsum Est quis dolor ex fugiat veniam tempor ullamco incididunt quis id in eiusmod ut quis Excepteur.</span>
+                            <img src="{{ URL::to('/') . '/images/sample_images/event_photos/event'.$event->id.'.jpg' }}">
+                            <span class="card-title">{{$event->title}}.</span>
                         </div>
                         <div class="card-content">
-                            <p>Lorem ipsum Ut in eiusmod pariatur reprehenderit minim esse reprehenderit ea in sunt ad cupidatat commodo enim id voluptate in eu Duis sint reprehenderit quis sed magna dolor do irure qui sit eu reprehenderit aliqua enim.</p>
+                            <p>{{$event->description}}</p>
                         </div>
                         <div class="card-action">
-                            <a href="#" class="red-text text-lighten-2">View Event &rarr;</a>
+                            <a href="{{ action('EventsController@show', $event->id) }}" class="red-text text-lighten-2">View Event &rarr;</a>
                         </div>
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
     </div>
 </div>

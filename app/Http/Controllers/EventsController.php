@@ -7,9 +7,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Event;
+use App\Ticket;
 use App\Location;
+use Auth;
 use Redirect;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Validator;
 // use Illuminate\Http\Request;
 
@@ -27,7 +30,21 @@ class EventsController extends Controller
         $location_name = $location->name;
         $partners = $event->partners;
         $locationName = Location::findOrFail($event->id);
-        return view('events.show', compact('event', 'location_name', 'partners'));
+
+        if( Auth::check() ){
+            try{
+                $ticket = Ticket::where('user_id', Auth::user()->id)
+                                ->where('event_id', $id)
+                                ->firstOrFail();
+            }catch (ModelNotFoundException $e){
+                $ticket = false;
+            }
+        } else {
+            $ticket = false;   
+        }
+
+
+        return view('events.show', compact('event', 'location_name', 'partners', 'ticket'));
     }
 
     public function create(){

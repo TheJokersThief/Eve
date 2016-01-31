@@ -7,63 +7,27 @@
 	        <div class="col s9 m9">
 	        	<h2>{{ $event->title }}</h2>
 	        </div>
-	        <div class="col s3 m3">
-		        <a href="{{ action('EventsController@edit', [$event->id]) }}">
-		        	<h2>Update</h2>
-		        </a>
-		    </div>
 	        @if(Auth::check())
-				{!! Form::open( ['url' => 'tickets', "class" => "col s12 m2 get_ticket_button"] ) !!}
-					{!! Form::hidden('event_id', $event->id) !!}
-					{!! Form::submit('Get Ticket', ['class' => 'btn btn-primary form-control']) !!}
-				{!! Form::close() !!}
-			@endif
-		</div>
-		<div class="divider"></div>
-  			<div class="section">
-		    <p>{{ $event->description }}</p>
-		</div>
-      	<div class="divider"></div>
-  			<div class="section">
-  			<div class="row">
-	  			<div class="col s6"><h5>Start:</h5></div>
-	      		<div class="col s6"><h5>End:</h5></div>
-			    <div class="col s6">{{ $event->start_datetime }}</div>
-	      		<div class="col s6">{{ $event->end_datetime }}</div>
-	      	</div>
-		</div>
-		<div class="divider"></div>
-  			<div class="section">
-  			<div class="row">
-  				<div class="col s2"><h5>Location:<h5></div>
-			    <div class="col s10"><p>{{ $event->location->name }}</p></div>
-			</div>
-		</div>
-		<div class="divider"></div>
-  			<div class="section">
-			    <h5>Event Partners</h5>
-			    <div class="row">
-				    @foreach($event->partners as $partner)
-				    	<div class="col s4">
-		            <div class="card">
-					    <div class="card-image waves-effect waves-block waves-light">
-					    	<img class="activator" src="{{ URL::to('/') }}/{{$partner->media->file_location}}">
-					    </div>
-					    <div class="card-content">
-					    	<span class="card-title activator grey-text text-darken-4">{{$partner->name}}<i class="material-icons right">more</i></span>
-					      	<p><a href="{{action('PartnersController@show', [$partner->id])}}">visit page</a></p>
-					    </div>
-					    <div class="card-reveal">
-					      <span class="card-title grey-text text-darken-4">{{$partner->name}}<i class="material-icons right">close</i></span>
-					      <p><a href="{{action('PartnersController@show', [$partner->id])}}">visit page</a></p>
-					      <p>{{$partner->description}}</p>
-					    </div>
+	        	@if(Auth::user()->is_admin)
+			        <div class="col s3 m3">
+				        <a href="{{ action('EventsController@edit', [$event->id]) }}">
+				        	<h2>Update</h2>
+				        </a>
+				    </div>
+				@endif
+		        @if(! $ticket)
+					{!! Form::open( ['url' => 'tickets', "class" => "col s12 m3 right-align get_ticket_button"] ) !!}
+						{!! Form::hidden('event_id', $event->id) !!}
+						{!! Form::submit('Get Ticket', ['class' => 'btn btn-primary form-control']) !!}
+					{!! Form::close() !!}
+				@else
+					<div class="col s12 m3 right-align get_ticket_button">
+						<a class="btn btn-primary" href="{{ action('TicketController@show', [$ticket->id]) }}">Show ticket</a>
 					</div>
-	          	</div>
-					@endforeach
-				</div>
-			</div>
+				@endif
+		    @endif
 		</div>
-	</div>
-
+		<div class="divider"></div>
+	
+		@include("events.details")	
 @endsection

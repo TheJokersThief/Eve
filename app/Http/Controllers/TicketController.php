@@ -23,8 +23,9 @@ class TicketController extends Controller
         $ticket = Ticket::where('user_id', Auth::user()->id)
         				->where('event_id', $eventId)
         				->firstOrFail();
+        $event = $ticket->event;
 
-        return view('tickets.show', compact('ticket'));
+        return view('tickets.show', compact('ticket', 'event'));
     }
 
     /**

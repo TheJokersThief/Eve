@@ -3,16 +3,14 @@
 
 @section('content')
 <main class="container">
-	<div class="qr-holder">{!! $ticket->qr() !!}</div>
+	<div class="row">
+		<div class="qr-holder col s12 m3 center-align">{!! $ticket->qr() !!}</div>
+		<div class="col s12 m9">
+			<h1 class="green-text">{{$ticket->event->title}}</h1>
+			<h2 class="teal-text">{{$ticket->user->name}}</h2>
+		</div>
+	</div>
 
-  <h1 class="green-text">{{$ticket->event->title}}</h1>
-  <h2>{{$ticket->event->location->name}}</h2>
-  <h3><em>{{$ticket->event->hrStartTime()}}</em> to <em>{{$ticket->event->hrEndTime()}}</em></h3>
-
-  <ul class="partners">
-    @foreach($ticket->event->partners as $partner)
-      <li>{{$partner->name}}</li>
-    @endforeach
-  </ul>
+	@include("events.details")
 </main>
 @endsection
