@@ -22,6 +22,15 @@ class UserController extends Controller
 {
 
     /**
+     * Log out a user
+     * @return REDIRECT login
+     */
+    public function logout( ){
+        Auth::logout();
+        return Redirect::back();
+    }
+
+    /**
      * Creates a new user.
      * This is a generic user.store function adapted from a previous project
      * and should definitely be brought up to date with this project /
@@ -138,11 +147,51 @@ class UserController extends Controller
         return Auth::check() ? Auth::user() : "false";
     }
 
+    /**
+     *   Test function for updating user information
+     */
+    public function updateUserInfo(){
+        $data = Request::only([
+                'name',
+               'email',
+                'bio',
+                'password'
+        ]);
+        $validator = Validator::make($data, [
+                'name' =>  'required|unique:users|min:5|alpha_num',
+               'email' => 'required',
+                'bio' => 'required|max:100',
+                'password' => 'required|confirmed|min:5'
+        ]);
+        if( $validator->fails( ) ){
+            // If validation fails, redirect back to 
+            // registration form with errors
+            return Redirect::back( )
+                    ->withErrors( $validator )
+                    ->withInput( );
+        }
+        $update = User::update($data);
+    }
+
+    /**
+     *   Returns the users personal page where they can update their info
+     */
+    public function index(){
+        $me = Auth::user();
+        return view('user.index', compact('me'));
+    }
+
+    /**
+     *   Returns a users myEvents view
+     */
     public function myEvents(){
         $me = Auth::user();
         return view('user.myEvents', compact('me'));
     }
 
+    /**
+     *   Returns the users pastEvents view
+     */
     public function pastEvents(){
         $me = Auth::user();
         return view('user.pastEvents', compact('me'));

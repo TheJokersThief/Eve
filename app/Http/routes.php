@@ -43,7 +43,10 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/', ['as' => 'admin.home', 'uses' => 'AdminController@index']);
 	});
 	
+	Route::get('logout', ['as' => 'logout', 'uses' => 'UserController@logout']);
 	Route::group(['middleware' => ['auth']], function(){
+		Route::get('user', ['as' => 'user', 'uses' => 'UserController@index']);
+		Route::post('user', ['as' => 'user', 'uses' => 'UserController@updateUserInfo']);
 		Route::get('user/myEvents', ['as' => 'myEvents', 'uses' => 'UserController@myEvents'] );
 		Route::get('user/pastEvents', ['as' => 'pastEvents', 'uses' => 'UserController@pastEvents'] );
 	});
