@@ -1,8 +1,36 @@
-&.create-news{
+&.create-news, &.edit-news{
 	.content{
 		min-height: 300px;
 		border: 1px solid #e0e0e0;
 	    border-radius: 2px;
 	    padding: 0px 15px;
+	}
+}
+
+&.show-news{
+	main.row, .row.content{
+		margin-bottom: 0;
+	}
+
+	// Title area
+	.parallax-container{
+		.parallax{
+			background: @off-black;
+			img{
+				opacity: 0.7;
+			}
+		}
+
+		.title{
+			color: @off-white;
+			background: @off-black;
+			width: 100%;
+		}
+	}
+	
+	.content{
+		background: url('http://softwareproject.dev/images/gray-geometric-background.jpg') grey no-repeat;
+		background-size: cover;
+		background-position: fixed;
 	}
 }

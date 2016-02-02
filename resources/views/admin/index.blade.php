@@ -101,6 +101,9 @@
 								<strong>{{ $new->title }}</strong>
 								<br /><small>({{ str_limit($new->content, 150) }})</small>
 								<div class="secondary-content">
+									<a href="{{ URL::route('news.show', ['news'=>$new->id]) }}">
+										<i class="fa fa-eye teal-text" alt="View News"></i> &nbsp;
+									</a>
 									<a href="{{ URL::route('news.edit', ['news'=>$new->id]) }}">
 										<i class="fa fa-pencil teal-text" alt="Edit News"></i> &nbsp;
 									</a>
