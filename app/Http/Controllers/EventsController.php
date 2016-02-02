@@ -93,7 +93,7 @@ class EventsController extends Controller
                                             time(), 
                                             $directory = "event_photos", 
                                             $bestFit = true, 
-                                            $fitDimensions = [1920, 500]
+                                            $fitDimensions = [200, 200]
                                         );
 
         $start_datetime = $data['start_date'] . ' ' . $data['start_time'] . ':' . '00';

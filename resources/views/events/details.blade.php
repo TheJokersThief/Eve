@@ -3,8 +3,8 @@
 </div>
 <div class="section">
 	<div class="row">
-		<div class="col s12">
-		    <img src="{{ $event->featured_image }}">
+		<div class="col s6">
+		    <img src="/images/sample_images/event_photos/{{ $event->featured_image }}">
 		</div>
 	</div>
 </div>
