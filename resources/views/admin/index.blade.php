@@ -50,9 +50,9 @@
 									<a href="{{ URL::route('events.edit', ['event'=>$event->id]) }}">
 										<i class="fa fa-pencil teal-text" alt="Edit Event"></i> &nbsp;
 									</a>
-									<a href="#!">
-										<i class="fa fa-times red-text" alt="Delete Event"></i>
-									</a>
+									{{ Form::open(['route' => ['events.destroy', $new->id], 'method' => 'delete', 'class' => 'inline-form']) }}
+									    <button type="submit" ><i class="fa fa-times red-text" alt="Delete Event"></i></button>
+									{{ Form::close() }}
 								</div>
 							</div>
 						</li>
@@ -77,9 +77,9 @@
 									<a href="{{ URL::route('partners.edit', ['partner'=>$partner->id]) }}">
 										<i class="fa fa-pencil teal-text" alt="Edit Partner"></i> &nbsp;
 									</a>
-									<a href="#!">
-										<i class="fa fa-times red-text" alt="Delete Partner"></i>
-									</a>
+									{{ Form::open(['route' => ['partners.destroy', $new->id], 'method' => 'delete', 'class' => 'inline-form']) }}
+									    <button type="submit" ><i class="fa fa-times red-text" alt="Delete Partner"></i></button>
+									{{ Form::close() }}
 								</div>
 							</div>
 						</li>
