@@ -144,4 +144,9 @@ class NewsController extends Controller
 
     	return Redirect::route('news.edit', [$news->id]);
     }
+
+    public function destroy( $newsID ){
+    	News::destroy($newsID);
+    	return Redirect::back();
+    }
 }

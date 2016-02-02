@@ -29,7 +29,7 @@
 			</aside>
 		</div>
 		<div class="col s12 m8">
-			<div class="row scrollspy" id="events">
+			<div class="row scrollspy" id="events" name="events">
 				<ul class="collection with-header">
 					<li class="collection-header">
 						<a href="{{ URL::route('events.create') }}" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New Event</a>
@@ -61,7 +61,7 @@
 				<a href="{{ URL::route('events.index') }}" class="waves-effect waves-light btn right">View All Events &rarr;</a>
 			</div>
 
-			<div class="row scrollspy" id="partners">
+			<div class="row scrollspy" id="partners" name="partners">
 				<ul class="collection with-header">
 					<li class="collection-header">
 						<a href="{{ URL::route('partners.create') }}" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New Partner</a>
@@ -88,7 +88,7 @@
 				<a href="{{ URL::route('partners.index') }}" class="waves-effect waves-light btn right">View All Partners &rarr;</a>
 			</div>
 			
-			<div class="row scrollspy" id="news">
+			<div class="row scrollspy" id="news" name="news">
 				<ul class="collection with-header">
 					<li class="collection-header">
 						<a href="{{ URL::route('news.create') }}" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New News</a>
@@ -99,7 +99,7 @@
 						<li class="collection-item">
 							<div>
 								<strong>{{ $new->title }}</strong>
-								<br /><small>({{ str_limit($new->content, 150) }})</small>
+								<br /><small>({{ strip_tags(str_limit($new->content, 150)) }})</small>
 								<div class="secondary-content">
 									<a href="{{ URL::route('news.show', ['news'=>$new->id]) }}">
 										<i class="fa fa-eye teal-text" alt="View News"></i> &nbsp;
@@ -107,9 +107,10 @@
 									<a href="{{ URL::route('news.edit', ['news'=>$new->id]) }}">
 										<i class="fa fa-pencil teal-text" alt="Edit News"></i> &nbsp;
 									</a>
-									<a href="#!">
-										<i class="fa fa-times red-text" alt="Delete News"></i>
-									</a>
+
+									{{ Form::open(['route' => ['news.destroy', $new->id], 'method' => 'delete', 'class' => 'inline-form']) }}
+									    <button type="submit" ><i class="fa fa-times red-text" alt="Delete News"></i></button>
+									{{ Form::close() }}
 								</div>
 							</div>
 						</li>
@@ -118,7 +119,7 @@
 				<a href="{{ URL::route('news.index') }}" class="waves-effect waves-light btn right">View All News &rarr;</a>
 			</div>
 
-			<div class="row scrollspy" id="media">
+			<div class="row scrollspy" id="media" name="media">
 				<div class="row card white">
 					<div class="card-content">
 						<h4>Approve Media for Frontpage</h4>
@@ -151,7 +152,7 @@
 			</div>
 
 
-			<div class="row scrollspy" id="staffs">
+			<div class="row scrollspy" id="staffs" name="staffs">
 				<ul class="collection with-header">
 					<li class="collection-header">
 						<a href="#!" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New Staff</a>
