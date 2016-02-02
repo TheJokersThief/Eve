@@ -32,7 +32,7 @@
 
 		</hr>
 
-		{!! Form::open( ['url' => 'events'] ) !!}
+		{!! Form::open( ['route' => 'events.store'] ) !!}
 			
 			<div class="row">
 				<div class="input-field col m6 s12">
@@ -146,7 +146,7 @@
 	<div class="modal-content">
 	  <h4>Create New Location</h4>
 	  <ul id="location-errors"></ul>
-		{!! Form::open( ['url' => 'events'] ) !!}
+		{!! Form::open( ['route' => 'events.store'] ) !!}
 			<div class="row">
 				<div class="input-field col m6 s12">
 					{!! Form::label('name','Location Name')	!!}
