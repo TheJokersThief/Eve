@@ -1,6 +1,13 @@
 <div class="section">
     <p>{{ $event->description }}</p>
 </div>
+<div class="section">
+	<div class="row">
+		<div class="col s12">
+		    <img src="{{ $event->featured_image }}">
+		</div>
+	</div>
+</div>
 	<div class="divider"></div>
 <div class="section">
 		<div class="row">

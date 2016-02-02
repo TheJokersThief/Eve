@@ -32,7 +32,7 @@
 
 		</hr>
 
-		{!! Form::open( ['route' => 'events.store'] ) !!}
+		{!! Form::open( ['route' => 'events.store', 'files' => true] ) !!}
 			
 			<div class="row">
 				<div class="input-field col m6 s12">
@@ -83,6 +83,13 @@
 					{!! Form::label('end_minute','Minute')!!}
 					{!! Form::selectRange('end_minute', 00, 59) !!}
 				</div> -->
+
+				<div class="col m6 s6">
+					{!! Form::label('featured_image','Choose Image')	!!}
+					{!! Form::file('featured_image') !!}
+				</div>
+
+			</div>
 
 	      	<div class="row">
 		      	<div class="input-field col s12">
