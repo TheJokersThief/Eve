@@ -40,6 +40,10 @@
 					{!! Form::text('title')	!!}
 				</div>
 				<div class="input-field col m6 s12">
+					{!! Form::label('tagline','Event Tagline')	!!}
+					{!! Form::text('tagline') !!}
+				</div>
+				<div class="input-field col m12 s12">
 					{!! Form::label('description','Event Description')	!!}
 					{!! Form::text('description') !!}
 				</div>
