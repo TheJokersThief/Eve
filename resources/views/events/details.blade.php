@@ -1,8 +1,8 @@
 <div class="parallax-container">
-	<div class="parallax"><img src="/images/sample_images/event_photos/{{ $event->featured_image }}"></div>
+	<div class="parallax"><img src="{{ $event->featured_image }}"></div>
 </div>
 <div class="section">
-    <p>{{ $event->description }}</p>
+    {!! $event->description !!}
 </div>
 	<div class="divider"></div>
 <div class="section">
