@@ -33,25 +33,40 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/', ['as' => 'install', 'uses' => 'InstallationController@index']);
 	});
 
+	////////////
+	// EVENTS //
+	////////////
 	Route::resource('events', 'EventsController');
 
+	//////////////
+	// PARTNERS //
+	//////////////
 	Route::resource('partners', 'PartnersController');
 
+	//////////
+	// NEWS //
+	//////////
 	Route::resource('news', 'NewsController');
 
-	Route::group(['prefix' => 'admin'], function( ){
+	///////////
+	// ADMIN //
+	///////////
+	Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function( ){
 		Route::get('/', ['as' => 'admin.home', 'uses' => 'AdminController@index']);
+		Route::get('unprocessed', ['as' => 'media.unprocessed', 'uses' => 'MediaController@viewUnprocessedMedia']);
+		Route::get('unprocessed/{eventID}', ['as' => 'media.unprocessedForEvent', 'uses' => 'MediaController@viewUnprocessedMediaForEvent']);
 	});
 	
-	Route::get('logout', ['as' => 'logout', 'uses' => 'UserController@logout']);
-	Route::group(['middleware' => ['auth']], function(){
-		Route::get('user', ['as' => 'user', 'uses' => 'UserController@index']);
-		Route::post('user', ['as' => 'user', 'uses' => 'UserController@updateUserInfo']);
-		Route::get('user/myEvents', ['as' => 'myEvents', 'uses' => 'UserController@myEvents'] );
-		Route::get('user/pastEvents', ['as' => 'pastEvents', 'uses' => 'UserController@pastEvents'] );
+	///////////
+	// USERS //
+	///////////
+	Route::group(['middleware' => ['auth'], 'prefix' => 'user'], function(){
+		Route::get('logout', ['as' => 'logout', 'uses' => 'UserController@logout']);
+		Route::get('/', ['as' => 'user', 'uses' => 'UserController@index']);
+		Route::post('/', ['as' => 'user', 'uses' => 'UserController@updateUserInfo']);
+		Route::get('/myEvents', ['as' => 'myEvents', 'uses' => 'UserController@myEvents'] );
+		Route::get('/pastEvents', ['as' => 'pastEvents', 'uses' => 'UserController@pastEvents'] );
 	});
-	Route::get('unprocessed', ['as' => 'media.unprocessed', 'uses' => 'MediaController@viewUnprocessedMedia']);
-	Route::get('unprocessed/{eventID}', ['as' => 'media.unprocessedForEvent', 'uses' => 'MediaController@viewUnprocessedMediaForEvent']);
 
 });
 
