@@ -12,6 +12,7 @@ use App\Setting;
 use Redirect;
 use Auth;
 use Validator;
+use Crypt;
 
 class NewsController extends Controller
 {
@@ -145,7 +146,8 @@ class NewsController extends Controller
     	return Redirect::route('news.edit', [$news->id]);
     }
 
-    public function destroy( $newsID ){
+    public function destroy( $encryptedNewsID ){
+    	$newsID = Crypt::decrypt($encryptedNewsID);
     	News::destroy($newsID);
     	return Redirect::back();
     }
