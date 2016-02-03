@@ -11,11 +11,11 @@ use App\Ticket;
 use App\Location;
 use Auth;
 use Redirect;
-use Illuminate\Support\Facades\Request;
+// use Illuminate\Support\Facades\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Validator;
 use App\Http\Controllers\MediaController;
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 
 class EventsController extends Controller
@@ -52,21 +52,24 @@ class EventsController extends Controller
     	return view('events.create', ['locations' => Location::all()]);
     }
 
-    public function store(){
+    public function store(Request $request){
         if(! Auth::check() || ! Auth::user()->is_admin ){
             return response(view('errors.403', ['error' => 'You do not have permission to edit events.']), 403);
         }
 
-        $data = Request::only( [
+        $data = $request->only( [
                     'title',
                     'description',
                     'start_date',
                     'end_date',
-                    'image',
+                    'featured_image',
                     'start_time',
                     'end_time',
                     'location_id'
                 ]);
+
+        
+        dd($data);
 
         // Validate all input
         $validator = Validator::make( $data, [
@@ -139,7 +142,7 @@ class EventsController extends Controller
              'endDate', 'startTime', 'endTime'));
     }
 
-    public function update($id){
+    public function update($id, Request $request){
         if(! Auth::check() || ! Auth::user()->is_admin ){
             return response(view('errors.403', ['error' => 'You do not have permission to edit events.']), 403);
         }
@@ -153,7 +156,7 @@ class EventsController extends Controller
                 ] );
         }
 
-        $data = Request::only( [
+        $data = $request->only( [
                     'title',
                     'description',
                     'start_date',
