@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('body-class') usersEvent-page @endsection
+@section('body-class') usersEvent-page usersAccount-page @endsection
 
 @section('content')
 	<main class="row">

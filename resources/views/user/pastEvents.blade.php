@@ -7,8 +7,8 @@
 		<nav class="oldEvents">
 	    	<div class="nav-wrapper" >
 	      			<div class="col s12">
-	      				<a href="http://softwareproject.dev/user/myEvents" class="breadcrumb">Upcoming Events</a>
-	       				<a href="http://softwareproject.dev/user/pastEvents" class="breadcrumb">Past Events</a>
+	      				<a href="{{ URL::route('myEvents') }}" class="breadcrumb">Upcoming Events</a>
+	       				<a href="{{ URL::route('pastEvents') }}" class="breadcrumb">Past Events</a>
 	      			</div>
 	   			</div>
 	  		</nav>
@@ -19,7 +19,7 @@
 							<!--temporarily not linked to users registered events-->
 						<div class="row">
 					            @foreach($me->tickets as $ticket)
-					            	@if($ticket->event->end_datetime > date(time()))
+					            	@if($ticket->event->end_datetime < date(time()))
 					                <div class="col s12 m6 l4">
 					                    <div class="card">
 					                        <div class="card-image">
