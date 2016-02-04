@@ -6,14 +6,14 @@
 <header class="parallax-container welcome-page-parallax z-depth-2">
     <div class="parallax">
 
-        @if( !isset( $event ) || $event->media()->file_location != "" )
+        @if( !isset( $event ) || $event->featured_image == "" )
             <video width="100%" autoplay loop style="max-width:100%">
                 <source src="{{URL::to('/')}}/images/video.webm" type="video/webm">
                 <source src="{{URL::to('/')}}/images/video.mp4" type="video/mp4">
                 <img src="{{URL::to('/')}}/images/video.jpg">
             </video>
         @else
-            <img src="{{ $event->media()->file_location }}" />
+            <img src="{{ $event->featured_image }}" />
         @endif
     </div>
 @endsection
@@ -30,8 +30,9 @@
                     <h2>{{ App\Setting::where('name', 'description')->first()->setting }}</h2>
                 @else
                     <h1>{{ $event->title }}</h1>
-                    <h2>{{ $event->description }}</h2>
-                    <a href="{{ URL::route('event.show', ['id' => $event->id]) }}" class="btn-large waves-effect waves-light teal lighten-1"><i class="fa fa-calendar left"></i> Learn More</a>
+                    <h2>{{ $event->tagline }}</h2>
+                    <br />
+                    <a href="{{ URL::route('events.show', ['id' => $event->id]) }}" class="btn-large waves-effect waves-light teal lighten-1"><i class="fa fa-calendar left"></i> Learn More</a>
                 @endif
             </div>
             <hr/>
@@ -49,14 +50,14 @@
                 <div class="col s12 m4">
                     <div class="card">
                         <div class="card-image">
-                            <img src="{{ URL::to('/') . '/images/sample_images/event_photos/event'.$event->id.'.jpg' }}">
+                            <img src="{{ $event->featured_image }}">
                             <span class="card-title">{{$event->title}}.</span>
                         </div>
                         <div class="card-content">
-                            <p>{{$event->description}}</p>
+                            <p>{{strip_tags(str_limit($event->description,250))}}</p>
                         </div>
                         <div class="card-action">
-                            <a href="{{ action('EventsController@show', $event->id) }}" class="red-text text-lighten-2">View Event &rarr;</a>
+                            <a href="{{ URL::route('events.show', $event->id) }}" class="red-text text-lighten-2">View Event &rarr;</a>
                         </div>
                     </div>
                 </div>

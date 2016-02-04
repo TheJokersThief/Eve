@@ -38,7 +38,7 @@
 
 <main class="row">
 	<div class="col m8 offset-m2 s12">
-		{!! Form::open( ['url' => 'news', 'id' => 'news-form', 'files' => 'true'] ) !!}
+		{!! Form::open( ['route' => 'news.store', 'id' => 'news-form', 'files' => 'true'] ) !!}
 			
 			<div class="row">
 				<h2 class="editable title">Your Title Here</h2>

@@ -32,7 +32,7 @@
 
 		</hr>
 
-		{!! Form::open( ['url' => 'events'] ) !!}
+		{!! Form::open( ['route' => 'events.store', 'files' => true] ) !!}
 			
 			<div class="row">
 				<div class="input-field col m6 s12">
@@ -40,6 +40,10 @@
 					{!! Form::text('title')	!!}
 				</div>
 				<div class="input-field col m6 s12">
+					{!! Form::label('tagline','Event Tagline')	!!}
+					{!! Form::text('tagline') !!}
+				</div>
+				<div class="input-field col m12 s12">
 					{!! Form::label('description','Event Description')	!!}
 					{!! Form::text('description') !!}
 				</div>
@@ -83,6 +87,13 @@
 					{!! Form::label('end_minute','Minute')!!}
 					{!! Form::selectRange('end_minute', 00, 59) !!}
 				</div> -->
+
+				<div class="col m6 s6">
+					{!! Form::label('featured_image','Choose Image')	!!}
+					{!! Form::file('featured_image') !!}
+				</div>
+
+			</div>
 
 	      	<div class="row">
 		      	<div class="input-field col s12">
@@ -146,7 +157,7 @@
 	<div class="modal-content">
 	  <h4>Create New Location</h4>
 	  <ul id="location-errors"></ul>
-		{!! Form::open( ['url' => 'events'] ) !!}
+		{!! Form::open( ['route' => 'events.store'] ) !!}
 			<div class="row">
 				<div class="input-field col m6 s12">
 					{!! Form::label('name','Location Name')	!!}

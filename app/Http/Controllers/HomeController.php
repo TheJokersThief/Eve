@@ -30,6 +30,8 @@ class HomeController extends Controller
         if( $isInstalled->setting != 'yes' ){
             return Redirect::route('install');
         }
-        return view('home');
+
+        $event = Event::first();
+        return view('home')->with('event', $event);
     }
 }

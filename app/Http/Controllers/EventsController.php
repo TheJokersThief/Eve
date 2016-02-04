@@ -11,10 +11,11 @@ use App\Ticket;
 use App\Location;
 use Auth;
 use Redirect;
-use Illuminate\Support\Facades\Request;
+// use Illuminate\Support\Facades\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Validator;
-// use Illuminate\Http\Request;
+use App\Http\Controllers\MediaController;
+use Illuminate\Http\Request;
 
 
 class EventsController extends Controller
@@ -51,20 +52,24 @@ class EventsController extends Controller
     	return view('events.create', ['locations' => Location::all()]);
     }
 
-    public function store(){
+    public function store(Request $request){
         if(! Auth::check() || ! Auth::user()->is_admin ){
             return response(view('errors.403', ['error' => 'You do not have permission to edit events.']), 403);
         }
 
-        $data = Request::only( [
+        $data = $request->only( [
                     'title',
                     'description',
                     'start_date',
                     'end_date',
+                    'featured_image',
                     'start_time',
                     'end_time',
                     'location_id'
                 ]);
+
+        
+        dd($data);
 
         // Validate all input
         $validator = Validator::make( $data, [
@@ -72,6 +77,7 @@ class EventsController extends Controller
                     'description'  => 'required',
                     'start_date'  => 'required',
                     'end_date'  => 'required',
+                    'featured_image' => 'image',
                     'start_time'  => 'required',
                     'end_time' => 'required',
                     'location_id'  => 'required',
@@ -85,6 +91,14 @@ class EventsController extends Controller
                     ->withInput( );
         }
 
+        $data['featured_image'] = MediaController::uploadImage( 
+                                            $request->file('featured_image'), 
+                                            time(), 
+                                            $directory = "event_photos", 
+                                            $bestFit = true, 
+                                            $fitDimensions = [1920, 500]
+                                        );
+
         $start_datetime = $data['start_date'] . ' ' . $data['start_time'] . ':' . '00';
         $end_datetime = $data['end_date'] . ' ' . $data['end_time'] . ':' . '00';
 
@@ -93,7 +107,8 @@ class EventsController extends Controller
                 "description" => $data["description"],
                 "start_datetime" => $start_datetime,
                 "end_datetime" => $end_datetime,
-                "location_id" => $data["location_id"]
+                "location_id" => $data["location_id"],
+                "featured_image" => $data["featured_image"]
             );
         
         // Create the new event
@@ -127,7 +142,7 @@ class EventsController extends Controller
              'endDate', 'startTime', 'endTime'));
     }
 
-    public function update($id){
+    public function update($id, Request $request){
         if(! Auth::check() || ! Auth::user()->is_admin ){
             return response(view('errors.403', ['error' => 'You do not have permission to edit events.']), 403);
         }
@@ -141,7 +156,7 @@ class EventsController extends Controller
                 ] );
         }
 
-        $data = Request::only( [
+        $data = $request->only( [
                     'title',
                     'description',
                     'start_date',

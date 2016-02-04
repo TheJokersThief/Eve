@@ -16,7 +16,7 @@
 				    </div>
 				@endif
 		        @if(! $ticket)
-					{!! Form::open( ['url' => 'tickets', "class" => "col s12 m3 right-align get_ticket_button"] ) !!}
+					{!! Form::open( ['action' => 'TicketController@store', "class" => "col s12 m3 right-align get_ticket_button"] ) !!}
 						{!! Form::hidden('event_id', $event->id) !!}
 						{!! Form::submit('Get Ticket', ['class' => 'btn btn-primary form-control']) !!}
 					{!! Form::close() !!}
