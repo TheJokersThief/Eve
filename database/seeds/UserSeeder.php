@@ -28,7 +28,9 @@ class UserSeeder extends Seeder
         	'is_staff' 			=> 1,
         	'profile_picture' 	=> $defaultProfileImage,
         	'bio' 				=> 'Lorem ipsum Nostrud ea laboris sunt dolor velit id Ut id qui qui officia consectetur Ut deserunt minim ut laborum proident sunt laborum in consectetur ullamco ullamco cupidatat do in exercitation occaecat non laboris nisi sint Duis officia aliqua dolor id.',
-        	'language' 			=> 'EN'
+        	'language' 			=> 'EN',
+            'country'           => 'Ireland',
+            'city'              => 'Ballyvolane'
         ]);
 
 	    //////////////////////
@@ -43,7 +45,9 @@ class UserSeeder extends Seeder
         	'is_staff' 			=> 1,
         	'profile_picture' 	=> $defaultProfileImage,
         	'bio' 				=> 'I wrote a book',
-        	'language' 			=> 'EN'
+        	'language' 			=> 'EN',
+            'country'           => 'England',
+            'city'              => 'Essex'
         ]);
 
         User::firstOrCreate([
@@ -55,7 +59,10 @@ class UserSeeder extends Seeder
         	'is_staff' 			=> 1,
         	'profile_picture' 	=> $defaultProfileImage,
         	'bio' 				=> "I wrote a poem",
-        	'language' 			=> "EN"
+        	'language' 			=> "EN",
+            'country'           => 'USA',
+            'city'              => 'New York'
+
         ]);
 
         User::firstOrCreate([
@@ -67,7 +74,9 @@ class UserSeeder extends Seeder
         	'is_staff' 			=> 1,
         	'profile_picture' 	=> $defaultProfileImage,
         	'bio' 				=> "I wrote a song",
-        	'language' 			=> "EN"
+        	'language' 			=> "EN",
+            'country'           => 'USA',
+            'city'              => 'New York'
         ]);
 
         User::firstOrCreate([
@@ -79,7 +88,9 @@ class UserSeeder extends Seeder
         	'is_staff' 			=> 1,
         	'profile_picture' 	=> $defaultProfileImage,
         	'bio' 				=> "Wassup With Oregon Right Now?",
-        	'language' 			=> "EN"
+        	'language' 			=> "EN",
+            'country'           => 'WonderLand',
+            'city'              => 'Emerald City'
         ]);
     }
 }
