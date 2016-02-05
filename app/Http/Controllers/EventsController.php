@@ -69,7 +69,6 @@ class EventsController extends Controller
 				]);
 
 
-		dd($data);
 
 		// Validate all input
 		$validator = Validator::make( $data, [
@@ -91,13 +90,15 @@ class EventsController extends Controller
 					->withInput( );
 		}
 
-		$data['featured_image'] = MediaController::uploadImage(
+		if( $request->hasFile('featured_image' ) ){
+			$data['featured_image'] = MediaController::uploadImage(
 											$request->file('featured_image'),
 											time(),
 											$directory = "event_photos",
 											$bestFit = true,
 											$fitDimensions = [1920, 500]
 										);
+		}
 
 		$start_datetime = $data['start_date'] . ' ' . $data['start_time'] . ':' . '00';
 		$end_datetime = $data['end_date'] . ' ' . $data['end_time'] . ':' . '00';
@@ -114,7 +115,9 @@ class EventsController extends Controller
 		// Create the new event
 		$newEvent = Event::create( $newData );
 
-		return Redirect::to( 'events' );
+		if( $newEvent ){
+			return Redirect::to( 'events' );
+		}
 
 		// If unsuccessful, return with errors
 		return Redirect::back( )
