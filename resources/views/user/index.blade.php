@@ -11,7 +11,7 @@
 				<div class="hide-on-small-only" id="userInfo">
 					<div class="collection">
 						<div class="hide-on-med-and-down, row">
-							<img src={{$me->profile_picture}}>
+							<img src="{{$me->profile_picture}}">
 						</div>
 						<div class="row">
 							<div class="col s10">
@@ -21,7 +21,7 @@
 						</div>
 						<div class="row">
 							<div class="col s12">
-								<a href="/user/editProfile/{{$me->name}}"class="waves-effect waves-light btn">Edit profile</a>
+								<a href="{{ URL::route('user/edit', Crypt::encrypt(Auth::user()->id)) }}"class="waves-effect waves-light btn">Edit profile</a>
 							</div>
 						</div>
 					</div>
