@@ -61,11 +61,17 @@ Route::group(['middleware' => ['web']], function () {
 	// USERS //
 	///////////
 	Route::group(['middleware' => ['auth'], 'prefix' => 'user'], function(){
-		Route::get('logout', ['as' => 'logout', 'uses' => 'UserController@logout']);
-		Route::get('/', ['as' => 'user', 'uses' => 'UserController@index']);
+		Route::get('profile', ['as' => 'me', 'uses' => 'UserController@index']);
+
+		Route::get('profile/{name}', 'UserController@userAccount');
+
+		Route::get('editProfile/{name}', 'UserController@edit');
 		Route::post('/', ['as' => 'user', 'uses' => 'UserController@updateUserInfo']);
+
 		Route::get('/myEvents', ['as' => 'myEvents', 'uses' => 'UserController@myEvents'] );
 		Route::get('/pastEvents', ['as' => 'pastEvents', 'uses' => 'UserController@pastEvents'] );
+
+		Route::get('logout', ['as' => 'logout', 'uses' => 'UserController@logout']);
 	});
 
 });
