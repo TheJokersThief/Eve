@@ -8,6 +8,7 @@ use Auth;
 use Image;
 use Hash;
 use Response;
+use Crypt;
 use App\User;
 use App\Ticket;
 use App\Setting;
@@ -150,8 +151,8 @@ class UserController extends Controller
     /**
      *   Test function for updating user information
      */
-    public function updateUserInfo(Request $request, User $user){
-        
+    public function updateUserInfo(Request $request){
+
         $data = $request->only([
                 'name',
                 'bio',
@@ -191,16 +192,16 @@ class UserController extends Controller
             $data['profile_picture'] = Auth::user()->profile_picture;
         }
         
-        if(isset($data['password'])){
+        if(isset($data['password']) && $data['password'] != ''){
             $data['password'] = Hash::make( $data['password'] );
-        }else{
-            $data['password'] = $user->password;
+        }else if( isset($data['password'])){
+            unset($data['password']);
         }
 
-
+        $user = Auth::user();
         $update = $user->update($data);
 
-        return Redirect::route('me');
+        return Redirect::route('user/edit', Crypt::encrypt( $user->id ) );
     }
 
     public function index(){
