@@ -27,183 +27,183 @@ class ApiController extends Controller
 	// INSTALL PROCESS ENDPOINTS //
 	///////////////////////////////
 
-    public static function installCreateUser( Request $request ){
-    	$data = $request->only([
-    				'email',
-    				'name',
-    				'password',
-    				'password_confirmation',
-    				'profile_picture'
-		    	]);
+	public static function installCreateUser( Request $request ){
+		$data = $request->only([
+					'email',
+					'name',
+					'password',
+					'password_confirmation',
+					'profile_picture'
+				]);
 
-        try {
-            $user = User::where('email', $data['email'] )->firstOrFail();
-            $userExists = true;
-            $passwordRequired = "";
-        } catch (ModelNotFoundException $e) {
-        	// Don't require password if user has filled out
-            // information before
-            $passwordRequired = "required|";
-            $userExists = false;
-        }
+		try {
+			$user = User::where('email', $data['email'] )->firstOrFail();
+			$userExists = true;
+			$passwordRequired = "";
+		} catch (ModelNotFoundException $e) {
+			// Don't require password if user has filled out
+			// information before
+			$passwordRequired = "required|";
+			$userExists = false;
+		}
 
-    	// Validate all input
-        $validator = Validator::make( $data, [
-                    'name'  => 'required',
-                    'email'     => 'email|required',
-                    'password'  => $passwordRequired.'confirmed|min:5',
-                    'profile_picture' => 'sometimes|image|max:10240' // Limit filesize to 10MB
-                ]);
+		// Validate all input
+		$validator = Validator::make( $data, [
+					'name'  => 'required',
+					'email'     => 'email|required',
+					'password'  => $passwordRequired.'confirmed|min:5',
+					'profile_picture' => 'sometimes|image|max:10240' // Limit filesize to 10MB
+				]);
 
-        if( $validator->fails( ) ){
-        	// If validation fails, redirect back to 
-        	// registration form with errors
-            return Response::json(['errors' => $validator->errors()->all()]);
-        }
+		if( $validator->fails( ) ){
+			// If validation fails, redirect back to
+			// registration form with errors
+			return Response::json(['errors' => $validator->errors()->all()]);
+		}
 
-        // Image intervention ftw
-        if ($request->hasFile('profile_picture')){
-            $data['profile_picture'] =  UserController::uploadProfilePicture( 
-                                            $request->file('profile_picture'),
-                                            $data['email']
-                                        );
-        } elseif( !$userExists ) {
-            // If they didn't upload a picture, set it to the default picture
-            $data['profile_picture'] = Setting::where('name', 'default_profile_picture')->first()->setting;
-        }
+		// Image intervention ftw
+		if ($request->hasFile('profile_picture')){
+			$data['profile_picture'] =  UserController::uploadProfilePicture(
+											$request->file('profile_picture'),
+											$data['email']
+										);
+		} elseif( !$userExists ) {
+			// If they didn't upload a picture, set it to the default picture
+			$data['profile_picture'] = Setting::where('name', 'default_profile_picture')->first()->setting;
+		}
 
-        if( $userExists ) {
-            $allUsers = User::all();
-            if( !count($allUsers) == 1 ){
-            	$allUsers->skip(1);
-                foreach ($allUsers as $indivUser) {
-                    $indivUser->delete();
-                }
-            }
+		if( $userExists ) {
+			$allUsers = User::all();
+			if( !count($allUsers) == 1 ){
+				$allUsers->skip(1);
+				foreach ($allUsers as $indivUser) {
+					$indivUser->delete();
+				}
+			}
 
-            UserController::updateUser( $user->id, $data );
-        } else {
-            UserController::createUser( $data );
-            // Make this first User staff and admin.
-            $user = User::first();
-            $user->is_admin = 1;
-            $user->is_staff = 1;
-            $user->save();
-        }    	
-	    return Response::json(['success']);
-    }
+			UserController::updateUser( $user->id, $data );
+		} else {
+			UserController::createUser( $data );
+			// Make this first User staff and admin.
+			$user = User::first();
+			$user->is_admin = 1;
+			$user->is_staff = 1;
+			$user->save();
+		}
+		return Response::json(['success']);
+	}
 
-    public static function getInstallUserInfo( ){
-    	$user = User::first();
+	public static function getInstallUserInfo( ){
+		$user = User::first();
 
-    	$fields = [
-                    'company_name',
-                    'description',
-                    'company_logo'
-                    ];
+		$fields = [
+					'company_name',
+					'description',
+					'company_logo'
+					];
 
-        foreach ($fields as $field) {
-        	$setting = Setting::where('name', $field)->first();
-        	$user->$field = $setting->setting;
-        }
-
-
-        return Response::json( $user->toArray() );
-    }
-
-    public static function createCompany( Request $request ){
-        
-        $fields = [
-                    'company_name',
-                    'description',
-                    'company_logo',
-                    'company_logo_white'
-                    ];
-
-        $data = $request->only($fields);
-
-        // Validate all input
-        $validator = Validator::make( $data, [
-                    'company_name'  => 'required',
-                    'description'   => 'required',
-                    'company_logo'  => 'sometimes|image|max:10240' // Limit filesize to 10MB
-                ]);
-
-        if( $validator->fails( ) ){
-        	// If validation fails, redirect back to 
-        	// registration form with errors
-            return Response::json(['errors' => $validator->errors()->all()]);
-        }
-
-        if ($request->hasFile('company_logo')){
-        	$logo_path = MediaController::uploadLogo( $request->file('company_logo') );
-            $data['company_logo'] = $logo_path["normal"];
-            $data['company_logo_white'] = $logo_path["white"];
-        } else {
-        	$data['company_logo'] = Setting::where('name', 'company_logo')->first()->setting;
-            $data['company_logo_white'] = Setting::where('name', 'company_logo_white')->first()->setting;
-        }
+		foreach ($fields as $field) {
+			$setting = Setting::where('name', $field)->first();
+			$user->$field = $setting->setting;
+		}
 
 
-        foreach ($fields as $field) {
-        	if( isset( $data[$field] ) ){
-        		$setting = Setting::where('name', $field)->first();
-	        	$setting->setting = $data[$field];
-	        	$setting->save();
-        	}
-        }
+		return Response::json( $user->toArray() );
+	}
 
-        // Mark software as installed
-        $installed = Setting::where('name', 'is_installed')->first();
-        $installed->setting = "yes";
-        $installed->save();
+	public static function createCompany( Request $request ){
 
-        // Log the user in as the user created in the last step
-        Auth::login( User::first() );
+		$fields = [
+					'company_name',
+					'description',
+					'company_logo',
+					'company_logo_white'
+					];
 
-        return Response::json( ['success'] );
-    }
+		$data = $request->only($fields);
 
-    ///////////////////////
-    /// CREATE LOCATION ///
-    ///////////////////////
+		// Validate all input
+		$validator = Validator::make( $data, [
+					'company_name'  => 'required',
+					'description'   => 'required',
+					'company_logo'  => 'sometimes|image|max:10240' // Limit filesize to 10MB
+				]);
 
-    public static function createLocation( Request $request ){
-        $data = $request->only([
-                    'name',
-                    'coordinates',
-                    'capacity'
-                ]);
+		if( $validator->fails( ) ){
+			// If validation fails, redirect back to
+			// registration form with errors
+			return Response::json(['errors' => $validator->errors()->all()]);
+		}
 
-        $validator = Validator::make( $data, [
-                    'name'  => 'required',
-                    'coordinates'   => 'required',
-                    'capacity'  => 'required|numeric'
-                ]);
+		if ($request->hasFile('company_logo')){
+			$logo_path = MediaController::uploadLogo( $request->file('company_logo') );
+			$data['company_logo'] = $logo_path["normal"];
+			$data['company_logo_white'] = $logo_path["white"];
+		} else {
+			$data['company_logo'] = Setting::where('name', 'company_logo')->first()->setting;
+			$data['company_logo_white'] = Setting::where('name', 'company_logo_white')->first()->setting;
+		}
 
-        if( $validator->fails( ) ){
-            // If validation fails, return json array of errors 
-            return Response::json(['errors' => $validator->errors()->all()]);
-        }
 
-        $location = Location::firstOrCreate($data);
+		foreach ($fields as $field) {
+			if( isset( $data[$field] ) ){
+				$setting = Setting::where('name', $field)->first();
+				$setting->setting = $data[$field];
+				$setting->save();
+			}
+		}
 
-        return Response::json( $location->toArray() );
-    }
+		// Mark software as installed
+		$installed = Setting::where('name', 'is_installed')->first();
+		$installed->setting = "yes";
+		$installed->save();
 
-    ///////////
-    // MEDIA //
-    ///////////
-    public static function approveMedia( Request $request ){
-        $data = $request->only([
-                    'encryptedID',
-                    'isApproved'
-                ]);
+		// Log the user in as the user created in the last step
+		Auth::login( User::first() );
 
-        $mediaID = Crypt::decrypt( $data["encryptedID"] );
-        $isApproved = ( $data["isApproved"] == 'true' ? true : false );
+		return Response::json( ['success'] );
+	}
 
-        MediaController::approveMedia( $mediaID, $isApproved );
-    }
+	///////////////////////
+	/// CREATE LOCATION ///
+	///////////////////////
+
+	public static function createLocation( Request $request ){
+		$data = $request->only([
+					'name',
+					'coordinates',
+					'capacity'
+				]);
+
+		$validator = Validator::make( $data, [
+					'name'  => 'required',
+					'coordinates'   => 'required',
+					'capacity'  => 'required|numeric'
+				]);
+
+		if( $validator->fails( ) ){
+			// If validation fails, return json array of errors
+			return Response::json(['errors' => $validator->errors()->all()]);
+		}
+
+		$location = Location::firstOrCreate($data);
+
+		return Response::json( $location->toArray() );
+	}
+
+	///////////
+	// MEDIA //
+	///////////
+	public static function approveMedia( Request $request ){
+		$data = $request->only([
+					'encryptedID',
+					'isApproved'
+				]);
+
+		$mediaID = Crypt::decrypt( $data["encryptedID"] );
+		$isApproved = ( $data["isApproved"] == 'true' ? true : false );
+
+		MediaController::approveMedia( $mediaID, $isApproved );
+	}
 
 }

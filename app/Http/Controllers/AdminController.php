@@ -29,8 +29,8 @@ class AdminController extends Controller
 	 * Require authentication
 	 */
 	public function __construct(){
-	    $this->middleware('auth');
-	    $this->middleware('admin');
+		$this->middleware('auth');
+		$this->middleware('admin');
 	}
 
 	public function index( ){

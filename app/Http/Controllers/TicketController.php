@@ -35,7 +35,7 @@ class TicketController extends Controller
 	/**
 	 * Creates a ticket for the event for the logged-in user, or if the user
 	 * already has a ticket, return theirs.
-	 * 
+	 *
 	 * @param  Integer 	$eventId 	ID of the event for the ticket.
 	 * @return View 		        Ticket View
 	 */
@@ -64,14 +64,14 @@ class TicketController extends Controller
 	/**
 	 * Admin function to validate a ticket and return the user's
 	 * name badge.
-	 * 
+	 *
 	 * @param  String 	$code 	QR code value of the ticket.
 	 * @return View       		Name badge for the user corresponding to the ticket.
 	 */
 	public function verify($code){
 		if( Auth::user()->is_staff || Auth::user()->is_admin ){
 			try{
-			  $ticket = Ticket::hasCode($code)->firstOrFail();  
+			  $ticket = Ticket::hasCode($code)->firstOrFail();
 			} catch (ModelNotFoundException $e) {
 				return view("tickets.unverifiable", ['error' => 'Ticket code invalid.']);
 			}
@@ -101,7 +101,7 @@ class TicketController extends Controller
 		$vCalendar = new Calendar( $_SERVER["HTTP_HOST"] );
 
 		try{
-		  $ticket = Ticket::hasCode($code)->firstOrFail();  
+		  $ticket = Ticket::hasCode($code)->firstOrFail();
 		} catch (ModelNotFoundException $e) {
 			return view("tickets.unverifiable", ['error' => 'Ticket code invalid.']);
 		}

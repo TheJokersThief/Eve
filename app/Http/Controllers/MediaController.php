@@ -21,78 +21,78 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class MediaController extends Controller
 {
 
-    public function viewUnprocessedMedia( ){
-        if(! Auth::check() || ! Auth::user()->is_admin ){
-           return response(view('errors.403', ['error' => 'You do not have permission to edit media.']), 403);
-        }
- 
-        $media = Media::where('processed', false)->get()->chunk(6);
-        return View::make('media.unprocessed')->with('media', $media);
-    }
+	public function viewUnprocessedMedia( ){
+		if(! Auth::check() || ! Auth::user()->is_admin ){
+		   return response(view('errors.403', ['error' => 'You do not have permission to edit media.']), 403);
+		}
 
-    public function viewUnprocessedMediaForEvent( $eventID ){
-        if(! Auth::check() || ! Auth::user()->is_admin ){
-           return response(view('errors.403', ['error' => 'You do not have permission to edit media.']), 403);
-        }
+		$media = Media::where('processed', false)->get()->chunk(6);
+		return View::make('media.unprocessed')->with('media', $media);
+	}
 
-        $media = Media::where('event_id', $eventID)->where('processed', false)->get()->chunk(6);
-        return View::make('media.unprocessed')->with('media', $media);
-    }
+	public function viewUnprocessedMediaForEvent( $eventID ){
+		if(! Auth::check() || ! Auth::user()->is_admin ){
+		   return response(view('errors.403', ['error' => 'You do not have permission to edit media.']), 403);
+		}
 
-    public static function approveMedia( $mediaID, $isApproved ){
-        if(! Auth::check() || ! Auth::user()->is_admin ){
-           return response(view('errors.403', ['error' => 'You do not have permission to edit media.']), 403);
-        }
+		$media = Media::where('event_id', $eventID)->where('processed', false)->get()->chunk(6);
+		return View::make('media.unprocessed')->with('media', $media);
+	}
 
-        $media = Media::find( $mediaID );
-        $media->approved = $isApproved;
-        $media->processed = true;
-        $media->save();
-    }
+	public static function approveMedia( $mediaID, $isApproved ){
+		if(! Auth::check() || ! Auth::user()->is_admin ){
+		   return response(view('errors.403', ['error' => 'You do not have permission to edit media.']), 403);
+		}
 
-    public static function uploadImage( $image, $hashSeed, $directory = "uploads", $bestFit = false, $fitDimensions = false ){
-        // Get the file from the request
-        $file = $image;
+		$media = Media::find( $mediaID );
+		$media->approved = $isApproved;
+		$media->processed = true;
+		$media->save();
+	}
 
-        $destination_path = storage_path() . '/'. $directory .'/';
-        // Create a filename by hashing the user's username. This
-        // will mean each user only has one profile picture residing
-        // on our filesystem
-        $file_name = hash('ripemd160', $hashSeed ) .'_picture.'. $file->getClientOriginalExtension();
-        // Move the file to our server
-        $movement = $image->move($destination_path, $file_name);
+	public static function uploadImage( $image, $hashSeed, $directory = "uploads", $bestFit = false, $fitDimensions = false ){
+		// Get the file from the request
+		$file = $image;
 
-        // Perform an image intervention, getting best fit from image
-        // and saving it again
-        $image = Image::make( storage_path(). '/'. $directory .'/' . $file_name);
-        if( $bestFit ){
-        	$image->fit( $fitDimensions[0], $fitDimensions[1] );
-        }
-        $image->save(storage_path(). '/'. $directory .'/' . $file_name);
+		$destination_path = storage_path() . '/'. $directory .'/';
+		// Create a filename by hashing the user's username. This
+		// will mean each user only has one profile picture residing
+		// on our filesystem
+		$file_name = hash('ripemd160', $hashSeed ) .'_picture.'. $file->getClientOriginalExtension();
+		// Move the file to our server
+		$movement = $image->move($destination_path, $file_name);
 
-        return (string) '/'. $directory .'/'. $file_name;
-    }
+		// Perform an image intervention, getting best fit from image
+		// and saving it again
+		$image = Image::make( storage_path(). '/'. $directory .'/' . $file_name);
+		if( $bestFit ){
+			$image->fit( $fitDimensions[0], $fitDimensions[1] );
+		}
+		$image->save(storage_path(). '/'. $directory .'/' . $file_name);
 
-    public static function uploadLogo( $image ){
-        // Get the file from the request
-        $file = $image;
-        $folder = '/company/';
+		return (string) '/'. $directory .'/'. $file_name;
+	}
 
-        $destination_path = storage_path() . $folder;
+	public static function uploadLogo( $image ){
+		// Get the file from the request
+		$file = $image;
+		$folder = '/company/';
 
-        $file_name = 'company_logo.'. $file->getClientOriginalExtension();
-        $file_name_white = 'company_logo_white.'. $file->getClientOriginalExtension();
-        // Move the file to our server
-        $movement = $image->move($destination_path, $file_name);
+		$destination_path = storage_path() . $folder;
 
-        MediaController::whiteOverlay( $destination_path . $file_name, $destination_path . $file_name_white );
+		$file_name = 'company_logo.'. $file->getClientOriginalExtension();
+		$file_name_white = 'company_logo_white.'. $file->getClientOriginalExtension();
+		// Move the file to our server
+		$movement = $image->move($destination_path, $file_name);
 
-        return [ "normal" => (string) $folder. $file_name, "white" => (string) $folder. $file_name_white ];
-    }
+		MediaController::whiteOverlay( $destination_path . $file_name, $destination_path . $file_name_white );
 
-    public static function whiteOverlay( $source, $destination ){
-        $image = Image::make( $source );
-        $image->colorize( 100, 100, 100 );
-        $image->save( $destination );
-    }
+		return [ "normal" => (string) $folder. $file_name, "white" => (string) $folder. $file_name_white ];
+	}
+
+	public static function whiteOverlay( $source, $destination ){
+		$image = Image::make( $source );
+		$image->colorize( 100, 100, 100 );
+		$image->save( $destination );
+	}
 }

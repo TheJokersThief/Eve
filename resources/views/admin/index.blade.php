@@ -51,7 +51,7 @@
 										<i class="fa fa-pencil teal-text" alt="Edit Event"></i> &nbsp;
 									</a>
 									{{ Form::open(['route' => ['events.destroy', $event->id], 'method' => 'delete', 'class' => 'inline-form']) }}
-									    <button type="submit" ><i class="fa fa-times red-text" alt="Delete Event"></i></button>
+										<button type="submit" ><i class="fa fa-times red-text" alt="Delete Event"></i></button>
 									{{ Form::close() }}
 								</div>
 							</div>
@@ -78,7 +78,7 @@
 										<i class="fa fa-pencil teal-text" alt="Edit Partner"></i> &nbsp;
 									</a>
 									{{ Form::open(['route' => ['partners.destroy', $partner->id], 'method' => 'delete', 'class' => 'inline-form']) }}
-									    <button type="submit" ><i class="fa fa-times red-text" alt="Delete Partner"></i></button>
+										<button type="submit" ><i class="fa fa-times red-text" alt="Delete Partner"></i></button>
 									{{ Form::close() }}
 								</div>
 							</div>
@@ -87,7 +87,7 @@
 				</ul>
 				<a href="{{ URL::route('partners.index') }}" class="waves-effect waves-light btn right">View All Partners &rarr;</a>
 			</div>
-			
+
 			<div class="row scrollspy" id="news" name="news">
 				<ul class="collection with-header">
 					<li class="collection-header">
@@ -109,7 +109,7 @@
 									</a>
 
 									{{ Form::open(['route' => ['news.destroy', Crypt::encrypt($new->id)], 'method' => 'delete', 'class' => 'inline-form']) }}
-									    <button type="submit" ><i class="fa fa-times red-text" alt="Delete News"></i></button>
+										<button type="submit" ><i class="fa fa-times red-text" alt="Delete News"></i></button>
 									{{ Form::close() }}
 								</div>
 							</div>
@@ -129,9 +129,9 @@
 									<div class="col s12 m2 l4" id="{{ 'media_'.$item->id }}">
 										<div class="card z-depth-0 off-black dimmed-card-image">
 											<div class="card-image">
-								              	<img src="{{ $item->file_location }}">
-								              	<span class="card-title">{{ str_limit($item->name, 30) }} </span>
-								            </div>
+												<img src="{{ $item->file_location }}">
+												<span class="card-title">{{ str_limit($item->name, 30) }} </span>
+											</div>
 											<div class="card-action">
 												<a href="#!">
 													<i alt="Approve" class="fa fa-2x fa-check green-text" onclick="approveMedia('{{ Crypt::encrypt( $item->id ) }}', 'true', '{{ 'media_'.$item->id }}' );"></i>
@@ -174,7 +174,7 @@
 				</ul>
 				<a href="#!" class="waves-effect waves-light btn right">View All Staffs &rarr;</a>
 			</div>
-		
+
 		</div>
 	</div>
 </div>

@@ -56,7 +56,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('unprocessed', ['as' => 'media.unprocessed', 'uses' => 'MediaController@viewUnprocessedMedia']);
 		Route::get('unprocessed/{eventID}', ['as' => 'media.unprocessedForEvent', 'uses' => 'MediaController@viewUnprocessedMediaForEvent']);
 	});
-	
+
 	///////////
 	// USERS //
 	///////////
@@ -84,13 +84,13 @@ Route::group(['prefix' => 'tickets', 'middleware' => 'web'], function(){
 });
 
 Route::group(['prefix' => 'api'], function () {
-    Route::group(['prefix' => 'install'], function () {
-	    Route::post('createuser', 'ApiController@installCreateUser');
-	    Route::get('getInstallUserInfo', 'ApiController@getInstallUserInfo');
-	    Route::post('createCompany', 'ApiController@createCompany');
+	Route::group(['prefix' => 'install'], function () {
+		Route::post('createuser', 'ApiController@installCreateUser');
+		Route::get('getInstallUserInfo', 'ApiController@getInstallUserInfo');
+		Route::post('createCompany', 'ApiController@createCompany');
 	});
 
-    Route::group(['prefix' => 'location'], function () {
+	Route::group(['prefix' => 'location'], function () {
 		Route::post('create', 'ApiController@createLocation');
 	});
 
@@ -103,10 +103,10 @@ Route::group(['prefix' => 'api'], function () {
 // Gets uploaded files via a public url
 Route::get('{directory}/{image}', function( $directory, $image = null)
 {
-    $path = storage_path(). '/'. $directory .'/' . $image;
-    if (file_exists($path)) { 
-        return Response::download($path);
-    }
+	$path = storage_path(). '/'. $directory .'/' . $image;
+	if (file_exists($path)) {
+		return Response::download($path);
+	}
 });
 
 /*
@@ -121,5 +121,5 @@ Route::get('{directory}/{image}', function( $directory, $image = null)
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+	//
 });
