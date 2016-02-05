@@ -65,7 +65,7 @@ Route::group(['middleware' => ['web']], function () {
 
 		Route::get('profile/{name}', 'UserController@userAccount');
 
-		Route::get('editProfile/{name}', ['as' => 'user/edit', 'uses'=> 'UserController@edit']);
+		Route::get('editProfile/{encryptedID}', ['as' => 'user/edit', 'uses'=> 'UserController@edit']);
 		Route::post('/', ['as' => 'user', 'uses' => 'UserController@updateUserInfo']);
 
 		Route::get('/myEvents', ['as' => 'myEvents', 'uses' => 'UserController@myEvents'] );
