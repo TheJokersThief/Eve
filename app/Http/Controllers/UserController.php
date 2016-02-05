@@ -14,8 +14,8 @@ use App\Setting;
 
 use App\Http\Controllers\MediaController;
 
-use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserController extends Controller
@@ -150,35 +150,80 @@ class UserController extends Controller
     /**
      *   Test function for updating user information
      */
-    public function updateUserInfo(){
-        $data = Request::only([
+    public function updateUserInfo(Request $request, User $user){
+        
+        $data = $request->only([
                 'name',
-               'email',
                 'bio',
-                'password'
+                'password',
+                'profile_picture',
+                'language',
+                'city',
+                'country'
         ]);
         $validator = Validator::make($data, [
-                'name' =>  'required|unique:users|min:5|alpha_num',
-               'email' => 'required',
-                'bio' => 'required|max:100',
-                'password' => 'required|confirmed|min:5'
+                'name' =>  'required|min:3|alpha_num',
+                'bio' => 'required',
+                'password' => 'sometimes|min:5',
+                'profile_picture' => 'sometimes',
+                'language' => 'required',
+                'city' => 'required',
+                'country' => 'required'
         ]);
+
         if( $validator->fails( ) ){
-            // If validation fails, redirect back to 
-            // registration form with errors
-            return Redirect::back( )
-                    ->withErrors( $validator )
-                    ->withInput( );
+        // If validation fails, redirect back to 
+        // registration form with errors
+        return Redirect::back( )
+                ->withErrors( $validator )
+                ->withInput( );
         }
-        $update = User::update($data);
+
+        if($request->hasFile('profile_picture')){
+            $data['profile_picture'] = MediaController::uploadImage(
+                $request->file('profile_picture'),
+                time(),
+                $directory = "user",
+                $bestFit = true,
+                $fitDimensions = [500, 500]
+            );
+        }else{
+            $data['profile_picture'] = Auth::user()->profile_picture;
+        }
+        
+        if(isset($data['password'])){
+            $data['password'] = Hash::make( $data['password'] );
+        }else{
+            $data['password'] = $user->password;
+        }
+
+
+        $update = $user->update($data);
+
+        return Redirect::route('me');
+    }
+
+    public function index(){
+        $me = Auth::user();
+        return view('user.index', compact('me'));
+    }
+
+    public function userAccount($name){
+        $me = User::where( 'name', $name )
+                  ->firstorfail();
+        return view('user.index', compact('me'));
     }
 
     /**
      *   Returns the users personal page where they can update their info
      */
-    public function index(){
-        $me = Auth::user();
-        return view('user.index', compact('me'));
+    public function edit($name){
+       if(! Auth::check() || ! (Auth::user()->name == $name || Auth::user()->is_admin) ){
+            return response(view('errors.403', ['error' => 'You do not have permission to edit users.']), 403);
+        }
+        $me = User::where( 'name', $name )
+          ->firstorfail();
+        return view('user.edit', compact('me'));
     }
 
     /**
