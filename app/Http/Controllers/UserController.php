@@ -218,13 +218,14 @@ class UserController extends Controller
     /**
      *   Returns the users personal page where they can update their info
      */
-    public function edit($name){
-       if(! Auth::check() || ! (Auth::user()->name == $name || Auth::user()->is_admin) ){
+    public function edit( $encryptedID ){
+        $userID = Crypt::decrypt($encryptedID);
+        if(! Auth::check() || ! (Auth::user()->id == $userID || Auth::user()->is_admin) ){
             return response(view('errors.403', ['error' => 'You do not have permission to edit users.']), 403);
         }
-        $me = User::where( 'name', $name )
-          ->firstorfail();
-        return view('user.edit', compact('me'));
+
+        $user = User::find($userID);
+        return view('user.edit')->with('me', $user);
     }
 
     /**
