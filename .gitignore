@@ -9,3 +9,4 @@ composer.lock
 public/css/app*
 public/js/compiled/
 storage/
+/.idea
