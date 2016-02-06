@@ -86,6 +86,7 @@ Route::group(['prefix' => 'tickets', 'middleware' => 'web'], function(){
 	Route::get('{id}', 'TicketController@show');
 	Route::get('verify/{code}', 'TicketController@verify');
 	Route::get('ical/{code}', 'TicketController@iCal');
+	Route::get('print/{id}', [ 'as' => 'tickets/print', 'uses' => 'TicketController@printable']);
 });
 
 Route::group(['prefix' => 'api'], function () {

@@ -24,10 +24,13 @@
 					<div class="col s12 m3 right-align get_ticket_button">
 						<a class="btn btn-primary" href="{{ action('TicketController@show', [$ticket->id]) }}">Show ticket</a>
 					</div>
+					<div class=" col s12 m3 right-align get_ticket_button">
+						<a class="btn" href="{{ URL::route('tickets/print', ['id' => $ticket->id ]) }}">Print ticket</a>
+					</div>
 				@endif
 		    @endif
 		</div>
 		<div class="divider"></div>
-	
-		@include("events.details")	
+
+		@include("events.details")
 @endsection

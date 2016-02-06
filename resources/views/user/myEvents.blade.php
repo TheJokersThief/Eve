@@ -46,7 +46,7 @@
 					                            <a href="{{action('EventsController@show', $ticket->event->id)}}" class="red-text text-lighten-2">View Event &rarr;</a>
 					                        </div>
 					                        <div class="card-action">
-					                            <a href="{{action('TicketController@show', $ticket->id)}}" class="red-text text-lighten-2">View Info Pack &rarr;</a>
+					                            <a href="{{action('TicketController@show', $ticket->event->id)}}" class="red-text text-lighten-2">View Info Pack &rarr;</a>
 					                        </div>
 					                    </div>
 					                </div>

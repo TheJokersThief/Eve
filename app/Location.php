@@ -16,4 +16,8 @@ class Location extends Model
 	public function event(){
 		return $this->hasMany('App/Event');
 	}
+
+	public function addressAsArray(){
+		return explode(',', $this->name );
+	}
 }
