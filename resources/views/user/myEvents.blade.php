@@ -40,7 +40,7 @@
 					                            <span class="card-title">{{$ticket->event->title}}</span>
 					                        </div>
 					                        <div class="card-content">
-					                            <p>{{$ticket->event->description}}</p>
+					                            <p>{{ strip_tags( str_limit( $ticket->event->description ) ) }}</p>
 					                        </div>
 					                        <div class="card-action">
 					                            <a href="{{action('EventsController@show', $ticket->event->id)}}" class="red-text text-lighten-2">View Event &rarr;</a>
