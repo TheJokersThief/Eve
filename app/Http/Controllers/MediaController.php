@@ -40,10 +40,6 @@ class MediaController extends Controller
 	}
 
 	public static function approveMedia( $mediaID, $isApproved ){
-		if(! Auth::check() || ! Auth::user()->is_admin ){
-		   return response(view('errors.403', ['error' => 'You do not have permission to edit media.']), 403);
-		}
-
 		$media = Media::find( $mediaID );
 		$media->approved = $isApproved;
 		$media->processed = true;

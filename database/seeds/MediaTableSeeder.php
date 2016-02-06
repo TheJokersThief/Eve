@@ -18,8 +18,8 @@ class MediaTableSeeder extends Seeder
          	'description' => 'A photo description',
          	'name' => 'Photo 1',
          	'view_count' => 20,
-         	'approved' => true,
-            'processed' => true
+         	'approved' => false,
+            'processed' => false
         ]);
 
         Media::firstOrCreate([
@@ -28,8 +28,8 @@ class MediaTableSeeder extends Seeder
          	'description' => 'A photo description',
          	'name' => 'Photo 2',
          	'view_count' => 5,
-         	'approved' => true,
-            'processed' => true
+         	'approved' => false,
+            'processed' => false
         ]);
 
         Media::firstOrCreate([
@@ -38,15 +38,27 @@ class MediaTableSeeder extends Seeder
          	'description' => 'A photo description',
          	'name' => 'Photo 3',
          	'view_count' => 570,
-         	'approved' => true,
-            'processed' => true
+         	'approved' => false,
+            'processed' => false
         ]);
 
         ///////////////////////
         // UNPROCESSED MEDIA //
         ///////////////////////
 
-        for ($i=1; $i <= 12; $i++) { 
+        for ($i=1; $i <= 12; $i++) {
+            Media::firstOrCreate([
+                'file_location' => '/images/sample_images/event_photos/'.$i.'.jpg',
+                'event_id' => 3,
+                'description' => 'A photo description',
+                'name' => 'Event Photo '.$i,
+                'view_count' => 0,
+                'approved' => true,
+                'processed' => true
+            ]);
+        }
+
+        for ($i=1; $i <= 12; $i++) {
             Media::firstOrCreate([
                 'file_location' => '/images/sample_images/event_photos/'.$i.'.jpg',
                 'event_id' => 3,

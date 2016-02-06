@@ -96,7 +96,7 @@ class EventsController extends Controller
 											time(),
 											$directory = "event_photos",
 											$bestFit = true,
-											$fitDimensions = [1920, 500]
+											$fitDimensions = [1920, 1080]
 										);
 		}
 

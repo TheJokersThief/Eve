@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('body-class') locations-index @endsection
+@section('body-class') locations-index locations @endsection
 
 @section('content')
 

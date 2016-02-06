@@ -66,21 +66,15 @@
     </div>
 </div>
 
-<div class="row remove-col-padding" id="venues">
-    <h3>Latest Venues</h3>
-
-    @for( $i = 1; $i < 9; $i++)
-        <div class="col s6 m3">
-            <div class="card hoverable">
-                <div class="card-image">
-                    <a href="#!">
-                        <img src="{{ URL::to('/') . '/images/sample_images/hotels/'.$i.'.jpg' }}" />
-                        <span class="card-title">Venue {{ $i }}</span>
-                    </a>
-                </div>
-            </div>
+<?php $event = App\Event::first(); ?>
+<div class="row" id="venues">
+    <div class="parallax-container valign-wrapper">
+        <div class="parallax"><img src="{{ $event->location->featured_image }}"></div>
+        <div class="col s12 m10 offset-m1 valign center">
+            <h2 class="white-text">{{ $event->location->name }}</h2>
+            <h4 class="white-text">{{ date( 'g:iA, D jS F ', strtotime($event->hrStartTime())) }} &rarr; {{ date( 'g:iA, D jS F ', strtotime($event->hrEndTime())) }}</h4>
         </div>
-    @endfor
+    </div>
 </div>
 
 <div class="row" id="latest">
@@ -90,32 +84,32 @@
         <div class="col s12 m10 offset-m1">
             <h3 class="card">Latest News</h3>
 
-            @for( $i = 1; $i < 7; $i++)
+            @foreach($news as $item)
                 <div class="col s6 m4">
                     <div class="card">
                         <div class="card-content">
-                            <h5>News Title {{ $i }}</h5>
-                            <p class="red-text text-lighten-2">{{ date( 'M m, Y') }}</p>
-                            <p>Lorem ipsum Ut in eiusmod pariatur reprehenderit minim esse reprehenderit ea in sunt ad cupidatat commodo enim id voluptate in eu Duis sint reprehenderit quis sed magna dolor do irure qui sit eu reprehenderit aliqua enim.</p>
-                            <a href="#!" class="waves-effect waves-light btn red lighten-1">Read More</a>
+                            <h5>{{ $item->title }}</h5>
+                            <p class="red-text text-lighten-2">{{ date( 'M m, Y', strtotime($item->created_at)) }}</p>
+                            <p>{{  strip_tags(str_limit( $item->content, 250 )) }}</p>
+                            <a href="{{ URL::route('news.show', $item->id ) }}" class="waves-effect waves-light btn red lighten-1">Read More</a>
                         </div>
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
 
     </div>
 </div>
 
 <div class="row remove-col-padding" id="photos">
-    @for( $i = 1; $i <= 12; $i++)
+    @foreach($media as $item)
         <div class="col s6 m3">
             <div class="card hoverable">
-                <div class="card-image center-cropped" style="background-image: url('{{ URL::to('/') . '/images/sample_images/event_photos/'.$i.'.jpg' }}');">
-                    <img src="{{ URL::to('/') . '/images/sample_images/event_photos/'.$i.'.jpg' }}" id="{{$i}}-image" />
+                <div class="card-image center-cropped" style="background-image: url('{{ $item->file_location }}');">
+                    <img src="{{ $item->file_location }}" />
                 </div>
             </div>
         </div>
-    @endfor
+    @endforeach
 </div>
 @endsection

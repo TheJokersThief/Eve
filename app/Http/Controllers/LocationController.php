@@ -21,11 +21,6 @@ class LocationController extends Controller
 		return view('locations.index', ['locations' => $locations]);
 	}
 
-	public function show($id){
-		$location = Location::findOrFail($id);
-		return view('locations.show')->with('locations', $location);
-	}
-
 	public function create(){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
 			return response(view('errors.403', ['error' => 'You do not have permission to edit locations.']), 403);
@@ -55,7 +50,7 @@ class LocationController extends Controller
 		$validator = Validator::make( $data, [
 					'name' => 'required',
 					'coordinates' => 'required',
-					'capacity' => 'required',
+					'capacity' => 'required|numeric',
 					'featured_image' => 'image|sometimes'
 				]);
 
@@ -81,7 +76,7 @@ class LocationController extends Controller
 
 		$location = Location::create($data);
 
-		return Redirect::route('locations.show', ['id' => $location->id]);
+		return Redirect::route('locations.edit', ['id' => $location->id]);
 	}
 
 	public function edit( $locationID ){
@@ -95,7 +90,7 @@ class LocationController extends Controller
 									? Setting::where('name', 'default_profile_picture')->first()->setting
 									: $item->featured_image;
 
-		return view('news.edit')->with( 'item', $item );
+		return view('locations.edit')->with( 'item', $item );
 	}
 
 	public function update( Request $request, $locationID ){

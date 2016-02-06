@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Redirect;
 use App\Setting;
 use App\Event;
+use App\News;
+use App\Media;
 
 class HomeController extends Controller
 {
@@ -31,8 +33,12 @@ class HomeController extends Controller
 			return Redirect::route('install');
 		}
 
-		$data['event'] = Event::first();
-		$data['upcomingEvents'] = Event::take(3)->get();
+		$data = [
+			"event" => Event::first(),
+			"upcomingEvents" => Event::take(3)->get(),
+			"news" => News::take(6)->get(),
+			"media" => Media::where('processed', true)->orderBy('id', 'DESC')->take(12)->get()
+		];
 
 		return view('home')->with($data);
 	}
