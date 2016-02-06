@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use Validator;
 use Redirect;
 use Auth;
@@ -12,6 +13,7 @@ use Crypt;
 use App\User;
 use App\Ticket;
 use App\Setting;
+use DB;
 
 use App\Http\Controllers\MediaController;
 
@@ -209,10 +211,33 @@ class UserController extends Controller
 		return view('user.index', compact('me'));
 	}
 
-	public function userAccount($name){
-		$me = User::where( 'name', $name )
-				  ->firstorfail();
-		return view('user.index', compact('me'));
+    public function show($id){
+        try{
+            $user = User::findOrFail($id);
+        } catch (ModelNotFoundException $e){
+            abort(404);
+        }
+
+        $eventIds = DB::table('tickets')
+                      ->where('user_id', $user->id)
+                      ->pluck('event_id');
+
+        $events = DB::table('events')
+                    ->whereIn('id', $eventIds)
+                    ->get();
+
+        return view('user.show', compact('user', 'events'));
+    }
+
+
+    public function userAccount($name){
+        if(Auth::user()->name == $name || Auth::user()->is_admin){
+            $me = User::where( 'name', $name )
+                ->firstorfail();
+            return view('user.index', compact('me'));
+        } else {
+            return response(view('errors.403', ['error' => 'You do not have permission to access this page.']), 403);
+        }
 	}
 
 	/**
