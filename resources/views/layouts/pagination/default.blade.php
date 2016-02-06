@@ -1,3 +1,8 @@
+{{--
+	USAGE:
+	@include('layouts.pagination.default', ['paginator' => $locations])
+--}}
+
 @if ($paginator->lastPage() > 1)
 <ul class="pagination">
     <li class="{{ ($paginator->currentPage() == 1) ? ' disabled' : '' }}">
