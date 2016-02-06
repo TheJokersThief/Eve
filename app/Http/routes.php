@@ -89,18 +89,20 @@ Route::group(['prefix' => 'tickets', 'middleware' => 'web'], function(){
 	Route::get('print/{id}', [ 'as' => 'tickets/print', 'uses' => 'TicketController@printable']);
 });
 
-Route::group(['prefix' => 'api'], function () {
+Route::group(['prefix' => 'api', 'middleware' => ['api']], function () {
 	Route::group(['prefix' => 'install'], function () {
 		Route::post('createuser', 'ApiController@installCreateUser');
 		Route::get('getInstallUserInfo', 'ApiController@getInstallUserInfo');
 		Route::post('createCompany', 'ApiController@createCompany');
 	});
 
-	Route::group(['prefix' => 'location'], function () {
+	Route::group(['prefix' => 'location', 'middleware' => 'admin'], function () {
 		Route::post('create', 'ApiController@createLocation');
-	});
+        Route::get('create', 'ApiController@createLocation');
 
-	Route::group(['prefix' => 'media'], function () {
+    });
+
+	Route::group(['prefix' => 'media', 'middleware' => 'admin'], function () {
 		Route::post('approve', 'ApiController@approveMedia');
 	});
 

@@ -190,9 +190,9 @@ function createLocation( ){
 				$('#location-select').append($newItem);
 				$('#location-select').val(data.id);
 				$('#location-select').material_select();
-				$("locationForm").closeModal();
+				$("#locationForm").closeModal();
 			}
-		},
+		}
 	});
 }
 
