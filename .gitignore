@@ -11,3 +11,4 @@ public/js/compiled/
 storage/
 /.idea
 _ide_helper.php
+.idea/codeStyleSettings.xml
