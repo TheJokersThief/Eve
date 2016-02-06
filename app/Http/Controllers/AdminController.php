@@ -16,6 +16,7 @@ use App\Event;
 use App\Partner;
 use App\Media;
 use App\News;
+use App\Location;
 
 use App\Http\Controllers\MediaController;
 
@@ -43,7 +44,7 @@ class AdminController extends Controller
 			"news" 		=> News::all()->take( $totalNumber ),
 			"media"		=> Media::where('processed', 0)->get()->take( $totalNumber*2 )->chunk(3),
 			"staffs"	=> User::where('is_staff', 1)->get()->take( $totalNumber ),
-
+			"locations" => Location::all()->take( $totalNumber )
 		];
 
 		$i = 0;

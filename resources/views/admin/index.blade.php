@@ -21,6 +21,7 @@
 				<div class="collection sidebar-scroll">
 					<a href="#events" 	class="collection-item">Events</a>
 					<a href="#partners" class="collection-item">Partners</a>
+					<a href="#locations" 	class="collection-item">Locations</a>
 					<a href="#news" 	class="collection-item">News</a>
 					<a href="#media" 	class="collection-item">Media</a>
 					<a href="#staff" 	class="collection-item">Staff</a>
@@ -86,6 +87,33 @@
 					@endforeach
 				</ul>
 				<a href="{{ URL::route('partners.index') }}" class="waves-effect waves-light btn right">View All Partners &rarr;</a>
+			</div>
+
+			<div class="row scrollspy" id="locations" name="locations">
+				<ul class="collection with-header">
+					<li class="collection-header">
+						<a href="{{ URL::route('locations.create') }}" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>Add New Location</a>
+						<h4>Locations</h4>
+					</li>
+
+					@foreach( $locations as $location )
+						<li class="collection-item">
+							<div>
+								<strong>{{ $location->name }}</strong>
+								<br /><small>({{ $location->capacity }} people)</small>
+								<div class="secondary-content">
+									<a href="{{ URL::route('locations.edit', ['location'=>$location->id]) }}">
+										<i class="fa fa-pencil teal-text" alt="Edit Location"></i> &nbsp;
+									</a>
+									{{ Form::open(['route' => ['locations.destroy', $location->id], 'method' => 'delete', 'class' => 'inline-form']) }}
+										<button type="submit" ><i class="fa fa-times red-text" alt="Delete Location"></i></button>
+									{{ Form::close() }}
+								</div>
+							</div>
+						</li>
+					@endforeach
+				</ul>
+				<a href="{{ URL::route('locations.index') }}" class="waves-effect waves-light btn right">View All Locations &rarr;</a>
 			</div>
 
 			<div class="row scrollspy" id="news" name="news">

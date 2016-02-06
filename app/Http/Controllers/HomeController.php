@@ -31,7 +31,9 @@ class HomeController extends Controller
 			return Redirect::route('install');
 		}
 
-		$event = Event::first();
-		return view('home')->with('event', $event);
+		$data['event'] = Event::first();
+		$data['upcomingEvents'] = Event::take(3)->get();
+
+		return view('home')->with($data);
 	}
 }
