@@ -30,7 +30,6 @@ class EventsController extends Controller
 		$location = $event->location;
 		$location_name = $location->name;
 		$partners = $event->partners;
-		$locationName = Location::findOrFail($event->id);
 
 		if( Auth::check() ){
 			try{
