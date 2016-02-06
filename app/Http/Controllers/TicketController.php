@@ -19,6 +19,20 @@ use Eluceo\iCal\Component\Calendar;
 class TicketController extends Controller
 {
 	/**
+	 * Return a printable view of the ticket
+	 * @param  Integer  $eventId    ID of the ticket to be printed
+	 * @return View                 Printable ticket view
+	 */
+	public function printable($eventId){
+		$ticket = Ticket::where('user_id', Auth::user()->id)
+						->where('event_id', $eventId)
+						->firstOrFail();
+		$event = $ticket->event;
+
+		return view( 'tickets.print', compact('ticket') );
+	}
+
+	/**
 	 * Return a representation of a ticket.
 	 * @param  Integer 	$eventId 	ID of the event to view
 	 * @return View          		Ticket View
