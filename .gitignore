@@ -7,7 +7,7 @@
 /node_modules
 composer.lock
 public/css/app*
-public/js/compiled/
+public/js/
 storage/
 /.idea
 _ide_helper.php
