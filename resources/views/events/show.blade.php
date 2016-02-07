@@ -42,7 +42,7 @@
                 <div class="row">
                     @foreach($users as $user)
                         <div class="col s2 m1">
-                            <a href="{{URL::to('/')}}/user/{{$user->username}}"">
+                            <a href="{{URL::route('user/show', $user->username) }}">
                                 <img src="{{$user->profile_picture}}" class="circle responsive-img" alt="{{$user->name}}" data-toggle="tooltip" data-placement="top" title="{{$user->name}}">
                             </a>
                         </div>
