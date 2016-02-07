@@ -36,7 +36,7 @@
 		@include("events.details")
         @if(count($users))
             <div class="divider"></div>
-            <div class="section people-attending @if(count($users) > 6)align-center@endif">
+            <div class="section people-attending @if(count($users) > 6)align-center @endif">
                 <h5>People attending this event:</h5>
                 <div class="row">
                     @foreach($users as $user)
