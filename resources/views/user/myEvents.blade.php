@@ -14,7 +14,7 @@
 	  		</nav>
 		<div class="col l10 push-l1 s12 card white">
 			<div class="row">
-				<div class="col m3 s12, hide-on-small-only" id="userInfo">
+				<div class="col m3 s12 hide-on-small-only" id="userInfo">
 					<div class="collection">
 						<div class="hide-on-med-and-down">
 							<img src={{$me->profile_picture}}>
@@ -29,7 +29,7 @@
 					</div>
 				</div>
 				<div id="upComingEvents" class="col m9 s12">
-					<div class="collection with-header, flow-text">
+					<div class="collection with-header flow-text">
 						<h3 class="center-align">Upcoming Events</h3>
 							<div class="row">
 					            @foreach($me->tickets as $ticket)

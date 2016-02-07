@@ -14,7 +14,7 @@
 	  		</nav>
 	  		<div class="col l10 push-l1 s12 card white">
 				<div id="upComingEvents" class="col 12">
-					<div class="collection with-header, flow-text">
+					<div class="collection with-header flow-text">
 						<h3 class="center-align">Past Events</h3>
 							<!--temporarily not linked to users registered events-->
 						<div class="row">

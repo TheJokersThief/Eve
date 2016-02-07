@@ -10,7 +10,7 @@
 			<div class="col m3">
 				<div class="hide-on-small-only" id="userInfo">
 					<div class="collection">
-						<div class="hide-on-med-and-down, row">
+						<div class="hide-on-med-and-down">
 							<img src="{{$me->profile_picture}}">
 						</div>
 						<div class="row">
