@@ -49,14 +49,29 @@ class UserController extends Controller
 					'name',
 					'password',
 					'password_confirmation',
-					'email'
+					'email',
+                    'username',
+                    'bio',
+                    'city',
+                    'country'
 				]);
 
-		// Validate all input
+        if($request->hasFile('profile_picture')){
+            $data['profile_picture'] = MediaController::uploadImage(
+                $request->file('profile_picture'),
+                time(),
+                $directory = "user",
+                $bestFit = true,
+                $fitDimensions = [500, 500]
+            );
+        }
+
+        // Validate all input
 		$validator = Validator::make( $data, [
 					'name'  => 'required',
 					'email'     => 'email|required|unique:users',
-					'password'  => 'required|confirmed|min:5'
+					'password'  => 'required|confirmed|min:5',
+                    'username'  => 'required|min:4'
 				]);
 
 		if( $validator->fails( ) ){
@@ -165,7 +180,7 @@ class UserController extends Controller
 				'country'
 		]);
 		$validator = Validator::make($data, [
-				'name' =>  'required|min:3|alpha_num',
+				'name' =>  'required|min:3',
 				'bio' => 'required',
 				'password' => 'sometimes|min:5',
 				'profile_picture' => 'sometimes',
