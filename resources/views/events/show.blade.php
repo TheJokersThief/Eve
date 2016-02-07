@@ -31,6 +31,20 @@
 		    @endif
 		</div>
 		<div class="divider"></div>
-
 		@include("events.details")
+        @if(count($users))
+            <div class="divider"></div>
+            <div class="section">
+                <h3>People attending this event:</h3>
+                <div class="row">
+                    @foreach($users as $user)
+                        <div class="col s2 m1">
+                            <a href="{{URL::to('/')}}/user/{{$user->username}}"">
+                                <img src="{{$user->profile_picture}}" class="circle responsive-img" alt="{{$user->name}}" data-toggle="tooltip" data-placement="top" title="{{$user->name}}">
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endif
 @endsection
