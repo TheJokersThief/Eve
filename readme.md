@@ -13,7 +13,7 @@ This will automagically download the relevant virtual machine and start you runn
 ### Add an entry to your hosts file
 
 * On Mac and Linux, you can open the terminal and type `sudo vim /etc/hosts`.
-* On Windows, you'll have to open notepad in administrator mode and then go to `C:\\Windows\System32\drivers\etc\hosts.txt`
+* On Windows, you'll have to open notepad in administrator mode and then go to `C:\\Windows\System32\drivers\etc\hosts`
 
 Add the following to the end:
 
