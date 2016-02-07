@@ -41,18 +41,24 @@
 		</div>
 
 		<div class="row">
-		      	<div class="input-field col s12">
-		    		<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();}">
-		      			<option value="" disabled selected>Choose location</option>
-						@foreach($locations as $location)
-							<option value="{{$location->id}}">{{$location->name}}</option>
-						@endforeach
-						<option value="-1">Create New Location</option>
-		    		</select>
-		    		<label>Location Select</label>
-		  		</div>
+			<div class="input-field col s12">
+				<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();}">
+					<option value="" disabled selected>Choose location</option>
+					@foreach($locations as $location)
+						<option value="{{$location->id}}">{{$location->name}}</option>
+					@endforeach
+					<option value="-1">Create New Location</option>
+				</select>
+				<label>Location Select</label>
 			</div>
+		</div>
 
+		<div class="row">
+			<div class="input-field col s12">
+				{!! Form::textarea('p-desc', null, ['id' => 'p-desc') !!}
+				{!! Form::label('p-desc', 'Partner Description:') !!}
+			</div>
+		</div>
 
 		<div class="row"><!-- To be calculated by the Google API in a later version -->
 			<div class="input-field col s12 m6">
@@ -72,7 +78,7 @@
 			</div>
 		</div>
 
-        <div class="row">
+		<div class="row">
 	{!! Form::submit('Add Partner', ['class' => 'btn btn-primary form-control', 'id' => 'partner-button']) !!}
 	{!! Form::close() !!}
 		</div>

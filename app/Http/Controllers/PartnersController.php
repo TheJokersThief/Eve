@@ -40,13 +40,15 @@ class PartnersController extends Controller
 		return view('partners.store');
 	}
 
-	public function edit(){
+	public function edit($partnerID){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
 			return response(view('errors.403', ['error' => 'You do not have permission to edit partners.']), 403);
 		}
 
-
-		return view('partners.edit');
+		$partner = Partner::where('id', $partnerID)
+						->firstOrFail();
+		return view('partners.edit', ['partner'=>$partner]);
+		//return view('partners.edit')->with(['partner'=>$partner]);
 	}
 
 	public function update(){
