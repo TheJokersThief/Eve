@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
     	User::firstOrCreate([
     		'id'				=> 1,
         	'name' 				=> "DEECM",
+            'username'          =>  "admin",
         	'email' 			=> "auditor@netsoc.co",
         	'password' 			=> Hash::make('password'),
         	'is_admin' 			=> 1,
@@ -39,7 +40,8 @@ class UserSeeder extends Seeder
         User::firstOrCreate([
         	'id'				=> 2,
         	'name' 				=> "Douglas Adams",
-        	'email' 			=> "doug@hitchhikersguide.galaxy",
+            'username'          =>  "dougie",
+            'email' 			=> "doug@hitchhikersguide.galaxy",
         	'password' 			=> Hash::make('TheAnswerIs42'),
         	'is_admin' 			=> 0,
         	'is_staff' 			=> 1,
@@ -53,7 +55,8 @@ class UserSeeder extends Seeder
         User::firstOrCreate([
         	'id'				=> 3,
         	'name' 				=> "William E. Henley",
-        	'email' 			=> "willy@invictus.net",
+            'username'          =>  "captainwilly",
+            'email' 			=> "willy@invictus.net",
         	'password' 			=> Hash::make('unconquerable'),
         	'is_admin' 			=> 0,
         	'is_staff' 			=> 1,
@@ -68,7 +71,8 @@ class UserSeeder extends Seeder
         User::firstOrCreate([
         	'id'				=> 4,
         	'name' 				=> "Kanye West",
-        	'email' 			=> "kanye@thecentreofthe.world",
+            'username'          =>  "yeezy",
+            'email' 			=> "kanye@thecentreofthe.world",
         	'password' 			=> Hash::make('IAmGod'),
         	'is_admin' 			=> 0,
         	'is_staff' 			=> 1,
@@ -82,7 +86,8 @@ class UserSeeder extends Seeder
         User::firstOrCreate([
         	'id'				=> 5,
         	'name' 				=> "Jaden Smith",
-        	'email' 			=> "whatIs@an.email",
+            'username'          =>  "tearsinthebackofanuber",
+            'email' 			=> "whatIs@an.email",
         	'password' 			=> Hash::make('hashtagyeezys'),
         	'is_admin' 			=> 0,
         	'is_staff' 			=> 1,
