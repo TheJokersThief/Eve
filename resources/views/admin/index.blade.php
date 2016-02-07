@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('body-class') admin-home-page @endsection
+@section('title') Admin Panel @endsection
 
 
 @section('extra-js')

@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('body-class') usersAccount-page @endsection
+@section('title') {{$me->name}} @endsection
+
 
  <link href="https://fonts.googleapis.com/icon?family=Material+Icons">
 

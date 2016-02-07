@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('body-class') edit-news @endsection
+@section('title') Editing News: {{$item->title}} @endsection
 
 @section('extra-css')
 	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') . '/css/clockpicker.css' }}">
@@ -36,7 +37,7 @@
 @section('content')
 
 
-<main class="row">
+<main class="container row">
 	<div class="col m8 offset-m2 s12">
 		{!! Form::open( ['method' => 'PUT', 'route' => ['news.update', $item->id] , 'id' => 'news-form', 'files' => 'true'] ) !!}
 			

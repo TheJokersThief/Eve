@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('body-class') install-page @endsection
+@section('title') Installing Eve @endsection
+
 
 @section('extra-js')
 	<script type="text/javascript">

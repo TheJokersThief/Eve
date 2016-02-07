@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('body-class') event-page @endsection
+@section('title') {{$event->title}} @endsection
 
 @section('content')
 

@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('body-class') create-news @endsection
+@section('title') Write News @endsection
+
 
 @section('extra-css')
 	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') . '/css/clockpicker.css' }}">
@@ -36,7 +38,7 @@
 @section('content')
 
 
-<main class="row">
+<main class="container row">
 	<div class="col m8 offset-m2 s12">
 		{!! Form::open( ['route' => 'news.store', 'id' => 'news-form', 'files' => 'true'] ) !!}
 			

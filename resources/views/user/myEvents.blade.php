@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('body-class') usersEvent-page usersAccount-page @endsection
+@section('title') Upcoming events @endsection
+
 
 @section('content')
 	<main class="row">

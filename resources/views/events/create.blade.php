@@ -2,6 +2,9 @@
 
 @section('body-class') create-event @endsection
 
+@section('title') Create an Event @endsection
+
+
 @section('extra-css')
 	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') . '/css/clockpicker.css' }}">
 @endsection

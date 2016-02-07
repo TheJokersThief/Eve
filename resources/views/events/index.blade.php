@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title') Events @endsection
+
+
 @section('content')
 
 	<div class="container">

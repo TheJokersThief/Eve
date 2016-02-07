@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('body-class') locations @endsection
+@section('title') Edit: {{$item->name}} @endsection
+
 
 @section('content')
 	<div class="row">

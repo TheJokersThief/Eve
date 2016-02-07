@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('body-class') unprocessed-media-page @endsection
+@section('title') Unprocessed Media @endsection
+
 
 @section('extra-js')
 	<script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>

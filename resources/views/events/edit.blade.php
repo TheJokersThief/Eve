@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('body-class') edit-event @endsection
+@section('title') Edit: {{$event->title}} @endsection
+
 
 @section('extra-css')
 	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') . '/css/clockpicker.css' }}">

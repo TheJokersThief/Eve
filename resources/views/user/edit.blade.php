@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('body-class') usersAccount-page @endsection
+@section('title') Edit your details @endsection
+
 
 @section('content')
 	<main class="row">
