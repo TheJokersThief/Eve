@@ -226,11 +226,15 @@ class UserController extends Controller
 		return view('user.index', compact('me'));
 	}
 
-    public function show($id){
+    public function show($idOrUsername){
         try{
-            $user = User::findOrFail($id);
+            $user = User::where('username', $idOrUsername)->firstOrFail();
         } catch (ModelNotFoundException $e){
-            abort(404);
+            try{
+                $user = User::findOrFail($idOrUsername);
+            } catch (ModelNotFoundException $f){
+                return response(view('errors.404', ['error' => 'This user account could not be found.']), 404);
+            }
         }
 
         $eventIds = DB::table('tickets')
