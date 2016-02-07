@@ -61,33 +61,6 @@
 					<input name="end_date" id="input_enddate" type="date" value="End Date" class="datepicker">
 				</div>
 
-				<!-- <div class="col m6 s6">
-					<label for"start_time">Start Time</label>
-				</div>
-				<div class="col m6 s6">
-					<label for"end_time">End Time</label>
-				</div>
-
-				<div id="start_time" class="col m3 s3">
-					{!! Form::label('start_hour','Hour')!!}
-					{!! Form::selectRange('start_hour', 00, 23) !!}
-				</div>
-
-				<div id="start_time" class="col m3 s3">
-					{!! Form::label('start_minute','Minute')!!}
-					{!! Form::selectRange('start_minute', 00, 59) !!}
-				</div>
-
-				<div id="end_time" class="col m3 s3">
-					{!! Form::label('end_hour','Hour')!!}
-					{!! Form::selectRange('end_hour', 00, 23) !!}
-				</div>
-
-				<div id="end_time" class="col m3 s3">
-					{!! Form::label('end_minute','Minute')!!}
-					{!! Form::selectRange('end_minute', 00, 59) !!}
-				</div> -->
-
 				<div class="col m6 s6">
 					{!! Form::label('featured_image','Choose Image')	!!}
 					{!! Form::file('featured_image') !!}

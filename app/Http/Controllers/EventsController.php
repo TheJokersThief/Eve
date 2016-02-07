@@ -161,6 +161,7 @@ class EventsController extends Controller
 		$data = $request->only( [
 					'title',
 					'description',
+					'featured_image',
 					'start_date',
 					'end_date',
 					'start_time',
@@ -196,6 +197,32 @@ class EventsController extends Controller
 				"end_datetime" => $end_datetime,
 				"location_id" => $data["location_id"]
 			);
+
+		//Only if the user updated the photo, validate and store it
+		if($data['featured_image']){
+
+			$validator = Validator::make( $data, [
+					'featured_image' => 'image'
+				]);
+
+			if( $validator->fails( ) ){
+				// If validation fails, redirect back to
+				// registration form with errors
+				return Redirect::back()
+						->withErrors( $validator )
+						->withInput( );
+			}
+
+			$data['featured_image'] = MediaController::uploadImage(
+										$request->file('featured_image'),
+										time(),
+										$directory = "event_photos",
+										$bestFit = true,
+										$fitDimensions = [1920, 1080]
+									);
+
+			$event->featured_image = $data['featured_image'];
+		}
 
 		$event->title = ($newData["title"]);
 		$event->description = ($newData["description"]);

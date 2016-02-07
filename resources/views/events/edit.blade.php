@@ -33,7 +33,7 @@
 
 		</hr>
 
-		{!! Form::open( ['url' => 'events'] ) !!}
+		{!! Form::open( ['url' => 'events', 'files' => true] ) !!}
 			
 			<div class="row">
 				<div class="input-field col m6 s12">
@@ -41,6 +41,10 @@
 					{!! Form::text('title')	!!}
 				</div>
 				<div class="input-field col m6 s12">
+					{!! Form::label('tagline','Event Tagline')	!!}
+					{!! Form::text('tagline') !!}
+				</div>
+				<div class="input-field col m12 s12">
 					{!! Form::label('description','Event Description')	!!}
 					{!! Form::text('description') !!}
 				</div>
@@ -56,6 +60,11 @@
 				<div class="col m6 s6">
 					<label for="input_enddate">End Date</label>
 					<input name="end_date" id="input_enddate" value="{{$endDate}}" type="date" class="datepicker">
+				</div>
+
+				<div class="col m6 s6">
+					{!! Form::label('featured_image','Choose Image')	!!}
+					{!! Form::file('featured_image') !!}
 				</div>
 
 			</div>
