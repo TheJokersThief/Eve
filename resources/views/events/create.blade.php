@@ -7,7 +7,6 @@
 @endsection
 
 @section('extra-js')
-	<script type="text/javascript" src="{{ URL::to('/') . '/js/clockpicker.js'}}"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.clockpicker').clockpicker({
