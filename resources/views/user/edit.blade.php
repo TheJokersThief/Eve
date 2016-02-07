@@ -28,31 +28,31 @@
 
 			<div class="col l9 m8 s12"/>
 				<ul class="collection flow-text input-field">
-					<li class="collection-item"><strong>edit name:</strong> 
-						<div class="secondary-content">
-							<i class="fa fa-pencil teal-text"></i>
-						</div>	
-						{!! Form::text('name', $me->name, ["class" => "example"])!!}
-					</li>
-					<li class="collection-item"><strong>edit bio:</strong>
+					<li class="collection-item"><strong>Name:</strong>
 						<div class="secondary-content">
 							<i class="fa fa-pencil teal-text"></i>
 						</div>
-						{!! Form::text('bio', $me->bio, ["class" => "example"])!!}
+						{!! Form::text('name', $me->name, ["class" => "example"])!!}
 					</li>
-					<li class="collection-item"><strong>edit language:</strong>
+					<li class="collection-item"><strong>Bio:</strong>
+						<div class="secondary-content">
+							<i class="fa fa-pencil teal-text"></i>
+						</div>
+						{!! Form::textarea('bio', $me->bio, ["class" => "materialize-textarea"])!!}
+					</li>
+					<li class="collection-item"><strong>Language:</strong>
 						<div class="secondary-content">
 							<i class="fa fa-pencil teal-text"></i>
 						</div>
 						{!! Form::text('language', $me->language, ["class" => "example"])!!}
 					</li>
-					<li class="collection-item"><strong>edit city:</strong>
+					<li class="collection-item"><strong>City:</strong>
 						<div class="secondary-content">
 							<i class="fa fa-pencil teal-text"></i>
 						</div>
 						{!! Form::text('city', $me->city, ["class" => "example"])!!}
 					</li>
-					<li class="collection-item"><strong>edit country:</strong>
+					<li class="collection-item"><strong>Country:</strong>
 						<div class="secondary-content">
 							<i class="fa fa-pencil teal-text"></i>
 						</div>
@@ -68,7 +68,7 @@
 					</li>
 				</ul>
 				<ul class="collection flow-text file-field input-field">
-					<li class="collection-item"><strong>profile picture</strong>
+					<li class="collection-item"><strong>Change Profile Picture</strong>
 						<div class="secondary-content">
 						    <div class="btn">
     							<span>File</span>
