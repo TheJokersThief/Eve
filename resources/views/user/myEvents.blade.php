@@ -12,12 +12,12 @@
 	      			</div>
 	   			</div>
 	  		</nav>
-		<div class="col l10 push-l1 s12 card white">
+		<div class="col l10 push-l1 s12">
 			<div class="row">
 				<div class="col m3 s12 hide-on-small-only" id="userInfo">
 					<div class="collection">
 						<div class="hide-on-med-and-down">
-							<img src={{$me->profile_picture}}>
+							<img src="{{$me->profile_picture}}">
 						</div>
 
 						<div class="row">
@@ -29,8 +29,9 @@
 					</div>
 				</div>
 				<div id="upComingEvents" class="col m9 s12">
-					<div class="collection with-header flow-text">
+					<div class="">
 						<h3 class="center-align">Upcoming Events</h3>
+						<div class="divider"></div>
 							<div class="row">
 					            @foreach($me->tickets as $ticket)
 					                <div class="col s12 m4">
@@ -43,7 +44,7 @@
 					                            <p>{{strip_tags(str_limit($ticket->event->description,250))}}</p>
 					                        </div>
 					                        <div class="card-action">
-					                            <a href="{{ URL::route('events.show', $event->id) }}" class="red-text text-lighten-2">View Event &rarr;</a>
+					                            <a href="{{ URL::route('events.show', $ticket->event->id) }}" class="red-text text-lighten-2">View Event &rarr;</a>
 					                        </div>
 					                    </div>
 					                </div>
