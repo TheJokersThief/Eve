@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
         	'password' 			=> Hash::make('password'),
         	'is_admin' 			=> 1,
         	'is_staff' 			=> 1,
-        	'profile_picture' 	=> $defaultProfileImage,
+        	'profile_picture' 	=> '/images/sample_images/event_photos/11.jpg',
         	'bio' 				=> 'Lorem ipsum Nostrud ea laboris sunt dolor velit id Ut id qui qui officia consectetur Ut deserunt minim ut laborum proident sunt laborum in consectetur ullamco ullamco cupidatat do in exercitation occaecat non laboris nisi sint Duis officia aliqua dolor id.',
         	'language' 			=> 'EN',
             'country'           => 'Ireland',
