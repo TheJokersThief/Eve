@@ -35,10 +35,10 @@
 						
 								<div class="col s12 valign-wrapper">
 									<a href="#!" class="valign btn-floating green lighten-4">
-										<i alt="Approve" class="fa fa-check green-text" onclick="approveMedia('{{ Crypt::encrypt( $item->id ) }}', 'true', '{{ 'media_'.$item->id }}' );"></i>
+										<i alt="Approve" class="fa fa-check green-text left" onclick="approveMedia('{{ Crypt::encrypt( $item->id ) }}', 'true', '{{ 'media_'.$item->id }}' );"></i>
 									</a>&nbsp;
 									<a href="#!" class="valign btn-floating red lighten-4">
-										<i alt="Reject" class="fa fa-times red-text right" onclick="approveMedia('{{ Crypt::encrypt( $item->id ) }}', 'false', '{{ 'media_'.$item->id }}' );"></i>
+										<i alt="Reject" class="fa fa-times red-text right left" onclick="approveMedia('{{ Crypt::encrypt( $item->id ) }}', 'false', '{{ 'media_'.$item->id }}' );"></i>
 									</a>
 								</div>
 							</span>
