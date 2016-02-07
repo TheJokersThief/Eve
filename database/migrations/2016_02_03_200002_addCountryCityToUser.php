@@ -25,7 +25,7 @@ class AddCountryCityToUser extends Migration
      */
     public function down()
     {
-        Schema::table('events', function ($table) {
+        Schema::table('users', function ($table) {
             $table->dropColumn(['country', 'city']);
         });
     }
