@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('body-class') event-page @endsection
+
 @section('content')
 
 	<div class="container">
@@ -34,8 +36,8 @@
 		@include("events.details")
         @if(count($users))
             <div class="divider"></div>
-            <div class="section">
-                <h3>People attending this event:</h3>
+            <div class="section people-attending @if(count($users) > 6)align-center@endif">
+                <h5>People attending this event:</h5>
                 <div class="row">
                     @foreach($users as $user)
                         <div class="col s2 m1">
