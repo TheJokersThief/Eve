@@ -62,16 +62,14 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('unprocessed/{eventID}', ['as' => 'media.unprocessedForEvent', 'uses' => 'MediaController@viewUnprocessedMediaForEvent']);
 	});
 
+
 	///////////
 	// USERS //
 	///////////
-	Route::group(['middleware' => ['auth'], 'prefix' => 'user'], function(){
+	Route::group(['middleware' => 'auth', 'prefix' => 'user'], function(){
 		Route::get('profile', ['as' => 'me', 'uses' => 'UserController@index']);
 
 		Route::get('profile/{name}', 'UserController@userAccount');
-
-        Route::get('{name}', 'UserController@show');
-
 
         Route::get('editProfile/{encryptedID}', ['as' => 'user/edit', 'uses'=> 'UserController@edit']);
 		Route::post('/', ['as' => 'user', 'uses' => 'UserController@updateUserInfo']);
@@ -80,6 +78,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/pastEvents', ['as' => 'pastEvents', 'uses' => 'UserController@pastEvents'] );
 
 		Route::get('logout', ['as' => 'logout', 'uses' => 'UserController@logout']);
+		Route::get('/{name}', ['as' => 'user/show', 'uses' => 'UserController@show']);
 	});
 
 });
