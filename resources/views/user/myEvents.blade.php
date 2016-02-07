@@ -33,20 +33,17 @@
 						<h3 class="center-align">Upcoming Events</h3>
 							<div class="row">
 					            @foreach($me->tickets as $ticket)
-					                <div class="col s12 m6 l4">
+					                <div class="col s12 m4">
 					                    <div class="card">
 					                        <div class="card-image">
-					                            <img src="{{ URL::to('/') . '/images/sample_images/event_photos/event'.$ticket->event->id.'.jpg' }}">
-					                            <span class="card-title">{{$ticket->event->title}}</span>
+					                            <img src="{{ $ticket->event->featured_image }}">
+					                            <span class="card-title">{{$ticket->event->title}}.</span>
 					                        </div>
 					                        <div class="card-content">
-					                            <p>{{ strip_tags( str_limit( $ticket->event->description ) ) }}</p>
+					                            <p>{{strip_tags(str_limit($ticket->event->description,250))}}</p>
 					                        </div>
 					                        <div class="card-action">
-					                            <a href="{{action('EventsController@show', $ticket->event->id)}}" class="red-text text-lighten-2">View Event &rarr;</a>
-					                        </div>
-					                        <div class="card-action">
-					                            <a href="{{action('TicketController@show', $ticket->event->id)}}" class="red-text text-lighten-2">View Info Pack &rarr;</a>
+					                            <a href="{{ URL::route('events.show', $event->id) }}" class="red-text text-lighten-2">View Event &rarr;</a>
 					                        </div>
 					                    </div>
 					                </div>
