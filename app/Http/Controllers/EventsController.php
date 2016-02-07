@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Validator;
 use App\Http\Controllers\MediaController;
 use Illuminate\Http\Request;
+use DB;
 
 
 class EventsController extends Controller
@@ -43,8 +44,16 @@ class EventsController extends Controller
 			$ticket = false;
 		}
 
+        $userIds = DB::table('tickets')
+                     ->where('event_id', $event->id)
+                     ->take(48)
+                     ->pluck('user_id');
 
-		return view('events.show', compact('event', 'location_name', 'partners', 'ticket'));
+        $users = DB::table('users')
+                   ->whereIn('id', $userIds)
+                   ->get();
+
+		return view('events.show', compact('event', 'location_name', 'partners', 'ticket', 'users'));
 	}
 
 	public function create(){

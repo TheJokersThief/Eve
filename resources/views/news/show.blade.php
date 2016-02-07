@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('body-class') show-news @endsection
+@section('title') {{$news->title}} @endsection
+
 
 @section('content')
 	

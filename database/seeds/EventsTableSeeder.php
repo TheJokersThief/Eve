@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Event;
+
 
 class EventsTableSeeder extends Seeder
 {
@@ -11,7 +13,7 @@ class EventsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('events')->insert([
+        Event::firstOrCreate([
             'tagline' => 'Our very first event. Everyone is welcome to come along. Except Eimear. Eimear smells.',
             'location_id' => 1,
             'featured_image' => '/images/sample_images/event_photos/event1.jpg',
@@ -27,7 +29,7 @@ class EventsTableSeeder extends Seeder
                 <p>You smart, you loyal, you a genius. A major key, never panic. Don’t panic, when it gets crazy and rough, don’t panic, stay calm. The key to more success is to have a lot of pillows. You see that bamboo behind me though, you see that bamboo? Ain’t nothin’ like bamboo. Find peace, life is like a water fall, you’ve gotta flow. Another one. To succeed you must believe. Life is what you make it, so let’s make it. Give thanks to the most high. Give thanks to the most high. We don’t see them, we will never see them.</p>'
         ]);
 
-        DB::table('events')->insert([
+        Event::firstOrCreate([
             'tagline' => 'Our second event. Be sure to bring your friends.',
             'location_id' => 5,
             'featured_image' => '/images/sample_images/event_photos/event2.jpg',
@@ -37,7 +39,7 @@ class EventsTableSeeder extends Seeder
             'description' => '<p>The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men. Blessed is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother\'s keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I lay My vengeance upon thee.</p>'
         ]);
 
-        DB::table('events')->insert([
+        Event::firstOrCreate([
             'tagline' => 'Our third and final event. Please arrive on time.',
             'location_id' => 2,
             'featured_image' => '/images/sample_images/event_photos/event3.jpg',

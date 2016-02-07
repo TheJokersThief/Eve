@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use Validator;
 use Redirect;
 use Auth;
@@ -12,6 +13,7 @@ use Crypt;
 use App\User;
 use App\Ticket;
 use App\Setting;
+use DB;
 
 use App\Http\Controllers\MediaController;
 
@@ -47,14 +49,29 @@ class UserController extends Controller
 					'name',
 					'password',
 					'password_confirmation',
-					'email'
+					'email',
+                    'username',
+                    'bio',
+                    'city',
+                    'country'
 				]);
 
-		// Validate all input
+        if($request->hasFile('profile_picture')){
+            $data['profile_picture'] = MediaController::uploadImage(
+                $request->file('profile_picture'),
+                time(),
+                $directory = "user",
+                $bestFit = true,
+                $fitDimensions = [500, 500]
+            );
+        }
+
+        // Validate all input
 		$validator = Validator::make( $data, [
 					'name'  => 'required',
 					'email'     => 'email|required|unique:users',
-					'password'  => 'required|confirmed|min:5'
+					'password'  => 'required|confirmed|min:5',
+                    'username'  => 'required|min:4'
 				]);
 
 		if( $validator->fails( ) ){
@@ -163,7 +180,7 @@ class UserController extends Controller
 				'country'
 		]);
 		$validator = Validator::make($data, [
-				'name' =>  'required|min:3|alpha_num',
+				'name' =>  'required|min:3',
 				'bio' => 'required',
 				'password' => 'sometimes|min:5',
 				'profile_picture' => 'sometimes',
@@ -209,10 +226,37 @@ class UserController extends Controller
 		return view('user.index', compact('me'));
 	}
 
-	public function userAccount($name){
-		$me = User::where( 'name', $name )
-				  ->firstorfail();
-		return view('user.index', compact('me'));
+    public function show($idOrUsername){
+        try{
+            $user = User::where('username', $idOrUsername)->firstOrFail();
+        } catch (ModelNotFoundException $e){
+            try{
+                $user = User::findOrFail($idOrUsername);
+            } catch (ModelNotFoundException $f){
+                return response(view('errors.404', ['error' => 'This user account could not be found.']), 404);
+            }
+        }
+
+        $eventIds = DB::table('tickets')
+                      ->where('user_id', $user->id)
+                      ->pluck('event_id');
+
+        $events = DB::table('events')
+                    ->whereIn('id', $eventIds)
+                    ->get();
+
+        return view('user.show', compact('user', 'events'));
+    }
+
+
+    public function userAccount($name){
+        if(Auth::user()->name == $name || Auth::user()->is_admin){
+            $me = User::where( 'name', $name )
+                ->firstorfail();
+            return view('user.index', compact('me'));
+        } else {
+            return response(view('errors.403', ['error' => 'You do not have permission to access this page.']), 403);
+        }
 	}
 
 	/**
@@ -233,7 +277,7 @@ class UserController extends Controller
 	 */
 	public function myEvents(){
 		$me = Auth::user();
-		return view('user.myEvents', compact('me'));
+		return view('user.myEvents')->with('me', $me);
 	}
 
 	/**
@@ -241,7 +285,8 @@ class UserController extends Controller
 	 */
 	public function pastEvents(){
 		$me = Auth::user();
-		return view('user.pastEvents', compact('me'));
+		$me->tickets = $me->tickets()->where('used', true)->get();
+		return view('user.pastEvents')->with('me', $me);
 
 	}
 

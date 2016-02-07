@@ -169,16 +169,18 @@ class ApiController extends Controller
 	///////////////////////
 
 	public static function createLocation( Request $request ){
-		$data = $request->only([
-					'name',
-					'coordinates',
-					'capacity'
-				]);
+        $data = $request->only([
+            'name',
+            'coordinates',
+            'capacity',
+            'featured_image'
+        ]);
 
 		$validator = Validator::make( $data, [
 					'name'  => 'required',
 					'coordinates'   => 'required',
-					'capacity'  => 'required|numeric'
+					'capacity'  => 'required|numeric',
+					'featured_image'  => 'image|sometimes'
 				]);
 
 		if( $validator->fails( ) ){

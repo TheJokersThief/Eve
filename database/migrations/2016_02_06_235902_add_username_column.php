@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCountryCityToUser extends Migration
+class AddUsernameColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,7 @@ class AddCountryCityToUser extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('country');
-            $table->string('city');
+            $table->string('username')->unique();
         });
     }
 
@@ -25,8 +24,8 @@ class AddCountryCityToUser extends Migration
      */
     public function down()
     {
-        Schema::table('users', function ($table) {
-            $table->dropColumn(['country', 'city']);
+        Schema::table('events', function ($table) {
+            $table->dropColumn(['username']);
         });
     }
 }

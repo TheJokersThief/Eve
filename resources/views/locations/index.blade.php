@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('body-class') locations-index locations @endsection
+@section('title') Places @endsection
+
 
 @section('content')
 
@@ -21,7 +23,7 @@
 							<i class="fa fa-pencil teal-text" alt="Edit Location"></i> &nbsp;
 						</a>
 						{{ Form::open(['route' => ['locations.destroy', $location->id], 'method' => 'delete', 'class' => 'inline-form']) }}
-							<button type="submit" ><i class="fa fa-times red-text" alt="Delete Location"></i></button>
+							<button type="submit" ><i class="fa fa-times red-text left" alt="Delete Location"></i></button>
 						{{ Form::close() }}
 					</div>
 				</div>

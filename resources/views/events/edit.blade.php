@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
 @section('body-class') edit-event @endsection
+@section('title') Edit: {{$event->title}} @endsection
+
 
 @section('extra-css')
 	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') . '/css/clockpicker.css' }}">
 @endsection
 
 @section('extra-js')
-	<script type="text/javascript" src="{{ URL::to('/') . '/js/clockpicker.js'}}"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.clockpicker').clockpicker({

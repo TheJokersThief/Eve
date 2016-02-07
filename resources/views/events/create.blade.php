@@ -2,12 +2,14 @@
 
 @section('body-class') create-event @endsection
 
+@section('title') Create an Event @endsection
+
+
 @section('extra-css')
 	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') . '/css/clockpicker.css' }}">
 @endsection
 
 @section('extra-js')
-	<script type="text/javascript" src="{{ URL::to('/') . '/js/clockpicker.js'}}"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.clockpicker').clockpicker({

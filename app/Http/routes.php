@@ -62,44 +62,52 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('unprocessed/{eventID}', ['as' => 'media.unprocessedForEvent', 'uses' => 'MediaController@viewUnprocessedMediaForEvent']);
 	});
 
+
 	///////////
 	// USERS //
 	///////////
-	Route::group(['middleware' => ['auth'], 'prefix' => 'user'], function(){
-		Route::get('profile', ['as' => 'me', 'uses' => 'UserController@index']);
+	Route::group(['prefix' => 'user'], function(){
+        Route::group(['middleware' => 'auth'], function(){
+            Route::get('profile', ['as' => 'me', 'uses' => 'UserController@index']);
 
-		Route::get('profile/{name}', 'UserController@userAccount');
+            Route::get('profile/{name}', 'UserController@userAccount');
 
-		Route::get('editProfile/{encryptedID}', ['as' => 'user/edit', 'uses'=> 'UserController@edit']);
-		Route::post('/', ['as' => 'user', 'uses' => 'UserController@updateUserInfo']);
+            Route::get('editProfile/{encryptedID}', ['as' => 'user/edit', 'uses'=> 'UserController@edit']);
+            Route::post('/', ['as' => 'user', 'uses' => 'UserController@updateUserInfo']);
 
-		Route::get('/myEvents', ['as' => 'myEvents', 'uses' => 'UserController@myEvents'] );
-		Route::get('/pastEvents', ['as' => 'pastEvents', 'uses' => 'UserController@pastEvents'] );
+            Route::get('/myEvents', ['as' => 'myEvents', 'uses' => 'UserController@myEvents'] );
+            Route::get('/pastEvents', ['as' => 'pastEvents', 'uses' => 'UserController@pastEvents'] );
 
-		Route::get('logout', ['as' => 'logout', 'uses' => 'UserController@logout']);
+            Route::get('logout', ['as' => 'logout', 'uses' => 'UserController@logout']);
+        });
+
+        Route::get('/{nameOrId}', ['as' => 'user/show', 'uses' => 'UserController@show']);
 	});
 
 });
 
 Route::group(['prefix' => 'tickets', 'middleware' => 'web'], function(){
 	Route::post('/', 'TicketController@store');
-	Route::get('{id}', 'TicketController@show');
-	Route::get('verify/{code}', 'TicketController@verify');
-	Route::get('ical/{code}', 'TicketController@iCal');
+    Route::get('verify/{code}', 'TicketController@verify');
+    Route::get('ical/{code}', 'TicketController@iCal');
+    Route::get('print/{id}', [ 'as' => 'tickets/print', 'uses' => 'TicketController@printable']);
+    Route::get('{id}', 'TicketController@show');
 });
 
-Route::group(['prefix' => 'api'], function () {
+Route::group(['prefix' => 'api', 'middleware' => ['api']], function () {
 	Route::group(['prefix' => 'install'], function () {
 		Route::post('createuser', 'ApiController@installCreateUser');
 		Route::get('getInstallUserInfo', 'ApiController@getInstallUserInfo');
 		Route::post('createCompany', 'ApiController@createCompany');
 	});
 
-	Route::group(['prefix' => 'location'], function () {
+	Route::group(['prefix' => 'location', 'middleware' => 'admin'], function () {
 		Route::post('create', 'ApiController@createLocation');
-	});
+        Route::get('create', 'ApiController@createLocation');
 
-	Route::group(['prefix' => 'media'], function () {
+    });
+
+	Route::group(['prefix' => 'media', 'middleware' => 'admin'], function () {
 		Route::post('approve', 'ApiController@approveMedia');
 	});
 

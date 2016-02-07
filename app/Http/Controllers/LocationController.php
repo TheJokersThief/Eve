@@ -36,7 +36,7 @@ class LocationController extends Controller
 	 */
 	public function store( Request $request ){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit news.']), 403);
+			return response(view('errors.403', ['error' => 'You do not have permission to edit locations.']), 403);
 		}
 
 		$data = $request->only( [

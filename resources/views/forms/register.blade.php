@@ -16,6 +16,13 @@
 </div>
 
 <div class="row">
+    <div class="input-field">
+        {!! Form::label('username', 'Username') !!}
+        {!! Form::text('username', null, ["class" => "example"] ) !!}
+    </div>
+</div>
+
+<div class="row">
 	<div class="input-field">
 		{!! Form::label('email', 'Email') !!}
 		{!! Form::email('email', null, ["class" => "example"] ) !!}

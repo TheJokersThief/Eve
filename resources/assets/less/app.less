@@ -60,6 +60,7 @@ body{
 	@import "_admin.less";
 	@import "_media.less";
 	@import "_news.less";
+    @import "_tooltips.less";
 
 	hr{
 		border: 0;
@@ -118,20 +119,18 @@ body{
 	.modal-row{
 		margin-bottom: 0;
 	}
+
 	&.usersAccount-page{
 		#userInfo img{
 			margin:3%;
-			width:254px;
-			height:255px;
+			width:100%;
+			padding-right: 15px;
 		}
 		#userInfo{
 			max-width:372px;
 		}
 	}
 	&.usersEvent-page{
-		#upComingEvents .card-title{
-			font-size:65% !important;
-		}
 		.oldEvents{
 			margin:0.5%;
 			background-color:white;
@@ -152,4 +151,30 @@ body{
 			}
 		}
 	}
+
+	&.userProfile-page{
+		margin-bottom: 0;
+
+		h4{
+			margin-top: 60px;
+		    text-align: center;
+		    padding: 10px 0;
+		}
+
+		.parallax-container{
+			height: auto;
+		}
+
+		.section.row{
+			margin-bottom: 0;
+			padding: 0;
+		}
+	}
+
+    &.event-page{
+      .people-attending{
+        max-width:800px;
+        margin: 0 auto;
+      }
+    }
 }

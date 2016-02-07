@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title') {{ App\Setting::where('name', 'company_name')->first()->setting }} @endsection
 @section('body-class') home-page @endsection
 
 @section('before-page')

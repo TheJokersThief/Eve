@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title') {{$partner->name}} @endsection
 @section('content')
 
 	<div class="container">
