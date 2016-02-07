@@ -32,7 +32,7 @@
 				<div class="divider"></div>
 				@foreach($me->tickets as $ticket)
 					<div class="col s12 m4">
-	                    <div class="card">
+	                    <div class="card dimmed-card-image">
 	                        <div class="card-image">
 	                            <img src="{{ $ticket->event->featured_image }}">
 	                            <span class="card-title">{{$ticket->event->title}}.</span>

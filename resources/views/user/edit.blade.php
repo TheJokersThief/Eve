@@ -8,7 +8,7 @@
 			<div class="col l3 m4, hide-on-small-only" id="userInfo">
 				<div class="collection">
 					<div class="hide-on-med-and-down">
-						<img src={{$me->profile_picture}}>
+						<img src="{{$me->profile_picture}}">
 					</div>
 
 					<div class="row">

@@ -21,7 +21,7 @@
 					            @foreach($me->tickets as $ticket)
 					            	@if($ticket->event->end_datetime < date(time()))
 					                <div class="col s12 m6 l4">
-					                    <div class="card">
+					                    <div class="card dimmed-card-image">
 					                        <div class="card-image">
 					                            <img src="{{ URL::to('/') . '/images/sample_images/event_photos/event'.$ticket->event->id.'.jpg' }}">
 					                            <span class="card-title">{{$ticket->event->title}}</span>
