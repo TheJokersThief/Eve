@@ -273,7 +273,7 @@ class UserController extends Controller
 	 */
 	public function myEvents(){
 		$me = Auth::user();
-		return view('user.myEvents', compact('me'));
+		return view('user.myEvents')->with('me', $me);
 	}
 
 	/**
@@ -281,7 +281,8 @@ class UserController extends Controller
 	 */
 	public function pastEvents(){
 		$me = Auth::user();
-		return view('user.pastEvents', compact('me'));
+		$me->tickets = $me->tickets()->where('used', true)->get();
+		return view('user.pastEvents')->with('me', $me);
 
 	}
 

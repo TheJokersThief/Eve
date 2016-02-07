@@ -24,7 +24,7 @@
     	<nav>
 			<div class="nav-wrapper container">
 			  <a href="{{ URL::to('/home') }}" class="brand-logo">
-			
+
 			  	@if( ($logo = App\Setting::where('name', 'company_logo')->first()->setting) != '' )
 
 			  		@if( ! method_exists(Route::current(), "getName") || ! Route::current()->getName() == null )
@@ -46,7 +46,7 @@
 			  		<li><a href="{{ URL::route('me') }}"><i class="material-icons">perm_identity</i></a></li>
 			  		<li><a href="{{ URL::route('myEvents') }}"><i class="material-icons">today</i></a></li>
 			  		<li><a href="{{ URL::route('logout') }}"><i class="material-icons">input</i></a></li>
-			  	@else 
+			  	@else
 					<li class="login">
 						<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">Login</a>
 					</li>
@@ -62,7 +62,7 @@
 						<li><a href="{{ URL::route('admin.home') }}">Admin</a></li>
 			  		@endif
 			  		<li><a href="{{ URL::to( 'home' ) }}">Home</a></li>
-			  	@else 
+			  	@else
 					<li class="login">
 						<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">Login</a>
 					</li>
@@ -70,7 +70,7 @@
 						<a href="{{ URL::to('register') }}" class="btn">Signup</a>
 					</li>
 			  	@endif
-			 
+
 			  </ul>
 			</div>
 		</nav>
@@ -84,7 +84,7 @@
 		              <p>
 		              	@foreach($errors->all() as $error)
 							<li>{{$error}}</li>
-						@endforeach				
+						@endforeach
 					  </p>
 		            </div>
 		          </div>
