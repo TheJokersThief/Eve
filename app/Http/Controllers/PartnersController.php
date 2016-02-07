@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Partner;
+use App\Location;
 use Redirect;
 
 use Auth;
@@ -28,7 +29,7 @@ class PartnersController extends Controller
 			return response(view('errors.403', ['error' => 'You do not have permission to edit partners.']), 403);
 		}
 
-		return view('partners.create');
+		return view('partners.create', ['locations' => Location::all()]);
 	}
 
 	public function store(){
