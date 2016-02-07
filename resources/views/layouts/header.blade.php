@@ -27,7 +27,7 @@
 			
 			  	@if( ($logo = App\Setting::where('name', 'company_logo')->first()->setting) != '' )
 
-			  		@if( ! Route::current()->getName() == null )
+			  		@if( ! method_exists(Route::current(), "getName") || ! Route::current()->getName() == null )
 						<img src="{{URL::to($logo)}}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo" width="20%">
 					@else
 						<img src="{{URL::to( App\Setting::where('name', 'company_logo_white')->first()->setting )}}" alt="{{ env( 'SITE_TITLE' ) }}" class="logo" width="20%">
