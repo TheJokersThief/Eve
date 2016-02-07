@@ -11,14 +11,12 @@
 					<div class="col s6 m4 l3">
 						<img class="responsive-img circle" src="{{$user->profile_picture}}">
 					</div>
-					<div class="col s12 m8 l9">
-						<h1>{{$user->name}}</h1>
-					</div>
-				</div>
-			</div>
-			<div class="section">
-			   <p class="flow-text">{{ $user->bio }}</p>
-			</div>
+					<div class="col s12 m7 l8 offset-m1 offset-l1">
+                        <h1>{{$user->name}}</h1>
+                        <p class="flow-text">{{ $user->bio }}</p>
+                    </div>
+                </div>
+            </div>
 			<div class="divider"></div>
 			<div class="section">
 				<div class="row">
