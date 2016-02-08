@@ -3,7 +3,14 @@
 @section('content')
 
 <div class="container">
-    <div class="col s12 m12 center-align"><h4>Partners</h4></div>
+	<div class="row">
+    <div class="col s10 m10 center-align"><h4>Partners</h4></div>
+    <div class="col s2 m2 valign-wrapper">
+	    <a href="#!" class="center-align waves-effect waves-circle waves-light btn-floating secondary-content">
+			<i class="material-icons">add</i>
+		</a>
+	</div>
+</div>
     <div class="row">
 	    @foreach($partners as $partner)
 	    	<div class="col s4">
