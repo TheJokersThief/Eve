@@ -22,7 +22,7 @@
 
 @section('content')
 
-{!! Form::model($event, ['method' => 'PATCH', 'action' => ['EventsController@update', $event->id]]) !!}
+{!! Form::model($event, ['method' => 'PUT', 'action' => ['EventsController@update', $event->id], 'files' => true]) !!}
 
 <div class="row">
 	<div class="col m8 offset-m2">
@@ -33,8 +33,6 @@
 		</div>
 
 		</hr>
-
-		{!! Form::open( ['url' => 'events', 'files' => true] ) !!}
 			
 			<div class="row">
 				<div class="input-field col m6 s12">
@@ -110,7 +108,7 @@
 					</div>
 				</div>
 			</div>
-		{!! Form::close() !!}
+		<!-- {!! Form::close() !!} -->
 	</div>
 </div>
 

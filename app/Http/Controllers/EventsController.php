@@ -208,7 +208,7 @@ class EventsController extends Controller
 			);
 
 		//Only if the user updated the photo, validate and store it
-		if($data['featured_image']){
+		if($request->hasFile('featured_image')){
 
 			$validator = Validator::make( $data, [
 					'featured_image' => 'image'
