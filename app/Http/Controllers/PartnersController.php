@@ -10,6 +10,7 @@ use App\Partner;
 use App\Location;
 use Redirect;
 
+use Validator;
 use Auth;
 
 class PartnersController extends Controller
@@ -32,12 +33,78 @@ class PartnersController extends Controller
 		return view('partners.create', ['locations' => Location::all()]);
 	}
 
-	public function store(){
+	public function store(Request $request){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
 			return response(view('errors.403', ['error' => 'You do not have permission to edit partners.']), 403);
 		}
 
-		return view('partners.store');
+		$data = $request->only( [
+					'name',
+					'picture',
+					'type',
+					'price',
+					'description',
+					'location_id',
+					'distance',
+					'email'
+				]);
+
+
+
+		// Validate all input
+		$validator = Validator::make( $data, [
+					'name' => 'required',
+					'picture' => 'required|image',
+					'type' => 'required',
+					'price' => 'required',
+					'description' => 'required',
+					'location_id' => 'required',
+					'distance' => 'required',
+					'email' => 'required',
+				]);
+
+		if( $validator->fails( ) ){
+			// If validation fails, redirect back to
+			// registration form with errors
+			return Redirect::to( 'partners/create' )
+					->withErrors( $validator )
+					->withInput( );
+		}
+
+		if( $request->hasFile('picture' ) ){
+			$data['picture'] = MediaController::uploadImage(
+											$request->file('picture'),
+											time(),
+											$directory = "partner_photos",
+											$bestFit = true,
+											$fitDimensions = [1920, 1080]
+										);
+		}
+
+		$newData = array(
+				"name" => $data["name"],
+				"description" => $data["description"],
+				"type" => $data["type"],
+				"price" => $data["price"],
+				"location_id" => $data["location_id"],
+				"distance" => $data["distance"],
+				"email" => $data["email"],
+				"picture" => $data["picture"]
+			);
+
+		// Create the new partner
+		$newPartner = Partner::create( $newData );
+
+		if( $newEvent ){
+			return Redirect::to( 'partners' );
+		}
+
+		// If unsuccessful, return with errors
+		return Redirect::back( )
+					->withErrors( [
+						'message' => 'We\'re sorry but partner creation failed, please try again later.'
+					] )
+					->withInput( );
 	}
 
 	public function edit($partnerID){

@@ -24,19 +24,19 @@
 
 		<div class="row">
 			<div class="input-field col s12">
-				{!! Form::text('p-name', null, ['placeholder' => 'Partner Name', 'id' => 'p-name']) !!}
-				{!! Form::label('p-name', 'Partner Name:') !!}
+				{!! Form::text('name', null, ['placeholder' => 'Partner Name', 'id' => 'name']) !!}
+				{!! Form::label('name', 'Partner Name:') !!}
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="input-field col s12 m6">
-				{!! Form::text('p-type', null, ['placeholder' => 'e.g. Hotel, Restaurant', 'id' => 'p-type']) !!}
-				{!! Form::label('p-type', 'Partner Type:') !!}
+				{!! Form::text('type', null, ['placeholder' => 'e.g. Hotel, Restaurant', 'id' => 'type']) !!}
+				{!! Form::label('type', 'Partner Type:') !!}
 			</div>
 			<div class="input-field col s12 m6">
-				{!! Form::number('p-price', null, ['id' => 'p-price', 'step' => 'any', 'min' => '0']) !!}
-				{!! Form::label('p-price', 'Average Price:') !!}
+				{!! Form::number('price', null, ['id' => 'price', 'step' => 'any', 'min' => '0']) !!}
+				{!! Form::label('price', 'Average Price:') !!}
 			</div>
 		</div>
 
@@ -55,26 +55,34 @@
 
 		<div class="row">
 			<div class="input-field col s12">
-				{!! Form::textarea('p-desc', null, ['id' => 'p-desc']) !!}
-				{!! Form::label('p-desc', 'Partner Description:') !!}
+				{!! Form::textarea('description', null, ['id' => 'description', 'class' => 'materialize-textarea']) !!}
+				{!! Form::label('description', 'Partner Description:') !!}
 			</div>
 		</div>
 
 		<div class="row"><!-- To be calculated by the Google API in a later version -->
 			<div class="input-field col s12 m6">
-				{!! Form::number('p-distance', null, ['id' => 'p-distance', 'step' => 'any', 'min' => '0'] ) !!}
-				{!! Form::label('p-distance', 'Distance:') !!}
+				{!! Form::number('distance', null, ['id' => 'distance', 'step' => 'any', 'min' => '0'] ) !!}
+				{!! Form::label('distance', 'Distance:') !!}
 			</div>
-			<div class="col s12 m6">
-					{!! Form::label('featured_image','Choose Image')	!!}
+			<div class="file-field input-field col s12 m6">
+				<!--{!! Form::label('featured_image','Choose Image', ['class' => '']) !!}
+				{!! Form::file('featured_image', null, ['class' => 'file-path']) !!}-->
+				<div class="btn">
+					<span>Feature Image</span>
 					{!! Form::file('featured_image') !!}
+					<!--<input type="file">-->
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="input-field col s12">
-				{!! Form::text('p-email', null, ['placeholder' => 'name@host.com', 'id' => 'p-email']) !!}
-				{!! Form::label('p-email', 'Contact email:') !!}
+				{!! Form::text('email', null, ['placeholder' => 'name@host.com', 'id' => 'email']) !!}
+				{!! Form::label('email', 'Contact email:') !!}
 			</div>
 		</div>
 
