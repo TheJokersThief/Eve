@@ -26,9 +26,9 @@
 
 	</div> -->
 
-	<ul class="collection with-header">
-	    <li class="collection-header"><h4>events</h4></li>
-	    <div class="row">
+<div class="container">
+	<div class="col s12 m12 center-align"><h4>Events</h4></div>
+		<div class="row">
 		    @foreach($events as $event)
 		    	<div class="col s4">
 		            <div class="card">
@@ -45,9 +45,10 @@
 					      <p>{!! $event->description !!}</p>
 					    </div>
 					</div>
-	          	</div>
+		      	</div>
 			@endforeach
 		</div>
-	</ul>
+	</div>
+</div>
 
 @endsection
