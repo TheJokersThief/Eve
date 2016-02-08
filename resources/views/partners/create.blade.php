@@ -55,14 +55,14 @@
 
 		<div class="row">
 			<div class="input-field col s12">
-				{!! Form::textarea('p-desc', null, ['id' => 'p-desc') !!}
+				{!! Form::textarea('p-desc', null, ['id' => 'p-desc']) !!}
 				{!! Form::label('p-desc', 'Partner Description:') !!}
 			</div>
 		</div>
 
 		<div class="row"><!-- To be calculated by the Google API in a later version -->
 			<div class="input-field col s12 m6">
-				{!! Form::number('p-distance', null, ['id' => 'p-distance', 'step' => 'any', 'min' => '0']) !!}
+				{!! Form::number('p-distance', null, ['id' => 'p-distance', 'step' => 'any', 'min' => '0'] ) !!}
 				{!! Form::label('p-distance', 'Distance:') !!}
 			</div>
 			<div class="col s12 m6">
