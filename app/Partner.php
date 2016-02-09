@@ -13,7 +13,7 @@ class Partner extends Model
 	 */
 	protected $fillable = [
 		'name',
-		'picture',
+		'featured_image',
 		'type',
 		'price',
 		'description',
@@ -31,7 +31,7 @@ class Partner extends Model
 		return $this->belongsToMany('App\Event', 'event_partners');
 	}
 
-	public function media(){
-		return $this->hasOne('App\Media', 'id', 'picture');
-	}
+	//public function media(){
+	//	return $this->hasOne('App\Media', 'id', 'picture');
+	//}
 }

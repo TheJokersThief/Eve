@@ -89,13 +89,13 @@ class PartnersController extends Controller
 				"location_id" => $data["location_id"],
 				"distance" => $data["distance"],
 				"email" => $data["email"],
-				"picture" => $data["picture"]
+				"featured_image" => $data["picture"]
 			);
 
 		// Create the new partner
 		$newPartner = Partner::create( $newData );
 
-		if( $newEvent ){
+		if( $newPartner ){
 			return Redirect::to( 'partners' );
 		}
 

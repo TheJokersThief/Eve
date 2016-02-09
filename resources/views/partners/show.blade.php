@@ -8,7 +8,7 @@
         </div>
         <div class="parallax-container">
 			<div class="parallax">
-				<img src="{{ $partner->media->file_location }}">
+				<img src="{{ $partner->featured_image }}">
 			</div>
 		</div>
 		<div class="divider"></div>
