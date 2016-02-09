@@ -17,6 +17,7 @@ class PaymentsSetup extends Migration
 	    });
 	    Schema::table('tickets', function (Blueprint $table) {
 		    $table->decimal('price', 6,2)->unsigned();
+		    $table->string('charge_id');
 	    });
     }
 
@@ -31,7 +32,7 @@ class PaymentsSetup extends Migration
 		    $table->dropColumn('price');
 	    });
 	    Schema::table('tickets', function (Blueprint $table) {
-		    $table->dropColumn('price');
+		    $table->dropColumn(['price','charge_id']);
 	    });
     }
 }

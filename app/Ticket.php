@@ -14,7 +14,8 @@ class Ticket extends Model
 		'event_id',
 		'used',
 		'scanned_by',
-		'price'
+		'price',
+		'charge_id'
 	];
 
 	/**
