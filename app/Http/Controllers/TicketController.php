@@ -80,64 +80,77 @@ class TicketController extends Controller
 		}
 
 
-		Stripe::setApiKey(env('STRIPE_SECRET'));
+		if($event->price > 0){
+			Stripe::setApiKey(env('STRIPE_SECRET'));
 
-		try{
-			$customer = Customer::create([
-				"email" => $user->email,
-				"card" => $data["stripeToken"]
-			]);
+			try{
+				$customer = Customer::create([
+					"email" => $user->email,
+					"card" => $data["stripeToken"]
+				]);
 
-			$charge = Charge::create([
-				"customer" => $customer->id,
-				"amount" => $event->price*100,
-				"currency" => "eur"
-			]);
-		} catch(Error\Card $e) {
-			return \Redirect::back()->withErrors([
-				// Card declined.
-				"message" => "Your card has been declined."
-			]);
-		} catch (Error\RateLimit $e) {
-			return \Redirect::back()->withErrors([
-				// Stripe API limit reached (This should NOT happen!)
-				"message" => "We're having some issues with our server. Try again later."
-			]);
-		} catch (Error\InvalidRequest $e) {
-			dd($e);
-			return \Redirect::back()->withErrors([
-				// We're not doing Stripe right. We need to fix this.
-				"message" => "It seems the developers have made a mistake; they have been notified. This will be fixed."
-			]);
-		} catch (Error\Authentication $e) {
-			return \Redirect::back()->withErrors([
-				// API keys wrong?
-				"message" => "It seems the developers have made a mistake with authentication; this will be fixed."
-			]);
-		} catch (Error\ApiConnection $e) {
-			return \Redirect::back()->withErrors([
-				// Network connectivity problems?
-				"message" => "We're having some network errors right now. Try again later."
-			]);
-		} catch (Error\Base $e) {
+				$charge = Charge::create([
+					"customer" => $customer->id,
+					"amount" => $event->price*100,
+					"currency" => "eur"
+				]);
+			} catch(Error\Card $e) {
+				return \Redirect::back()->withErrors([
+					// Card declined.
+					"message" => "Your card has been declined."
+				]);
+			} catch (Error\RateLimit $e) {
+				return \Redirect::back()->withErrors([
+					// Stripe API limit reached (This should NOT happen!)
+					"message" => "We're having some issues with our server. Try again later."
+				]);
+			} catch (Error\InvalidRequest $e) {
+				dd($e);
+				return \Redirect::back()->withErrors([
+					// We're not doing Stripe right. We need to fix this.
+					"message" => "It seems the developers have made a mistake; they have been notified. This will be fixed."
+				]);
+			} catch (Error\Authentication $e) {
+				return \Redirect::back()->withErrors([
+					// API keys wrong?
+					"message" => "It seems the developers have made a mistake with authentication; this will be fixed."
+				]);
+			} catch (Error\ApiConnection $e) {
+				return \Redirect::back()->withErrors([
+					// Network connectivity problems?
+					"message" => "We're having some network errors right now. Try again later."
+				]);
+			} catch (Error\Base $e) {
 
-			// I actually don't know what this error means
-			// or what it does, so probably panic
+				// I actually don't know what this error means
+				// or what it does, so probably panic
 
-			return \Redirect::back()->withErrors([
-				"message" => "Something went wrong here."
-			]);
+				return \Redirect::back()->withErrors([
+					"message" => "Something went wrong here."
+				]);
+			}
+			$ticket = Ticket::create(
+				[
+					"user_id"  => $user->id,
+					"event_id" => $event->id,
+					"price" => $event->price,
+					"used" => false,
+					"charge_id" => $charge->id
+				]
+			);
+		} else {
+			$ticket = Ticket::create(
+				[
+					"user_id"  => $user->id,
+					"event_id" => $event->id,
+					"price" => $event->price,
+					"used" => false,
+					"charge_id" => ""
+				]
+			);
 		}
 
-		$ticket = Ticket::create(
-						[
-							"user_id"  => $user->id,
-							"event_id" => $event->id,
-							"price" => $event->price,
-							"used" => false,
-							"charge_id" => $charge->id
-						]
-					);
+
 		return $this->show($ticket->id);
 		// return view('tickets.show', $ticket);
 	}
