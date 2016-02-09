@@ -69,7 +69,7 @@
 			</div>
 
 	      	<div class="row">
-		      	<div class="input-field col s12">
+		      	<div class="input-field col s6">
 		    		<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();}">
 		      			<option value="{{$location->id}}" disabled selected>{{$location->name}}</option>
 						@foreach($locations as $location)
@@ -78,6 +78,16 @@
 						<option value="-1">Create New Location</option>
 		    		</select>
 		    		<label>Location Select</label>
+		  		</div>
+		  		<div class="input-field col s6">
+		    		<select multiple name="partner_id[]" id="partner-select">
+		      			<option value="" disabled selected>Choose partner</option>
+						@foreach($allPartners as $partner)
+							<option value="{{$partner->id}}" {{$selected = (in_array($partner->id, $eventPartnersId) ?
+									 'selected' : '')}} {{$selected}}>{{$partner->name}}</option>
+						@endforeach
+		    		</select>
+		    		<label>Partner Select</label>
 		  		</div>
 			</div>
 

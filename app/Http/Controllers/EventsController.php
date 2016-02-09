@@ -171,6 +171,15 @@ class EventsController extends Controller
 		$location = $event->location;
 		$startDateTime = $event->start_datetime;
 		$endDateTime = $event->end_datetime;
+		$allPartners = Partner::all();
+		$eventPartners = $event->partners;
+		$eventPartnersId = [];
+		$i = 0;
+		foreach($eventPartners as $partner){
+			$eventPartnersId[$i++] = $partner->id;
+		}
+
+		//dd($eventPartnersId);
 
 		// Format the start and end datetime for presentation
 		$startDate = substr($startDateTime, 0, 10);
@@ -179,7 +188,7 @@ class EventsController extends Controller
 		$endTime = substr($endDateTime, 11, 5);
 
 		// Return a view of the event for editing
-		return view('events.edit', compact('event', 'locations', 'location', 'startDate',
+		return view('events.edit', compact('event', 'locations', 'location', 'allPartners', 'eventPartnersId', 'startDate',
 			 'endDate', 'startTime', 'endTime'));
 	}
 
@@ -204,6 +213,7 @@ class EventsController extends Controller
 		$data = $request->only( [
 					'title',
 					'description',
+					'partner_id',
 					'featured_image',
 					'start_date',
 					'end_date',
@@ -216,6 +226,7 @@ class EventsController extends Controller
 		$validator = Validator::make( $data, [
 					'title'  => 'required',
 					'description'  => 'required',
+					'partner_id' => 'required',
 					'start_date'  => 'required',
 					'end_date'  => 'required',
 					'start_time'  => 'required',
@@ -282,6 +293,12 @@ class EventsController extends Controller
 		$event->start_datetime = ($newData["start_datetime"]);
 		$event->end_datetime = ($newData["end_datetime"]);
 		$event->location_id = ($newData["location_id"]);
+
+		// Detach all partners and attach new partners to event
+		$event->partners()->detach();
+		foreach($data['partner_id'] as $partner_id){
+			$event->partners()->attach($partner_id);
+		}
 
 		// Save the event to the database
 		$event->save();
