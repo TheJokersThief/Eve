@@ -86,8 +86,15 @@
 				</div>
 
 				<div class="col m6 s6">
-					{!! Form::label('featured_image','Choose Image')	!!}
-					{!! Form::file('featured_image') !!}
+					<div class="file-field input-field">
+						<div class="btn">
+							<span>Image</span>
+							<input type="file" id="featured_image" name="featured_image">
+						</div>
+						<div class="file-path-wrapper">
+							<input class="file-path validate" type="text" disabled placeholder="Upload an image">
+						</div>
+					</div>
 				</div>
 
 			</div>
