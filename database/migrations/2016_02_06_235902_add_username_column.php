@@ -24,7 +24,7 @@ class AddUsernameColumn extends Migration
      */
     public function down()
     {
-        Schema::table('events', function ($table) {
+        Schema::table('users', function ($table) {
             $table->dropColumn(['username']);
         });
     }
