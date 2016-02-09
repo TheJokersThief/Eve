@@ -80,6 +80,11 @@
 					<input name="end_date" id="input_enddate" value="{{$endDate}}" type="date" class="datepicker">
 				</div>
 
+				<div class="input-field col m6 s6">
+					{!! Form::label('price','Price') !!}
+					{!! Form::number('price', $event->price, ['step' => 0.01]) !!}
+				</div>
+
 				<div class="col m6 s6">
 					{!! Form::label('featured_image','Choose Image')	!!}
 					{!! Form::file('featured_image') !!}
