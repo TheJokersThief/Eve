@@ -83,10 +83,12 @@ class EventsController extends Controller
 					'partner_id',
 					'start_date',
 					'end_date',
+					'price',
 					'featured_image',
 					'start_time',
 					'end_time',
-					'location_id'
+					'location_id',
+					'price'
 				]);
 
 		// Validate all input
@@ -100,6 +102,7 @@ class EventsController extends Controller
 					'start_time'  => 'required',
 					'end_time' => 'required',
 					'location_id'  => 'required',
+					'price'        => 'required|numeric'
 				]);
 
 		// If validation fails;
@@ -133,7 +136,8 @@ class EventsController extends Controller
 				"start_datetime" => $start_datetime,
 				"end_datetime" => $end_datetime,
 				"location_id" => $data["location_id"],
-				"featured_image" => $data["featured_image"]
+				"featured_image" => $data["featured_image"],
+				"price" => $data["price"]
 			);
 
 		// Create the new event
@@ -217,7 +221,8 @@ class EventsController extends Controller
 					'end_date',
 					'start_time',
 					'end_time',
-					'location_id'
+					'location_id',
+					'price'
 				]);
 
 		// Validate the data
@@ -230,6 +235,7 @@ class EventsController extends Controller
 					'start_time'  => 'required',
 					'end_time' => 'required',
 					'location_id'  => 'required',
+					'price' => 'required|numeric'
 				]);
 
 		// If validation fails;
@@ -250,7 +256,8 @@ class EventsController extends Controller
 				"description" => $data["description"],
 				"start_datetime" => $start_datetime,
 				"end_datetime" => $end_datetime,
-				"location_id" => $data["location_id"]
+				"location_id" => $data["location_id"],
+				"price" => $data["price"]
 			);
 
 		// Only if the user updated the photo;

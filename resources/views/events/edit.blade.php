@@ -80,9 +80,21 @@
 					<input name="end_date" id="input_enddate" value="{{$endDate}}" type="date" class="datepicker">
 				</div>
 
+				<div class="input-field col m6 s6">
+					{!! Form::label('price','Price') !!}
+					{!! Form::number('price', $event->price, ['step' => 0.01]) !!}
+				</div>
+
 				<div class="col m6 s6">
-					{!! Form::label('featured_image','Choose Image')	!!}
-					{!! Form::file('featured_image') !!}
+					<div class="file-field input-field">
+						<div class="btn">
+							<span>Image</span>
+							<input type="file" id="featured_image" name="featured_image">
+						</div>
+						<div class="file-path-wrapper">
+							<input class="file-path validate" type="text" disabled placeholder="Upload an image">
+						</div>
+					</div>
 				</div>
 
 			</div>

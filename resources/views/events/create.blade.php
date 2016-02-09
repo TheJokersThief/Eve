@@ -78,6 +78,11 @@
 					<label for="input_enddate">End Date</label>
 					<input name="end_date" id="input_enddate" type="date" value="End Date" class="datepicker">
 				</div>
+				
+				<div class="input-field col m6 s6">
+					{!! Form::label('price','Price') !!}
+					{!! Form::number('price', '5.00', ['step' => 0.01]) !!}
+				</div>
 
 				<div class="col m6 s6">
 					{!! Form::label('featured_image','Choose Image')	!!}

@@ -16,6 +16,7 @@ class EventsTableSeeder extends Seeder
         Event::firstOrCreate([
             'tagline' => 'Our very first event. Everyone is welcome to come along. Except Eimear. Eimear smells.',
             'location_id' => 1,
+	        'price' => 5.00,
             'featured_image' => '/images/sample_images/event_photos/event1.jpg',
             'start_datetime' => '2016:01:01 09:00:00',
             'end_datetime' => '2016:01:03 22:00:00',
@@ -32,6 +33,7 @@ class EventsTableSeeder extends Seeder
         Event::firstOrCreate([
             'tagline' => 'Our second event. Be sure to bring your friends.',
             'location_id' => 5,
+	        'price' => 5.00,
             'featured_image' => '/images/sample_images/event_photos/event2.jpg',
             'start_datetime' => '2016:02:21 09:30:00',
             'end_datetime' => '2016:02:25 15:45:00',
@@ -42,6 +44,7 @@ class EventsTableSeeder extends Seeder
         Event::firstOrCreate([
             'tagline' => 'Our third and final event. Please arrive on time.',
             'location_id' => 2,
+	        'price' => 5.00,
             'featured_image' => '/images/sample_images/event_photos/event3.jpg',
             'start_datetime' => '2016:03:20 12:35:14',
             'end_datetime' => '2016:03:21 15:45:00',
