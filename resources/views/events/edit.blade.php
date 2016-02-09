@@ -102,7 +102,10 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col s2 push-s10">
+				<div class="col s2">
+					<a href="{{ action('EventsController@show', [$event->id]) }}" class="waves-effect waves-light btn">Cancel</a>
+				</div>
+				<div class="col s2 push-s8">
 					<div class='form-group'>
 					{!! Form::submit('Update Event', ['class' => 'btn btn-primary form-control']) !!}
 					</div>
