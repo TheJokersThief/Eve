@@ -179,7 +179,6 @@ class EventsController extends Controller
 			$eventPartnersId[$i++] = $partner->id;
 		}
 
-		//dd($eventPartnersId);
 
 		// Format the start and end datetime for presentation
 		$startDate = substr($startDateTime, 0, 10);
@@ -193,7 +192,6 @@ class EventsController extends Controller
 	}
 
 	public function update($id, Request $request){
-
 		// Ensure the user is logged in as an admin
 		if(! Auth::check() || ! Auth::user()->is_admin ){
 			return response(view('errors.403', ['error' => 'You do not have permission to edit events.']), 403);
@@ -257,20 +255,6 @@ class EventsController extends Controller
 
 		// Only if the user updated the photo;
 		if($request->hasFile('featured_image')){
-
-			// Validate the image
-			$validator = Validator::make( $data, [
-					'featured_image' => 'image'
-				]);
-
-			if( $validator->fails( ) ){
-				// If validation fails, redirect back to
-				// registration form with errors
-				return Redirect::back()
-						->withErrors( $validator )
-						->withInput( );
-			}
-
 			// Upload the image
 			$data['featured_image'] = MediaController::uploadImage(
 										$request->file('featured_image'),
@@ -288,11 +272,7 @@ class EventsController extends Controller
 		}
 
 		// Store the values from the form in event
-		$event->title = ($newData["title"]);
-		$event->description = ($newData["description"]);
-		$event->start_datetime = ($newData["start_datetime"]);
-		$event->end_datetime = ($newData["end_datetime"]);
-		$event->location_id = ($newData["location_id"]);
+		$event->update( $newData );
 
 		// Detach all partners and attach new partners to event
 		$event->partners()->detach();
@@ -304,6 +284,6 @@ class EventsController extends Controller
 		$event->save();
 
 		// Return to the events index
-		return redirect('events');
+		return Redirect::route('events.show', $event->id);
 	}
 }

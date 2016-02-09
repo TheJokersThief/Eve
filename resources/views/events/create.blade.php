@@ -10,12 +10,24 @@
 @endsection
 
 @section('extra-js')
+	<script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.clockpicker').clockpicker({
 				placement: 'bottom',
 			    align: 'left',
 			    donetext: 'Done'
+			});
+
+			tinymce.init({
+			  selector: 'div.editable',
+			  inline: true,
+			  plugins: [
+			    'advlist autolink lists link image charmap print preview anchor',
+			    'searchreplace visualblocks code fullscreen',
+			    'insertdatetime media table contextmenu paste'
+			  ],
+			  toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
 			});
 		});
 	</script>
@@ -35,7 +47,7 @@
 		</hr>
 
 		{!! Form::open( ['route' => 'events.store', 'files' => true] ) !!}
-			
+
 			<div class="row">
 				<div class="input-field col m6 s12">
 					{!! Form::label('title','Event Title')	!!}
@@ -46,8 +58,12 @@
 					{!! Form::text('tagline') !!}
 				</div>
 				<div class="input-field col m12 s12">
-					{!! Form::label('description','Event Description')	!!}
-					{!! Form::text('description') !!}
+					<h5>Description:</h5>
+					<div class="editable content" id="description">
+					  <p>
+					    Start typing your description here!
+					  </p>
+					</div>
 				</div>
 			</div>
 

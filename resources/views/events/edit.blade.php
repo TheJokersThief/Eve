@@ -9,6 +9,7 @@
 @endsection
 
 @section('extra-js')
+	<script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.clockpicker').clockpicker({
@@ -16,13 +17,26 @@
 			    align: 'left',
 			    donetext: 'Done'
 			});
+
+			tinymce.init({
+			  selector: 'div.editable',
+			  inline: true,
+			  plugins: [
+			    'advlist autolink lists link image charmap print preview anchor',
+			    'searchreplace visualblocks code fullscreen',
+			    'insertdatetime media table contextmenu paste'
+			  ],
+			  toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
+			});
+
+			if( $('input[name=description_content]').val() != '' ){
+				$('.content').html($('input[name=description_content]').val());
+			}
 		});
 	</script>
 @endsection
 
 @section('content')
-
-{!! Form::model($event, ['method' => 'PUT', 'action' => ['EventsController@update', $event->id], 'files' => true]) !!}
 
 <div class="row">
 	<div class="col m8 offset-m2">
@@ -33,7 +47,7 @@
 		</div>
 
 		</hr>
-			
+		{!! Form::model($event, ['method' => 'PUT', 'action' => ['EventsController@update', $event->id], 'files' => true]) !!}
 			<div class="row">
 				<div class="input-field col m6 s12">
 					{!! Form::label('title','Event Title')	!!}
@@ -44,8 +58,13 @@
 					{!! Form::text('tagline') !!}
 				</div>
 				<div class="input-field col m12 s12">
-					{!! Form::label('description','Event Description')	!!}
-					{!! Form::text('description') !!}
+					<h5>Description:</h5>
+					<div class="editable content" id="description">
+					  <p>
+					    Start typing your description here!
+					  </p>
+					</div>
+					{!! Form::hidden('description_content', $event->description)	!!}
 				</div>
 			</div>
 
@@ -71,9 +90,12 @@
 	      	<div class="row">
 		      	<div class="input-field col s6">
 		    		<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();}">
-		      			<option value="{{$location->id}}" disabled selected>{{$location->name}}</option>
 						@foreach($locations as $location)
-							<option value="{{$location->id}}">{{$location->name}}</option>
+							@if( $location == $event->location )
+								<option value="{{$location->id}}" selected>{{$location->name}}</option>
+							@else
+								<option value="{{$location->id}}">{{$location->name}}</option>
+							@endif
 						@endforeach
 						<option value="-1">Create New Location</option>
 		    		</select>
@@ -121,7 +143,7 @@
 					</div>
 				</div>
 			</div>
-		<!-- {!! Form::close() !!} -->
+		{!! Form::close() !!}
 	</div>
 </div>
 
@@ -151,7 +173,5 @@
 	  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" onClick="$('#location-select').val('');$('#location-select').material_select();">Cancel</a>
 	</div>
 </div>
-
-	{!! Form::close() !!}
 
 @endsection
