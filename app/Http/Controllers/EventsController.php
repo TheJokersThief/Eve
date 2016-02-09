@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Event;
 use App\Ticket;
 use App\Location;
+use App\Partner;
 use Auth;
 use Redirect;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -65,7 +66,7 @@ class EventsController extends Controller
 
 	// Return a view for creating an event
 	public function create(){
-		return view('events.create', ['locations' => Location::all()]);
+		return view('events.create', ['locations' => Location::all(), 'partners' => Partner::all()]);
 	}
 
 	// Store a new event
@@ -79,6 +80,7 @@ class EventsController extends Controller
 		$data = $request->only( [
 					'title',
 					'description',
+					'partner_id',
 					'start_date',
 					'end_date',
 					'featured_image',
@@ -91,6 +93,7 @@ class EventsController extends Controller
 		$validator = Validator::make( $data, [
 					'title'  => 'required',
 					'description'  => 'required',
+					'partner_id' => 'required',
 					'start_date'  => 'required',
 					'end_date'  => 'required',
 					'featured_image' => 'image',
@@ -138,8 +141,13 @@ class EventsController extends Controller
 
 		// If successful, redirect to events
 		if( $newEvent ){
+			// Attach partners to model
+			foreach($data['partner_id'] as $partner_id){
+				$newEvent->partners()->attach($partner_id);
+			}
 			return Redirect::to( 'events' );
 		}
+
 
 		// If unsuccessful, return with errors
 		return Redirect::back( )
