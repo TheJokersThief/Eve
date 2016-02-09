@@ -24,10 +24,13 @@
 							{!! Form::submit('Get Ticket', ['class' => 'btn btn-primary form-control']) !!}
 						@else
 							<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-							        data-key="{{env('STRIPE_')}}"
+							        data-key="{{env('STRIPE_KEY')}}"
+							        data-logo="{{URL::to('/images/logo.png')}}"
 							        data-description="{{$event->title}}"
 							        data-amount="{{$event->price * 100}}"
-							        data-locale="auto"></script>
+							        data-locale="auto"
+									data-currency="EUR"
+									data-email="{{Auth::user()->email}}"></script>
 						@endif
 					{!! Form::close() !!}
 				@else
