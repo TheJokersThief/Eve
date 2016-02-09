@@ -20,7 +20,7 @@
 				<h1>Add a New Partner</h1>
 			</div>
 		</div>
-		{!! Form::open( ['route' => 'partners.store', 'id' => 'partner-form', 'files' => 'true'] ) !!}
+		{!! Form::open( ['route' => 'partners.store', 'id' => 'partner-form', 'files' => true] ) !!}
 
 		<div class="row">
 			<div class="input-field col s12">
@@ -47,7 +47,6 @@
 					@foreach($locations as $location)
 						<option value="{{$location->id}}">{{$location->name}}</option>
 					@endforeach
-					<option value="-1">Create New Location</option>
 				</select>
 				<label>Location Select</label>
 			</div>
@@ -66,11 +65,9 @@
 				{!! Form::label('distance', 'Distance:') !!}
 			</div>
 			<div class="file-field input-field col s12 m6">
-				<!--{!! Form::label('featured_image','Choose Image', ['class' => '']) !!}
-				{!! Form::file('featured_image', null, ['class' => 'file-path']) !!}-->
 				<div class="btn">
 					<span>Feature Image</span>
-					{!! Form::file('featured_image') !!}
+					{!! Form::file('picture') !!}
 					<!--<input type="file">-->
 				</div>
 				<div class="file-path-wrapper">
@@ -91,32 +88,6 @@
 	{!! Form::close() !!}
 		</div>
 	</div>
-	<div id="locationForm" class="modal bottom-sheet">
-	<div class="modal-content">
-	  <h4>Create New Location</h4>
-	  <ul id="location-errors"></ul>
-		{!! Form::open( ['route' => 'events.store'] ) !!}
-			<div class="row">
-				<div class="input-field col m6 s12">
-					{!! Form::label('name','Location Name')	!!}
-					{!! Form::text('name')	!!}
-				</div>
-				<div class="input-field col m6 s12">
-					{!! Form::label('capacity','Location Capacity')	!!}
-					{!! Form::number('capacity') !!}
-				</div>
-				<div class="input-field col m6 s12">
-					{!! Form::label('coordinates','Location Coordinates')	!!}
-					{!! Form::text('coordinates') !!}
-				</div>
-			</div>
-		{!! Form::close() !!}
-	</div>
-	<div class="modal-footer">
-	  <a href="#!" class="orange-text modal-action waves-effect waves-green btn-flat" onClick="createLocation()">Create</a>
-	  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" onClick="$('#location-select').val('');$('#location-select').material_select();">Cancel</a>
-	</div>
-</div>
 </main>
 
 @endsection
