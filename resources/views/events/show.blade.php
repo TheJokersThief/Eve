@@ -41,6 +41,9 @@
 					<div class=" col s12 m2 right-align get_ticket_button">
 						<a class="btn" target="_blank" href="{{ URL::route('tickets/print', ['id' => $ticket->id ]) }}">Print ticket</a>
 					</div>
+					<div class=" col s12 m3 right-align get_ticket_button">
+						<a class="btn" href="{{ URL::route('tickets/print', ['id' => $ticket->id ]) }}">Print ticket</a>
+					</div>
 				@endif
 			@else
 				<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">Login</a>
