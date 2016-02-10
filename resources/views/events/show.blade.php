@@ -22,7 +22,8 @@
 						{!! Form::hidden('event_id', $event->id) !!}
 						@if(!$event->price)
 							{!! Form::submit('Get Ticket', ['class' => 'btn btn-primary form-control']) !!}
-						@else
+						@else {{-- This is the Stripe embed and is used to
+								   generate the token we use to verify payments --}}
 							<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 							        data-key="{{env('STRIPE_KEY')}}"
 							        data-logo="{{URL::to('/images/logo.png')}}"

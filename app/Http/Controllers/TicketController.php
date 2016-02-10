@@ -81,14 +81,19 @@ class TicketController extends Controller
 
 
 		if($event->price > 0){
+			// If the ticket ain't free you're going to have to pay for it.
+			// Let's Stripe.
 			Stripe::setApiKey(env('STRIPE_SECRET'));
 
 			try{
+
+				// Create a reference for a Customer relating to the Stripe token we received
 				$customer = Customer::create([
 					"email" => $user->email,
 					"card" => $data["stripeToken"]
 				]);
 
+				// Now, charge that customer for the ticket as expected.
 				$charge = Charge::create([
 					"customer" => $customer->id,
 					"amount" => $event->price*100,
@@ -135,7 +140,7 @@ class TicketController extends Controller
 					"event_id" => $event->id,
 					"price" => $event->price,
 					"used" => false,
-					"charge_id" => $charge->id
+					"charge_id" => $charge->id //Reference to transaction details in Stripe
 				]
 			);
 		} else {
@@ -145,7 +150,7 @@ class TicketController extends Controller
 					"event_id" => $event->id,
 					"price" => $event->price,
 					"used" => false,
-					"charge_id" => ""
+					"charge_id" => null // No charge made
 				]
 			);
 		}
