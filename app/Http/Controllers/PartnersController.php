@@ -118,12 +118,59 @@ class PartnersController extends Controller
 		//return view('partners.edit')->with(['partner'=>$partner]);
 	}
 
-	public function update(){
+	public function update( $partnerID, Request $request){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
 			return response(view('errors.403', ['error' => 'You do not have permission to edit partners.']), 403);
 		}
 
-		return view('partners.update');
+
+		/*$data = $request->only( [
+					'featured_image'
+				]);*/
+		//dd( $request );
+		//$data = $request;
+
+		$data = $request->only([
+				'name',
+				'type',
+				'price',
+				'location_id',
+				'description',
+				'distance',
+				'email',
+				'featured_image'
+			]);
+
+		// Validate all input
+		$validator = Validator::make( $data, ['featured_image' => 'image|sometimes']);
+		//dd($validator);
+
+		if( $validator->fails( ) ){
+			// If validation fails, redirect back to
+			// registration form with errors
+			return Redirect::back( )
+					->withErrors( $validator )
+					->withInput( );
+		}
+
+		if( $request->hasFile('featured_image') ){
+			$data['featured_image'] = MediaController::uploadImage(
+											$request->file('featured_image'),
+											time(),
+											$directory = "partner_images",
+											$bestFit = true,
+											$fitDimensions = [1920, 1080]
+										);
+		} else{
+			unset( $data['featured_image'] );
+		}
+
+		$partner = Partner::find($partnerID);
+		$partner->update( $data );
+
+
+
+		return Redirect::route('partners.edit', [$partner->id]);
 	}
 
 	/**

@@ -68,7 +68,7 @@ selected
 			<div class="file-field input-field col s12 m6">
 				<div class="btn">
 					<span>Feature Image</span>
-					{!! Form::file('picture') !!}
+					{!! Form::file('featured_image') !!}
 					<!--<input type="file">-->
 				</div>
 				<div class="file-path-wrapper">
