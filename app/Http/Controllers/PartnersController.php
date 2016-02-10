@@ -114,7 +114,7 @@ class PartnersController extends Controller
 
 		$partner = Partner::where('id', $partnerID)
 						->firstOrFail();
-		return view('partners.edit', ['partner'=>$partner]);
+		return view('partners.edit', ['partner'=>$partner], ['locations' => Location::all()] );
 		//return view('partners.edit')->with(['partner'=>$partner]);
 	}
 

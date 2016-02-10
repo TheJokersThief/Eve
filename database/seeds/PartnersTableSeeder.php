@@ -14,7 +14,7 @@ class PartnersTableSeeder extends Seeder
     {
         Partner::firstOrCreate([
          	'name' => "McDonald's",
-            'featured_image' => 'images/sample_images/hotels/1.jpg',
+            'featured_image' => '/images/sample_images/hotels/1.jpg',
             'type' => 'Food',
             'price' => 5.99,
             'description' => 'A lovely restaurant for family meals.',
@@ -25,7 +25,7 @@ class PartnersTableSeeder extends Seeder
 
         Partner::firstOrCreate([
          	'name' => "Bewley's",
-            'featured_image' => 'images/sample_images/hotels/2.jpg',
+            'featured_image' => '/images/sample_images/hotels/2.jpg',
             'type' => 'Hotel',
             'price' => 64.99,
             'description' => 'A fancy-schmancy hotel',
@@ -36,7 +36,7 @@ class PartnersTableSeeder extends Seeder
 
         Partner::firstOrCreate([
          	'name' => "Ramen",
-            'featured_image' => 'images/sample_images/hotels/3.jpg',
+            'featured_image' => '/images/sample_images/hotels/3.jpg',
             'type' => 'Food',
             'price' => 6.00,
             'description' => 'Asian street food',
@@ -47,7 +47,7 @@ class PartnersTableSeeder extends Seeder
 
         Partner::firstOrCreate([
             'name' => "Rament",
-            'featured_image' => 'images/sample_images/hotels/3.jpg',
+            'featured_image' => '/images/sample_images/hotels/3.jpg',
             'type' => 'Food',
             'price' => 6.00,
             'description' => 'Asian street food better than Ramen',
