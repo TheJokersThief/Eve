@@ -17,7 +17,7 @@ class PaymentsSetup extends Migration
 	    });
 	    Schema::table('tickets', function (Blueprint $table) {
 		    $table->decimal('price', 6,2)->unsigned();
-		    $table->string('charge_id');
+		    $table->string('charge_id')->nullable();
 	    });
     }
 
