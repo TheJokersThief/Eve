@@ -100,7 +100,7 @@ class TicketController extends Controller
 					"currency" => "eur"
 				]);
 			} catch(Error\Card $e) {
-				return \Redirect::back()->withErrors([
+				return Redirect::back()->withErrors([
 					// Card declined.
 					"message" => "Your card has been declined."
 				]);
@@ -111,17 +111,17 @@ class TicketController extends Controller
 				]);
 			} catch (Error\InvalidRequest $e) {
 				dd($e);
-				return \Redirect::back()->withErrors([
+				return Redirect::back()->withErrors([
 					// We're not doing Stripe right. We need to fix this.
 					"message" => "It seems the developers have made a mistake; they have been notified. This will be fixed."
 				]);
 			} catch (Error\Authentication $e) {
-				return \Redirect::back()->withErrors([
+				return Redirect::back()->withErrors([
 					// API keys wrong?
 					"message" => "It seems the developers have made a mistake with authentication; this will be fixed."
 				]);
 			} catch (Error\ApiConnection $e) {
-				return \Redirect::back()->withErrors([
+				return Redirect::back()->withErrors([
 					// Network connectivity problems?
 					"message" => "We're having some network errors right now. Try again later."
 				]);
@@ -130,7 +130,7 @@ class TicketController extends Controller
 				// I actually don't know what this error means
 				// or what it does, so probably panic
 
-				return \Redirect::back()->withErrors([
+				return Redirect::back()->withErrors([
 					"message" => "Something went wrong here."
 				]);
 			}
