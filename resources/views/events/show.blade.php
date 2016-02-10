@@ -39,7 +39,7 @@
 						<a class="btn btn-primary" href="{{ action('TicketController@show', [$event->id]) }}">Show ticket</a>
 					</div>
 					<div class=" col s12 m2 right-align get_ticket_button">
-						<a class="btn" href="{{ URL::route('tickets/print', ['id' => $ticket->id ]) }}">Print ticket</a>
+						<a class="btn" href="{{ URL::route('tickets/print', ['id' => $event->id ]) }}">Print ticket</a>
 					</div>
 				@endif
 			@else
