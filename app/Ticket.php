@@ -67,11 +67,6 @@ class Ticket extends Model
 		return $this->belongsTo('App\User');
 	}
 
-	public function getScannedByAttribute($value){
-		return User::firstOrFail($value);
-	}
-
-
 	public function event(){
 		return $this->belongsTo('App\Event');
 	}
