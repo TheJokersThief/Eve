@@ -79,7 +79,7 @@
 									<a href="{{ URL::route('partners.edit', ['partner'=>$partner->id]) }}">
 										<i class="fa fa-pencil teal-text" alt="Edit Partner"></i> &nbsp;
 									</a>
-									{{ Form::open(['route' => ['partners.destroy', $partner->id], 'method' => 'delete', 'class' => 'inline-form']) }}
+									{{ Form::open(['route' => ['partners.destroy', Crypt::encrypt($partner->id)], 'method' => 'delete', 'class' => 'inline-form']) }}
 										<button type="submit" ><i class="fa fa-times red-text" alt="Delete Partner"></i></button>
 									{{ Form::close() }}
 								</div>
