@@ -156,8 +156,7 @@ class TicketController extends Controller
 		}
 
 
-		return $this->show($ticket->id);
-		// return view('tickets.show', $ticket);
+		return view('tickets.show', compact('ticket', 'event'));
 	}
 
 	/**
