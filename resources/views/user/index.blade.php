@@ -32,7 +32,7 @@
 			<div class="col m9">
 				<h3 class="center-align">Attending</h3>
 				<div class="divider"></div>
-				@foreach($me->tickets as $ticket)
+				@forelse($me->tickets as $ticket)
 					<div class="col s12 m4">
 	                    <div class="card dimmed-card-image">
 	                        <div class="card-image">
@@ -47,7 +47,22 @@
 	                        </div>
 	                    </div>
 	                </div>
-				@endforeach
+				@empty
+	            	<div class="section">
+	            		<div class="section">
+							<h5 class="center-align">Oh bother.</h5>
+						</div>
+						<h5 class="center-align">You're not attending any events soon,</h5>
+						<h5 class="center-align">maybe you want to check out some other events?</h5>
+						<div class="section">
+							<div class="center-align">
+								<div class="col s3 m3">
+									<a href="{{ action('EventsController@index') }}" class="waves-effect waves-light btn">See Events</a>
+								</div>
+							</div>
+						</div>
+					</div>
+	            @endforelse
 			</div>
 		</div>
 	</main>

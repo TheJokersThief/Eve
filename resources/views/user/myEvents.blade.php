@@ -34,24 +34,39 @@
 					<div class="">
 						<h3 class="center-align">Upcoming Events</h3>
 						<div class="divider"></div>
-							<div class="row">
-					            @foreach($me->tickets as $ticket)
-					                <div class="col s12 m4">
-					                    <div class="card dimmed-card-image">
-					                        <div class="card-image">
-					                            <img src="{{ $ticket->event->featured_image }}">
-					                            <span class="card-title">{{$ticket->event->title}}.</span>
-					                        </div>
-					                        <div class="card-content">
-					                            <p>{{strip_tags(str_limit($ticket->event->description,250))}}</p>
-					                        </div>
-					                        <div class="card-action">
-					                            <a href="{{ URL::route('events.show', $ticket->event->id) }}" class="red-text text-lighten-2">View Event &rarr;</a>
-					                        </div>
-					                    </div>
-					                </div>
-					            @endforeach
-					        </div>
+						<div class="row">
+				            @forelse($me->tickets as $ticket)
+				                <div class="col s12 m4">
+				                    <div class="card dimmed-card-image">
+				                        <div class="card-image">
+				                            <img src="{{ $ticket->event->featured_image }}">
+				                            <span class="card-title">{{$ticket->event->title}}.</span>
+				                        </div>
+				                        <div class="card-content">
+				                            <p>{{strip_tags(str_limit($ticket->event->description,250))}}</p>
+				                        </div>
+				                        <div class="card-action">
+				                            <a href="{{ URL::route('events.show', $ticket->event->id) }}" class="red-text text-lighten-2">View Event &rarr;</a>
+				                        </div>
+				                    </div>
+				                </div>
+				            @empty
+				            	<div class="section">
+				            		<div class="section">
+										<h5 class="center-align">Oh bother.</h5>
+									</div>
+									<h5 class="center-align">You're not attending any events soon,</h5>
+									<h5 class="center-align">maybe you want to check out some other events?</h5>
+									<div class="section">
+										<div class="center-align">
+											<div class="col s3 m3">
+												<a href="{{ action('EventsController@index') }}" class="waves-effect waves-light btn">See Events</a>
+											</div>
+										</div>
+									</div>
+								</div>
+				            @endforelse
+				        </div>
 					</div>
 				</div>
 			</div>
