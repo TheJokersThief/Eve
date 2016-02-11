@@ -4,69 +4,178 @@
 @section('title') {{$event->title}} @endsection
 
 @section('content')
-
-	<div class="container">
-		<div class="row">
-			<div class="valign-wrapper">
-			<div class="col s8 m8">
-				<h2>{{ $event->title }}</h2>
-			</div>
-			@if(Auth::check())
-				@if(Auth::user()->is_admin)
-					<div class="col s2 m2 center-align">
-							<a href="{{ action('EventsController@edit', [$event->id]) }}" class="waves-effect waves-light btn">Update</a>
-						</div>
-				@endif
-				@if(! $ticket)
-					{!! Form::open( ['action' => 'TicketController@store', "class" => "col s12 m3 right-align get_ticket_button"] ) !!}
-						{!! Form::hidden('event_id', $event->id) !!}
-						@if(!$event->price)
-							{!! Form::submit('Get Ticket', ['class' => 'btn btn-primary form-control']) !!}
-						@else {{-- This is the Stripe embed and is used to
-								   generate the token we use to verify payments --}}
-							<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-							        data-key="{{env('STRIPE_KEY')}}"
-							        data-logo="{{URL::to('/images/logo.png')}}"
-							        data-description="{{$event->title}}"
-							        data-amount="{{$event->price * 100}}"
-							        data-locale="auto"
-									data-currency="EUR"
-									data-email="{{Auth::user()->email}}"></script>
-						@endif
-					{!! Form::close() !!}
-				@else
-					<div class="col s12 m2 right-align get_ticket_button">
-						<a class="btn btn-primary" href="{{ action('TicketController@show', [$event->id]) }}">Show ticket</a>
+	<main class="row">
+		<section class="event-image valign-wrapper" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('{{ $event->featured_image }}');;">
+			<div class="row container valign">
+				<div id="event-details" class="col s12 m4 l4 right-align valign-wrapper">
+					<div class="valign">
+						<h5>{{ $event->hrStartTime( ) }}</h5>
+						<h5>{{ $event->hrEndTime( ) }}</h5>
+						<h5>{{ $event->location->name }}</h5>
 					</div>
-					<div class=" col s12 m2 right-align get_ticket_button">
-						<a class="btn" target="_blank" href="{{ URL::route('tickets/print', ['id' => $ticket->id ]) }}">Print ticket</a>
-					</div>
-					<div class=" col s12 m3 right-align get_ticket_button">
-						<a class="btn" href="{{ URL::route('tickets/print', ['id' => $ticket->id ]) }}">Print ticket</a>
-					</div>
-				@endif
-			@else
-				<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">Login</a>
-				<a href="{{ URL::to('register') }}" class="btn">Signup</a>
-			@endif
-		</div>
-		<div class="divider"></div>
-		@include("events.details")
-		@if(count($users))
-			<div class="divider"></div>
-			<div class="section people-attending @if(count($users) > 6)align-center @endif">
-				<h5>People attending this event:</h5>
-				<div class="row">
-					@foreach($users as $user)
-						<div class="col s2 m1">
-							<a href="{{URL::route('user/show', $user->username) }}">
-								<img src="{{$user->profile_picture}}" class="circle responsive-img" alt="{{$user->name}}" data-toggle="tooltip" data-placement="top" title="{{$user->name}}">
-							</a>
-						</div>
-					@endforeach
+				</div>
+				<div class="col s12 m8 l8" id="event-title">
+					<h1>{{ $event->title }}</h1>
+					<h4>{{ $event->tagline }}</h4>
 				</div>
 			</div>
-		@endif
-	</div>
-</div>
+		</section>
+		<section id="description" class="container">
+			<div class="card">
+				<div class="card-header red lighten-2">
+					<div class="card-title">
+						<h4 class="">About The Event</h4>
+						@if(Auth::user()->is_admin)
+							<a href="{{ route('events.edit', [$event->id]) }}" class="right waves-effect waves-light btn">
+								Edit <i class="fa fa-pencil left"></i>
+							</a>
+						@endif
+					</div>
+				</div>
+				<div class="card-content">
+					{!! $event->description !!}
+				</div>
+			</div>
+		</section>
+
+		<section id="event-actions" class="container">
+			<div id="ticket" class="col s12 m4 l4">
+				<div id="ticket-card" class="card">
+					<div class="card-header amber darken-2">
+						<div class="card-title">
+							<h4 class="ticket-card-title truncate">{{ $event->title }}</h4>
+							<p class="ticket-card-date">{{ $event->location->name }}</p>
+						</div>
+					</div>
+					<div class="card-content-bg white-text" style="background-image: url('{{ $event->featured_image }}')">
+						<div class="card-content">
+							<div class="row ticket-state-wrapper">
+								@if(! $ticket)
+									{!! Form::open( ['action' => 'TicketController@store', "class" => "col s12 center-align get_ticket_button"] ) !!}
+										{!! Form::hidden('event_id', $event->id) !!}
+										@if(!$event->price )
+											<h2 id="price">
+												FREE
+											</h2>
+											{!! Form::submit('Get Ticket', ['class' => 'btn btn-primary red lighten-2 form-control']) !!}
+										@elseif( Auth::check() ) {{-- This is the Stripe embed and is used to
+												   generate the token we use to verify payments --}}
+											<h2 id="price">
+												&euro;{{ $event->price }}
+											</h2>
+											<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+													data-key="{{env('STRIPE_KEY')}}"
+													data-logo="{{URL::to('/images/logo.png')}}"
+													data-description="{{$event->title}}"
+													data-amount="{{$event->price * 100}}"
+													data-locale="auto"
+													data-currency="EUR"
+													data-email="{{Auth::user()->email}}"></script>
+										@else
+											<h2 id="price">
+												&euro;{{ $event->price }}
+											</h2>
+											<a class="btn btn-primary red lighten-2 modal-trigger" href="#login-modal">
+												Buy Ticket
+											</a>
+										@endif
+									{!! Form::close() !!}
+								@else
+									<div class="col s12 center-align">
+										{!! $ticket->qr() !!}
+									</div>
+									<div class=" col s12 center-align">
+										<a class="btn red lighten-2" target="_blank" href="{{ URL::route('tickets/print', ['id' => $ticket->id ]) }}"><i class="fa fa-print left"></i> Print ticket</a>
+									</div>
+								@endif
+							</div>
+							<div class="row">
+								<div class="col s6 m6 l6 center-align">
+									<div class="ticket-info">
+										<p class="small center-align">Start</p>
+										<p class="small"><span class="grey-text text-lighten-2">Time:</span> {{ date('h:i A', strtotime( $event->start_datetime ) ) }}</p>
+										<p class="small"><span class="grey-text text-lighten-2">Date:</span> {{ date('d/m/Y', strtotime( $event->start_datetime ) ) }}</p>
+									</div>
+								</div>
+								<div class="col s6 m6 l6 center-align ticket-state-two">
+									<div class="ticket-info">
+										<p class="small center-align">End</p>
+										<p class="small"><span class="grey-text text-lighten-2">Time:</span> {{ date('h:i A', strtotime( $event->end_datetime ) ) }}</p>
+										<p class="small"><span class="grey-text text-lighten-2">Date:</span> {{ date('d/m/Y', strtotime( $event->end_datetime ) ) }}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				@if(count($users))
+					<div class="divider"></div>
+					<ul class="collection with-header">
+						<li class="collection-header"><h4> Attendees:</h4></li>
+						@foreach( $users as $user )
+							<li class="collection-item avatar">
+								<img src="{{ $user->profile_picture }}" alt="" class="circle">
+								<strong class="title">{{ $user->name }}</strong>
+								<p>
+									{{ $user->city }}, {{ $user->country }}
+								</p>
+								<a href="{{ URL::route('user/show', [$user->username]) }}" class="secondary-content"><i class="fa fa-external-link red-text text-lighten-2"></i></a>
+							</li>
+						@endforeach
+					</ul>
+				@endif
+			</div>
+
+			<div id="partners" class="col s12 m8 l8">
+				@foreach( $partners as $partner )
+				<div class="col s12 m6 l6">
+					<div class="product-card">
+						<div class="card">
+							<div class="card-image waves-effect waves-block waves-light">
+								@if( $partner->price )
+									<a href="#" class="btn-floating btn-large btn-price waves-effect waves-light  pink accent-2">&euro;{{ $partner->price }}</a>
+								@endif
+								<img src="{{ $partner->featured_image }}" alt="product-img">
+							</div>
+							<ul class="card-action-buttons">
+								<li>
+									<a class="btn-floating waves-effect waves-light green accent-4">
+										<i class="fa fa-envelope-o"></i>
+									</a>
+								</li>
+								<li>
+									<a class="btn-floating waves-effect waves-light light-blue">
+										<i class="mdi-action-info activator"></i>
+									</a>
+								</li>
+								<li>
+									<a class="btn-floating waves-effect waves-light red accent-2" href="{{ $partner->url }}">
+										<i class="fa fa-external-link"></i>
+									</a>
+								</li>
+							</ul>
+							<div class="card-content">
+
+								<div class="row">
+									<div class="col s8">
+										<p class="card-title grey-text text-darken-4"><a href="#" class="grey-text text-darken-4">{{ $partner->name }}</a>
+										</p>
+									</div>
+									<div class="col s4 no-padding">
+										<a href=""></a><img src="{{ $partner->logo }}" class="responsive-img">
+
+									</div>
+								</div>
+							</div>
+							<div class="card-reveal">
+								<span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i>{{$partner->name}}</span>
+								<p>{{$partner->description}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				@endforeach
+			</div>
+		</section>
+	</main>
 @endsection
