@@ -21,7 +21,7 @@
 	                    <p><i class="fa fa-language cyan-text text-darken-2"></i> {{ $me->language }}</p>
 	                </div>
 	                <div class="card-reveal">
-		                    <span class="card-title grey-text text-darken-4">Roger Waters <i class="mdi-navigation-close right"></i></span>
+		                    <span class="card-title grey-text text-darken-4">{{$me->name}} <i class="mdi-navigation-close right"></i></span>
 		                    <p>{{ str_limit( $me->bio, 300 ) }}</p>
 		                </div>
 	            </div>

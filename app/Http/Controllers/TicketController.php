@@ -28,11 +28,12 @@ class TicketController extends Controller
 	 * @param  Integer  $eventId    ID of the ticket to be printed
 	 * @return View                 Printable ticket view
 	 */
-	public function printable($eventId){
+	public function printable($ticketId){
+		$ticketId =  Crypt::decrypt($ticketId);
+
 		$ticket = Ticket::where('user_id', Auth::user()->id)
-						->where('event_id', $eventId)
+						->where('id', $ticketId)
 						->firstOrFail();
-		$event = $ticket->event;
 
 		return view( 'tickets.print', compact('ticket') );
 	}
