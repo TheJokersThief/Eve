@@ -66,22 +66,22 @@ Route::group(['middleware' => ['web']], function () {
 	///////////
 	// USERS //
 	///////////
+
+	Route::get('search', ['as' => 'search', 'uses' => 'UserController@search']);
+
 	Route::group(['prefix' => 'user'], function(){
         Route::group(['middleware' => 'auth'], function(){
             Route::get('profile', ['as' => 'me', 'uses' => 'UserController@index']);
 
-            Route::get('profile/{name}', 'UserController@userAccount');
-
             Route::get('editProfile/{encryptedID}', ['as' => 'user/edit', 'uses'=> 'UserController@edit']);
-            Route::post('/', ['as' => 'user', 'uses' => 'UserController@updateUserInfo']);
+            Route::post('/{encryptedID}', ['as' => 'user', 'uses' => 'UserController@updateUserInfo']);
 
             Route::get('/myEvents', ['as' => 'myEvents', 'uses' => 'UserController@myEvents'] );
             Route::get('/pastEvents', ['as' => 'pastEvents', 'uses' => 'UserController@pastEvents'] );
 
             Route::get('logout', ['as' => 'logout', 'uses' => 'UserController@logout']);
         });
-
-        Route::get('/{nameOrId}', ['as' => 'user/show', 'uses' => 'UserController@show']);
+        Route::get('show/{nameOrId}', ['as' => 'user/show', 'uses' => 'UserController@show']);
 	});
 
 });
