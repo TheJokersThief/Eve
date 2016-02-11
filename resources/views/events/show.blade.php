@@ -25,10 +25,19 @@
 				<div class="card-header red lighten-2">
 					<div class="card-title">
 						<h4 class="">About The Event</h4>
-						@if(Auth::user()->is_admin)
-							<a href="{{ route('events.edit', [$event->id]) }}" class="right waves-effect waves-light btn">
-								Edit <i class="fa fa-pencil left"></i>
-							</a>
+						@if( Auth::check() )
+							@if(Auth::user()->is_admin)
+								<a href="{{ route('events.edit', [$event->id]) }}" class="right waves-effect waves-light btn">
+									Edit <i class="fa fa-pencil left"></i>
+								</a>
+							@endif
+
+							{{-- If it's just a normal user, show them how to upload images --}}
+							@if(! Auth::user()->is_admin && ! Auth::user()->is_staff )
+								<a href="{{ route('media/upload', [Crypt::encrypt($event->id)]) }}" class="right waves-effect waves-light btn">
+									Add Photos <i class="fa fa-pencil left"></i>
+								</a>
+							@endif
 						@endif
 					</div>
 				</div>
@@ -38,7 +47,7 @@
 			</div>
 		</section>
 
-		<section id="event-actions" class="container">
+		<section id="event-actions" class="container row">
 			<div id="ticket" class="col s12 m4 l4">
 				<div id="ticket-card" class="card">
 					<div class="card-header amber darken-2">
@@ -175,6 +184,12 @@
 					</div>
 				</div>
 				@endforeach
+			</div>
+		</section>
+
+		<section class="row container">
+			<div classs="col s12">
+				@include('events.gallery')
 			</div>
 		</section>
 	</main>
