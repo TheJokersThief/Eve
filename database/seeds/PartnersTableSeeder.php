@@ -21,6 +21,8 @@ class PartnersTableSeeder extends Seeder
             'location_id' => 2,
             'distance' => 20.5,
             'email' => 'mcd@gmail.com',
+            'logo' => '/images/sample_images/logos/mcdonalds.png',
+            'url' => 'http://mcdonalds.com'
         ]);
 
         Partner::firstOrCreate([
@@ -32,6 +34,8 @@ class PartnersTableSeeder extends Seeder
             'location_id' => 2,
             'distance' => 5.65,
             'email' => 'mr.bewley@gmail.com',
+            'logo' => '/images/sample_images/logos/bewleys.png',
+            'url' => 'http://bewleys.com'
         ]);
 
         Partner::firstOrCreate([
@@ -43,6 +47,8 @@ class PartnersTableSeeder extends Seeder
             'location_id' => 4,
             'distance' => 89,
             'email' => 'ramen@gmail.com',
+            'logo' => '/images/sample_images/logos/ramen.jpg',
+            'url' => 'http://ramen.com'
         ]);
 
         Partner::firstOrCreate([
@@ -54,6 +60,8 @@ class PartnersTableSeeder extends Seeder
             'location_id' => 4,
             'distance' => 89,
             'email' => 'rament@gmail.com',
+            'logo' => '/images/sample_images/logos/rament.jpg',
+            'url' => 'http://rament.com'
         ]);
     }
 }

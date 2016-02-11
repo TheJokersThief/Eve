@@ -68,7 +68,7 @@ selected
 			<div class="file-field input-field col s12 m6">
 				<div class="btn">
 					<span>Feature Image</span>
-					{!! Form::file('picture') !!}
+					{!! Form::file('featured_image') !!}
 					<!--<input type="file">-->
 				</div>
 				<div class="file-path-wrapper">
@@ -89,6 +89,9 @@ selected
 				</div>
 			</div>
 		{!! Form::close() !!}
+		{{ Form::open(['route' => ['partners.destroy', Crypt::encrypt($partner->id)], 'method' => 'delete', 'class' => 'inline-form']) }}
+										<button type="submit" ><i class="fa fa-times red-text" alt="Delete Partner"></i></button>
+									{{ Form::close() }}
 	</div>
 </main>
 

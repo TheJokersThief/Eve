@@ -36,8 +36,9 @@ class RemovePartnerMediaRelationship extends Migration
     {
         Schema::table('partners', function($table) {
 	    	$table->dropColumn('featured_image');
-	    	$table->integer('picture')->unsigned();
-	    	App\Partner::update(['picture' => 1]);
+	    	$table->integer('picture')->unsigned()->nullable();
+
+	    	DB::raw('UPDATE partners SET picture = 1');
         	$table->foreign('picture')
                   ->references('id')
                   ->on('media');
