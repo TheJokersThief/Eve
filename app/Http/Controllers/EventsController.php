@@ -109,7 +109,7 @@ class EventsController extends Controller
 		// If validation fails;
 		if( $validator->fails( ) ){
 			// Redirect back to registration form with errors
-			return Redirect::to( 'events' )
+			return Redirect::to( 'events/create' )
 					->withErrors( $validator )
 					->withInput( );
 		}
