@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('body-class') usersEvent-page @endsection
+@section('body-class') usersEvent-page usersAccount-page @endsection
 @section('title') Past events @endsection
 
 @section('content')
@@ -9,29 +9,34 @@
 	    	<div class="nav-wrapper" >
 	      			<div class="col s12">
 	      				<a href="{{ URL::route('myEvents') }}" class="breadcrumb">Upcoming Events</a>
-	       				<a href="{{ URL::route('pastEvents') }}" class="breadcrumb">  </a>
+	       				<a href="{{ URL::route('pastEvents') }}" class="breadcrumb">Past Events</a>
 	      			</div>
 	   			</div>
 	  		</nav>
-		<div class="col l10 push-l1 s12">
-			<div class="row">
-				<div class="col m3 s12 hide-on-small-only" id="userInfo">
+		<div class="col m10 s12 push-m1">
+			<div class="col m3">
+				<div class="hide-on-small-only" id="userInfo">
 					<div class="collection">
 						<div class="hide-on-med-and-down">
 							<img src="{{$me->profile_picture}}">
 						</div>
-
 						<div class="row">
 							<div class="col s10">
-								<span class="card-title">User Name: {{$me->name}}</span>
+								<span>User Name: {{$me->name}}</span>
 								<p>{{$me->bio}}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col s12">
+								<a href="{{ URL::route('user/edit', Crypt::encrypt($me->id)) }}"class="waves-effect waves-light btn">Edit profile</a>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
 				<div id="upComingEvents" class="col m9 s12">
 					<div class="">
-						<h3 class="center-align">Upcoming Events</h3>
+						<h3 class="center-align">Past Events</h3>
 						<div class="divider"></div>
 							<div class="row">
 					            @foreach($me->tickets as $ticket)
