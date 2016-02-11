@@ -23,7 +23,7 @@
 			</div>
 
 			{!! Form::open([
-				"route" => 'user',
+				"route" => array('user', Crypt::encrypt($me->id)),
 				"method" => "POST",
 				"files" => true
 			]) !!}
