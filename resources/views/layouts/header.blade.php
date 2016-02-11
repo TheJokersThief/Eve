@@ -62,6 +62,9 @@
 						<li><a href="{{ URL::route('admin.home') }}">Admin</a></li>
 			  		@endif
 			  		<li><a href="{{ URL::to( 'home' ) }}">Home</a></li>
+			  		<li><a href="{{ URL::route('me') }}"><i class="material-icons">perm_identity</i></a></li>
+			  		<li><a href="{{ URL::route('myEvents') }}"><i class="material-icons">today</i></a></li>
+			  		<li><a href="{{ URL::route('logout') }}"><i class="material-icons">input</i></a></li>
 			  	@else
 					<li class="login">
 						<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">Login</a>
