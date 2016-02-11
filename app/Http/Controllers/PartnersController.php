@@ -10,6 +10,7 @@ use App\Partner;
 use App\Location;
 use Redirect;
 
+use Crypt;
 use Validator;
 use Auth;
 
@@ -188,6 +189,6 @@ class PartnersController extends Controller
 		}*/
 		$partnerID = Crypt::decrypt($encryptedPartnerID);
 		Partner::destroy($partnerID);
-		return Redirect::back();
+		return Redirect::route('partners.index');
 	}
 }

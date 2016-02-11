@@ -89,6 +89,9 @@ selected
 				</div>
 			</div>
 		{!! Form::close() !!}
+		{{ Form::open(['route' => ['partners.destroy', Crypt::encrypt($partner->id)], 'method' => 'delete', 'class' => 'inline-form']) }}
+										<button type="submit" ><i class="fa fa-times red-text" alt="Delete Partner"></i></button>
+									{{ Form::close() }}
 	</div>
 </main>
 
