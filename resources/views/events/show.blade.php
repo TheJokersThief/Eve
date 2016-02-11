@@ -85,7 +85,7 @@
 										{!! $ticket->qr() !!}
 									</div>
 									<div class=" col s12 center-align">
-										<a class="btn red lighten-2" target="_blank" href="{{ URL::route('tickets/print', ['id' => $ticket->id ]) }}"><i class="fa fa-print left"></i> Print ticket</a>
+										<a class="btn red lighten-2" target="_blank" href="{{ URL::route( 'tickets/print', [ 'id' => Crypt::encrypt( $ticket->id ) ] ) }}"><i class="fa fa-print left"></i> Print ticket</a>
 									</div>
 								@endif
 							</div>
