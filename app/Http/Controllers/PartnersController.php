@@ -47,7 +47,9 @@ class PartnersController extends Controller
 					'description',
 					'location_id',
 					'distance',
-					'email'
+					'email',
+					'logo',
+					'url'
 				]);
 
 
@@ -62,6 +64,8 @@ class PartnersController extends Controller
 					'location_id' => 'required',
 					'distance' => 'required',
 					'email' => 'required',
+					'logo' => 'required|image',
+					'url' => 'required'
 				]);
 
 		if( $validator->fails( ) ){
@@ -82,6 +86,15 @@ class PartnersController extends Controller
 										);
 		}
 
+
+		if( $request->hasFile('logo' ) ){
+			$data['logo'] = MediaController::uploadImage(
+											$request->file('logo'),
+											time(),
+											$directory = "partner_logos"
+										);
+		}
+
 		$newData = array(
 				"name" => $data["name"],
 				"description" => $data["description"],
@@ -90,7 +103,9 @@ class PartnersController extends Controller
 				"location_id" => $data["location_id"],
 				"distance" => $data["distance"],
 				"email" => $data["email"],
-				"featured_image" => $data["picture"]
+				"featured_image" => $data["picture"],
+				"url" => $data["url"],
+				"logo" => $data["logo"]
 			);
 
 		// Create the new partner
