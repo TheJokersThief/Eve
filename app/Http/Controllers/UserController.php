@@ -168,7 +168,7 @@ class UserController extends Controller
 	/**
 	 *   Test function for updating user information
 	 */
-	public function updateUserInfo(Request $request){
+	public function updateUserInfo(Request $request, $encryptedID){
 
 		$data = $request->only([
 				'name',
@@ -197,6 +197,9 @@ class UserController extends Controller
 				->withInput( );
 		}
 
+		$userID = Crypt::decrypt($encryptedID);
+		$user = User::find($userID);
+
 		if($request->hasFile('profile_picture')){
 			$data['profile_picture'] = MediaController::uploadImage(
 				$request->file('profile_picture'),
@@ -206,7 +209,7 @@ class UserController extends Controller
 				$fitDimensions = [500, 500]
 			);
 		}else{
-			$data['profile_picture'] = Auth::user()->profile_picture;
+			$data['profile_picture'] = $user->profile_picture;
 		}
 
 		if(isset($data['password']) && $data['password'] != ''){
@@ -215,15 +218,24 @@ class UserController extends Controller
 			unset($data['password']);
 		}
 
-		$user = Auth::user();
 		$update = $user->update($data);
 
-		return Redirect::route('user/edit', Crypt::encrypt( $user->id ) );
+
+		return Redirect::route('user/edit', Crypt::encrypt( $userID ) );
 	}
 
 	public function index(){
-		$me = Auth::user();
-		return view('user.index', compact('me'));
+		$user = Auth::user();
+
+		$eventIds = DB::table('tickets')
+                      ->where('user_id', $user->id)
+                      ->pluck('event_id');
+
+        $events = DB::table('events')
+                    ->whereIn('id', $eventIds)
+                    ->get();
+
+        return view('user.show', compact('user', 'events'));
 	}
 
     public function show($idOrUsername){
@@ -247,17 +259,6 @@ class UserController extends Controller
 
         return view('user.show', compact('user', 'events'));
     }
-
-
-    public function userAccount($name){
-        if(Auth::user()->name == $name || Auth::user()->is_admin){
-            $me = User::where( 'name', $name )
-                ->firstorfail();
-            return view('user.index', compact('me'));
-        } else {
-            return response(view('errors.403', ['error' => 'You do not have permission to access this page.']), 403);
-        }
-	}
 
 	/**
 	 *   Returns the users personal page where they can update their info
@@ -290,4 +291,7 @@ class UserController extends Controller
 
 	}
 
+	public function search(){
+		return 'hi';
+	}
 }
