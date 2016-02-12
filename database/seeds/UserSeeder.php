@@ -34,9 +34,9 @@ class UserSeeder extends Seeder
             'city'              => 'Ballyvolane'
         ]);
 
-	    //////////////////////
-    	// FOUR STAFF USERS //
-	    //////////////////////
+	    ////////////////////////
+    	// THREE STAFF USERS  //
+	    ////////////////////////
         User::firstOrCreate([
         	'id'				=> 2,
         	'name' 				=> "Douglas Adams",
@@ -83,6 +83,9 @@ class UserSeeder extends Seeder
             'city'              => 'New York'
         ]);
 
+        ///////////////////
+        // REGULAR USERS //
+        ///////////////////
         User::firstOrCreate([
         	'id'				=> 5,
         	'name' 				=> "Jaden Smith",
@@ -90,7 +93,7 @@ class UserSeeder extends Seeder
             'email' 			=> "whatIs@an.email",
         	'password' 			=> Hash::make('hashtagyeezys'),
         	'is_admin' 			=> 0,
-        	'is_staff' 			=> 1,
+        	'is_staff' 			=> 0,
         	'profile_picture' 	=> $defaultProfileImage,
         	'bio' 				=> "Wassup With Oregon Right Now?",
         	'language' 			=> "EN",
