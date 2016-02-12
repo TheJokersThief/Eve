@@ -19,7 +19,8 @@ class MediaTableSeeder extends Seeder
          	'name' => 'Photo 1',
          	'view_count' => 20,
          	'approved' => false,
-            'processed' => false
+            'processed' => false,
+            'user_id' => 5
         ]);
 
         Media::firstOrCreate([
@@ -29,7 +30,8 @@ class MediaTableSeeder extends Seeder
          	'name' => 'Photo 2',
          	'view_count' => 5,
          	'approved' => false,
-            'processed' => false
+            'processed' => false,
+            'user_id' => 5
         ]);
 
         Media::firstOrCreate([
@@ -39,7 +41,8 @@ class MediaTableSeeder extends Seeder
          	'name' => 'Photo 3',
          	'view_count' => 570,
          	'approved' => false,
-            'processed' => false
+            'processed' => false,
+            'user_id' => 5
         ]);
 
         ///////////////////////
@@ -54,7 +57,8 @@ class MediaTableSeeder extends Seeder
                 'name' => 'Event Photo '.$i,
                 'view_count' => 0,
                 'approved' => true,
-                'processed' => true
+                'processed' => true,
+                'user_id' => 5
             ]);
         }
 
@@ -66,7 +70,8 @@ class MediaTableSeeder extends Seeder
                 'name' => 'Event Photo '.$i,
                 'view_count' => 0,
                 'approved' => false,
-                'processed' => false
+                'processed' => false,
+                'user_id' => 5
             ]);
         }
     }
