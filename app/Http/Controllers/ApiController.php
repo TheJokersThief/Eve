@@ -7,10 +7,12 @@ use Redirect;
 use Auth;
 use Image;
 use Crypt;
+use Hash;
 use App\User;
 use App\Ticket;
 use App\Setting;
 use App\Location;
+use App\Media;
 use Response;
 
 use Illuminate\Http\Request;
@@ -208,4 +210,49 @@ class ApiController extends Controller
 		MediaController::approveMedia( $mediaID, $isApproved );
 	}
 
+	public function uploadMedia( Request $request, $encryptedEventID ){
+		$eventID = Crypt::decrypt( $encryptedEventID );
+
+		$data = $request->only(['file']);
+
+		// Validate all input
+		$validator = Validator::make( $data, [
+					'file'  => 'image',
+				]);
+
+		// If validation fails;
+		if( $validator->fails( ) ){
+			// Redirect back to registration form with errors
+			return Response::json(['error' => 'File isn\'t an image!']);
+		}
+
+		if( $request->hasFile('file') ){
+			$file_location = MediaController::uploadImage(
+								$request->file('file'),
+								$data['file']->getClientOriginalName().time(), // Seed with time to ensure name is unique
+								$directory = "event-photos/". hexdec( Hash::make( $eventID ) )
+							);
+			$media = Media::create([
+				'file_location' => $file_location,
+				'event_id' => $eventID,
+				'name' => $data['file']->getClientOriginalName(),
+				'user_id' => Auth::user()->id
+			]);
+			return Response::json(['file_location' => $file_location, 'media_id' => $media->id]);
+		}
+		return Response::json(['error' => 'No file was received']);
+	}
+
+	public function renameMedia( Request $request ){
+		$data = $request->only(['mediaID', 'title']);
+		$media = Media::find( $data['mediaID'] );
+
+		if( Auth::user()->id == $media->user->id ){
+			$media->name = $data['title'];
+			$media->save();
+			return Response::json('success');
+		} else {
+			return Response::json(['error' => 'You do not have permission to edit this image']);
+		}
+	}
 }
