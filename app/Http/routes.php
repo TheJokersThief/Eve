@@ -67,7 +67,7 @@ Route::group(['middleware' => ['web']], function () {
 	// USERS //
 	///////////
 
-	Route::get('search', ['as' => 'search', 'uses' => 'UserController@search']);
+	
 
 	Route::group(['prefix' => 'user'], function(){
         Route::group(['middleware' => 'auth'], function(){
@@ -80,6 +80,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/pastEvents', ['as' => 'pastEvents', 'uses' => 'UserController@pastEvents'] );
 
             Route::get('logout', ['as' => 'logout', 'uses' => 'UserController@logout']);
+
+             Route::get('test', ['as' => 'test', 'uses' => 'UserController@test']);
+            Route::get('search', ['as' => 'search', 'uses' => 'UserController@search']);
         });
         Route::get('show/{nameOrId}', ['as' => 'user/show', 'uses' => 'UserController@show']);
 	});

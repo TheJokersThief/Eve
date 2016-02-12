@@ -291,7 +291,30 @@ class UserController extends Controller
 
 	}
 
-	public function search(){
-		return 'hi';
+	public function test(){
+		return view('user.search');
+	}
+	public function search(Request $request){
+		$query = $request->input('search');
+
+		try{
+			$user = User::where('name', 'LIKE', '%' . $query . '%')->firstOrFail();
+        } catch (ModelNotFoundException $e){
+            try{
+                $user = User::findOrFail($idOrUsername);
+            } catch (ModelNotFoundException $f){
+                return response(view('errors.404', ['error' => 'This user account could not be found.']), 404);
+            }
+        }
+
+        $eventIds = DB::table('tickets')
+                      ->where('user_id', $user->id)
+                      ->pluck('event_id');
+
+        $events = DB::table('events')
+                    ->whereIn('id', $eventIds)
+                    ->get();
+                    
+        return view('user.show', compact('user', 'events'));
 	}
 }
