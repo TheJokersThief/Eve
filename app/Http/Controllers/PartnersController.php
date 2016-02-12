@@ -10,6 +10,7 @@ use App\Partner;
 use App\Location;
 use Redirect;
 
+use Crypt;
 use Validator;
 use Auth;
 
@@ -46,7 +47,9 @@ class PartnersController extends Controller
 					'description',
 					'location_id',
 					'distance',
-					'email'
+					'email',
+					'logo',
+					'url'
 				]);
 
 
@@ -61,6 +64,8 @@ class PartnersController extends Controller
 					'location_id' => 'required',
 					'distance' => 'required',
 					'email' => 'required',
+					'logo' => 'required|image',
+					'url' => 'required'
 				]);
 
 		if( $validator->fails( ) ){
@@ -81,6 +86,15 @@ class PartnersController extends Controller
 										);
 		}
 
+
+		if( $request->hasFile('logo' ) ){
+			$data['logo'] = MediaController::uploadImage(
+											$request->file('logo'),
+											time(),
+											$directory = "partner_logos"
+										);
+		}
+
 		$newData = array(
 				"name" => $data["name"],
 				"description" => $data["description"],
@@ -89,7 +103,9 @@ class PartnersController extends Controller
 				"location_id" => $data["location_id"],
 				"distance" => $data["distance"],
 				"email" => $data["email"],
-				"featured_image" => $data["picture"]
+				"featured_image" => $data["picture"],
+				"url" => $data["url"],
+				"logo" => $data["logo"]
 			);
 
 		// Create the new partner
@@ -114,16 +130,63 @@ class PartnersController extends Controller
 
 		$partner = Partner::where('id', $partnerID)
 						->firstOrFail();
-		return view('partners.edit', ['partner'=>$partner]);
+		return view('partners.edit', ['partner'=>$partner], ['locations' => Location::all()] );
 		//return view('partners.edit')->with(['partner'=>$partner]);
 	}
 
-	public function update(){
+	public function update( $partnerID, Request $request){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
 			return response(view('errors.403', ['error' => 'You do not have permission to edit partners.']), 403);
 		}
 
-		return view('partners.update');
+
+		/*$data = $request->only( [
+					'featured_image'
+				]);*/
+		//dd( $request );
+		//$data = $request;
+
+		$data = $request->only([
+				'name',
+				'type',
+				'price',
+				'location_id',
+				'description',
+				'distance',
+				'email',
+				'featured_image'
+			]);
+
+		// Validate all input
+		$validator = Validator::make( $data, ['featured_image' => 'image|sometimes']);
+		//dd($validator);
+
+		if( $validator->fails( ) ){
+			// If validation fails, redirect back to
+			// registration form with errors
+			return Redirect::back( )
+					->withErrors( $validator )
+					->withInput( );
+		}
+
+		if( $request->hasFile('featured_image') ){
+			$data['featured_image'] = MediaController::uploadImage(
+											$request->file('featured_image'),
+											time(),
+											$directory = "partner_images",
+											$bestFit = true,
+											$fitDimensions = [1920, 1080]
+										);
+		} else{
+			unset( $data['featured_image'] );
+		}
+
+		$partner = Partner::find($partnerID);
+		$partner->update( $data );
+
+
+
+		return Redirect::route('partners.edit', [$partner->id]);
 	}
 
 	/**
@@ -141,6 +204,6 @@ class PartnersController extends Controller
 		}*/
 		$partnerID = Crypt::decrypt($encryptedPartnerID);
 		Partner::destroy($partnerID);
-		return Redirect::back();
+		return Redirect::route('partners.index');
 	}
 }

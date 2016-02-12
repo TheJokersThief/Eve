@@ -13,7 +13,7 @@ class Event extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		'description', 'location_id', 'start_datetime', 'end_datetime', 'title', 'featured_image', 'price'
+		'description', 'tagline', 'location_id', 'start_datetime', 'end_datetime', 'title', 'featured_image', 'price'
 	];
 
 	public function location(){

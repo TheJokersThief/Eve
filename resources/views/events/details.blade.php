@@ -21,7 +21,7 @@
 <div class="divider"></div>
 <div class="section">
 		<div class="row">
-			<div class="col s2"><h5>Location:<h5></div>
+			<div class="col s2"><h5>Location:</h5></div>
 	    <div class="col s10"><p>{{ $event->location->name }}</p></div>
 	</div>
 </div>

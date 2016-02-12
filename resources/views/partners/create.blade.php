@@ -24,7 +24,7 @@
 
 		<div class="row">
 			<div class="input-field col s12">
-				{!! Form::text('name', null, ['placeholder' => 'Partner Name', 'id' => 'name']) !!}
+				{!! Form::text('name', null, ['id' => 'name']) !!}
 				{!! Form::label('name', 'Partner Name:') !!}
 			</div>
 		</div>
@@ -58,24 +58,38 @@
 				{!! Form::label('description', 'Partner Description:') !!}
 			</div>
 		</div>
-
-		<div class="row"><!-- To be calculated by the Google API in a later version -->
-			<div class="input-field col s12 m6">
-				{!! Form::number('distance', null, ['id' => 'distance', 'step' => 'any', 'min' => '0'] ) !!}
-				{!! Form::label('distance', 'Distance:') !!}
+		<div class="row">
+			<div class="input-field col s12">
+				{!! Form::label('url', 'Website: ') !!}
+				{!! Form::text('url', null, ['placeholder'=>'http://www.example.com']) !!}
+			</div>
+		</div>
+		<div class="row">
+			<div class="file-field input-field col s12 m6">
+				<div class="btn">
+					<span>Logo</span>
+					{!! Form::file('logo') !!}
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
 			</div>
 			<div class="file-field input-field col s12 m6">
 				<div class="btn">
 					<span>Feature Image</span>
 					{!! Form::file('picture') !!}
-					<!--<input type="file">-->
 				</div>
 				<div class="file-path-wrapper">
 					<input class="file-path validate" type="text">
 				</div>
 			</div>
 		</div>
-
+		<div class="row">
+			<div class="input-field col s12"><!-- To be calculated by the Google API in a later version -->
+				{!! Form::number('distance', null, ['id' => 'distance', 'step' => 'any', 'min' => '0'] ) !!}
+				{!! Form::label('distance', 'Distance:') !!}
+			</div>
+		</div>
 		<div class="row">
 			<div class="input-field col s12">
 				{!! Form::text('email', null, ['placeholder' => 'name@host.com', 'id' => 'email']) !!}

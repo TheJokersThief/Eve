@@ -1,3 +1,11 @@
+<footer class="page-footer">
+  <div class="footer-copyright">
+    <div class="container">
+    	&copy; {{ date('Y') }} Copyright
+    </div>
+  </div>
+</footer>
+
 	@if(!Auth::check())
 		<div class="row modal-row">
 			<div id="login-modal" class="col s12 m4 offset-m4 modal">

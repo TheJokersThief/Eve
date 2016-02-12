@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -68,5 +69,15 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * Action to be performed AFTER a user has been authenticated
+     * and logged in
+     * @param  Request $request
+     * @return redirect           Back to whence they came from
+     */
+    protected function authenticated( Request $request ){
+    	return redirect()->back();
     }
 }

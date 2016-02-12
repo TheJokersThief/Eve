@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('body-class') userProfile-page @endsection
+@section('title') {{$user->name}} @endsection
 
 @section('content')
 <main>
@@ -9,12 +10,22 @@
 			<div class="section">
 				<div class="row">
 					<div class="col s6 m4 l3">
-						<img class="responsive-img circle" src="{{$user->profile_picture}}">
+						<img class="responsive-img circle hide-on-small-only" src="{{$user->profile_picture}}">
 					</div>
 					<div class="col s12 m7 l8 offset-m1 offset-l1">
-                        <h1>{{$user->name}}</h1>
-                        <p class="flow-text">{{ $user->bio }}</p>
+						<div class="row">
+							<h2 class="col l5 m7 s12">{{$user->username}}</h2>
+	                        <h2 class="col l7 m5 s12">({{$user->name}})</h2>
+	                    </div>
+	                    <div class="row col s12">
+	                        <p class="flow-text">{{ $user->bio }}</p>
+	                    </div>
                     </div>
+                    @unless(!Auth::check() || ! (Auth::user()->id == $user->id || Auth::user()->is_admin))
+                    	<div class="col s12">
+				<a href="{{ URL::route('user/edit', Crypt::encrypt($user->id)) }}"class="waves-effect waves-light btn">Edit profile</a>
+			</div>
+                    @endunless
                 </div>
             </div>
 			<div class="divider"></div>
@@ -61,6 +72,20 @@
 							</div>
 						</div>
 					@endforeach
+				</div>
+			</div>
+		</div>
+	@else
+	    <div class="section">
+			<div class="section">
+				<h5 class="center-align">Oh bother.</h5>
+			</div>
+			<h5 class="center-align">{{$user->name}} is not attending any events soon</h5>
+			<div class="section">
+				<div class="center-align">
+					<div class="col s3 m3">
+						<a href="{{ action('EventsController@index') }}" class="waves-effect waves-light btn">See Events</a>
+					</div>
 				</div>
 			</div>
 		</div>

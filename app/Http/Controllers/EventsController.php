@@ -79,6 +79,7 @@ class EventsController extends Controller
 		// Get the required fields from the form
 		$data = $request->only( [
 					'title',
+					'tagline',
 					'description',
 					'partner_id',
 					'start_date',
@@ -87,13 +88,13 @@ class EventsController extends Controller
 					'featured_image',
 					'start_time',
 					'end_time',
-					'location_id',
-					'price'
+					'location_id'
 				]);
 
 		// Validate all input
 		$validator = Validator::make( $data, [
 					'title'  => 'required',
+					'tagline'  => 'required',
 					'description'  => 'required',
 					'partner_id' => 'required',
 					'start_date'  => 'required',
@@ -108,7 +109,7 @@ class EventsController extends Controller
 		// If validation fails;
 		if( $validator->fails( ) ){
 			// Redirect back to registration form with errors
-			return Redirect::to( 'events' )
+			return Redirect::to( 'events/create' )
 					->withErrors( $validator )
 					->withInput( );
 		}
@@ -132,6 +133,7 @@ class EventsController extends Controller
 
 		$newData = array(
 				"title" => $data["title"],
+				"tagline" => $data["tagline"],
 				"description" => $data["description"],
 				"start_datetime" => $start_datetime,
 				"end_datetime" => $end_datetime,
@@ -214,6 +216,7 @@ class EventsController extends Controller
 		// Get the required fields from the form
 		$data = $request->only( [
 					'title',
+					'tagline',
 					'description',
 					'partner_id',
 					'featured_image',
@@ -228,6 +231,7 @@ class EventsController extends Controller
 		// Validate the data
 		$validator = Validator::make( $data, [
 					'title'  => 'required',
+					'tagline' => 'required',
 					'description'  => 'required',
 					'partner_id' => 'required',
 					'start_date'  => 'required',
@@ -253,6 +257,7 @@ class EventsController extends Controller
 
 		$newData = array(
 				"title" => $data["title"],
+				"tagline" => $data["tagline"],
 				"description" => $data["description"],
 				"start_datetime" => $start_datetime,
 				"end_datetime" => $end_datetime,

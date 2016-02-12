@@ -7,28 +7,33 @@
 @section('content')
 	<main class="row">
 		<div class="col s12 m8 offset-m2">
-			<div class="col l3 m4, hide-on-small-only" id="userInfo">
-				<div class="collection">
-					<div class="hide-on-med-and-down">
-						<img src="{{$me->profile_picture}}">
-					</div>
+			<div class="col l4 m4, hide-on-small-only">
+				<div id="profile-card" class="card hide-on-small-only">
+	                <div class="card-image waves-effect waves-block waves-light">
+	                    <img class="activator" src="{{ URL::to('/') . '/images/red-geometric-background.png'}}" alt="user background">
+	                </div>
+	                <div class="card-content">
+	                    <img src="{{$me->profile_picture}}" alt="" class="circle responsive-img activator card-profile-image">
 
-					<div class="row">
-						<div class="col s10">
-							<span class="card-title">User Name: {{$me->name}}</span>
-							<p>{{$me->bio}}</p>
-						</div>
-					</div>
-				</div>
+	                    <span class="card-title activator grey-text text-darken-4">{{ $me->name }}</span>
+	                    <p><i class="mdi-communication-email cyan-text text-darken-2"></i> {{ $me->email }}</p>
+	                    <p><i class="fa fa-map-marker cyan-text text-darken-2"></i> {{ $me->city }}, {{ $me->country }}</p>
+	                    <p><i class="fa fa-language cyan-text text-darken-2"></i> {{ $me->language }}</p>
+	                </div>
+	                <div class="card-reveal">
+		                    <span class="card-title grey-text text-darken-4">{{$me->name}} <i class="mdi-navigation-close right"></i></span>
+		                    <p>{{ str_limit( $me->bio, 300 ) }}</p>
+		                </div>
+	            </div>
 			</div>
 
 			{!! Form::open([
-				"route" => 'user',
+				"route" => array('user', Crypt::encrypt($me->id)),
 				"method" => "POST",
 				"files" => true
 			]) !!}
 
-			<div class="col l9 m8 s12"/>
+			<div class="col l7 m7 s12"/>
 				<ul class="collection flow-text input-field">
 					<li class="collection-item"><strong>Name:</strong>
 						<div class="secondary-content">
