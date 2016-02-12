@@ -13,7 +13,6 @@
 	    {!! Form::text('search', 
 				null, 
 				array('required',
-                'class'=>'form-control',
                 'placeholder'=>'Search for a user'))
 	    !!}
 
