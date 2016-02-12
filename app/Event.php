@@ -28,6 +28,10 @@ class Event extends Model
 		return $this->hasMany('App\Ticket');
 	}
 
+	public function media(){
+		return $this->hasMany('App\Media');
+	}
+
 	/**
 	 * Start time string for humans.
 	 */
