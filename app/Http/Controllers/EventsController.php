@@ -53,7 +53,7 @@ class EventsController extends Controller
 
         $userIds = DB::table('tickets')
                      ->where('event_id', $event->id)
-                     ->take(48)
+                     ->take(10)
                      ->pluck('user_id');
 
         $users = DB::table('users')

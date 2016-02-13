@@ -8,11 +8,13 @@ use Auth;
 use Image;
 use Hash;
 use View;
+use Crypt;
 use Response;
 use App\User;
 use App\Media;
 use App\Ticket;
 use App\Setting;
+use App\Event;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -28,6 +30,11 @@ class MediaController extends Controller
 
 		$media = Media::where('processed', false)->get()->chunk(6);
 		return View::make('media.unprocessed')->with('media', $media);
+	}
+
+	public function uploadFiles( Request $request, $encryptedEventID ){
+		$event = Event::find( Crypt::decrypt( $encryptedEventID ) );
+		return View::make('media.upload')->with('event', $event);
 	}
 
 	public function viewUnprocessedMediaForEvent( $eventID ){

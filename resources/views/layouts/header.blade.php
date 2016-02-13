@@ -96,3 +96,5 @@
 			</div>
 		@endif
 	</header>
+
+	<div class="body-wrapper">

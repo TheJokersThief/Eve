@@ -67,7 +67,7 @@ Route::group(['middleware' => ['web']], function () {
 	// USERS //
 	///////////
 
-	
+
 
 	Route::group(['prefix' => 'user'], function(){
         Route::group(['middleware' => 'auth'], function(){
@@ -114,12 +114,26 @@ Route::group(['prefix' => 'api', 'middleware' => ['api']], function () {
 		Route::post('approve', 'ApiController@approveMedia');
 	});
 
+	Route::group(['prefix' => 'media', 'middleware' => 'auth'], function(){
+		Route::post('upload/{encryptedEventID}', ['as' => 'api/media/upload', 'uses' => 'ApiController@uploadMedia']);
+		Route::post('rename', ['as' => 'api/media/rename', 'uses' => 'ApiController@renameMedia']);
+	});
+
 });
 
 // Gets uploaded files via a public url
 Route::get('{directory}/{image}', function( $directory, $image = null)
 {
 	$path = storage_path(). '/'. $directory .'/' . $image;
+	if (file_exists($path)) {
+		return Response::download($path);
+	}
+});
+
+// Event photos are divided by hashed event id
+Route::get('event-photos/{directory}/{image}', function( $directory, $image = null)
+{
+	$path = storage_path(). '/event-photos/'. $directory .'/' . $image;
 	if (file_exists($path)) {
 		return Response::download($path);
 	}

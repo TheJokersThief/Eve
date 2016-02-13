@@ -9,7 +9,7 @@ $( document ).ready(function($){
 	    selectYears: 15, // Creates a dropdown of 15 years to control year
 	    format: 'yyyy-mm-dd' // Formats the date
 	});
-        
+
 	$('select').material_select();
 
 	// Rewrite iCal Links to be integrated to services
@@ -19,7 +19,7 @@ $( document ).ready(function($){
 			var link = $(this).attr('href');
 
 			var link = link.replace(window.location.protocol + "//", "webcal://");
-			
+
 			if(navigator.platform.toUpperCase().indexOf('LINUX')>=0 || navigator.platform.toUpperCase().indexOf('WIN')>=0){
 				link = "https://www.google.com/calendar/render?cid=" + link;
 			}
@@ -50,7 +50,7 @@ function createUser( ){
 		cache: false,
         contentType: false,
         processData: false,
-        data: formData,	
+        data: formData,
         beforeSend: function( ){
         	$('#personal-details-errors').empty();
         },
@@ -77,7 +77,7 @@ function createCompany( ){
 		cache: false,
         contentType: false,
         processData: false,
-        data: formData,	
+        data: formData,
         beforeSend: function( ){
         	$('#company-details-errors').empty();
         },
@@ -145,7 +145,7 @@ function autofillInformation( ){
         contentType: false,
         processData: false,
         beforeSend: function( ){
-        	
+
         },
 		success: function(data) {
 			for( var key in data ){
@@ -181,7 +181,7 @@ function createLocation( ){
 		cache: false,
         contentType: false,
         processData: false,
-        data: formData,	
+        data: formData,
 		success: function(data) {
 			if( data.errors ){
 				// If we have validation errors, display them
@@ -239,6 +239,68 @@ function fillInfo( ){
 	}
 
 	if( $('[name=title]').val() != '' ){
-		$('.title').text($('[name=title]').val());		
+		$('.title').text($('[name=title]').val());
 	}
+}
+
+/* MEDIA */
+function initDropzone( ){
+	Dropzone.options.fileupload = {
+		init: function(){
+			this.on('addedfile', function( file ){
+				var filename = file.name.replace('.', '').replace(' ', '');
+
+				// Add the file to our list with a progress bar
+				$('.uploaded-images').append(
+					`
+					<li class="collection-item" id="`+filename+`">
+						<p>`+file.name+`</p>
+						<div class="progress">
+							<div class="determinate"></div>
+						</div>
+					</li>
+					`
+				);
+			});
+
+			this.on('uploadprogress', function( file, progress, bytesSent ){
+				var filename = file.name.replace('.', '').replace(' ', '');
+				$('#'+filename+" .determinate").width( progress + "%" );
+			});
+
+			this.on('success', function( file, response ){
+				var filename = file.name.replace('.', '').replace(' ', '');
+
+				$('#'+filename).remove();
+				$('.uploaded-images').append(
+					`
+						<li class="collection-item avatar" id="`+filename+`">
+							<img src="`+response.file_location+`" alt="" class="circle">
+
+							<div class="image-name">
+								<div class="input-field col s12">
+									<input placeholder="`+file.name+` (Start typing to rename)" id="title" type="text" onchange="updateImageTitle( this.value, ` + response.media_id + ` )">
+						        </div>
+							</div>
+							<a href="#!" class="secondary-content"><i class="fa fa-times red-text"></i></a>
+						</li>
+					`
+				);
+			});
+
+		}
+	};
+}
+
+function updateImageTitle( title, media_id ){
+	$.ajax({
+		url: '/api/media/rename',
+		type: 'post',
+		cache: false,
+		dataType: 'json',
+        data: {
+        	"title" : title,
+        	"mediaID"  : media_id
+        }
+	});
 }

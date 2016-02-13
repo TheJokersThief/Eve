@@ -55,6 +55,9 @@ strong{
 	border: 0;
 }
 
+html, body, .body-wrapper { height: 100%; }
+body > .body-wrapper { height: auto; min-height: 100%; }
+
 body{
 	@import "_home.less";
 	@import "_admin.less";
@@ -370,6 +373,12 @@ body{
 				position: absolute;
 				top: 0px;
 				letter-spacing: 0px;
+			}
+		}
+
+		.popup-gallery{
+			a img{
+				display: block;
 			}
 		}
 	}

@@ -17,12 +17,13 @@ class DatabaseSeeder extends Seeder
         $this->call(SettingsSeeder::class);
         $this->call(LocationSeeder::class);
         $this->call(EventsTableSeeder::class);
-        $this->call(MediaTableSeeder::class);
         $this->call(PartnersTableSeeder::class);
         $this->call(LocationsTableSeeder::class);
         $this->call(EventPartnersTableSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(MediaTableSeeder::class);
         $this->call(NewsSeeder::class);
+        $this->call(TicketSeeder::class);
 
         Model::reguard();
     }
