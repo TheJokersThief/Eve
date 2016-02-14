@@ -5,7 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use QrCode;
 use Crypt;
-use App\User;
+use Cache;
+
 
 class Ticket extends Model
 {
@@ -25,20 +26,35 @@ class Ticket extends Model
 	 * @return string Ticket Code
 	 */
 	public function code(){
-		$arr = [  "id"     => $this->id,
+		$cacheKey = "ticket:{$this->id}";
+
+		$code = Cache::get($cacheKey);
+
+		if($code == null){
+			$arr = [  "id" => $this->id,
 				"user_id"  => $this->user_id,
 				"event_id" => $this->event_id ];
 
-		return Crypt::encrypt( json_encode($arr) );
+			$code = Crypt::encrypt( json_encode($arr) );
+
+			// Cache the given code for 180 minutes
+			Cache::put($cacheKey, $code, 180);
+		}
+
+		return $code;
+
 	}
 
 	/**
 	 * Returns a code for an SVG QR code pointing to
 	 * the ticket's validate page.
+	 *
+	 * @param   int $size   Integer value of number of pixels that represent the code's side length
+	 *
 	 * @return string As above
 	 */
-	public function qr(){
-		QrCode::size(225);
+	public function qr($size = 225){
+		QrCode::size($size);
 		return QrCode::generate( "http://" . $_SERVER["HTTP_HOST"] . "/tickets/verify/" . $this->code() );
 	}
 
