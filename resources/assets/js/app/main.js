@@ -27,10 +27,6 @@ $( document ).ready(function($){
 			$(this).attr('href', link);
 		});
 	}
-
-    //Activate tooltip
-    $('[data-toggle="tooltip"]').tooltip();
-
 });
 
 function updateProgressBar( elementId, newValue ){
