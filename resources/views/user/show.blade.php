@@ -23,8 +23,8 @@
                     </div>
                     @unless(!Auth::check() || ! (Auth::user()->id == $user->id || Auth::user()->is_admin))
                     	<div class="col s12">
-				<a href="{{ URL::route('user/edit', Crypt::encrypt($user->id)) }}"class="waves-effect waves-light btn">Edit profile</a>
-			</div>
+							<a href="{{ URL::route('user/edit', Crypt::encrypt($user->id)) }}"class="waves-effect waves-light btn">Edit profile</a>
+						</div>
                     @endunless
                 </div>
             </div>

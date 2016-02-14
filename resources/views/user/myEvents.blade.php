@@ -9,8 +9,8 @@
 		<nav class="oldEvents">
 	    	<div class="nav-wrapper" >
       			<div class="col s12">
-      				<a href="{{ URL::route('myEvents') }}" class="breadcrumb">Upcoming Events</a>
-       				<a href="{{ URL::route('pastEvents') }}" class="breadcrumb">  </a>
+      				<a href="{{ URL::route('myEvents') }}" class="breadcrumb"><span class="grey-text text-darken-4">Upcoming Events</span></a>
+       				<a href="{{ URL::route('pastEvents') }}" class="breadcrumb">Past Events</a>
       			</div>
 	   		</div>
 	  	</nav>
