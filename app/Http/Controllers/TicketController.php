@@ -39,6 +39,18 @@ class TicketController extends Controller
 	}
 
 	/**
+	 * Return a printable view of the ticket
+	 * @param  Integer  $eventId    ID of the ticket to be printed
+	 * @return View                 Printable ticket view
+	 */
+	public function printableNameTag($ticketId){
+		$ticket = Ticket::findOrFail($ticketId);
+
+		return view( 'tickets.nametag', compact('ticket') );
+	}
+
+
+	/**
 	 * Return a representation of a ticket.
 	 * @param  Integer 	$eventId 	ID of the event to view
 	 * @return View          		Ticket View
@@ -141,6 +153,7 @@ class TicketController extends Controller
 					"event_id" => $event->id,
 					"price" => $event->price,
 					"used" => false,
+					"printed" => false,
 					"charge_id" => $charge->id //Reference to transaction details in Stripe
 				]
 			);
@@ -151,6 +164,7 @@ class TicketController extends Controller
 					"event_id" => $event->id,
 					"price" => $event->price,
 					"used" => false,
+					"printed" => false,
 					"charge_id" => null // No charge made
 				]
 			);
@@ -190,6 +204,30 @@ class TicketController extends Controller
 		}
 	}
 
+	public function markPrinted($ticketId){
+		if(Auth::check() && Auth::user()->is_staff){
+			try{
+				$ticket = Ticket::findOrFail($ticketId);
+			} catch (ModelNotFoundException $e){
+				return ["success" => false, "message" => "Not found!"];
+			}
+			$ticket->printed = true;
+			$ticket->save();
+			return ["success" => true, "message" => "Ticket marked as printed!"];
+		} else {
+			return ["success" => false, "message" => "Not logged in!"];
+		}
+	}
+
+	/**
+	 * @return A JSON respnose with a list of all the tickets
+	 * scanned by this authenticated user, that haven't been marked done
+	 */
+	public function ticketsToPrint(){
+		return Ticket::where('scanned_by', Auth::user()->id)
+					 ->where('printed', false)
+			         ->get();
+	}
 
 	/**
 	 * Generates and returns an iCal file for a ticket.

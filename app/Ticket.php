@@ -16,9 +16,11 @@ class Ticket extends Model
 		'used',
 		'scanned_by',
 		'price',
-		'charge_id'
+		'charge_id',
+		'printed'
 	];
 
+	protected $appends = ["user_name", "event_title"];
 	/**
 	 * Generates a code to be used in a QR code representation
 	 * of the ticket, containing the ticket ID, user id and event id.
@@ -44,6 +46,7 @@ class Ticket extends Model
 		return $code;
 
 	}
+
 
 	/**
 	 * Returns a code for an SVG QR code pointing to
@@ -76,6 +79,14 @@ class Ticket extends Model
 		return $query->where('id',     $decoded->id)
 					 ->where("user_id", $decoded->user_id)
 					 ->where("event_id", $decoded->event_id);
+	}
+
+	public function getUserNameAttribute(){
+		return $this->user->name;
+	}
+
+	public function getEventTitleAttribute(){
+		return $this->event->title;
 	}
 
 

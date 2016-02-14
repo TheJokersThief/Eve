@@ -62,6 +62,15 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('unprocessed/{eventID}', ['as' => 'media.unprocessedForEvent', 'uses' => 'MediaController@viewUnprocessedMediaForEvent']);
 	});
 
+	Route::group(['prefix' => 'staff', 'middleware' => ['staff']], function( ){
+		Route::get('/', ['as' => 'staff.home', 'uses' => 'StaffController@index']);
+
+		Route::get("toPrint", 'TicketController@ticketsToPrint');
+		Route::get("markPrinted/{id}", 'TicketController@markPrinted');
+		Route::get("nameTag/{id}", 'TicketController@printableNameTag');
+	});
+
+
 
 	///////////
 	// USERS //
