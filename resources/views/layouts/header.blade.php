@@ -21,8 +21,20 @@
 <body class="@yield('body-class')">
     @yield('before-page')
     <header>
+		{!! Form::open([
+			"route" => 'search',
+			"method" => "GET"
+		]) !!}
     	<nav>
 			<div class="nav-wrapper container">
+			  <div class="left input-field hide-on-med-and-down">
+				  {!! Form::text('search', 
+						null, 
+						array('required',
+			            'placeholder'=>'Search for a user'))
+				  !!}
+				  <label for="search"><i class="material-icons">search</i></label>
+			  </div>
 			  <a href="{{ URL::to('/home') }}" class="brand-logo">
 
 			  	@if( ($logo = App\Setting::where('name', 'company_logo')->first()->setting) != '' )
@@ -56,7 +68,9 @@
 			  	@endif
 			  </ul>
 			  <ul class="side-nav" id="mobile-demo">
-
+			  <div class="input-field">
+				  <label for="search"><i class="material-icons">search</i></label>
+			  </div>
 			  	@if( Auth::check( ) )
 			  		@if( Auth::user()->is_admin )
 						<li><a href="{{ URL::route('admin.home') }}">Admin</a></li>
@@ -75,6 +89,10 @@
 			  	@endif
 
 			  </ul>
+			  <div class="hide">
+					{!! Form::submit() !!}
+			  </div>
+			  {!! Form::close() !!}
 			</div>
 		</nav>
 		@if(isset($errors) && !empty($errors->all()))

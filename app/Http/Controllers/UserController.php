@@ -167,6 +167,9 @@ class UserController extends Controller
 
 	/**
 	 *   Test function for updating user information
+	 *	@param Request $request
+	 *	@param $encryptedID		The users encryped id
+	 *	@return Redirect
 	 */
 	public function updateUserInfo(Request $request, $encryptedID){
 
@@ -271,6 +274,7 @@ class UserController extends Controller
 
 	/**
 	 *   Returns the users personal page where they can update their info
+	 *	 @return VIEW
 	 */
 	public function edit( $encryptedID ){
 		$userID = Crypt::decrypt($encryptedID);
@@ -284,6 +288,7 @@ class UserController extends Controller
 
 	/**
 	 *   Returns a users myEvents view
+	 *	 @return VIEW
 	 */
 	public function myEvents(){
 		$me = Auth::user();
@@ -292,16 +297,13 @@ class UserController extends Controller
 
 	/**
 	 *   Returns the users pastEvents view
+	 *	 @return VIEW
 	 */
 	public function pastEvents(){
 		$me = Auth::user();
 		$me->tickets = $me->tickets()->where('used', true)->get();
 		return view('user.pastEvents')->with('me', $me);
 
-	}
-
-	public function test(){
-		return view('user.search');
 	}
 
 	/**
@@ -311,25 +313,9 @@ class UserController extends Controller
 	 */
 	public function search(Request $request){
 		$query = $request->input('search');
-
-		try{
-			$user = User::where('name', 'LIKE', '%' . $query . '%')->firstOrFail();
-        } catch (ModelNotFoundException $e){
-            try{
-                $user = User::findOrFail($idOrUsername);
-            } catch (ModelNotFoundException $f){
-                return response(view('errors.404', ['error' => 'This user account could not be found.']), 404);
-            }
-        }
-
-        $eventIds = DB::table('tickets')
-                      ->where('user_id', $user->id)
-                      ->pluck('event_id');
-
-        $events = DB::table('events')
-                    ->whereIn('id', $eventIds)
-                    ->get();
-
-        return view('user.show', compact('user', 'events'));
+		
+		$users = User::where('name', 'LIKE', '%' . $query . '%')->paginate(10);
+              //  return response(view('errors.404', ['error' => 'This user account could not be found.']), 404);
+        return view('user.pageResults', compact('users'));
 	}
 }

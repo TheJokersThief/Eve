@@ -76,9 +76,6 @@ Route::group(['middleware' => ['web']], function () {
 	///////////
 	// USERS //
 	///////////
-
-
-
 	Route::group(['prefix' => 'user'], function(){
         Route::group(['middleware' => 'auth'], function(){
             Route::get('profile', ['as' => 'me', 'uses' => 'UserController@index']);
@@ -96,6 +93,11 @@ Route::group(['middleware' => ['web']], function () {
         });
         Route::get('show/{nameOrId}', ['as' => 'user/show', 'uses' => 'UserController@show']);
 	});
+
+	//////////////////////
+	// SEARCH FUNCTION ///
+	//////////////////////
+    Route::get('search', ['as' => 'search', 'uses' => 'UserController@search']);
 
 });
 
