@@ -37,6 +37,7 @@ Route::group(['middleware' => ['web']], function () {
 	// EVENTS //
 	////////////
 	Route::resource('events', 'EventsController');
+	Route::get('events/upload/{encryptedEventID}', ['as' => 'media/upload', 'uses' => 'MediaController@uploadFiles']);
 
 	//////////////
 	// PARTNERS //
