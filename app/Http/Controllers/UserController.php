@@ -224,6 +224,10 @@ class UserController extends Controller
 		return Redirect::route('user/edit', Crypt::encrypt( $userID ) );
 	}
 
+	/**
+	 * Shows all events for a logged in user
+	 * @return VIEW
+	 */
 	public function index(){
 		$user = Auth::user();
 
@@ -238,6 +242,11 @@ class UserController extends Controller
         return view('user.show', compact('user', 'events'));
 	}
 
+	/**
+	 * Display individual user profiles
+	 * @param  string $idOrUsername
+	 * @return VIEW
+	 */
     public function show($idOrUsername){
         try{
             $user = User::where('username', $idOrUsername)->firstOrFail();
@@ -294,6 +303,12 @@ class UserController extends Controller
 	public function test(){
 		return view('user.search');
 	}
+
+	/**
+	 * Searches for a user
+	 * @param  Request $request
+	 * @return VIEW
+	 */
 	public function search(Request $request){
 		$query = $request->input('search');
 
