@@ -14,8 +14,8 @@
 					</div>
 					<div class="col s12 m7 l8 offset-m1 offset-l1">
 						<div class="row">
-							<h2 class="col l5 m7 s12">{{$user->username}}</h2>
-	                        <h2 class="col l7 m5 s12">({{$user->name}})</h2>
+							<h3 class="col s12">{{$user->username}}</h3>
+	                        <h5 class="col s12">({{$user->name}})</h5>
 	                    </div>
 	                    <div class="row col s12">
 	                        <p class="flow-text">{{ $user->bio }}</p>
