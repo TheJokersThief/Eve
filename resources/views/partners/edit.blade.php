@@ -17,6 +17,11 @@
 
 <main class="container row">
 	<div class="col m8 offset-m2 s12">
+		<div class="row">
+			<div class="col s12">
+				<h1>Editing Partner: {{ $partner->name }}</h1>
+			</div>
+		</div>
 		{!! Form::open( ['method' => 'PUT', 'route' => ['partners.update', $partner->id] , 'id' => 'partner-form', 'files' => true] ) !!}
 
 		<div class="row">
@@ -60,16 +65,27 @@ selected
 			</div>
 		</div>
 
-		<div class="row"><!-- To be calculated by the Google API in a later version -->
-			<div class="input-field col s12 m6">
-				{!! Form::number('distance', $partner->distance, ['id' => 'distance', 'step' => 'any', 'min' => '0'] ) !!}
-				{!! Form::label('distance', 'Distance:') !!}
+		<div class="row">
+			<div class="input-field col s12">
+				{!! Form::label('url', 'Website: ') !!}
+				{!! Form::text('url', $partner->url, ['placeholder'=>'http://www.example.com']) !!}
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="file-field input-field col s12 m6">
+				<div class="btn">
+					<span>Logo</span>
+					{!! Form::file('logo') !!}
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
 			</div>
 			<div class="file-field input-field col s12 m6">
 				<div class="btn">
 					<span>Feature Image</span>
 					{!! Form::file('featured_image') !!}
-					<!--<input type="file">-->
 				</div>
 				<div class="file-path-wrapper">
 					<input class="file-path validate" type="text">
@@ -77,6 +93,12 @@ selected
 			</div>
 		</div>
 
+		<div class="row">
+			<div class="input-field col s12">
+				{!! Form::number('distance', $partner->distance, ['id' => 'distance', 'step' => 'any', 'min' => '0'] ) !!}
+				{!! Form::label('distance', 'Distance:') !!}
+			</div>
+		</div>
 		<div class="row">
 			<div class="input-field col s12">
 				{!! Form::text('email', $partner->email, ['placeholder' => 'name@host.com', 'id' => 'email']) !!}
@@ -89,9 +111,10 @@ selected
 				</div>
 			</div>
 		{!! Form::close() !!}
+
 		{{ Form::open(['route' => ['partners.destroy', Crypt::encrypt($partner->id)], 'method' => 'delete', 'class' => 'inline-form']) }}
-										<button type="submit" ><i class="fa fa-times red-text" alt="Delete Partner"></i></button>
-									{{ Form::close() }}
+		<button type="submit" class="waves-effect waves-light btn deep-orange accent-4 tooltipped" data-position="top" data-tooltip="Be careful! This action can't be undone!" >Delete Partner</button>
+		{{ Form::close() }}
 	</div>
 </main>
 
