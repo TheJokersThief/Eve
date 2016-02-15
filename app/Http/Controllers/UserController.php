@@ -30,7 +30,7 @@ class UserController extends Controller
 	 */
 	public function logout( ){
 		Auth::logout();
-		return Redirect::home();
+		return Redirect::to('/');
 	}
 
 	/**
@@ -314,7 +314,7 @@ class UserController extends Controller
         $events = DB::table('events')
                     ->whereIn('id', $eventIds)
                     ->get();
-                    
+
         return view('user.show', compact('user', 'events'));
 	}
 }
