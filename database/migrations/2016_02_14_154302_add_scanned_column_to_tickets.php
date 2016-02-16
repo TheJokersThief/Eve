@@ -24,6 +24,8 @@ class AddScannedColumnToTickets extends Migration
      */
     public function down()
     {
-	    $table->dropColumn('printed');
+        Schema::table('tickets', function (Blueprint $table) {
+    	    $table->dropColumn('printed');
+        });
     }
 }
