@@ -165,7 +165,7 @@
 	<div class="modal-content">
 	  <h4>Create New Location</h4>
 	  <ul id="location-errors"></ul>
-		{!! Form::open( ['route' => 'events.store'] ) !!}
+		{!! Form::open( ['route' => 'events.store', 'files' => true] ) !!}
 			<div class="row">
 				<div class="input-field col m6 s12">
 					{!! Form::label('name','Location Name')	!!}
@@ -178,6 +178,15 @@
 				<div class="input-field col m6 s12">
 					{!! Form::label('coordinates','Location Coordinates')	!!}
 					{!! Form::text('coordinates') !!}
+				</div>
+				<div class="file-field input-field col m6 s12">
+					<div class="btn">
+						<span>Feature Image</span>
+						{!! Form::file('featured_image') !!}
+					</div>
+					<div class="file-path-wrapper">
+						<input class="file-path validate" type="text">
+					</div>
 				</div>
 			</div>
 		{!! Form::close() !!}
