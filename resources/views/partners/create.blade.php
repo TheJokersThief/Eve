@@ -103,5 +103,5 @@
 		</div>
 	</div>
 </main>
-
+@include("forms.locationmodal")
 @endsection
