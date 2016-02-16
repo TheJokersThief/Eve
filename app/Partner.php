@@ -28,7 +28,7 @@ class Partner extends Model
 	}
 
 	public function events(){
-		return $this->belongsToMany('App\Event', 'event_partners');
+		return $this->belongsToMany('App\Event', 'event_partners')->withPivot('distance');
 	}
 
 	//public function media(){
