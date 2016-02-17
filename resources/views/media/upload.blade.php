@@ -1,7 +1,3 @@
-@extends('layouts.app')
-
-{{-- The sections detailed here are for viewing a singular page. If you wish to include this modal into another page, the appropriate sections must copied into the parent page's sections as well. Otherwise, only the "content" section will be visible --}}
-
 @section('body-class') @parent media-upload @endsection
 
 @section('extra-js')
