@@ -12,6 +12,9 @@
 */
 
 
+Route::get('/emailtest', 'MailController@index');
+
+
 Route::group(['middleware' => ['web']], function () {
 	Route::auth();
 	Route::get('/home', 'HomeController@index');
@@ -106,7 +109,7 @@ Route::group(['prefix' => 'tickets', 'middleware' => 'web'], function(){
     Route::get('verify/{code}', 'TicketController@verify');
     Route::get('ical/{code}', 'TicketController@iCal');
     Route::get('print/{id}', [ 'as' => 'tickets/print', 'uses' => 'TicketController@printable']);
-    Route::get('{id}', 'TicketController@show');
+    Route::get('{id}', ['as' => 'tickets/show', 'uses' => 'TicketController@show']);
 });
 
 Route::group(['prefix' => 'api', 'middleware' => ['api']], function () {

@@ -56,6 +56,10 @@ class TicketController extends Controller
 	 * @return View          		Ticket View
 	 */
 	public function show($eventId){
+		if( !is_numeric( $eventId ) ){
+			$eventId = Crypt::decrypt( $eventId );
+		}
+
 		$ticket = Ticket::where('user_id', Auth::user()->id)
 						->where('event_id', $eventId)
 						->firstOrFail();
@@ -63,6 +67,7 @@ class TicketController extends Controller
 
 		return view('tickets.show', compact('ticket', 'event'));
 	}
+
 
 	/**
 	 * Creates a ticket for the event for the logged-in user, or if the user
