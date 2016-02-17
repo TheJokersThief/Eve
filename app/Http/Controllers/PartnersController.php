@@ -10,6 +10,7 @@ use App\Partner;
 use App\Location;
 use App\Event;
 use Redirect;
+use DB;
 
 use Crypt;
 use Validator;
@@ -204,12 +205,8 @@ class PartnersController extends Controller
 		if(! Auth::check() || ! Auth::user()->is_admin ){
 			return response( view('errors.403', ['error' => 'You do not have permission to edit partners']), 403 );
 		}
-		/*try {
-		    $partnerID = Crypt::decrypt($encryptedPartnerID);
-		} catch (Illuminate\Contracts\Encryption\DecryptException ) {
-		    //
-		}*/
 		$partnerID = Crypt::decrypt($encryptedPartnerID);
+		DB::delete('delete from event_partners where partner_id = ?', [$partnerID]);
 		Partner::destroy($partnerID);
 		return Redirect::route('partners.index');
 	}

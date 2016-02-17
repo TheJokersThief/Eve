@@ -36,8 +36,4 @@ class Partner extends Model
 		$result = DB::select('select * from event_partners where id = ?', [$this->id]);
 		return count($result) > 0 ? true : false;
 	}
-
-	//public function media(){
-	//	return $this->hasOne('App\Media', 'id', 'picture');
-	//}
 }
