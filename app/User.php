@@ -37,7 +37,7 @@ class User extends Authenticatable
 	 */
 	protected static $graph_node_field_aliases = [
 		'id' => 'facebook_id',
-		'picture.data.url' => 'profile_picture',
+		'picture.url' => 'profile_picture',
 		'location.name' => "city"
 	];
 

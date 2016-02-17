@@ -44,7 +44,7 @@ class FacebookController extends Controller
 		Facebook::setDefaultAccessToken($token);
 
 		try {
-			$response = Facebook::get('/me?fields=id,name,email,bio,picture,location');
+			$response = Facebook::get('/me?fields=id,name,email,location,bio,picture.width(800).height(800)');
 		} catch (Facebook\Exceptions\FacebookSDKException $e) {
 			dd($e->getMessage());
 		}
