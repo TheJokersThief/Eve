@@ -19,6 +19,7 @@
 	@yield('extra-head')
 </head>
 <body class="@yield('body-class')">
+	@include('layouts.facebook-sdk')
     @yield('before-page')
     <header>
 		{!! Form::open([

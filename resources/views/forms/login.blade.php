@@ -17,6 +17,8 @@
 <button class="btn waves-effect waves-light" type="submit" name="action">Login
 	<i class="mdi-content-send right"></i>
 </button>
+<fb:login-button scope="public_profile,email,user_about_me,user_friends" onlogin="window.location.href='{{URL::to('/')}}/facebook/jsAuth'">
+</fb:login-button>
 
 {!! Form::close() 													!!}
 
