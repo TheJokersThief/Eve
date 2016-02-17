@@ -129,6 +129,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['api']], function () {
 	Route::group(['prefix' => 'media', 'middleware' => 'auth'], function(){
 		Route::post('upload/{encryptedEventID}', ['as' => 'api/media/upload', 'uses' => 'ApiController@uploadMedia']);
 		Route::post('rename', ['as' => 'api/media/rename', 'uses' => 'ApiController@renameMedia']);
+		Route::post('delete', ['as' => 'api/media/delete', 'uses' => 'ApiController@deleteMedia']);
 	});
 
 });

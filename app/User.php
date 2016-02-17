@@ -28,4 +28,8 @@ class User extends Authenticatable
 	public function tickets(){
 		return $this->hasMany('App\Ticket');
 	}
+
+	public function media(){
+		return $this->hasMany('App\Media');
+	}
 }

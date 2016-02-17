@@ -198,6 +198,10 @@ class ApiController extends Controller
 	///////////
 	// MEDIA //
 	///////////
+	/**
+	 * Handle API request to approve media for front page
+	 * @param  Request $request
+	 */
 	public static function approveMedia( Request $request ){
 		$data = $request->only([
 					'encryptedID',
@@ -210,6 +214,12 @@ class ApiController extends Controller
 		MediaController::approveMedia( $mediaID, $isApproved );
 	}
 
+	/**
+	 * Process an API upload request for images
+	 * @param  Request $request
+	 * @param  string  $encryptedEventID
+	 * @return JSON
+	 */
 	public function uploadMedia( Request $request, $encryptedEventID ){
 		$eventID = Crypt::decrypt( $encryptedEventID );
 
@@ -243,16 +253,44 @@ class ApiController extends Controller
 		return Response::json(['error' => 'No file was received']);
 	}
 
+	/**
+	 * Rename an image
+	 * @param  Request $request
+	 * @return JSON
+	 */
 	public function renameMedia( Request $request ){
 		$data = $request->only(['mediaID', 'title']);
 		$media = Media::find( $data['mediaID'] );
 
 		if( Auth::user()->id == $media->user->id ){
+			// Ensure the user owns the image
 			$media->name = $data['title'];
 			$media->save();
 			return Response::json('success');
 		} else {
 			return Response::json(['error' => 'You do not have permission to edit this image']);
 		}
+	}
+
+	/**
+	 * Delete an image from an event
+	 * @param  Request $request
+	 * @return JSON
+	 */
+	public function deleteMedia( Request $request ){
+		$data = $request->only(['encryptedEventID', 'encryptedMediaID']);
+		$eventID = Crypt::decrypt($data['encryptedEventID']);
+		$mediaID = Crypt::decrypt($data['encryptedMediaID']);
+		$media = Media::find( $mediaID );
+
+		if( $media->event_id == $eventID
+				&& $media->user_id == Auth::user()->id ){
+			// Ensure 1) media belongs to relevant event
+			// 2) The user owns that image
+			$media->delete();
+			return Response::json(['success']);
+		}
+
+		return Response::json(['error' => $this->errorMessages['no_permission']]);
 	}
 }

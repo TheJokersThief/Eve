@@ -59,3 +59,16 @@ function updateImageTitle( title, media_id ){
         }
 	});
 }
+
+function deleteImage( encryptedEventID, encryptedMediaID ){
+	$.ajax({
+		url: '/api/media/delete',
+		type: 'post',
+		cache: false,
+		dataType: 'json',
+        data: {
+        	"encryptedEventID" : encryptedEventID,
+        	"encryptedMediaID"  : encryptedMediaID
+        }
+	});
+}

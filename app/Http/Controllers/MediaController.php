@@ -23,29 +23,58 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class MediaController extends Controller
 {
 
+	private static $errorMessages = [
+		'no_permission' => 'You do not have permission to edit media.'
+	];
+
+	/**
+	 * Render view with unapproved media for all events
+	 * @return VIEW
+	 */
 	public function viewUnprocessedMedia( ){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-		   return response(view('errors.403', ['error' => 'You do not have permission to edit media.']), 403);
+		   return response(view('errors.403', ['error' => $this->errorMessages['no_permission']]), 403);
 		}
 
 		$media = Media::where('processed', false)->get()->chunk(6);
 		return View::make('media.unprocessed')->with('media', $media);
 	}
 
+	/**
+	 * View to allow users to upload photos to an event
+	 * @param  Request $request
+	 * @param  string  $encryptedEventID
+	 * @return VIEW
+	 */
 	public function uploadFiles( Request $request, $encryptedEventID ){
-		$event = Event::find( Crypt::decrypt( $encryptedEventID ) );
-		return View::make('media.upload')->with('event', $event);
+		$data['eventID'] = Crypt::decrypt( $encryptedEventID );
+		$data['event'] = Event::find( $data['eventID'] );
+		$data['images'] = Auth::user()->media->where('event_id', $data['eventID'])->sortBy('id');
+
+
+		return View::make('media.upload')->with($data);
 	}
 
+	/**
+	 * View unprocessed images for a particular event
+	 * @param  integer $eventID
+	 * @return VIEW
+	 */
 	public function viewUnprocessedMediaForEvent( $eventID ){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-		   return response(view('errors.403', ['error' => 'You do not have permission to edit media.']), 403);
+		   return response(view('errors.403', ['error' => $this->errorMessages['no_permission']]), 403);
 		}
 
 		$media = Media::where('event_id', $eventID)->where('processed', false)->get()->chunk(6);
 		return View::make('media.unprocessed')->with('media', $media);
 	}
 
+	/**
+	 * Approve a photo for the front page
+	 * @param  integer $mediaID
+	 * @param  boolean $isApproved
+	 * @return VIEW
+	 */
 	public static function approveMedia( $mediaID, $isApproved ){
 		$media = Media::find( $mediaID );
 		$media->approved = $isApproved;
@@ -53,6 +82,15 @@ class MediaController extends Controller
 		$media->save();
 	}
 
+	/**
+	 * Move an image from a user's browser to our server
+	 * @param  Image  	$image
+	 * @param  string  	$hashSeed
+	 * @param  string  	$directory
+	 * @param  boolean 	$bestFit
+	 * @param  boolean 	$fitDimensions
+	 * @return string  	URL to the image
+	 */
 	public static function uploadImage( $image, $hashSeed, $directory = "uploads", $bestFit = false, $fitDimensions = false ){
 		// Get the file from the request
 		$file = $image;
@@ -76,6 +114,11 @@ class MediaController extends Controller
 		return (string) '/'. $directory .'/'. $file_name;
 	}
 
+	/**
+	 * Upload a company logo during the installation process
+	 * @param  Image $image
+	 * @return string        The URLs for the normal and white versions of the logo
+	 */
 	public static function uploadLogo( $image ){
 		// Get the file from the request
 		$file = $image;
@@ -93,6 +136,11 @@ class MediaController extends Controller
 		return [ "normal" => (string) $folder. $file_name, "white" => (string) $folder. $file_name_white ];
 	}
 
+	/**
+	 * Completely fill the company logo with white
+	 * @param  string $source
+	 * @param  string $destination
+	 */
 	public static function whiteOverlay( $source, $destination ){
 		$image = Image::make( $source );
 		$image->colorize( 100, 100, 100 );
