@@ -44,15 +44,15 @@ class MediaController extends Controller
 	 * View to allow users to upload photos to an event
 	 * @param  Request $request
 	 * @param  string  $encryptedEventID
-	 * @return VIEW
+	 * @return array The data necessary to pass to the view
 	 */
-	public function uploadFiles( Request $request, $encryptedEventID ){
+	public static function uploadFiles( $encryptedEventID ){
 		$data['eventID'] = Crypt::decrypt( $encryptedEventID );
 		$data['event'] = Event::find( $data['eventID'] );
 		$data['images'] = Auth::user()->media->where('event_id', $data['eventID'])->sortBy('id');
 
 
-		return View::make('media.upload')->with($data);
+		return $data;
 	}
 
 	/**

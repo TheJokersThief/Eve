@@ -10,6 +10,7 @@ use App\Location;
 use App\Partner;
 use Auth;
 use Redirect;
+use Crypt;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Validator;
 use App\Http\Controllers\MediaController;
@@ -30,38 +31,40 @@ class EventsController extends Controller
 	// Show a single event
 	public function show($id){
 		// Find the event, or fail
-		$event = Event::findOrFail($id);
+		$data['event'] = Event::findOrFail($id);
 
 		// Retrieve various attributes of the location
-		$location = $event->location;
-		$location_name = $location->name;
-		$partners = $event->partners;
+		$location = $data['event']->location;
+		$data['location_name'] = $location->name;
+		$data['partners'] = $data['event']->partners;
 
 		// If the user is authorised, get the ticket
 		// for the event
 		if( Auth::check() ){
 			try{
-				$ticket = Ticket::where('user_id', Auth::user()->id)
+				$data['ticket'] = Ticket::where('user_id', Auth::user()->id)
 								->where('event_id', $id)
 								->firstOrFail();
 			}catch (ModelNotFoundException $e){
-				$ticket = false;
+				$data['ticket'] = false;
 			}
 		} else {
-			$ticket = false;
+			$data['ticket'] = false;
 		}
 
         $userIds = DB::table('tickets')
-                     ->where('event_id', $event->id)
+                     ->where('event_id', $data['event']->id)
                      ->take(10)
                      ->pluck('user_id');
 
-        $users = DB::table('users')
+        $data['users'] = DB::table('users')
                    ->whereIn('id', $userIds)
                    ->get();
 
+        $data = array_merge( $data, MediaController::uploadFiles( Crypt::encrypt($data['event']->id) ) );
+
         // Return a view of the event
-		return view('events.show', compact('event', 'location_name', 'partners', 'ticket', 'users'));
+		return view('events.show')->with($data);
 	}
 
 	// Return a view for creating an event

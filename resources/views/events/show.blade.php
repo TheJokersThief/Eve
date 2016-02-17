@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
-@section('body-class') event-page @endsection
+@section('body-class') event-page media-upload @endsection
 @section('title') {{$event->title}} @endsection
+
+@section('extra-js')
+	<script type="text/javascript">
+		$(document).ready(function( ){
+			// initDropzone( );
+		});
+	</script>
+@endsection
 
 @section('content')
 	<main class="row">
@@ -34,7 +42,7 @@
 
 							{{-- If it's just a normal user, show them how to upload images --}}
 							@if(! Auth::user()->is_admin && ! Auth::user()->is_staff )
-								<a href="{{ route('media/upload', [Crypt::encrypt($event->id)]) }}" class="right waves-effect waves-light btn">
+								<a href="#media-modal"class="right waves-effect waves-light btn modal-trigger">
 									Add Photos <i class="fa fa-pencil left"></i>
 								</a>
 							@endif
@@ -193,4 +201,6 @@
 			</div>
 		</section>
 	</main>
+
+	@include('media.upload')
 @endsection
