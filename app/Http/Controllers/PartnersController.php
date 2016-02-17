@@ -8,7 +8,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Partner;
 use App\Location;
+use App\Event;
 use Redirect;
+use DB;
 
 use Crypt;
 use Validator;
@@ -31,7 +33,7 @@ class PartnersController extends Controller
 			return response(view('errors.403', ['error' => 'You do not have permission to edit partners.']), 403);
 		}
 
-		return view('partners.create', ['locations' => Location::all()]);
+		return view('partners.create', ['locations' => Location::all(), 'events' => Event::all()]);
 	}
 
 	public function store(Request $request){
@@ -46,6 +48,7 @@ class PartnersController extends Controller
 					'price',
 					'description',
 					'location_id',
+					'event_id',
 					'distance',
 					'email',
 					'logo',
@@ -62,6 +65,7 @@ class PartnersController extends Controller
 					'price' => 'required',
 					'description' => 'required',
 					'location_id' => 'required',
+					'event_id'	=> 'required',
 					'distance' => 'required',
 					'email' => 'required',
 					'logo' => 'required|image',
@@ -112,6 +116,10 @@ class PartnersController extends Controller
 		$newPartner = Partner::create( $newData );
 
 		if( $newPartner ){
+			// Attach events to model
+			foreach($data['event_id'] as $event_id){
+				$newPartner->events()->attach($event_id);
+			}
 			return Redirect::to( 'partners' );
 		}
 
@@ -197,12 +205,8 @@ class PartnersController extends Controller
 		if(! Auth::check() || ! Auth::user()->is_admin ){
 			return response( view('errors.403', ['error' => 'You do not have permission to edit partners']), 403 );
 		}
-		/*try {
-		    $partnerID = Crypt::decrypt($encryptedPartnerID);
-		} catch (Illuminate\Contracts\Encryption\DecryptException ) {
-		    //
-		}*/
 		$partnerID = Crypt::decrypt($encryptedPartnerID);
+		DB::delete('delete from event_partners where partner_id = ?', [$partnerID]);
 		Partner::destroy($partnerID);
 		return Redirect::route('partners.index');
 	}

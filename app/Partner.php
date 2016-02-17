@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Partner extends Model
 {
@@ -31,7 +32,8 @@ class Partner extends Model
 		return $this->belongsToMany('App\Event', 'event_partners')->withPivot('distance');
 	}
 
-	//public function media(){
-	//	return $this->hasOne('App\Media', 'id', 'picture');
-	//}
+	public function isPartnered( ){
+		$result = DB::select('select * from event_partners where id = ?', [$this->id]);
+		return count($result) > 0 ? true : false;
+	}
 }

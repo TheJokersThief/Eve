@@ -41,15 +41,25 @@
 		</div>
 
 		<div class="row">
-			<div class="input-field col s12">
+			<div class="input-field col s6">
 				<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();}">
 					<option value="" disabled selected>Choose location</option>
 					@foreach($locations as $location)
 						<option value="{{$location->id}}">{{$location->name}}</option>
 					@endforeach
+					<option value="-1">Create New Location</option>
 				</select>
 				<label>Location Select</label>
 			</div>
+			<div class="input-field col s6">
+	    		<select multiple name="event_id[]" id="event-select">
+	      			<option value="" disabled selected>Choose event</option>
+					@foreach($events as $event)
+						<option value="{{$event->id}}">{{$event->title}}</option>
+					@endforeach
+	    		</select>
+	    		<label>Event Select</label>
+	  		</div>
 		</div>
 
 		<div class="row">

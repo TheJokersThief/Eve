@@ -52,6 +52,7 @@
 selected
 @endif
 						>{{$location->name}}</option>
+						<option value="-1">Create New Location</option>
 					@endforeach
 				</select>
 				<label>Location Select</label>
@@ -111,11 +112,10 @@ selected
 				</div>
 			</div>
 		{!! Form::close() !!}
-
 		{{ Form::open(['route' => ['partners.destroy', Crypt::encrypt($partner->id)], 'method' => 'delete', 'class' => 'inline-form']) }}
 		<button type="submit" class="waves-effect waves-light btn deep-orange accent-4 tooltipped" data-position="top" data-tooltip="Be careful! This action can't be undone!" >Delete Partner</button>
 		{{ Form::close() }}
 	</div>
 </main>
-
+@include("forms.locationmodal")
 @endsection
