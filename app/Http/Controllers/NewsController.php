@@ -16,6 +16,10 @@ use Crypt;
 
 class NewsController extends Controller
 {
+	private $errorMessages = [
+		'incorrect_permissions' => 'You do not have permission to edit news.'
+	];
+
 	public function index(){
 		$news = News::orderBy('id', 'ASC')->get();
 		return view('news.index', ['news' => $news]);
@@ -28,7 +32,7 @@ class NewsController extends Controller
 
 	public function create(){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit news.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 
 		return view('news.create');
@@ -41,7 +45,7 @@ class NewsController extends Controller
 	 */
 	public function store( Request $request ){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit news.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 
 		$data = $request->only( [
@@ -86,7 +90,7 @@ class NewsController extends Controller
 
 	public function edit( $newsID ){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit news.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 		$item = News::find($newsID);
 
@@ -100,7 +104,7 @@ class NewsController extends Controller
 
 	public function update( Request $request, $newsID ){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit news.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 
 		$data = $request->only( [

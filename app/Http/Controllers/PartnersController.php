@@ -18,6 +18,12 @@ use Auth;
 
 class PartnersController extends Controller
 {
+	private $errorMessages = [
+		'incorrect_permissions' => 'You do not have permission to edit news.',
+		'partner_creation_failed' => 'We\'re sorry but partner creation failed, please try again later.',
+		'incorrect_permissions_partners' => 'You do not have permission to edit partners'
+	];
+
 	public function index(){
 		$partners = Partner::orderBy('id', 'ASC')->get();
 		return view('partners.index', ['partners' => $partners]);
@@ -30,7 +36,7 @@ class PartnersController extends Controller
 
 	public function create(){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit partners.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 
 		return view('partners.create', ['locations' => Location::all(), 'events' => Event::all()]);
@@ -38,7 +44,7 @@ class PartnersController extends Controller
 
 	public function store(Request $request){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit partners.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 
 		$data = $request->only( [
@@ -126,14 +132,14 @@ class PartnersController extends Controller
 		// If unsuccessful, return with errors
 		return Redirect::back( )
 					->withErrors( [
-						'message' => 'We\'re sorry but partner creation failed, please try again later.'
+						'message' => $this->errorMessages['partner_creation_failed']
 					] )
 					->withInput( );
 	}
 
 	public function edit($partnerID){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit partners.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 
 		$partner = Partner::where('id', $partnerID)
@@ -144,7 +150,7 @@ class PartnersController extends Controller
 
 	public function update( $partnerID, Request $request){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit partners.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 
 
@@ -203,7 +209,7 @@ class PartnersController extends Controller
 	 */
 	public function destroy( $encryptedPartnerID ){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response( view('errors.403', ['error' => 'You do not have permission to edit partners']), 403 );
+			return response( view('errors.403', ['error' => $this->errorMessages['incorrect_permissions_partners']]), 403 );
 		}
 		$partnerID = Crypt::decrypt($encryptedPartnerID);
 		DB::delete('delete from event_partners where partner_id = ?', [$partnerID]);
