@@ -26,7 +26,7 @@ class User extends Authenticatable
 	 * @var array
 	 */
 	protected static $graph_node_fillable_fields = [
-		'name', 'email', 'username', 'profile_picture', 'bio', 'language',
+		'name', 'email', 'username', 'profile_picture', 'bio',
 		'country', 'city', 'facebook_id'
 	];
 
@@ -36,7 +36,9 @@ class User extends Authenticatable
 	 * @var array
 	 */
 	protected static $graph_node_field_aliases = [
-		'id' => 'facebook_id'
+		'id' => 'facebook_id',
+		'picture.data.url' => 'profile_picture',
+		'location.name' => "city"
 	];
 
 	/**

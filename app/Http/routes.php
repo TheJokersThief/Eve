@@ -18,6 +18,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/user/me', 'UserController@me');
 });
 
+Route::group(['prefix' => 'facebook', 'middleware' => 'web'], function(){
+	Route::get('jsAuth', 'FacebookController@authenticateFromJavascript');
+});
 
 
 Route::group(['middleware' => ['web']], function () {
