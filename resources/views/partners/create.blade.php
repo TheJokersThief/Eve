@@ -47,6 +47,7 @@
 					@foreach($locations as $location)
 						<option value="{{$location->id}}">{{$location->name}}</option>
 					@endforeach
+					<option value="-1">Create New Location</option>
 				</select>
 				<label>Location Select</label>
 			</div>
@@ -109,6 +110,32 @@
 		<div class="row">
 	{!! Form::submit('Add Partner', ['class' => 'btn btn-primary form-control', 'id' => 'partner-button']) !!}
 	{!! Form::close() !!}
+		</div>
+		<div id="locationForm" class="modal bottom-sheet">
+			<div class="modal-content">
+			<h4>Create New Location</h4>
+	  <ul id="location-errors"></ul>
+		{!! Form::open( ['route' => 'events.store'] ) !!}
+			<div class="row">
+				<div class="input-field col m6 s12">
+					{!! Form::label('name','Location Name')	!!}
+					{!! Form::text('name')	!!}
+				</div>
+				<div class="input-field col m6 s12">
+					{!! Form::label('capacity','Location Capacity')	!!}
+					{!! Form::number('capacity') !!}
+				</div>
+				<div class="input-field col m6 s12">
+					{!! Form::label('coordinates','Location Coordinates')	!!}
+					{!! Form::text('coordinates') !!}
+				</div>
+			</div>
+		{!! Form::close() !!}
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="orange-text modal-action waves-effect waves-green btn-flat" onClick="createLocation()">Create</a>
+			<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" onClick="$('#location-select').val('');$('#location-select').material_select();">Cancel</a>
+		</div>
 		</div>
 	</div>
 </main>
