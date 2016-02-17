@@ -21,6 +21,10 @@ Route::group(['middleware' => ['web']], function () {
 
 
 Route::group(['middleware' => ['web']], function () {
+	Route::get('/map', function(){
+		return view('map');
+	});
+
 	// Basic auth controls such as password reset
 	Route::controllers([
 		'auth' => 'Auth\AuthController',
@@ -28,6 +32,10 @@ Route::group(['middleware' => ['web']], function () {
 	]);
 
 	Route::get('/', 'HomeController@index');
+
+	Route::get('events/infopack', ['as' => 'events/infopack', function () {
+	    return view('events.infopack');
+	}]);
 
 	Route::group(['prefix' => 'install'], function () {
 		Route::get('/', ['as' => 'install', 'uses' => 'InstallationController@index']);

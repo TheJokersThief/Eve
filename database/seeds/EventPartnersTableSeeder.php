@@ -18,7 +18,7 @@ class EventPartnersTableSeeder extends Seeder
         	$partner = Partner::find( $i );
         	$event = Event::find(1);
 
-        	$event->partners()->save($partner);
+        	$event->partners()->save($partner, ['distance'=>5.2]);
         }
     }
 }
