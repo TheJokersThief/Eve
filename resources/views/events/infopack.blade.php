@@ -1,2 +1,2 @@
 <p> hello </p>
-{{dd($id)}}
+{{dd($ticket)}}

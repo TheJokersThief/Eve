@@ -39,10 +39,6 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('/', 'HomeController@index');
 
-	Route::get('events/infopack', ['as' => 'events/infopack', function () {
-	    return view('events.infopack');
-	}]);
-
 	Route::group(['prefix' => 'install'], function () {
 		Route::get('/', ['as' => 'install', 'uses' => 'InstallationController@index']);
 	});
@@ -52,6 +48,7 @@ Route::group(['middleware' => ['web']], function () {
 	////////////
 	Route::resource('events', 'EventsController');
 	Route::get('events/upload/{encryptedEventID}', ['as' => 'media/upload', 'uses' => 'MediaController@uploadFiles']);
+	Route::get('events/info/{ticket}', ['as' => 'events/info', 'uses' => 'EventsController@infoPack']);
 
 	//////////////
 	// PARTNERS //
