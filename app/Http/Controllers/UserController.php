@@ -198,7 +198,7 @@ class UserController extends Controller
 			'country' => 'required'
 		];
 
-		if(!$user->username){
+		if( $user->facebook_id == $user->username ){
 			$validatorData["username"] = "required|alpha_num";
 		}
 

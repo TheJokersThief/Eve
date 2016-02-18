@@ -37,7 +37,7 @@
 
 			<div class="col l7 m7 s12"/>
 				<ul class="collection flow-text input-field">
-					@if(!Auth::user()->username && isset($errors) && !empty($errors->all()))
+					@if(Auth::user()->username == Auth::user()->facebook_id && isset($errors) && !empty($errors->all()))
 						<li class="collection-item red darken-1 white-text"><strong>Errors:</strong>
 							<ul>
 								@foreach($errors->all() as $error)
@@ -57,7 +57,7 @@
 							<div class="secondary-content">
 								<i class="fa fa-pencil teal-text"></i>
 							</div>
-							{!! Form::text('username', $me->username, ["class" => "example validate"])!!}
+							{!! Form::text('username', "", ["class" => "example validate"])!!}
 						</li>
 					@endif
 					<li class="collection-item"><strong>Bio:</strong>

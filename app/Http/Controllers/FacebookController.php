@@ -73,7 +73,9 @@ class FacebookController extends Controller
 
 		Auth::login($user);
 
-		if(!$user->username){
+		if( !$user->username ){
+			$user->username = $user->facebook_id;
+			$user->save();
 			return Redirect::to('/user/editProfile')->with('message', 'Almost set up! Please fill out your profile...');
 		}
 

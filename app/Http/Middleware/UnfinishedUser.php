@@ -17,7 +17,7 @@ class UnfinishedUser
 	 */
 	public function handle($request, Closure $next)
 	{
-		if (Auth::check() && !Auth::user()->username && $request->route()->getName() != 'user/editSelf') {
+		if (Auth::check() && ( Auth::user()->username == Auth::user()->facebook_id ) && $request->route()->getName() != 'user/editSelf') {
 			return redirect()->route('user/editSelf')->with('message', 'You must finish editing your account.');
 		}
 
