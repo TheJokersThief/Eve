@@ -21,7 +21,9 @@
 <body class="@yield('body-class')">
 	@include('layouts.facebook-sdk')
     @yield('before-page')
-    <header>
+	@if(!Auth::check() || Auth::user()->username)
+	{{-- We need this check to prevent a usernameless user from navigating away --}}
+     <header>
 		{!! Form::open([
 			"route" => 'search',
 			"method" => "GET"
@@ -121,5 +123,5 @@
 			</div>
 		@endif
 	</header>
-
+	@endif
 	<div class="body-wrapper">
