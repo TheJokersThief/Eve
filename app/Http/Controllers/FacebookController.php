@@ -10,6 +10,7 @@ use Facebook;
 use Redirect;
 use Session;
 use Auth;
+use URL;
 use App\User;
 
 class FacebookController extends Controller
@@ -53,17 +54,23 @@ class FacebookController extends Controller
 			// Request Facebook user data
 			$response = Facebook::get('/me?fields=id,name,email,location,bio,picture.width(800).height(800)');
 		} catch (Facebook\Exceptions\FacebookSDKException $e) {
-			Redirect::back()->withErrors([$e->getMessage()]);
+			return Redirect::back()->withErrors([$e->getMessage()]);
 		}
 
 		// get a Graph User object
 		$facebook_user = $response->getGraphUser();
 
+
 		// Use the Graph User to create a Laravel User with their data
 		$user = User::createOrUpdateGraphNode($facebook_user);
 
-		// Log the user into Laravel
 		Auth::login($user);
+
+		if(!$user->username){
+			return Redirect::to('/user/editProfile')->with('message', 'Almost set up! Please fill out your profile...');
+		}
+
+		// Log the user into Laravel
 
 		return Redirect::back();
 	}
