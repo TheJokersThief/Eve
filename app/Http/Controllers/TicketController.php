@@ -191,7 +191,7 @@ class TicketController extends Controller
 		}
 
 
-		return view('tickets.show', compact('ticket', 'event'));
+		return Redirect::back()->with('message', "You've got a ticket! Find your details and print it out here.");
 	}
 
 	/**
