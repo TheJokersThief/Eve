@@ -25,5 +25,9 @@
     <script src="{{URL::to('/')}}/js/libraries.js"></script>
 	<script type="text/javascript" src="{{ URL::to('/') }}/js/main.js"></script>
 	@yield('extra-js')
+
+	@if(session('message'))
+		<script>Materialize.toast('{!! session('message') !!}', 3000);</script>
+	@endif
 </body>
 </html>
