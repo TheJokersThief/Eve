@@ -6,23 +6,24 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use FB;
 use Redirect;
 use Session;
 use Auth;
 use URL;
 use App\User;
+use Facebook;
+use SammyK\LaravelFacebookSdk;
 
 class FacebookController extends Controller
 {
 	/**
 	 * Callback to log in users from Facebook. Be warned; it's messy.
 	 */
-	public function authenticateFromJavascript(Request $request){
+	public function authenticateFromJavascript(Request $request, LaravelFacebookSdk\LaravelFacebookSdk $fb){
 
 		// Try to grab the Facebook API token that the SDK should give us
 		try {
-			$token = FB::getJavaScriptHelper()->getAccessToken();
+			$token = $fb->getJavaScriptHelper()->getAccessToken();
 		} catch (Facebook\Exceptions\FacebookSDKException $e) {
 			// Failed to obtain access token; error out
 			return Redirect::to('/login')->withErrors([$e->getMessage()]);
@@ -34,7 +35,7 @@ class FacebookController extends Controller
 
 		if (! $token->isLongLived()) {
 			// OAuth 2.0 client handler. This is... a thing.
-			$oauth_client = FB::getOAuth2Client();
+			$oauth_client = $fb->getOAuth2Client();
 
 			// Extend the access token.
 			try {
@@ -54,11 +55,11 @@ class FacebookController extends Controller
 
 
 		// Use the user's access token by default for this request
-		FB::setDefaultAccessToken($token);
+		$fb->setDefaultAccessToken($token);
 
 		try {
 			// Request Facebook user data
-			$response = FB::get('/me?fields=id,name,email,location,bio,picture.width(800).height(800)');
+			$response = $fb->get('/me?fields=id,name,email,location,bio,picture.width(800).height(800)');
 		} catch (Facebook\Exceptions\FacebookSDKException $e) {
 			return Redirect::back()->withErrors([$e->getMessage()]);
 		}
