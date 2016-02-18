@@ -184,27 +184,33 @@ class UserController extends Controller
 				'country',
 				'username'
 		]);
-		$validator = Validator::make($data, [
-				'name' =>  'required|min:3',
-				'bio' => 'required',
-				'password' => 'sometimes|min:5',
-				'username' => 'sometimes|alpha_num',
-				'profile_picture' => 'sometimes',
-				'language' => 'required',
-				'city' => 'required',
-				'country' => 'required'
-		]);
-
-		if( $validator->fails( ) ){
-		// If validation fails, redirect back to
-		// registration form with errors
-		return Redirect::back( )
-				->withErrors( $validator )
-				->withInput( );
-		}
 
 		$userID = Crypt::decrypt($encryptedID);
 		$user = User::find($userID);
+
+		$validatorData = [
+			'name' =>  'required|min:3',
+			'bio' => 'required',
+			'password' => 'sometimes|min:5',
+			'profile_picture' => 'sometimes',
+			'language' => 'required',
+			'city' => 'required',
+			'country' => 'required'
+		];
+
+		if(!$user->username){
+			$validatorData["username"] = "required|alpha_num";
+		}
+
+		$validator = Validator::make($data, $validatorData);
+
+		if( $validator->fails( ) ){
+			// If validation fails, redirect back to
+			// registration form with errors
+			return Redirect::back( )
+				->withErrors( $validator )
+				->withInput( );
+		}
 
 		if($request->hasFile('profile_picture')){
 			$data['profile_picture'] = MediaController::uploadImage(
