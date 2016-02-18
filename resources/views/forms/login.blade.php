@@ -14,9 +14,9 @@
 	</div>
 </div>
 
-<button class="btn waves-effect waves-light" type="submit" name="action">Login
+<a href="#" class="btn waves-effect waves-light" type="submit" name="action">Login
 	<i class="mdi-content-send right"></i>
-</button>
+</a>
 
 <button class="btn waves-effect waves-light blue darken-3 facebook-login-button"">Login with Facebook
 	<i class="fa fa-facebook-square right"></i>
