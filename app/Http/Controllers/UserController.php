@@ -315,7 +315,26 @@ class UserController extends Controller
 		$query = $request->input('search');
 		
 		$users = User::where('name', 'LIKE', '%' . $query . '%')->paginate(10);
-              //  return response(view('errors.404', ['error' => 'This user account could not be found.']), 404);
+              
         return view('user.pageResults', compact('users'));
 	}
+
+	public function autocomplete(Request $request){
+		$term = $request->input('term');
+		
+		$results = array();
+		
+		$queries = DB::table('users')
+			->where('name', 'LIKE', '%'.$term.'%')
+			->orWhere('username', 'LIKE', '%'.$term.'%')
+			->take(5)->get();
+		
+		foreach ($queries as $query)
+		{
+		    $results[] = [ 'id' => $query->id, 'value' => $query->name ];
+		}
+		return Response::json($results);
+	}
+
+
 }

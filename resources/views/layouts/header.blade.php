@@ -14,6 +14,7 @@
 	<!-- Compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') }}/css/app.css">
+	<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
 	@yield('extra-css')
 
 	@yield('extra-head')
@@ -21,6 +22,24 @@
 <body class="@yield('body-class')">
     @yield('before-page')
     <header>
+
+		@section('extra-js')
+			<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+     		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+			<script type="text/javascript">
+			$(function()
+			{
+				 $( "#search" ).autocomplete({
+				  source: "user/autocomplete",
+				  minLength: 1,
+				  select: function(event, ui) {
+				  	$('#search').val(ui.item.value);
+				  }
+				});
+			});
+		</script>
+		@endsection
+
 		{!! Form::open([
 			"route" => 'search',
 			"method" => "GET"
@@ -30,8 +49,8 @@
 			  <div class="left input-field hide-on-med-and-down">
 				  {!! Form::text('search', 
 						null, 
-						array('required',
-			            'placeholder'=>'Search for a user'))
+						['id' => 'search',
+			            'placeholder'=>'Search for a user'])
 				  !!}
 				  <label for="search"><i class="material-icons">search</i></label>
 			  </div>
@@ -96,7 +115,7 @@
 
 			  </ul>
 			  <div class="hide">
-					{!! Form::submit() !!}
+					{!! Form::submit('Search') !!}
 			  </div>
 			  {!! Form::close() !!}
 			</div>

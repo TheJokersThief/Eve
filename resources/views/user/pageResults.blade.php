@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('body-class') usersEvent-page usersAccount-page @endsection
+@section('title') Results Page @endsection
 
 @section('content')
 
 	<main class="row">
-		<div class="col l10 s12 offset-l1">
+		<div class="col l8 s12 offset-l2">
 			<ul class="collection with-header">
 				<li class="collection-header">
 					<h2 class="center-align flow-text">Search Results</h2>
