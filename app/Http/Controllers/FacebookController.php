@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Redirect;
@@ -66,10 +67,15 @@ class FacebookController extends Controller
 
 		// get a Graph User object
 		$facebook_user = $response->getGraphUser();
-		$facebook_user["username"] = $facebook_user["id"];
+
+		try{
+			$user = User::where('facebook_id', $facebook_user["id"])->first();
+		} catch (ModelNotFoundException $e){
+			$facebook_user["username"] = $facebook_user["id"];
+			$user = User::createOrUpdateGraphNode($facebook_user);
+		}
 
 		// Use the Graph User to create a Laravel User with their data
-		$user = User::createOrUpdateGraphNode($facebook_user);
 
 		Auth::login($user);
 
