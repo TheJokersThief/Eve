@@ -204,6 +204,7 @@
 			</div>
 		</section>
 	</main>
-
-	@include('media.upload')
+	@if( Auth::check() )
+		@include('media.upload')
+	@endif
 @endsection
