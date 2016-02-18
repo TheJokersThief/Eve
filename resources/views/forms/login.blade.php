@@ -17,8 +17,10 @@
 <button class="btn waves-effect waves-light" type="submit" name="action">Login
 	<i class="mdi-content-send right"></i>
 </button>
-<fb:login-button scope="public_profile,email,user_about_me,user_friends,user_location" onlogin="window.location.href='{{URL::to('/')}}/facebook/jsAuth'">
-</fb:login-button>
+
+<button class="btn waves-effect waves-light blue darken-3 facebook-login-button"">Login with Facebook
+	<i class="fa fa-facebook-square right"></i>
+</button>
 
 {!! Form::close() 													!!}
 
