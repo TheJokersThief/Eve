@@ -20,26 +20,11 @@
 	@yield('extra-head')
 </head>
 <body class="@yield('body-class')">
+	@include('layouts.facebook-sdk')
     @yield('before-page')
-    <header>
-
-		@section('extra-js')
-			<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-     		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-			<script type="text/javascript">
-			$(function()
-			{
-				 $( "#search" ).autocomplete({
-				  source: "user/autocomplete",
-				  minLength: 1,
-				  select: function(event, ui) {
-				  	$('#search').val(ui.item.value);
-				  }
-				});
-			});
-		</script>
-		@endsection
-
+	@if(!Auth::check() || Auth::user()->username)
+	{{-- We need this check to prevent a usernameless user from navigating away --}}
+     <header>
 		{!! Form::open([
 			"route" => 'search',
 			"method" => "GET"
@@ -139,5 +124,5 @@
 			</div>
 		@endif
 	</header>
-
+	@endif
 	<div class="body-wrapper">

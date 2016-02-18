@@ -18,6 +18,10 @@
 	<i class="mdi-content-send right"></i>
 </button>
 
+<button class="btn waves-effect waves-light blue darken-3 facebook-login-button"">Login with Facebook
+	<i class="fa fa-facebook-square right"></i>
+</button>
+
 {!! Form::close() 													!!}
 
 <p>

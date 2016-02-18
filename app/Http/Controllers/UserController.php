@@ -14,6 +14,7 @@ use App\User;
 use App\Ticket;
 use App\Setting;
 use DB;
+use Session;
 
 use App\Http\Controllers\MediaController;
 
@@ -180,28 +181,36 @@ class UserController extends Controller
 				'profile_picture',
 				'language',
 				'city',
-				'country'
+				'country',
+				'username'
 		]);
-		$validator = Validator::make($data, [
-				'name' =>  'required|min:3',
-				'bio' => 'required',
-				'password' => 'sometimes|min:5',
-				'profile_picture' => 'sometimes',
-				'language' => 'required',
-				'city' => 'required',
-				'country' => 'required'
-		]);
-
-		if( $validator->fails( ) ){
-		// If validation fails, redirect back to
-		// registration form with errors
-		return Redirect::back( )
-				->withErrors( $validator )
-				->withInput( );
-		}
 
 		$userID = Crypt::decrypt($encryptedID);
 		$user = User::find($userID);
+
+		$validatorData = [
+			'name' =>  'required|min:3',
+			'bio' => 'required',
+			'password' => 'sometimes|min:5',
+			'profile_picture' => 'sometimes',
+			'language' => 'required',
+			'city' => 'required',
+			'country' => 'required'
+		];
+
+		if(!$user->username){
+			$validatorData["username"] = "required|alpha_num";
+		}
+
+		$validator = Validator::make($data, $validatorData);
+
+		if( $validator->fails( ) ){
+			// If validation fails, redirect back to
+			// registration form with errors
+			return Redirect::back( )
+				->withErrors( $validator )
+				->withInput( );
+		}
 
 		if($request->hasFile('profile_picture')){
 			$data['profile_picture'] = MediaController::uploadImage(
@@ -223,8 +232,11 @@ class UserController extends Controller
 
 		$update = $user->update($data);
 
-
-		return Redirect::route('user/edit', Crypt::encrypt( $userID ) );
+		if(isset($data['username'])){
+			$from = Session::get('fb_logged_in_from', "/");
+			return Redirect::to($from)->with('message', 'Great! Your profile is ready. Feel free to browse the site.');
+		}
+		return Redirect::route('user/show', $userID);
 	}
 
 	/**
@@ -276,13 +288,17 @@ class UserController extends Controller
 	 *   Returns the users personal page where they can update their info
 	 *	 @return VIEW
 	 */
-	public function edit( $encryptedID ){
-		$userID = Crypt::decrypt($encryptedID);
-		if(! Auth::check() || ! (Auth::user()->id == $userID || Auth::user()->is_admin) ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit users.']), 403);
+	public function edit( $encryptedID = "" ){
+		if(!$encryptedID){
+			$userID = Auth::user()->id;
+		} else {
+			$userID = Crypt::decrypt($encryptedID);
 		}
 
 		$user = User::find($userID);
+		if(! Auth::check() || ( $encryptedID && ! (Auth::user()->id == $userID || Auth::user()->is_admin) ) ){
+			return response(view('errors.403', ['error' => 'You do not have permission to edit users.']), 403);
+		}
 		return view('user.edit')->with('me', $user);
 	}
 

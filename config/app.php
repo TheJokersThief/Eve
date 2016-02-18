@@ -152,6 +152,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         PulkitJalan\Google\GoogleServiceProvider::class,
+	    SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -211,6 +212,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'QrCode'    => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+	    'Facebook' => SammyK\LaravelFacebookSdk\FacebookFacade::class,
     ],
 
 ];
