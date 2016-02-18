@@ -9,7 +9,7 @@
 
 
 $(document).ready(function(){
-	if($('.staff-home-page')){
+	if($('.staff-home-page').length){
 		function TicketViewModel() {
 			var self = this;
 
@@ -41,7 +41,7 @@ $(document).ready(function(){
 
 			self.update();
 		}
-
+		
 		ko.applyBindings(new TicketViewModel());
 	}
 });
