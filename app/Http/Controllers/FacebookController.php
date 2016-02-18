@@ -66,7 +66,7 @@ class FacebookController extends Controller
 
 		// get a Graph User object
 		$facebook_user = $response->getGraphUser();
-
+		$facebook_user["username"] = $facebook_user["id"];
 
 		// Use the Graph User to create a Laravel User with their data
 		$user = User::createOrUpdateGraphNode($facebook_user);
