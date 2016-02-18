@@ -19,6 +19,13 @@ use DB;
 
 class EventsController extends Controller
 {
+	private $errorMessages =[
+		'incorrect_permissions' => 'You do not have permission to edit events.',
+		'event_creation_failed' => 'We\'re sorry but event creation failed, please try again later.',
+		'event_not_found' => 'The event you tried to edit could not be found.'
+	];
+
+
 	// Show a view of all events
 	public function index(){
 		// Retrieve all events from the database
@@ -76,7 +83,7 @@ class EventsController extends Controller
 	public function store(Request $request){
 		// Ensure the user is an admin
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit events.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 
 		// Get the required fields from the form
@@ -161,7 +168,7 @@ class EventsController extends Controller
 		// If unsuccessful, return with errors
 		return Redirect::back( )
 					->withErrors( [
-						'message' => 'We\'re sorry but event creation failed, please try again later.'
+						'message' => $this->errorMessages['event_creation_failed']
 					] )
 					->withInput( );
 	}
@@ -170,7 +177,7 @@ class EventsController extends Controller
 	public function edit($id){
 		//Ensure the user is an admin
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit events.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 		// Find the event, or fail
 		$event = Event::findOrFail($id);
@@ -203,7 +210,7 @@ class EventsController extends Controller
 	public function update($id, Request $request){
 		// Ensure the user is logged in as an admin
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit events.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 
 		// Try to retrieve the model for updating from the database
@@ -212,7 +219,7 @@ class EventsController extends Controller
 		} catch (ModelNotFoundException $e) {
 			return Redirect::back( )->withErrors(
 				[
-					'message' => 'The event you tried to edit could not be found.'
+					'message' => $this->errorMessages['event_not_found']
 				] );
 		}
 

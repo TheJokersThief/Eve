@@ -16,6 +16,12 @@ use Crypt;
 
 class LocationController extends Controller
 {
+	private $errorMessages = [
+		'incorrect_permissions' => 'You do not have permission to edit locations.',
+		'incorrect_permissions_news' => 'You do not have permission to edit news.',
+
+	];
+
 	public function index(){
 		$locations = Location::orderBy('id', 'ASC')->paginate(15);
 		return view('locations.index', ['locations' => $locations]);
@@ -23,7 +29,7 @@ class LocationController extends Controller
 
 	public function create(){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit locations.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 
 		return view('locations.create');
@@ -36,7 +42,7 @@ class LocationController extends Controller
 	 */
 	public function store( Request $request ){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit locations.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 
 		$data = $request->only( [
@@ -81,7 +87,7 @@ class LocationController extends Controller
 
 	public function edit( $locationID ){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit news.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions_news']]), 403);
 		}
 		$item = Location::find($locationID);
 
@@ -95,7 +101,7 @@ class LocationController extends Controller
 
 	public function update( Request $request, $locationID ){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit locations.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 
 		$data = $request->only( [
@@ -141,7 +147,7 @@ class LocationController extends Controller
 
 	public function destroy( $encryptedLocationID ){
 		if(! Auth::check() || ! Auth::user()->is_admin ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit locations.']), 403);
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
 		}
 		$locationID = Crypt::decrypt($encryptedLocationID);
 		Location::destroy($locationID);

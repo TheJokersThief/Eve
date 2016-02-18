@@ -24,6 +24,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ApiController extends Controller
 {
+	private $errorMessages = [
+		'incorrect_permissions' => 'You do not have permission to edit this image',
+		'not_an_image' => 'File isn\'t an image!',
+		'no_file' => 'No file was received',
+	];
 
 	///////////////////////////////
 	// INSTALL PROCESS ENDPOINTS //
@@ -233,7 +238,7 @@ class ApiController extends Controller
 		// If validation fails;
 		if( $validator->fails( ) ){
 			// Redirect back to registration form with errors
-			return Response::json(['error' => 'File isn\'t an image!']);
+			return Response::json(['error' => $this->errorMessages['not_an_image']]);
 		}
 
 		if( $request->hasFile('file') ){
@@ -250,7 +255,7 @@ class ApiController extends Controller
 			]);
 			return Response::json(['file_location' => $file_location, 'media_id' => $media->id]);
 		}
-		return Response::json(['error' => 'No file was received']);
+		return Response::json(['error' => $this->errorMessages['no_file']]);
 	}
 
 	/**
@@ -268,7 +273,7 @@ class ApiController extends Controller
 			$media->save();
 			return Response::json('success');
 		} else {
-			return Response::json(['error' => 'You do not have permission to edit this image']);
+			return Response::json(['error' => $this->errorMessages['incorrect_permissions']]);
 		}
 	}
 

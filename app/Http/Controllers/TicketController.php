@@ -23,6 +23,21 @@ use Stripe\Error;
 
 class TicketController extends Controller
 {
+
+	private $errorMessages = [
+		'event_not_found' => 'We can\'t find the event that you requested.',
+		'ticket_exists' => "It appears you already have a ticket",
+		'card_declined' => "Your card has been declined.",
+		'server_error' => "We're having some issues with our server. Try again later.",
+		'dev_mistake' => "It seems the developers have made a mistake; they have been notified. This will be fixed.",
+		'dev_mistake_auth' => "It seems the developers have made a mistake with authentication; this will be fixed.",
+		'network_error' => "We're having some network errors right now. Try again later.",
+		'something_wrong' => "Something went wrong here.",
+		'ticket_invalid' => 'Ticket is invalid',
+		'not_logged_in' => 'Are you logged in?',
+		'ticket_not_found' => "Not found!"
+	];
+
 	/**
 	 * Return a printable view of the ticket
 	 * @param  Integer  $eventId    ID of the ticket to be printed
@@ -86,14 +101,14 @@ class TicketController extends Controller
 			$event = Event::findOrFail($data["event_id"]);
 		} catch (ModelNotFoundException $e) {
 			return Redirect::back()->withErrors([
-				'message' => 'We can\'t find the event that you requested.'
+				'message' => $this->errorMessages['event_not_found']
 			]);
 		}
 
 		$user  = Auth::user();
 		if(Ticket::where('event_id', $event->id)->where('user_id', $user->id)->get()->toArray()){
 			return Redirect::back()->withErrors([
-				"message" => "It appears you already have a ticket"
+				"message" => $this->errorMessages['ticket_exists']
 			]);
 		}
 
@@ -120,28 +135,28 @@ class TicketController extends Controller
 			} catch(Error\Card $e) {
 				return Redirect::back()->withErrors([
 					// Card declined.
-					"message" => "Your card has been declined."
+					"message" => $this->errorMessages['card_declined']
 				]);
 			} catch (Error\RateLimit $e) {
 				return \Redirect::back()->withErrors([
 					// Stripe API limit reached (This should NOT happen!)
-					"message" => "We're having some issues with our server. Try again later."
+					"message" => $this->errorMessages['server_error']
 				]);
 			} catch (Error\InvalidRequest $e) {
 				dd($e);
 				return Redirect::back()->withErrors([
 					// We're not doing Stripe right. We need to fix this.
-					"message" => "It seems the developers have made a mistake; they have been notified. This will be fixed."
+					"message" => $this->errorMessages['dev_mistake']
 				]);
 			} catch (Error\Authentication $e) {
 				return Redirect::back()->withErrors([
 					// API keys wrong?
-					"message" => "It seems the developers have made a mistake with authentication; this will be fixed."
+					"message" => $this->errorMessages['dev_mistake_auth']
 				]);
 			} catch (Error\ApiConnection $e) {
 				return Redirect::back()->withErrors([
 					// Network connectivity problems?
-					"message" => "We're having some network errors right now. Try again later."
+					"message" => $this->errorMessages['network_error']
 				]);
 			} catch (Error\Base $e) {
 
@@ -149,7 +164,7 @@ class TicketController extends Controller
 				// or what it does, so probably panic
 
 				return Redirect::back()->withErrors([
-					"message" => "Something went wrong here."
+					"message" => $this->errorMessages['something_wrong']
 				]);
 			}
 			$ticket = Ticket::create(
@@ -191,7 +206,7 @@ class TicketController extends Controller
 			try{
 			  $ticket = Ticket::hasCode($code)->firstOrFail();
 			} catch (ModelNotFoundException $e) {
-				return view("tickets.unverifiable", ['error' => 'Ticket code invalid.']);
+				return view("tickets.unverifiable", ['error' => $this->errorMessages['ticket_invalid']]);
 			}
 			if( $ticket->used ){
 				return view("tickets.unverifiable", ['error' => 'Ticket already used.']);
@@ -205,7 +220,7 @@ class TicketController extends Controller
 			}
 		} else {
 			// user is admin, cannot validate tickets.
-			return view("tickets.unverifiable", ['error' => 'You are not allowed to verify tickets; are you logged in?']);
+			return view("tickets.unverifiable", ['error' => $this->errorMessages['not_logged_in']]);
 		}
 	}
 
@@ -214,13 +229,13 @@ class TicketController extends Controller
 			try{
 				$ticket = Ticket::findOrFail($ticketId);
 			} catch (ModelNotFoundException $e){
-				return ["success" => false, "message" => "Not found!"];
+				return ["success" => false, "message" => $this->errorMessages['ticket_not_found']];
 			}
 			$ticket->printed = true;
 			$ticket->save();
 			return ["success" => true, "message" => "Ticket marked as printed!"];
 		} else {
-			return ["success" => false, "message" => "Not logged in!"];
+			return ["success" => false, "message" => $this->errorMessages['not_logged_in']];
 		}
 	}
 
@@ -245,7 +260,7 @@ class TicketController extends Controller
 		try{
 		  $ticket = Ticket::hasCode($code)->firstOrFail();
 		} catch (ModelNotFoundException $e) {
-			return view("tickets.unverifiable", ['error' => 'Ticket code invalid.']);
+			return view("tickets.unverifiable", ['error' => $this->errorMessages['ticket_invalid']]);
 		}
 
 		$event = $ticket->event;
