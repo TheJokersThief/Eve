@@ -52,7 +52,7 @@
 						</div>
 						{!! Form::text('name', $me->name, ["class" => "example validate"])!!}
 					</li>
-					@if(!$me->username)
+					@if($me->username == $me->facebook_id)
 						<li class="collection-item"><strong>Username:</strong>
 							<div class="secondary-content">
 								<i class="fa fa-pencil teal-text"></i>
