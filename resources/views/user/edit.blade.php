@@ -41,6 +41,14 @@
 						</div>
 						{!! Form::text('name', $me->name, ["class" => "example"])!!}
 					</li>
+					@if(!$me->username)
+						<li class="collection-item"><strong>Username:</strong>
+							<div class="secondary-content">
+								<i class="fa fa-pencil teal-text"></i>
+							</div>
+							{!! Form::text('username', $me->username, ["class" => "example"])!!}
+						</li>
+					@endif
 					<li class="collection-item"><strong>Bio:</strong>
 						<div class="secondary-content">
 							<i class="fa fa-pencil teal-text"></i>

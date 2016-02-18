@@ -180,12 +180,14 @@ class UserController extends Controller
 				'profile_picture',
 				'language',
 				'city',
-				'country'
+				'country',
+				'username'
 		]);
 		$validator = Validator::make($data, [
 				'name' =>  'required|min:3',
 				'bio' => 'required',
 				'password' => 'sometimes|min:5',
+				'username' => 'sometimes|alpha_num',
 				'profile_picture' => 'sometimes',
 				'language' => 'required',
 				'city' => 'required',
@@ -224,7 +226,7 @@ class UserController extends Controller
 		$update = $user->update($data);
 
 
-		return Redirect::route('user/edit', Crypt::encrypt( $userID ) );
+		return Redirect::route('user/show', $userID);
 	}
 
 	/**
@@ -276,13 +278,17 @@ class UserController extends Controller
 	 *   Returns the users personal page where they can update their info
 	 *	 @return VIEW
 	 */
-	public function edit( $encryptedID ){
-		$userID = Crypt::decrypt($encryptedID);
-		if(! Auth::check() || ! (Auth::user()->id == $userID || Auth::user()->is_admin) ){
-			return response(view('errors.403', ['error' => 'You do not have permission to edit users.']), 403);
+	public function edit( $encryptedID = "" ){
+		if(!$encryptedID){
+			$userID = Auth::user()->id;
+		} else {
+			$userID = Crypt::decrypt($encryptedID);
 		}
 
 		$user = User::find($userID);
+		if(! Auth::check() || ( $encryptedID && ! (Auth::user()->id == $userID || Auth::user()->is_admin) ) ){
+			return response(view('errors.403', ['error' => 'You do not have permission to edit users.']), 403);
+		}
 		return view('user.edit')->with('me', $user);
 	}
 
