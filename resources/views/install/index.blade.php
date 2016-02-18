@@ -89,13 +89,17 @@
 						{!! Form::label('email','Email')									!!}
 						{!! Form::text('email')	!!}
 					</div>
+
+					<div class="input-field col m6 s12">
+						{!! Form::label('username', 'Username') !!}
+						{!! Form::text('username' ) !!}
+					</div>
+
 					<div class="input-field col m6 s12">
 						{!! Form::label('name','Full Name')									!!}
 						{!! Form::text('name')	!!}
 					</div>
-				</div>
 
-				<div class="row">
 					<div class="input-field col m6 s12">
 						{!! Form::label('password','Password')								!!}
 						{!! Form::password('password')	!!}
@@ -105,9 +109,7 @@
 						{!! Form::label('password_confirmation', 'Confirm Password') !!}
 						{!! Form::password('password_confirmation' ) !!}
 					</div>
-				</div>
-				
-				<div class="row">
+
 					<div class="col s12 m3">
 						<img src="/images/default_profile_image.png" id="profle-picture-preview">
 					</div>

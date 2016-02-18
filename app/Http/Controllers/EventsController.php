@@ -79,6 +79,10 @@ class EventsController extends Controller
 		return view('events.create', ['locations' => Location::all(), 'partners' => Partner::all()]);
 	}
 
+	public function infoPack(Ticket $ticket){
+		return view('events.infopack', ['ticket' => $ticket]);
+	}
+
 	// Store a new event
 	public function store(Request $request){
 		// Ensure the user is an admin

@@ -105,7 +105,7 @@
 										<a class="btn red lighten-2" target="_blank" href="{{ URL::route( 'tickets/print', [ 'id' => Crypt::encrypt( $ticket->id ) ] ) }}"><i class="fa fa-print left"></i> Print ticket</a>
 									</div>
 									<div class=" col s12 center-align">
-										<a class="btn red lighten-2" target="_blank" href="{{ URL::route( 'infopack', ['id' => Crypt::encrypt( $ticket->id )] ) }}"><i class="fa fa-print left"></i> Info Pack</a>
+										<a class="btn red lighten-2" target="_blank" href="{{ URL::route( 'events/info', ['ticket' => $ticket]) }}"><i class="fa fa-print left"></i> Info Pack</a>
 									</div>
 								@endif
 							</div>
@@ -204,6 +204,7 @@
 			</div>
 		</section>
 	</main>
-
-	@include('media.upload')
+	@if( Auth::check() )
+		@include('media.upload')
+	@endif
 @endsection

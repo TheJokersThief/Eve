@@ -57,6 +57,7 @@
 					@foreach($events as $event)
 						<option value="{{$event->id}}">{{$event->title}}</option>
 					@endforeach
+						<option value="-1">Create New Location</option>
 	    		</select>
 	    		<label>Event Select</label>
 	  		</div>
