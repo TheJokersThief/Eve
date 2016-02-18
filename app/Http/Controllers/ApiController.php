@@ -57,7 +57,7 @@ class ApiController extends Controller
 		// Validate all input
 		$validator = Validator::make( $data, [
 					'name'  => 'required',
-					'email'     => 'email|required',
+					'email'     => 'email|sometimes',
 					'password'  => $passwordRequired.'confirmed|min:5',
 					'profile_picture' => 'sometimes|image|max:10240' // Limit filesize to 10MB
 				]);
