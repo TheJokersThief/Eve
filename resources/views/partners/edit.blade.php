@@ -52,8 +52,8 @@
 selected
 @endif
 						>{{$location->name}}</option>
-						<option value="-1">Create New Location</option>
 					@endforeach
+						<option value="-1">Create New Location</option>
 				</select>
 				<label>Location Select</label>
 			</div>
