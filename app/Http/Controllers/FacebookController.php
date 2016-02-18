@@ -18,7 +18,7 @@ class FacebookController extends Controller
 	/**
 	 * Callback to log in users from Facebook. Be warned; it's messy.
 	 */
-	public function authenticateFromJavascript(){
+	public function authenticateFromJavascript(Request $request){
 
 		// Try to grab the Facebook API token that the SDK should give us
 		try {
@@ -45,7 +45,13 @@ class FacebookController extends Controller
 		}
 
 		// Keep the User Access Token in Session storage, so we can use it for this request
+		$data = $request->all();
+
 		Session::put('fb_user_access_token', (string) $token);
+		if(isset($data["from"])){
+			Session::put('fb_logged_in_from', (string) $data["from"]);
+		}
+
 
 		// Use the user's access token by default for this request
 		Facebook::setDefaultAccessToken($token);

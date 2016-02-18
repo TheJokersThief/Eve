@@ -14,6 +14,7 @@ use App\User;
 use App\Ticket;
 use App\Setting;
 use DB;
+use Session;
 
 use App\Http\Controllers\MediaController;
 
@@ -225,7 +226,10 @@ class UserController extends Controller
 
 		$update = $user->update($data);
 
-
+		if(isset($data['username'])){
+			$from = Session::get('fb_logged_in_from', "/");
+			return Redirect::to($from)->with('message', 'Great! Your profile is ready. Feel free to browse the site.');
+		}
 		return Redirect::route('user/show', $userID);
 	}
 
