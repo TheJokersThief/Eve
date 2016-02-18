@@ -212,7 +212,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'QrCode'    => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
-	    'Facebook' => SammyK\LaravelFacebookSdk\FacebookFacade::class,
+	    'FB' => SammyK\LaravelFacebookSdk\FacebookFacade::class,
     ],
 
 ];

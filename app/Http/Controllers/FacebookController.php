@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Facebook;
+use FB;
 use Redirect;
 use Session;
 use Auth;
@@ -22,7 +22,7 @@ class FacebookController extends Controller
 
 		// Try to grab the Facebook API token that the SDK should give us
 		try {
-			$token = Facebook::getJavaScriptHelper()->getAccessToken();
+			$token = FB::getJavaScriptHelper()->getAccessToken();
 		} catch (Facebook\Exceptions\FacebookSDKException $e) {
 			// Failed to obtain access token; error out
 			return Redirect::to('/login')->withErrors([$e->getMessage()]);
@@ -34,7 +34,7 @@ class FacebookController extends Controller
 
 		if (! $token->isLongLived()) {
 			// OAuth 2.0 client handler. This is... a thing.
-			$oauth_client = Facebook::getOAuth2Client();
+			$oauth_client = FB::getOAuth2Client();
 
 			// Extend the access token.
 			try {
@@ -54,11 +54,11 @@ class FacebookController extends Controller
 
 
 		// Use the user's access token by default for this request
-		Facebook::setDefaultAccessToken($token);
+		FB::setDefaultAccessToken($token);
 
 		try {
 			// Request Facebook user data
-			$response = Facebook::get('/me?fields=id,name,email,location,bio,picture.width(800).height(800)');
+			$response = FB::get('/me?fields=id,name,email,location,bio,picture.width(800).height(800)');
 		} catch (Facebook\Exceptions\FacebookSDKException $e) {
 			return Redirect::back()->withErrors([$e->getMessage()]);
 		}
