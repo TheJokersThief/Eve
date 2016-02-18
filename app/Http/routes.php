@@ -83,7 +83,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['middleware' => 'auth'], function(){
             Route::get('profile', ['as' => 'me', 'uses' => 'UserController@index']);
 
-            Route::get('editProfile/{encryptedID}', ['as' => 'user/edit', 'uses'=> 'UserController@edit']);
+	        Route::get('editProfile', ['as' => 'user/editSelf', 'uses'=> 'UserController@edit']);
+	        Route::get('editProfile/{encryptedID}', ['as' => 'user/edit', 'uses'=> 'UserController@edit']);
             Route::post('/{encryptedID}', ['as' => 'user', 'uses' => 'UserController@updateUserInfo']);
 
             Route::get('/myEvents', ['as' => 'myEvents', 'uses' => 'UserController@myEvents'] );
