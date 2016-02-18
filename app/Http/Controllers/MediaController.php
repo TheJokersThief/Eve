@@ -49,7 +49,10 @@ class MediaController extends Controller
 	public static function uploadFiles( $encryptedEventID ){
 		$data['eventID'] = Crypt::decrypt( $encryptedEventID );
 		$data['event'] = Event::find( $data['eventID'] );
-		$data['images'] = Auth::user()->media->where('event_id', $data['eventID'])->sortBy('id');
+		
+		if( Auth::check() ){
+			$data['images'] = Auth::user()->media->where('event_id', $data['eventID'])->sortBy('id');
+		}
 
 
 		return $data;

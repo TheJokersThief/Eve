@@ -14,7 +14,7 @@ class EventsTableSeeder extends Seeder
     public function run()
     {
         Event::firstOrCreate([
-            'tagline' => 'Our very first event. Everyone is welcome to come along. Except Eimear. Eimear smells.',
+            'tagline' => 'Our very first event. Everyone is welcome to come along.',
             'location_id' => 1,
 	        'price' => 5.00,
             'featured_image' => '/images/sample_images/event_photos/event1.jpg',
