@@ -16,8 +16,12 @@
 						{!! Form::text('name')	!!}
 					</div>
 					<div class="input-field col m5 s12">
-						{!! Form::label('coordinates','Coordinates')	!!}
-						{!! Form::text('coordinates')	!!}
+						{!! Form::label('latitude','Latitude')	!!}
+						{!! Form::number('latitude')	!!}
+					</div>
+					<div class="input-field col m5 s12">
+						{!! Form::label('longitude','Longitude')	!!}
+						{!! Form::number('longitude')	!!}
 					</div>
 					<div class="input-field col m2 s12">
 						{!! Form::label('capacity','Capacity')	!!}

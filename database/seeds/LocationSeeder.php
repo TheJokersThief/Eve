@@ -14,31 +14,36 @@ class LocationSeeder extends Seeder
     public function run(){
     	Location::firstOrCreate([
     		'name' => "1 Yellow Brick Road, Cork City, Cork",
-    		'coordinates' => "1,1",
+    		'latitude' => 53.347503,
+            'longitude' => 6.228647,
     		'capacity' => "200",
     		'featured_image' => '/images/sample_images/venues/1.jpg'
     	]);
     	Location::firstOrCreate([
     		'name' => "2 Yellow Brick Road, Cork City, Cork",
-    		'coordinates' => "2,1",
+    		'latitude' => 53.347503,
+            'longitude' => 6.228647,
     		'capacity' => "200",
     		'featured_image' => '/images/sample_images/venues/1.jpg'
     	]);
     	Location::firstOrCreate([
     		'name' => "3 Yellow Brick Road, Cork City, Cork",
-    		'coordinates' => "3,1",
+    		'latitude' => 53.347503,
+            'longitude' => 6.228647,
     		'capacity' => "200",
     		'featured_image' => '/images/sample_images/venues/1.jpg'
     	]);
     	Location::firstOrCreate([
     		'name' => "4 Yellow Brick Road, Cork City, Cork",
-    		'coordinates' => "4,1",
+    		'latitude' => 53.347503,
+            'longitude' => 6.228647,
     		'capacity' => "200",
     		'featured_image' => '/images/sample_images/venues/1.jpg'
     	]);
     	Location::firstOrCreate([
     		'name' => "5 Yellow Brick Road, Cork City, Cork",
-    		'coordinates' => "5,1",
+    		'latitude' => 53.347503,
+            'longitude' => 6.228647,
     		'capacity' => "200",
     		'featured_image' => '/images/sample_images/venues/1.jpg'
     	]);

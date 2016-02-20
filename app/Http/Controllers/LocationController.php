@@ -47,7 +47,8 @@ class LocationController extends Controller
 
 		$data = $request->only( [
 					'name',
-					'coordinates',
+					'latitude',
+					'longitude',
 					'capacity',
 					'featured_image'
 				]);
@@ -55,7 +56,8 @@ class LocationController extends Controller
 		// Validate all input
 		$validator = Validator::make( $data, [
 					'name' => 'required',
-					'coordinates' => 'required',
+					'latitude' => 'required',
+					'longitude' => 'required',
 					'capacity' => 'required|numeric',
 					'featured_image' => 'image|sometimes'
 				]);
@@ -106,7 +108,8 @@ class LocationController extends Controller
 
 		$data = $request->only( [
 					'name',
-					'coordinates',
+					'latitude',
+					'longitude',
 					'capacity',
 					'featured_image'
 				]);
@@ -114,7 +117,8 @@ class LocationController extends Controller
 		// Validate all input
 		$validator = Validator::make( $data, [
 					'name' => 'required',
-					'coordinates' => 'required',
+					'latitude' => 'required',
+					'longitude' => 'required',
 					'capacity' => 'required',
 					'featured_image' => 'image|sometimes'
 				]);

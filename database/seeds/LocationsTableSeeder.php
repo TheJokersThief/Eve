@@ -14,19 +14,22 @@ class LocationsTableSeeder extends Seeder
     {
         Location::firstOrCreate([
          	'name' => "The 3 Arena",
-            'coordinates' => '12122132121789',
+            'latitude' => 53.347503,
+            'longitude' => 6.228647,
             'capacity' => 30000,
         ]);
 
         Location::firstOrCreate([
          	'name' => "Lansdowne Road",
-            'coordinates' => '343449',
+            'latitude' => 53.335105,
+            'longitude' => 6.228423,
             'capacity' => 400000,
         ]);
 
         Location::firstOrCreate([
          	'name' => "Musgrave Park",
-            'coordinates' => '3400000',
+            'latitude' => 51.881045,
+            'longitude' => 8.470948,
             'capacity' => 12000,
         ]);
     }
