@@ -6,7 +6,26 @@
 @section('extra-js')
 <script type="text/javascript">
   $(document).ready(function(){
-    initMap();
+	  var map = new google.maps.Map(document.getElementById('map'), {
+	    center: {lat: {!! $ticket->event->location->latitude !!}, lng: {!! $ticket->event->location->longitude !!}},
+	    zoom: 13,
+	    styles: [{
+	      featureType: 'poi',
+	      stylers: [{ visibility: 'off' }]  // Turn off points of interest.
+	    }, {
+	      featureType: 'transit.station',
+	      stylers: [{ visibility: 'off' }]  // Turn off bus stations, train stations, etc.
+	    }],
+	    disableDoubleClickZoom: true
+	  });
+
+	  var myLatLng = {lat: {!! $ticket->event->location->latitude !!}, lng: {!! $ticket->event->location->longitude !!}};
+
+	  var marker = new google.maps.Marker({
+	    position: myLatLng,
+	    map: map,
+	    title: "{!! $ticket->event->title !!}"
+	  });
   });
 </script>
 @endsection
@@ -58,5 +77,6 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKOjys2eW4gpc3KmoBlVOjQ-SqHWgyvwI
         &libraries=visualization&callback=initMap">
 </script>
-
+<script type="text/javascript">
+</script>
 @endsection
