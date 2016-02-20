@@ -4,13 +4,17 @@
 @section('title') Electronic Info Pack @endsection
 
 @section('extra-js')
+<script type="text/javascript">
+  $(document).ready(function(){
+    initMap();
+  });
+</script>
 @endsection
 
 @section('content')
 
 <div class="container">
 	<div class="row">
-		<section id="description" class="container">
 			<div class="card">
 				<div class="card-header red lighten-2">
 					<div class="card-title">
@@ -21,10 +25,10 @@
 					{!! $ticket->event->description !!}
 				</div>
 			</div>
-		</section>
-		<div class="col s12">
+		<div class="col s12 center-align">
 			{!! $ticket->qr() !!}
 		</div>
+		<div id="map" class="col s12 center-align" style="height: 400px;"></div>
 		@foreach($ticket->event->partners as $partner)
 		<div class="col s4">
 	      <div class="card blue-grey darken-1">
@@ -37,5 +41,9 @@
 	    @endforeach
 	</div>
 </div>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKOjys2eW4gpc3KmoBlVOjQ-SqHWgyvwI
+        &libraries=visualization&callback=initMap">
+</script>
 
 @endsection
