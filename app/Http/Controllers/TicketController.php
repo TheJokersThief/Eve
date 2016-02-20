@@ -274,6 +274,7 @@ class TicketController extends Controller
 
 		$vEvent->setDtStart(new DateTime($event->start_datetime))
 			   ->setDtEnd(new DateTime($event->end_datetime))
+			   //this needs to be changed-> coordinates is now latitude and longitude
 			   ->setLocation($event->location->name, $firstName, $event->location->coordinates)
 			   ->setSummary($event->title);
 
