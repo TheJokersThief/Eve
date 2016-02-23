@@ -6,7 +6,7 @@
 @section('extra-js')
 	<script type="text/javascript">
 		$(document).ready(function( ){
-			// initDropzone( );
+			initDropzone( );
 		});
 	</script>
 @endsection
