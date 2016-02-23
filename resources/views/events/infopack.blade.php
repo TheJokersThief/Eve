@@ -34,11 +34,13 @@
 	  marker.addListener('click', function() {
 	    infowindow.open(map, marker);
 	  });
+
 	  function addPartnerMarker(latitude, longitude, partnerName){
 	  	var myLatLng = {lat: latitude, lng: longitude};
 		  var marker = new google.maps.Marker({
 		    position: myLatLng,
 		    map: map,
+		    icon: "/images/partnerMarker.png",
 		    title: partnerName
 		  });
 
