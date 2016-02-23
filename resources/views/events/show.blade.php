@@ -108,7 +108,7 @@
 										<a class="btn red lighten-2" target="_blank" href="{{ URL::route( 'events/info', ['ticket' => $ticket]) }}"><i class="fa fa-print left"></i> Info Pack</a>
 									</div>
 									<div class=" col s12 row center-align">
-										<a class="btn red lighten-2 ical" target="_blank" href="{{ URL::action( 'TicketController@iCal', ['id' => Crypt::encrypt($ticket->id)]) }}"><i class="fa fa-calendar left"></i> Add To Calendar</a>
+										<a class="btn red lighten-2 ical" target="_blank" href="{{ URL::action( 'TicketController@iCal', ['code' => $ticket->code()]) }}"><i class="fa fa-calendar left"></i> Add To Calendar</a>
 									</div>
 
 								@endif
