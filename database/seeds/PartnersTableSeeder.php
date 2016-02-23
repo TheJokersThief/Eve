@@ -13,7 +13,7 @@ class PartnersTableSeeder extends Seeder
     public function run()
     {
         Partner::firstOrCreate([
-         	'name' => "McDonald's",
+         	'name' => "McDonalds",
             'featured_image' => '/images/sample_images/hotels/1.jpg',
             'type' => 'Food',
             'price' => 5.99,
@@ -26,7 +26,7 @@ class PartnersTableSeeder extends Seeder
         ]);
 
         Partner::firstOrCreate([
-         	'name' => "Bewley's",
+         	'name' => "Bewleys",
             'featured_image' => '/images/sample_images/hotels/2.jpg',
             'type' => 'Hotel',
             'price' => 64.99,
