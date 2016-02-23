@@ -82,7 +82,7 @@
 											</h2>
 											<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 													data-key="{{env('STRIPE_KEY')}}"
-													data-logo="{{URL::to('/images/logo.png')}}"
+													data-image="{{URL::to('/images/logo.png')}}"
 													data-description="{{$event->title}}"
 													data-amount="{{$event->price * 100}}"
 													data-locale="auto"
@@ -101,12 +101,16 @@
 									<div class="col s12 center-align">
 										{!! $ticket->qr() !!}
 									</div>
-									<div class=" col s12 center-align">
+									<div class=" col s12 row center-align">
 										<a class="btn red lighten-2" target="_blank" href="{{ URL::route( 'tickets/print', [ 'id' => Crypt::encrypt( $ticket->id ) ] ) }}"><i class="fa fa-print left"></i> Print ticket</a>
 									</div>
-									<div class=" col s12 center-align">
+									<div class=" col s12 row center-align">
 										<a class="btn red lighten-2" target="_blank" href="{{ URL::route( 'events/info', ['ticket' => $ticket]) }}"><i class="fa fa-print left"></i> Info Pack</a>
 									</div>
+									<div class=" col s12 row center-align">
+										<a class="btn red lighten-2 ical" target="_blank" href="{{ URL::action( 'TicketController@iCal', ['id' => Crypt::encrypt($ticket->id)]) }}"><i class="fa fa-calendar left"></i> Add To Calendar</a>
+									</div>
+
 								@endif
 							</div>
 							<div class="row">
