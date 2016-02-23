@@ -20,11 +20,19 @@
 	  });
 
 	  var myLatLng = {lat: {!! $ticket->event->location->latitude !!}, lng: {!! $ticket->event->location->longitude !!}};
-
 	  var marker = new google.maps.Marker({
 	    position: myLatLng,
 	    map: map,
 	    title: "{!! $ticket->event->title !!}"
+	  });
+	  marker.addListener('click', function() {
+	    infowindow.open(map, marker);
+	  });
+
+	  var contentString = "{!! $ticket->event->title !!}";
+	  var infowindow = new google.maps.InfoWindow({
+	    content: contentString,
+	    maxWidth: 200
 	  });
   });
 </script>
