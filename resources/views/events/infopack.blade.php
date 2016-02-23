@@ -25,16 +25,40 @@
 	    map: map,
 	    title: "{!! $ticket->event->title !!}"
 	  });
-	  marker.addListener('click', function() {
-	    infowindow.open(map, marker);
-	  });
 
 	  var contentString = "{!! $ticket->event->title !!}";
 	  var infowindow = new google.maps.InfoWindow({
 	    content: contentString,
 	    maxWidth: 200
 	  });
+	  marker.addListener('click', function() {
+	    infowindow.open(map, marker);
+	  });
+	  function addPartnerMarker(latitude, longitude, partnerName){
+	  	var myLatLng = {lat: latitude, lng: longitude};
+		  var marker = new google.maps.Marker({
+		    position: myLatLng,
+		    map: map,
+		    title: partnerName
+		  });
+
+		  var contentString = partnerName;
+		  var infowindow = new google.maps.InfoWindow({
+		    content: contentString,
+		    maxWidth: 200
+		  });
+		  marker.addListener('click', function() {
+		    infowindow.open(map, marker);
+		  });
+		}
+
+		@foreach($ticket->event->partners as $partner)
+			addPartnerMarker({{$partner->location->latitude}},
+							 {{$partner->location->longitude}},
+							 "{{$partner->name}}");
+		@endforeach
   });
+
 </script>
 @endsection
 
@@ -81,10 +105,8 @@
 	    @endforeach
 	</div>
 </div>
-<script async defer
+<script 
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKOjys2eW4gpc3KmoBlVOjQ-SqHWgyvwI
         &libraries=visualization&callback=initMap">
-</script>
-<script type="text/javascript">
 </script>
 @endsection
