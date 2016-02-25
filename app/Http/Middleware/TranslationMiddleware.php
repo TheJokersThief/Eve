@@ -18,6 +18,6 @@ class TranslationMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next( $request )->withCookie(cookie()->forever('locale', 'en'));
+        return $next( $request )->withCookie(cookie()->forever('locale', 'fr'));
     }
 }

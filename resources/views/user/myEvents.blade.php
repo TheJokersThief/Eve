@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('body-class') usersEvent-page usersAccount-page @endsection
-@section('title') Upcoming events @endsection
+@section('title') {{_t('Upcoming events')}} @endsection
 
 
 @section('content')
@@ -9,8 +9,8 @@
 		<nav class="oldEvents">
 	    	<div class="nav-wrapper" >
       			<div class="col s12">
-      				<a href="{{ URL::route('myEvents') }}" class="breadcrumb"><span class="grey-text text-darken-4">Upcoming Events</span></a>
-       				<a href="{{ URL::route('pastEvents') }}" class="breadcrumb">Past Events</a>
+      				<a href="{{ URL::route('myEvents') }}" class="breadcrumb"><span class="grey-text text-darken-4">{{_t('Upcoming Events')}}</span></a>
+       				<a href="{{ URL::route('pastEvents') }}" class="breadcrumb">{{_t('Past Events')}}</a>
       			</div>
 	   		</div>
 	  	</nav>
@@ -38,34 +38,34 @@
 	            </div>
 			</div>
 			<div class="col m9">
-				<h3 class="center-align">Attending</h3>
+				<h3 class="center-align">{{_t('Attending')}}</h3>
 				<div class="divider"></div>
 				@forelse($me->tickets as $ticket)
 					<div class="col s12 m4">
 	                    <div class="card dimmed-card-image">
 	                        <div class="card-image">
 	                            <img src="{{ $ticket->event->featured_image }}">
-	                            <span class="card-title">{{$ticket->event->title}}.</span>
+	                            <span class="card-title">{{_t($ticket->event->title)}}.</span>
 	                        </div>
 	                        <div class="card-content">
-	                            <p>{{strip_tags(str_limit($ticket->event->description,250))}}</p>
+	                            <p>{{strip_tags(str_limit(_t($ticket->event->description),250))}}</p>
 	                        </div>
 	                        <div class="card-action">
-	                            <a href="{{ URL::route('events.show', $ticket->event->id) }}" class="red-text text-lighten-2">View Event &rarr;</a>
+	                            <a href="{{ URL::route('events.show', $ticket->event->id) }}" class="red-text text-lighten-2">{{_t('View Event')}} &rarr;</a>
 	                        </div>
 	                    </div>
 	                </div>
 				@empty
 	            	<div class="section">
 	            		<div class="section">
-							<h5 class="center-align">Oh bother.</h5>
+							<h5 class="center-align">{{_t("Oh bother.")}}</h5>
 						</div>
-						<h5 class="center-align">You're not attending any events soon,</h5>
-						<h5 class="center-align">maybe you want to check out some other events?</h5>
+						<h5 class="center-align">{{_t("You're not attending any events soon,")}}</h5>
+						<h5 class="center-align">{{_t("maybe you want to check out some other events?")}}</h5>
 						<div class="section">
 							<div class="center-align">
 								<div class="col s3 m3">
-									<a href="{{ action('EventsController@index') }}" class="waves-effect waves-light btn">See Events</a>
+									<a href="{{ action('EventsController@index') }}" class="waves-effect waves-light btn">{{_t("See Events")}}</a>
 								</div>
 							</div>
 						</div>

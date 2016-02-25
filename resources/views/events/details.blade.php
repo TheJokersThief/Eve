@@ -1,5 +1,5 @@
 <div class="section">
-    {!! $event->tagline !!}
+    {!! _t($event->tagline) !!}
 </div>
 <div class="parallax-container">
 	<div class="parallax">
@@ -7,27 +7,27 @@
 	</div>
 </div>
 <div class="section">
-    {!! $event->description !!}
+    {!! _t($event->description )!!}
 </div>
 	<div class="divider"></div>
 <div class="section">
 		<div class="row">
-			<div class="col s6"><h5>Start:</h5></div>
-  		<div class="col s6"><h5>End:</h5></div>
-	    <div class="col s6">{{ $event->hrStartTime() }}</div>
-  		<div class="col s6">{{ $event->hrEndTime() }}</div>
+			<div class="col s6"><h5>{{_t('Start:')}}</h5></div>
+  		<div class="col s6"><h5>{{_t('End:')}}</h5></div>
+	    <div class="col s6">{{ _t($event->hrStartTime()) }}</div>
+  		<div class="col s6">{{ _t($event->hrEndTime()) }}</div>
   	</div>
 </div>
 <div class="divider"></div>
 <div class="section">
 		<div class="row">
-			<div class="col s2"><h5>Location:</h5></div>
+			<div class="col s2"><h5>{{_t('Location:')}}</h5></div>
 	    <div class="col s10"><p>{{ $event->location->name }}</p></div>
 	</div>
 </div>
 <div class="divider"></div>
 <div class="section">
-    <h5>Event Partners</h5>
+    <h5>{{_t('Event Partners')}}</h5>
     <div class="row">
         @foreach($event->partners as $partner)
             <div class="col s4">
@@ -36,13 +36,13 @@
                 <img class="activator" src="{{ URL::to('/') }}/{{$partner->featured_image}}">
             </div>
             <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">{{$partner->name}}<i class="material-icons right">more</i></span>
-                <p><a href="{{action('PartnersController@show', [$partner->id])}}">visit page</a></p>
+                <span class="card-title activator grey-text text-darken-4">{{$partner->name}}<i class="material-icons right">{{_t('more')}}</i></span>
+                <p><a href="{{action('PartnersController@show', [$partner->id])}}">{{_t('visit page')}}</a></p>
             </div>
             <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4">{{$partner->name}}<i class="material-icons right">close</i></span>
-              <p><a href="{{action('PartnersController@show', [$partner->id])}}">visit page</a></p>
-              <p>{{$partner->description}}</p>
+              <span class="card-title grey-text text-darken-4">{{$partner->name}}<i class="material-icons right">{{_t('close')}}</i></span>
+              <p><a href="{{action('PartnersController@show', [$partner->id])}}">{{_t('visit page')}}</a></p>
+              <p>{{_t($partner->description)}}</p>
             </div>
         </div>
     </div>

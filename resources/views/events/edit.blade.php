@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('body-class') edit-event @endsection
-@section('title') Edit: {{$event->title}} @endsection
+@section('title') {{_t('Edit:')}} {{_t($event->title)}} @endsection
 
 
 @section('extra-css')
@@ -42,7 +42,7 @@
 	<div class="col m8 offset-m2">
 		<div class="row">
 			<div class="col s12">
-				<h1>Edit an Event</h1>
+				<h1>{{_t('Edit an Event')}}</h1>
 			</div>
 		</div>
 
@@ -50,49 +50,49 @@
 		{!! Form::model($event, ['method' => 'PUT', 'action' => ['EventsController@update', $event->id], 'files' => true]) !!}
 			<div class="row">
 				<div class="input-field col m6 s12">
-					{!! Form::label('title','Event Title')	!!}
+					{!! Form::label('title',_t('Event Title'))	!!}
 					{!! Form::text('title')	!!}
 				</div>
 				<div class="input-field col m6 s12">
-					{!! Form::label('tagline','Event Tagline')	!!}
+					{!! Form::label('tagline',_t('Event Tagline'))	!!}
 					{!! Form::text('tagline') !!}
 				</div>
 				<div class="input-field col m12 s12">
-					<h5>Description:</h5>
+					<h5>{{_t('Description:')}}</h5>
 					<div class="editable content" id="description">
 					  <p>
-					    Start typing your description here!
+					    {{_t('Start typing your description here!')}}
 					  </p>
 					</div>
-					{!! Form::hidden('description_content', $event->description)	!!}
+					{!! Form::hidden('description_content', _t($event->description))	!!}
 				</div>
 			</div>
 
 			<div class="row">
 
 				<div class="col m6 s6">
-					<label for="start_date">Start Date</label>
+					<label for="start_date">{{_t('Start Date')}}</label>
 					<input name="start_date" id="start_date" value="{{$startDate}}" type="date" class="datepicker">
 				</div>
 
 				<div class="col m6 s6">
-					<label for="input_enddate">End Date</label>
+					<label for="input_enddate">{{_t('End Date')}}</label>
 					<input name="end_date" id="input_enddate" value="{{$endDate}}" type="date" class="datepicker">
 				</div>
 
 				<div class="input-field col m6 s6">
-					{!! Form::label('price','Price') !!}
+					{!! Form::label('price',_t('Price')) !!}
 					{!! Form::number('price', $event->price, ['step' => 0.01]) !!}
 				</div>
 
 				<div class="col m6 s6">
 					<div class="file-field input-field">
 						<div class="btn">
-							<span>Image</span>
+							<span>{{_t('Image')}}</span>
 							<input type="file" id="featured_image" name="featured_image">
 						</div>
 						<div class="file-path-wrapper">
-							<input class="file-path validate" type="text" disabled placeholder="Upload an image">
+							<input class="file-path validate" type="text" disabled placeholder="{{_t('Upload an image')}}">
 						</div>
 					</div>
 				</div>
@@ -109,25 +109,25 @@
 								<option value="{{$location->id}}">{{$location->name}}</option>
 							@endif
 						@endforeach
-						<option value="-1">Create New Location</option>
+						<option value="-1">{{_t('Create New Location')}}</option>
 		    		</select>
-		    		<label>Location Select</label>
+		    		<label>{{_t('Location Select')}}</label>
 		  		</div>
 		  		<div class="input-field col s6">
 		    		<select multiple name="partner_id[]" id="partner-select">
-		      			<option value="" disabled selected>Choose partner</option>
+		      			<option value="" disabled selected>{{_t('Choose partner')}}</option>
 						@foreach($allPartners as $partner)
 							<option value="{{$partner->id}}" {{$selected = (in_array($partner->id, $eventPartnersId) ?
 									 'selected' : '')}} {{$selected}}>{{$partner->name}}</option>
 						@endforeach
 		    		</select>
-		    		<label>Partner Select</label>
+		    		<label>{{_t('Partner Select')}}</label>
 		  		</div>
 			</div>
 
 			<div class="row">
 				<div class="col s4">
-					<label for="start_time">Start Time</label>
+					<label for="start_time">{{_t('Start Time')}}</label>
 					<div id="start_time" class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
 					    <input name="start_time" type="text" class="form-control" value="{{$startTime}}">
 					    <span class="input-group-addon">
@@ -136,7 +136,7 @@
 					</div>
 				</div>
 				<div class="col s4">
-					<label for="end_time">End Time</label>
+					<label for="end_time">{{_t('End Time')}}</label>
 					<div id="end_time" class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
 					    <input name="end_time" type="text" class="form-control" value="{{$endTime}}">
 					    <span class="input-group-addon">
@@ -147,11 +147,11 @@
 			</div>
 			<div class="row">
 				<div class="col s2">
-					<a href="{{ action('EventsController@show', [$event->id]) }}" class="waves-effect waves-light btn">Cancel</a>
+					<a href="{{ action('EventsController@show', [$event->id]) }}" class="waves-effect waves-light btn">{{_t('Cancel')}}</a>
 				</div>
 				<div class="col s2 push-s8">
 					<div class='form-group'>
-					{!! Form::submit('Update Event', ['class' => 'btn btn-primary form-control']) !!}
+					{!! Form::submit( _t('Update Event'), ['class' => 'btn btn-primary form-control']) !!}
 					</div>
 				</div>
 			</div>
@@ -161,28 +161,28 @@
 
 <div id="locationForm" class="modal bottom-sheet">
 	<div class="modal-content">
-	  <h4>Create New Location</h4>
+	  <h4>{{_t('Create New Location')}}</h4>
 	  <ul id="location-errors"></ul>
 		{!! Form::open( ['url' => 'events'] ) !!}
 			<div class="row">
 				<div class="input-field col m6 s12">
-					{!! Form::label('name','Location Name')	!!}
+					{!! Form::label('name',_t('Location Name'))	!!}
 					{!! Form::text('name')	!!}
 				</div>
 				<div class="input-field col m6 s12">
-					{!! Form::label('capacity','Location Capacity')	!!}
+					{!! Form::label('capacity',_t('Location Capacity'))	!!}
 					{!! Form::number('capacity') !!}
 				</div>
 				<div class="input-field col m6 s12">
-					{!! Form::label('coordinates','Location Coordinates')	!!}
+					{!! Form::label('coordinates',_t('Location Coordinates'))	!!}
 					{!! Form::text('coordinates') !!}
 				</div>
 			</div>
 		{!! Form::close() !!}
 	</div>
 	<div class="modal-footer">
-	  <a href="#!" class="orange-text modal-action waves-effect waves-green btn-flat" onClick="createLocation()">Create</a>
-	  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" onClick="$('#location-select').val('');$('#location-select').material_select();">Cancel</a>
+	  <a href="#!" class="orange-text modal-action waves-effect waves-green btn-flat" onClick="createLocation()">{{_t('Create')}}</a>
+	  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" onClick="$('#location-select').val('');$('#location-select').material_select();">{{_t('Cancel')}}</a>
 	</div>
 </div>
 

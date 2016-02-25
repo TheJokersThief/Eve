@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('body-class') edit-news @endsection
-@section('title') Editing News: {{$item->title}} @endsection
+@section('title') {{_t('Editing News:')}} {{$item->title}} @endsection
 
 @section('extra-css')
 	<link rel="stylesheet" type="text/css" href="{{ URL::to('/') . '/css/clockpicker.css' }}">
@@ -40,23 +40,23 @@
 <main class="container row">
 	<div class="col m8 offset-m2 s12">
 		{!! Form::open( ['method' => 'PUT', 'route' => ['news.update', $item->id] , 'id' => 'news-form', 'files' => 'true'] ) !!}
-			
+
 			<div class="row">
-				<h2 class="editable title">Your Title Here</h2>
+				<h2 class="editable title">{{_t('Your Title Here')}}</h2>
 				{!! Form::hidden('title', $item->title)	!!}
 
-				<div class="editable content" placeholder="Start typing your content here!">
+				<div class="editable content" placeholder="{{_t('Start typing your content here!')}}">
 				  <p>
-				    Start typing your content here!
+				    {{_t('Start typing your content here!')}}
 				  </p>
 				</div>
 				{!! Form::hidden('content', $item->content)	!!}
 			</div>
-			
+
 			<div class="collection">
 				<div class="row col m6 l4">
 					<div class="input-field col m12 s12">
-						{!! Form::label('tags','Tags (Comma-separated)') !!}
+						{!! Form::label('tags',_t('Tags (Comma-separated)')) !!}
 						{!! Form::text('tags', $item->tags)	!!}
 					</div>
 				</div>
@@ -67,7 +67,7 @@
 
 					<div class="file-field input-field col m6 s12">
 						<div class="btn">
-							<span>Add Image</span>
+							<span>{{_t('Add Image')}}</span>
 							{!! Form::file('featured_image') !!}
 						</div>
 						<div class="file-path-wrapper">
@@ -76,19 +76,19 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="col s3 ">
 					<div class='form-group'>
 						<a href="{{URL::route('news.show', [$item->id])}}">
-							<button class="btn btn-primary form-control" type="button">View News</button>
+							<button class="btn btn-primary form-control" type="button">{{_t('View News')}}</button>
 						</a>
 					</div>
 				</div>
 
 				<div class="col s2 right">
 					<div class='form-group'>
-						{!! Form::submit('Update News', ['class' => 'btn btn-primary form-control', 'id' => 'news-button']) !!}
+						{!! Form::submit(_t('Update News'), ['class' => 'btn btn-primary form-control', 'id' => 'news-button']) !!}
 					</div>
 				</div>
 			</div>

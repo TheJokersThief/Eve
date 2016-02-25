@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Printable Nametag</title>
+	<title>{{_t('Printable Nametag')}}</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 	<style>
@@ -41,7 +41,7 @@
 						@elseif($ticket->user->is_staff)
 							Event Staff
 						@else
-							{{$ticket->event->title}}
+							{{_t($ticket->event->title)}}
 						@endif</p>
 				</div>
 			</div>

@@ -16,12 +16,12 @@
 			<div class="row ">
 				<div class="col s12 m6 l6">
 					<ul class="collection with-header">
-						<li class="collection-header"><h4>Your Images</h4></li>
+						<li class="collection-header"><h4>{{_t('Your Images')}}</h4></li>
 					@foreach( $images as $image )
 						<li class="collection-item" id="{{ Crypt::encrypt($image->id) }}">
 							<div>
 								<img src="{{ $image->file_location }}" class="col s3"/>
-								{{ $image->name }}
+								{{ _t($image->name) }}
 								<a href="#!" class="secondary-content">
 									<i class="fa fa-times red-text"
 										onclick="
@@ -49,7 +49,7 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">{{_t('Close')}}</a>
 		</div>
 	</div>
 @endsection

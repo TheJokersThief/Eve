@@ -1,30 +1,30 @@
 @extends('layouts.app')
 
 @section('body-class') show-news @endsection
-@section('title') {{$news->title}} @endsection
+@section('title') {{ _t($news->title) }} @endsection
 
 
 @section('content')
-	
+
 	<main class="row">
 		<div class="parallax-container valign-wrapper">
 			<div class="parallax">
 				<img src="{{ $news->featured_image }}">
 			</div>
 			<div class="row center-align title">
-				<h1>{{ $news->title }}</h1>
+				<h1>{{ _t($news->title) }}</h1>
 			</div>
 		</div>
 		<div class="row content">
 			<div class="col l8 offset-l2 card white">
 				<p class="red-text text-lighten-2">{{ date( 'M m, Y', strtotime( $news->created_at ) ) }}</p>
-				{!! $news->content !!}
-				
+				{!! _t($news->content) !!}
+
 				<div class="row">
-					Tags: 
+					{{_t('Tags: ')}}
 					@forelse( explode( ',', trim($news->tags) ) as $tag )
 						<div class="chip">
-							{{ trim( $tag ) }}
+							{{ trim( _t($tag) ) }}
 						</div>
 					@empty
 
@@ -32,7 +32,7 @@
 
 					@if( Auth::user()->is_admin )
 						<a href="{{ URL::route('news.edit', [$news->id] ) }}" class="red-text text-lighten-2 right">
-							Edit &rarr;
+							{{_t('Edit')}} &rarr;
 						</a>
 					@endif
 				</div>
