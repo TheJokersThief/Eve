@@ -12,8 +12,13 @@
 */
 
 
-Route::get('/emailtest', 'MailController@index');
-
+Route::post('language', function( Illuminate\Http\Request $request ){
+	$data = $request->only(['language']);
+	if( Auth::check() ){
+		App\Http\Controllers\UserController::setLanguageCode( $data['language'], Auth::user()->id);
+	}
+	return back()->withCookie(cookie()->forever('locale', $data['language']));
+});
 
 Route::group(['middleware' => ['web']], function () {
 	Route::auth();

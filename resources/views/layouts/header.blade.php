@@ -31,14 +31,16 @@
 		]) !!}
     	<nav>
 			<div class="nav-wrapper container">
-			  <div class="left input-field hide-on-med-and-down">
+
+				<!-- User Search Box -->
+				<div class="left input-field hide-on-med-and-down">
 				  {!! Form::text('search',
 						null,
 						['id' => 'search',
-			            'placeholder'=> _t('Search for a user') ])
+				        'placeholder'=> str_limit( _t('Search for a user'), 20 ) ])
 				  !!}
 				  <label for="search"><i class="material-icons">search</i></label>
-			  </div>
+				</div>
 			  <a href="{{ URL::to('/home') }}" class="brand-logo">
 
 			  	@if( ($logo = App\Setting::where('name', 'company_logo')->first()->setting) != '' )
@@ -73,6 +75,7 @@
 						<a href="{{ URL::to('register') }}" class="btn">{{_t('Signup')}}</a>
 					</li>
 			  	@endif
+			  	<li><a href="#language-modal" class="modal-trigger" alt="{{_t('Language Preferences')}}"><i class="material-icons">language</i></a></li>
 			  </ul>
 			  <ul class="side-nav" id="mobile-demo">
 			  <div class="input-field">
@@ -97,6 +100,7 @@
 						<a href="{{ URL::to('register') }}" class="btn">{{_t('Signup')}}</a>
 					</li>
 			  	@endif
+			  	<li><a href="#language-modal" class="modal-trigger" alt="{{_t('Language Preferences')}}"><i class="material-icons">language</i></a></li>
 
 			  </ul>
 			  <div class="hide">
