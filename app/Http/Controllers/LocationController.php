@@ -19,7 +19,6 @@ class LocationController extends Controller
 	private $errorMessages = [
 		'incorrect_permissions' => 'You do not have permission to edit locations.',
 		'incorrect_permissions_news' => 'You do not have permission to edit news.',
-
 	];
 
 	public function index(){

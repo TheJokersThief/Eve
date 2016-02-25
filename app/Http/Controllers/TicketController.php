@@ -36,7 +36,7 @@ class TicketController extends Controller
 		'something_wrong' => "Something went wrong here.",
 		'ticket_invalid' => 'Ticket is invalid',
 		'not_logged_in' => 'Are you logged in?',
-		'ticket_not_found' => "Not found!",
+		'ticket_not_found' => "Not found!"
 	];
 
 	/**

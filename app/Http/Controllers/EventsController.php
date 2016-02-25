@@ -20,9 +20,9 @@ use DB;
 class EventsController extends Controller
 {
 	private $errorMessages =[
-		'incorrect_permissions' => _t('You do not have permission to edit events.'),
-		'event_creation_failed' => _t('We\'re sorry but event creation failed, please try again later.'),
-		'event_not_found' => _t('The event you tried to edit could not be found.')
+		'incorrect_permissions' => 'You do not have permission to edit events.',
+		'event_creation_failed' => 'We\'re sorry but event creation failed, please try again later.',
+		'event_not_found' => 'The event you tried to edit could not be found.'
 	];
 
 
