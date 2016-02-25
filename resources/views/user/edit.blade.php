@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('body-class') usersAccount-page @endsection
-@section('title') Edit your details @endsection
+@section('title') {{_t('Edit your details')}} @endsection
 
 
 @section('content')
@@ -19,7 +19,7 @@
 
 						<span class="card-title activator grey-text text-darken-4">{{ $me->name }}</span>
 						<p><i class="mdi-communication-email cyan-text text-darken-2"></i> {{ $me->email }}</p>
-						<p><i class="fa fa-map-marker cyan-text text-darken-2"></i> {{ $me->city }}, {{ $me->country }}</p>
+						<p><i class="fa fa-map-marker cyan-text text-darken-2"></i> {{ $me->city }}, {{ _t($me->country) }}</p>
 						<p><i class="fa fa-language cyan-text text-darken-2"></i> {{ $me->language }}</p>
 					</div>
 					<div class="card-reveal">
@@ -41,44 +41,44 @@
 						<li class="collection-item red darken-1 white-text"><strong>Errors:</strong>
 							<ul>
 								@foreach($errors->all() as $error)
-									<li class="white-text">{{$error}}</li>
+									<li class="white-text">{{_t($error)}}</li>
 								@endforeach
 							</ul>
 						</li>
 					@endif
-					<li class="collection-item"><strong>Name:</strong>
+					<li class="collection-item"><strong>{{_t('Name:')}}</strong>
 						<div class="secondary-content">
 							<i class="fa fa-pencil teal-text"></i>
 						</div>
 						{!! Form::text('name', $me->name, ["class" => "example validate"])!!}
 					</li>
 					@if($me->username == $me->facebook_id)
-						<li class="collection-item"><strong>Username:</strong>
+						<li class="collection-item"><strong>{{_t('Username:')}}</strong>
 							<div class="secondary-content">
 								<i class="fa fa-pencil teal-text"></i>
 							</div>
 							{!! Form::text('username', "", ["class" => "example validate"])!!}
 						</li>
 					@endif
-					<li class="collection-item"><strong>Bio:</strong>
+					<li class="collection-item"><strong>{{_t('Bio:')}}</strong>
 						<div class="secondary-content">
 							<i class="fa fa-pencil teal-text"></i>
 						</div>
 						{!! Form::textarea('bio', $me->bio, ["class" => "materialize-textarea"])!!}
 					</li>
-					<li class="collection-item"><strong>Language:</strong>
+					<li class="collection-item"><strong>{{_t('Language:')}}</strong>
 						<div class="secondary-content">
 							<i class="fa fa-pencil teal-text"></i>
 						</div>
 						{!! Form::text('language', $me->language, ["class" => "example validate"])!!}
 					</li>
-					<li class="collection-item"><strong>City:</strong>
+					<li class="collection-item"><strong>{{_t('City:')}}</strong>
 						<div class="secondary-content">
 							<i class="fa fa-pencil teal-text"></i>
 						</div>
 						{!! Form::text('city', $me->city, ["class" => "example validate"])!!}
 					</li>
-					<li class="collection-item"><strong>Country:</strong>
+					<li class="collection-item"><strong>{{_t('Country:')}}</strong>
 						<div class="secondary-content">
 							<i class="fa fa-pencil teal-text"></i>
 						</div>
@@ -86,7 +86,7 @@
 					</li>
 				</ul>
 				<ul class="collection flow-text">
-					<li class="collection-item"><strong>Change password:</strong>
+					<li class="collection-item"><strong>{{_t('Change password:')}}</strong>
 						<div class="secondary-content">
 							<i class="fa fa-pencil teal-text"></i>
 						</div>
@@ -94,10 +94,10 @@
 					</li>
 				</ul>
 				<ul class="collection flow-text file-field input-field">
-					<li class="collection-item"><strong>Change Profile Picture</strong>
+					<li class="collection-item"><strong>{{_t('Change Profile Picture')}}</strong>
 						<div class="secondary-content">
 						    <div class="btn">
-    							<span>File</span>
+    							<span>{{_t('File')}}</span>
    								{!! Form::file('profile_picture')!!}
   							</div>
   							<div class="file-path-wrapper">
@@ -106,7 +106,7 @@
 						</div>
 					</li>
 				</ul>
-				{!! Form::submit('Submit', ['class' => 'btn btn-primary form-control']) !!}
+				{!! Form::submit( _t('Submit'), ['class' => 'btn btn-primary form-control']) !!}
 			</div>
 			{!! Form::close() !!}
 		</div>

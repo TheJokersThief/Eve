@@ -64,7 +64,7 @@ function createLocation( ){
 $(function()
 {
 	 $( "#search" ).autocomplete({
-	  source: "user/autocomplete",
+	  source: "autocomplete",
 	  minLength: 1,
 	  select: function(event, ui) {
 	  	$('#search').val(ui.item.value);

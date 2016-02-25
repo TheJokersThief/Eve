@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('body-class') info-page @endsection
-@section('title') Electronic Info Pack @endsection
+@section('title') {{_t('Electronic Info Pack')}} @endsection
 
 @section('extra-js')
 <script type="text/javascript">
@@ -23,18 +23,44 @@
 	  var marker = new google.maps.Marker({
 	    position: myLatLng,
 	    map: map,
-	    title: "{!! $ticket->event->title !!}"
+	    title: "{!! _t($ticket->event->title) !!}"
+	  });
+
+	  var contentString = "{!! _t($ticket->event->title) !!}";
+	  var infowindow = new google.maps.InfoWindow({
+	    content: contentString,
+	    maxWidth: 200
 	  });
 	  marker.addListener('click', function() {
 	    infowindow.open(map, marker);
 	  });
 
-	  var contentString = "{!! $ticket->event->title !!}";
-	  var infowindow = new google.maps.InfoWindow({
-	    content: contentString,
-	    maxWidth: 200
-	  });
+	  function addPartnerMarker(latitude, longitude, partnerName){
+	  	var myLatLng = {lat: latitude, lng: longitude};
+		  var marker = new google.maps.Marker({
+		    position: myLatLng,
+		    map: map,
+		    icon: "/images/partnerMarker.png",
+		    title: partnerName
+		  });
+
+		  var contentString = partnerName;
+		  var infowindow = new google.maps.InfoWindow({
+		    content: contentString,
+		    maxWidth: 200
+		  });
+		  marker.addListener('click', function() {
+		    infowindow.open(map, marker);
+		  });
+		}
+
+		@foreach($ticket->event->partners as $partner)
+			addPartnerMarker({{$partner->location->latitude}},
+							 {{$partner->location->longitude}},
+							 "{{$partner->name}}");
+		@endforeach
   });
+
 </script>
 @endsection
 
@@ -45,18 +71,18 @@
 		<div class="card">
 			<div class="card-header red lighten-2">
 				<div class="card-title" style="padding: .1%;">
-					<p style="margin-left: 5%;">{!! $ticket->event->title !!}</p>
+					<p style="margin-left: 5%;">{!! _t($ticket->event->title) !!}</p>
 				</div>
 			</div>
 			<div class="card-content">
-				{!! $ticket->event->description !!}
+				{!! _t($ticket->event->description) !!}
 			</div>
 		</div>
 		<div class="col s12 m4 l4">
 			<div class="card">
 				<div class="card-header blue">
 					<div class="card-title">
-						<p class="center-align">Your Ticket</p>
+						<p class="center-align">{{_t('Your Ticket')}}</p>
 					</div>
 				</div>
 				<div class="card-content">
@@ -74,17 +100,20 @@
 	      <div class="card blue-grey darken-1">
 	        <div class="card-content white-text">
 	          <span class="card-title">{!! $partner->name !!}</span>
+<<<<<<< HEAD
 	          <p>{!! $partner->description !!}</p>
+	          <p>Distance: {!! $partner->pivot->distance !!}m</p>
+=======
+	          <p>{!! _t($partner->description) !!}</p>
+>>>>>>> origin/master
 	        </div>
 	      </div>
 	    </div>
 	    @endforeach
 	</div>
 </div>
-<script async defer
+<script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKOjys2eW4gpc3KmoBlVOjQ-SqHWgyvwI
         &libraries=visualization&callback=initMap">
-</script>
-<script type="text/javascript">
 </script>
 @endsection

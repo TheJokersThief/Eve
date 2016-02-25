@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('body-class') create-news @endsection
-@section('title') Write News @endsection
+@section('title') {{_t('Write News')}} @endsection
 
 
 @section('extra-css')
@@ -41,23 +41,23 @@
 <main class="container row">
 	<div class="col m8 offset-m2 s12">
 		{!! Form::open( ['route' => 'news.store', 'id' => 'news-form', 'files' => 'true'] ) !!}
-			
+
 			<div class="row">
-				<h2 class="editable title">Your Title Here</h2>
+				<h2 class="editable title">{{_t('Your Title Here')}}</h2>
 				{!! Form::hidden('title')	!!}
 
-				<div class="editable content" placeholder="Start typing your content here!">
+				<div class="editable content" placeholder="{{_t('Start typing your content here!')}}">
 				  <p>
-				    Start typing your content here!
+				    {{_t('Start typing your content here!')}}
 				  </p>
 				</div>
 				{!! Form::hidden('content')	!!}
 			</div>
-			
+
 			<div class="collection">
 				<div class="row col m6 l4">
 					<div class="input-field col m12 s12">
-						{!! Form::label('tags','Tags (Comma-separated)') !!}
+						{!! Form::label('tags',_t('Tags (Comma-separated)')) !!}
 						{!! Form::text('tags')	!!}
 					</div>
 				</div>
@@ -68,7 +68,7 @@
 
 					<div class="file-field input-field col m6 s12">
 						<div class="btn">
-							<span>Add Image</span>
+							<span>{{_t('Add Image')}}</span>
 							{!! Form::file('featured_image') !!}
 						</div>
 						<div class="file-path-wrapper">
@@ -77,7 +77,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="col s2 right">
 					<div class='form-group'>

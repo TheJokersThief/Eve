@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('body-class') usersEvent-page usersAccount-page @endsection
-@section('title') Past events @endsection
+@section('title') {{_t('Past events')}} @endsection
 
 @section('content')
 	<main class="row">
 		<nav class="oldEvents">
 	    	<div class="nav-wrapper" >
 	      			<div class="col s12">
-	      				<a href="{{ URL::route('myEvents') }}" class="breadcrumb">Upcoming Events</a>
-	       				<a href="{{ URL::route('pastEvents') }}" class="breadcrumb"><span class="grey-text text-darken-4">Past Events</span></a>
+	      				<a href="{{ URL::route('myEvents') }}" class="breadcrumb">{{_t('Upcoming Events')}}</a>
+	       				<a href="{{ URL::route('pastEvents') }}" class="breadcrumb"><span class="grey-text text-darken-4">{{_t('Past Events')}}</span></a>
 	      			</div>
 	   			</div>
 	  		</nav>
@@ -17,7 +17,7 @@
 			<div class="col m3">
 				<div id="profile-card" class="card hide-on-small-only">
 	                <div class="card-image waves-effect waves-block waves-light">
-	                    <img class="activator" src="{{ URL::to('/') . '/images/red-geometric-background.png'}}" alt="user background">
+	                    <img class="activator" src="{{ URL::to('/') . '/images/red-geometric-background.png'}}" alt="{{_t('user background')}}">
 	                </div>
 	                <div class="card-content">
 	                    <img src="{{$me->profile_picture}}" alt="" class="circle responsive-img activator card-profile-image">
@@ -38,7 +38,7 @@
 			</div>
 				<div id="upComingEvents" class="col m9 s12">
 					<div class="">
-						<h3 class="center-align">Past Events</h3>
+						<h3 class="center-align">{{_t('Past Events')}}</h3>
 						<div class="divider"></div>
 							<div class="row">
 					            @foreach($me->tickets as $ticket)
@@ -46,13 +46,13 @@
 					                    <div class="card dimmed-card-image">
 					                        <div class="card-image">
 					                            <img src="{{ $ticket->event->featured_image }}">
-					                            <span class="card-title">{{$ticket->event->title}}.</span>
+					                            <span class="card-title">{{_t($ticket->event->title)}}.</span>
 					                        </div>
 					                        <div class="card-content">
-					                            <p>{{strip_tags(str_limit($ticket->event->description,250))}}</p>
+					                            <p>{{strip_tags(str_limit(_t($ticket->event->description),250))}}</p>
 					                        </div>
 					                        <div class="card-action">
-					                            <a href="{{ URL::route('events.show', $ticket->event->id) }}" class="red-text text-lighten-2">View Event &rarr;</a>
+					                            <a href="{{ URL::route('events.show', $ticket->event->id) }}" class="red-text text-lighten-2">{{_t('View Event')}} &rarr;</a>
 					                        </div>
 					                    </div>
 					                </div>

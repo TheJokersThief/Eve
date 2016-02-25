@@ -95,8 +95,8 @@
 	<body>
 		<header>
 			<div id="title">
-				<div class="superText">Event:</div>
-				<h1>{{$ticket->event->title}}</h1>
+				<div class="superText">{{_t('Event:')}}</div>
+				<h1>{{_t($ticket->event->title)}}</h1>
 			</div>
 			<div id="logo">
 				<img src="{{ $ticket->event->featured_image }}" />
@@ -104,27 +104,27 @@
 		</header>
 		<main>
 			<div id="time">
-				<div class="superText">Date and Time:</div>
-				<p>From:&emsp;{{ $ticket->event->hrStartTime() }}</p>
-				<p>To:&emsp;&emsp;{{ $ticket->event->hrEndTime() }}</p>
+				<div class="superText">{{_t('Date and Time:')}}</div>
+				<p>{{_t('From:')}}&emsp;{{ $ticket->event->hrStartTime() }}</p>
+				<p>{{_t('To:')}}&emsp;&emsp;{{ $ticket->event->hrEndTime() }}</p>
 			</div>
 			<div id="location">
-				<div class="superText">Location:</div>
+				<div class="superText">{{_t('Location:')}}</div>
 				@foreach( $ticket->event->location->addressAsArray() as $line )
 					<p>{{ $line }}</p>
 				@endforeach
 			</div>
 			<div id="name">
-				<div class="superText">Ticketholder:</div>
+				<div class="superText">{{_t('Ticketholder:')}}</div>
 				<p>{{$ticket->user->name}}</p>
 			</div>
 			<div id="number">
-				<div class="superText">Order Number:</div>
+				<div class="superText">{{_t('Order Number:')}}</div>
 				<p>#{{ $ticket->id }}</p>
 			</div>
 			<div id="about">
-				<div class="superText">About:</div>
-				<p>{{ strip_tags(str_limit( $ticket->event->description, 300 ))}}</p>
+				<div class="superText">{{_t('About:')}}</div>
+				<p>{{ strip_tags(str_limit( _t($ticket->event->description), 300 ))}}</p>
 			</div>
 			<div id="map">
 				<img src="">

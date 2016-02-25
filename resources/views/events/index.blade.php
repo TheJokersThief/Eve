@@ -30,10 +30,10 @@
 	<div class="row">
 		<div class="valign-wrapper">
 			<div class="col s10 m10">
-				<h4>Events</h4>
+				<h4>{{_t('Events')}}</h4>
 			</div>
 			<div class="col s2 m2">
-				<a href="{{ action('EventsController@create') }}" class="waves-effect waves-light btn">Create</a>
+				<a href="{{ action('EventsController@create') }}" class="waves-effect waves-light btn">{{_t('Create')}}</a>
 			</div>
 		</div>
 	    @foreach($events as $event)
@@ -43,13 +43,13 @@
 				    	<img class="activator" src="{{$event->featured_image}}">
 				    </div>
 				    <div class="card-content">
-				    	<span class="card-title activator grey-text text-darken-4">{{$event->title}}<i class="material-icons right">more</i></span>
-				      	<p><a href="{{action('EventsController@show', [$event->id])}}">visit page</a></p>
+				    	<span class="card-title activator grey-text text-darken-4">{{_t($event->title)}}<i class="material-icons right">{{_t('more')}}</i></span>
+				      	<p><a href="{{action('EventsController@show', [$event->id])}}">{{_t('visit page')}}</a></p>
 				    </div>
 				    <div class="card-reveal">
-				      <span class="card-title grey-text text-darken-4">{{$event->title}}<i class="material-icons right">close</i></span>
-				      <p><a href="{{action('EventsController@show', [$event->id])}}">visit page</a></p>
-				      <p>{!! $event->description !!}</p>
+				      <span class="card-title grey-text text-darken-4">{{_t($event->title)}}<i class="material-icons right">{{_t('close')}}</i></span>
+				      <p><a href="{{action('EventsController@show', [$event->id])}}">{{_t('visit page')}}</a></p>
+				      <p>{!! _t($event->description) !!}</p>
 				    </div>
 				</div>
 	      	</div>

@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('body-class') event-page media-upload @endsection
-@section('title') {{$event->title}} @endsection
+@section('title') {{_t($event->title)}} @endsection
 
 @section('extra-js')
 	<script type="text/javascript">
 		$(document).ready(function( ){
-			// initDropzone( );
+			initDropzone( );
 		});
 	</script>
 @endsection
@@ -17,14 +17,14 @@
 			<div class="row container valign">
 				<div id="event-details" class="col s12 m4 l4 right-align valign-wrapper">
 					<div class="valign">
-						<h5>{{ $event->hrStartTime( ) }}</h5>
-						<h5>{{ $event->hrEndTime( ) }}</h5>
+						<h5>{{ _t($event->hrStartTime( )) }}</h5>
+						<h5>{{ _t($event->hrEndTime( )) }}</h5>
 						<h5>{{ $event->location->name }}</h5>
 					</div>
 				</div>
 				<div class="col s12 m8 l8" id="event-title">
-					<h1>{{ $event->title }}</h1>
-					<h4>{{ $event->tagline }}</h4>
+					<h1>{{ _T($event->title) }}</h1>
+					<h4>{{ _T($event->tagline) }}</h4>
 				</div>
 			</div>
 		</section>
@@ -32,7 +32,7 @@
 			<div class="card">
 				<div class="card-header red lighten-2">
 					<div class="card-title">
-						<h4 class="">About The Event</h4>
+						<h4 class="">{{_t('About The Event')}}</h4>
 						@if( Auth::check() )
 							@if(Auth::user()->is_admin)
 								<a href="{{ route('events.edit', [$event->id]) }}" class="right waves-effect waves-light btn">
@@ -43,14 +43,14 @@
 							{{-- If it's just a normal user, show them how to upload images --}}
 							@if(! Auth::user()->is_admin && ! Auth::user()->is_staff )
 								<a href="#media-modal"class="right waves-effect waves-light btn modal-trigger">
-									Add Photos <i class="fa fa-pencil left"></i>
+									{{_t('Add Photos')}} <i class="fa fa-pencil left"></i>
 								</a>
 							@endif
 						@endif
 					</div>
 				</div>
 				<div class="card-content">
-					{!! $event->description !!}
+					{!! _t($event->description) !!}
 				</div>
 			</div>
 		</section>
@@ -60,7 +60,7 @@
 				<div id="ticket-card" class="card">
 					<div class="card-header amber darken-2">
 						<div class="card-title">
-							<h4 class="ticket-card-title truncate">{{ $event->title }}</h4>
+							<h4 class="ticket-card-title truncate">{{ _t($event->title) }}</h4>
 							<p class="ticket-card-date">{{ $event->location->name }}</p>
 						</div>
 					</div>
@@ -72,7 +72,7 @@
 										{!! Form::hidden('event_id', $event->id) !!}
 										@if(!$event->price )
 											<h2 id="price">
-												FREE
+												{{_t('FREE')}}
 											</h2>
 											{!! Form::submit('Get Ticket', ['class' => 'btn btn-primary red lighten-2 form-control']) !!}
 										@elseif( Auth::check() ) {{-- This is the Stripe embed and is used to
@@ -93,7 +93,7 @@
 												&euro;{{ $event->price }}
 											</h2>
 											<a class="btn btn-primary red lighten-2 modal-trigger" href="#login-modal">
-												Buy Ticket
+												{{_t('Buy Ticket')}}
 											</a>
 										@endif
 									{!! Form::close() !!}
@@ -102,13 +102,13 @@
 										{!! $ticket->qr() !!}
 									</div>
 									<div class=" col s12 row center-align">
-										<a class="btn red lighten-2" target="_blank" href="{{ URL::route( 'tickets/print', [ 'id' => Crypt::encrypt( $ticket->id ) ] ) }}"><i class="fa fa-print left"></i> Print ticket</a>
+										<a class="btn red lighten-2" target="_blank" href="{{ URL::route( 'tickets/print', [ 'id' => Crypt::encrypt( $ticket->id ) ] ) }}"><i class="fa fa-print left"></i> {{_t('Print ticket')}}</a>
 									</div>
 									<div class=" col s12 row center-align">
-										<a class="btn red lighten-2" target="_blank" href="{{ URL::route( 'events/info', ['ticket' => $ticket]) }}"><i class="fa fa-print left"></i> Info Pack</a>
+										<a class="btn red lighten-2" target="_blank" href="{{ URL::route( 'events/info', ['ticket' => $ticket]) }}"><i class="fa fa-print left"></i> {{_t('Info Pack')}}</a>
 									</div>
 									<div class=" col s12 row center-align">
-										<a class="btn red lighten-2 ical" target="_blank" href="{{ URL::action( 'TicketController@iCal', ['code' => $ticket->code()]) }}"><i class="fa fa-calendar left"></i> Add To Calendar</a>
+										<a class="btn red lighten-2 ical" target="_blank" href="{{ URL::action( 'TicketController@iCal', ['code' => $ticket->code()]) }}"><i class="fa fa-calendar left"></i> {{_t('Add To Calendar')}}</a>
 									</div>
 
 								@endif
@@ -116,16 +116,16 @@
 							<div class="row">
 								<div class="col s6 m6 l6 center-align">
 									<div class="ticket-info">
-										<p class="small center-align">Start</p>
-										<p class="small"><span class="grey-text text-lighten-2">Time:</span> {{ date('h:i A', strtotime( $event->start_datetime ) ) }}</p>
-										<p class="small"><span class="grey-text text-lighten-2">Date:</span> {{ date('d/m/Y', strtotime( $event->start_datetime ) ) }}</p>
+										<p class="small center-align">{{_t('Start')}}</p>
+										<p class="small"><span class="grey-text text-lighten-2">{{_t('Time:')}}</span> {{ date('h:i A', strtotime( $event->start_datetime ) ) }}</p>
+										<p class="small"><span class="grey-text text-lighten-2">{{_t('Date:')}}</span> {{ date('d/m/Y', strtotime( $event->start_datetime ) ) }}</p>
 									</div>
 								</div>
 								<div class="col s6 m6 l6 center-align ticket-state-two">
 									<div class="ticket-info">
-										<p class="small center-align">End</p>
-										<p class="small"><span class="grey-text text-lighten-2">Time:</span> {{ date('h:i A', strtotime( $event->end_datetime ) ) }}</p>
-										<p class="small"><span class="grey-text text-lighten-2">Date:</span> {{ date('d/m/Y', strtotime( $event->end_datetime ) ) }}</p>
+										<p class="small center-align">{{_t('End')}}</p>
+										<p class="small"><span class="grey-text text-lighten-2">{{_t('Time:')}}</span> {{ date('h:i A', strtotime( $event->end_datetime ) ) }}</p>
+										<p class="small"><span class="grey-text text-lighten-2">{{_t('Date:')}}</span> {{ date('d/m/Y', strtotime( $event->end_datetime ) ) }}</p>
 									</div>
 								</div>
 							</div>
@@ -135,7 +135,7 @@
 				@if(count($users))
 					<div class="divider"></div>
 					<ul class="collection with-header">
-						<li class="collection-header"><h4> Attendees:</h4></li>
+						<li class="collection-header"><h4> {{_t('Attendees:')}}</h4></li>
 						@foreach( $users as $user )
 							<li class="collection-item avatar">
 								<img src="{{ $user->profile_picture }}" alt="" class="circle">

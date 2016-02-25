@@ -32,10 +32,10 @@
     	<nav>
 			<div class="nav-wrapper container">
 			  <div class="left input-field hide-on-med-and-down">
-				  {!! Form::text('search', 
-						null, 
+				  {!! Form::text('search',
+						null,
 						['id' => 'search',
-			            'placeholder'=>'Search for a user'])
+			            'placeholder'=> _t('Search for a user') ])
 				  !!}
 				  <label for="search"><i class="material-icons">search</i></label>
 			  </div>
@@ -56,21 +56,21 @@
 			  <ul class="right hide-on-med-and-down">
 			  	@if( Auth::check( ) )
 			  		@if( Auth::user()->is_admin )
-						<li><a href="{{ URL::route('admin.home') }}">Admin</a></li>
+						<li><a href="{{ URL::route('admin.home') }}">{{_t('Admin')}}</a></li>
 			  		@endif
 			  		@if( Auth::user()->is_staff )
-						<li><a href="{{ URL::route('staff.home') }}">Staff</a></li>
+						<li><a href="{{ URL::route('staff.home') }}">{{_t('Staff')}}</a></li>
 			  		@endif
-			  		<li><a href="{{ URL::to( 'home' ) }}">Home</a></li>
+			  		<li><a href="{{ URL::to( 'home' ) }}">{{_t('Home')}}</a></li>
 			  		<li><a href="{{ URL::route('me') }}"><i class="material-icons">perm_identity</i></a></li>
 			  		<li><a href="{{ URL::route('myEvents') }}"><i class="material-icons">today</i></a></li>
 			  		<li><a href="{{ URL::route('logout') }}"><i class="material-icons">input</i></a></li>
 			  	@else
 					<li class="login">
-						<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">Login</a>
+						<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">{{_t('Login')}}</a>
 					</li>
 					<li class="register">
-						<a href="{{ URL::to('register') }}" class="btn">Signup</a>
+						<a href="{{ URL::to('register') }}" class="btn">{{_t('Signup')}}</a>
 					</li>
 			  	@endif
 			  </ul>
@@ -80,10 +80,10 @@
 			  </div>
 			  	@if( Auth::check( ) )
 			  		@if( Auth::user()->is_admin )
-						<li><a href="{{ URL::route('admin.home') }}">Admin</a></li>
+						<li><a href="{{ URL::route('admin.home') }}">{{_t('Admin')}}</a></li>
 			  		@endif
 			  		@if( Auth::user()->is_staff )
-						<li><a href="{{ URL::route('staff.home') }}">Staff</a></li>
+						<li><a href="{{ URL::route('staff.home') }}">{{_t('Staff')}}</a></li>
 			  		@endif
 			  		<li><a href="{{ URL::to( 'home' ) }}">Home</a></li>
 			  		<li><a href="{{ URL::route('me') }}"><i class="material-icons">perm_identity</i></a></li>
@@ -91,10 +91,10 @@
 			  		<li><a href="{{ URL::route('logout') }}"><i class="material-icons">input</i></a></li>
 			  	@else
 					<li class="login">
-						<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">Login</a>
+						<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">{{_t('Login')}}</a>
 					</li>
 					<li class="register">
-						<a href="{{ URL::to('register') }}" class="btn">Signup</a>
+						<a href="{{ URL::to('register') }}" class="btn">{{_t('Signup')}}</a>
 					</li>
 			  	@endif
 
@@ -111,7 +111,7 @@
 		        <div class="col s12 m6">
 		          <div class="card red darken-1">
 		            <div class="card-content white-text">
-		              <span class="card-title">Errors</span>
+		              <span class="card-title">{{_t('Errors')}}</span>
 		              <p>
 		              	@foreach($errors->all() as $error)
 							<li>{{$error}}</li>

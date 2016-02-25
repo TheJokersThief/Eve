@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('body-class') unprocessed-media-page @endsection
-@section('title') Unprocessed Media @endsection
+@section('title') {{_t('Unprocessed Media')}} @endsection
 
 
 @section('extra-js')
@@ -33,8 +33,8 @@
 					<div class="card">
 						<div class="card-image">
 							<img src="{{ $item->file_location }}">
-							<span class="card-title">{{ $item->name }}
-						
+							<span class="card-title">{{ {{_t('$item->name')}} }}
+
 								<div class="col s12 valign-wrapper">
 									<a href="#!" class="valign btn-floating green lighten-4">
 										<i alt="Approve" class="fa fa-check green-text left" onclick="approveMedia('{{ Crypt::encrypt( $item->id ) }}', 'true', '{{ 'media_'.$item->id }}' );"></i>

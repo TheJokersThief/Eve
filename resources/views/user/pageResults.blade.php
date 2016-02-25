@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('body-class') usersEvent-page usersAccount-page @endsection
-@section('title') Results Page @endsection
+@section('title') {{_t("Results Page")}} @endsection
 
 @section('content')
 
@@ -9,7 +9,7 @@
 		<div class="col l8 s12 offset-l2">
 			<ul class="collection with-header">
 				<li class="collection-header">
-					<h2 class="center-align flow-text">Search Results</h2>
+					<h2 class="center-align flow-text">{{_t("Search Results")}}</h2>
 				</li>
 				@if(count($users) > 0)
 					@foreach($users as $user)
@@ -24,7 +24,7 @@
 					@endforeach
 				@else
 					<li class="collection-item">
-						We can't find any users with that name, Sorry!
+						{{_t("We can't find any users with that name, Sorry!")}}
 					</li>
 				@endif
 			</ul>

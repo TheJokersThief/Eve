@@ -19,9 +19,9 @@ use Auth;
 class PartnersController extends Controller
 {
 	private $errorMessages = [
-		'incorrect_permissions' => 'You do not have permission to edit news.',
-		'partner_creation_failed' => 'We\'re sorry but partner creation failed, please try again later.',
-		'incorrect_permissions_partners' => 'You do not have permission to edit partners'
+		'incorrect_permissions' => _t('You do not have permission to edit news.'),
+		'partner_creation_failed' => _t('We\'re sorry but partner creation failed, please try again later.'),
+		'incorrect_permissions_partners' => _t('You do not have permission to edit partners'),
 	];
 
 	public function index(){
@@ -123,8 +123,10 @@ class PartnersController extends Controller
 
 		if( $newPartner ){
 			// Attach events to model
+			$distance;
 			foreach($data['event_id'] as $event_id){
-				$newPartner->events()->attach($event_id);
+				$distance = getDistance(Event::find($event_id)->location, $newPartner->location);
+				$newPartner->events()->attach($event_id, ['distance' => $distance]);
 			}
 			return Redirect::to( 'partners' );
 		}
@@ -198,7 +200,13 @@ class PartnersController extends Controller
 		$partner = Partner::find($partnerID);
 		$partner->update( $data );
 
+		$partner->events()->detach();
 
+		$distance;
+		foreach($data['event_id'] as $event_id){
+			$distance = getDistance(Event::find($event_id)->location, $partner->location);
+			$partner->events()->attach($event_id, ['distance' => $distance]);
+		}
 
 		return Redirect::route('partners.edit', [$partner->id]);
 	}
@@ -216,4 +224,5 @@ class PartnersController extends Controller
 		Partner::destroy($partnerID);
 		return Redirect::route('partners.index');
 	}
+
 }

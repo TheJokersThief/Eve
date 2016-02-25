@@ -20,9 +20,9 @@ use DB;
 class EventsController extends Controller
 {
 	private $errorMessages =[
-		'incorrect_permissions' => 'You do not have permission to edit events.',
-		'event_creation_failed' => 'We\'re sorry but event creation failed, please try again later.',
-		'event_not_found' => 'The event you tried to edit could not be found.'
+		'incorrect_permissions' => _t('You do not have permission to edit events.'),
+		'event_creation_failed' => _t('We\'re sorry but event creation failed, please try again later.'),
+		'event_not_found' => _t('The event you tried to edit could not be found.')
 	];
 
 
@@ -162,8 +162,10 @@ class EventsController extends Controller
 		// If successful, redirect to events
 		if( $newEvent ){
 			// Attach partners to model
+			$distance;
 			foreach($data['partner_id'] as $partner_id){
-				$newEvent->partners()->attach($partner_id);
+				$distance = getDistance(Partner::find($partner_id)->location, $newEvent->location);
+				$newEvent->partners()->attach($partner_id, ['distance' => $distance]);
 			}
 			return Redirect::to( 'events' );
 		}
@@ -302,9 +304,13 @@ class EventsController extends Controller
 
 		// Detach all partners and attach new partners to event
 		$event->partners()->detach();
+
+		$distance;
 		foreach($data['partner_id'] as $partner_id){
-			$event->partners()->attach($partner_id);
+			$distance = getDistance(Partner::find($partner_id)->location, $event->location);
+			$event->partners()->attach($partner_id, ['distance' => $distance]);
 		}
+
 
 		// Save the event to the database
 		$event->save();
