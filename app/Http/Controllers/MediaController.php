@@ -24,7 +24,7 @@ class MediaController extends Controller
 {
 
 	private static $errorMessages = [
-		'no_permission' => _'You do not have permission to edit media.'
+		'no_permission' => 'You do not have permission to edit media.'
 	];
 
 	/**
