@@ -6,7 +6,7 @@ ip_address = "172.22.22.26"
 
 # Begin our configuration using V2 of the API
 Vagrant.configure(2) do |config|
-  
+
   config.vm.box = "scotch/box"
   config.vm.box_check_update = true
 
@@ -27,7 +27,7 @@ Vagrant.configure(2) do |config|
   # Sync the containing folder to the web directory of the VM
   #   The sync will persist as you edit files, you won't have
   #   to destroy and re-up the VM each time you make a change
-  #   
+  #
   config.vm.synced_folder "./", "/var/www", :owner=> 'www-data', :group=>'www-data', :mount_options=> ["dmode=777,fmode=775"]
   config.vm.synced_folder "./public", "/var/www/html", :owner=> 'www-data', :group=>'www-data', :mount_options=> ["dmode=777,fmode=775"]
   config.vm.synced_folder "./storage", "/var/www/storage", :owner=> 'www-data', :group=>'www-data', :mount_options=> ["dmode=777,fmode=777"]
