@@ -37,7 +37,7 @@
 				  {!! Form::text('search',
 						null,
 						['id' => 'search',
-				        'placeholder'=> str_limit( _t('Search for a user'), 100 ) ])
+				        'placeholder'=> str_limit( _t('Search for a user'), 20 ) ])
 				  !!}
 				  <label for="search"><i class="material-icons">search</i></label>
 				</div>
