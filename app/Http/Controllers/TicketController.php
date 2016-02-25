@@ -7,6 +7,7 @@ use Redirect;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MailController;
 use App\Ticket;
 use App\Event;
 use App\User;
@@ -190,7 +191,7 @@ class TicketController extends Controller
 			);
 		}
 
-
+		MailController::sendTicket( $ticket );
 		return Redirect::back()->with('message', "You've got a ticket! Find your details and print it out here.");
 	}
 
