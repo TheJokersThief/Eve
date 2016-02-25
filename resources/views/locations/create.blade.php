@@ -15,6 +15,8 @@
 						{!! Form::label('name',_t('Location Title)')	!!}
 						{!! Form::text('name')	!!}
 					</div>
+				</div>
+				<div class="row">
 					<div class="input-field col m5 s12">
 						{!! Form::label('latitude',_t('Latitude'))	!!}
 						{!! Form::number('latitude')	!!}
@@ -28,7 +30,6 @@
 						{!! Form::number('capacity')	!!}
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="file-field input-field col s12">
 						<div class="btn">

@@ -29,6 +29,14 @@
 					<input class="file-path validate" type="text">
 				</div>
 			</div>
+			<div class="input-field col m5 s12">
+				{!! Form::label('latitude','Latitude')	!!}
+				{!! Form::number('latitude')	!!}
+			</div>
+			<div class="input-field col m5 s12">
+				{!! Form::label('longitude','Longitude')	!!}
+				{!! Form::number('longitude')	!!}
+			</div>
 		</div>
 		{!! Form::close() !!}
 	</div>
