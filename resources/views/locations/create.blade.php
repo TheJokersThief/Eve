@@ -12,15 +12,9 @@
 			{!! Form::open( ['route' => 'locations.store', 'files' => true] ) !!}
 				<div class="row">
 					<div class="input-field col m5 s12">
-						{!! Form::label('name','Location Name')	!!}
+						{!! Form::label('name','Location Title')	!!}
 						{!! Form::text('name')	!!}
 					</div>
-					<div class="input-field col m2 s12">
-						{!! Form::label('capacity','Capacity')	!!}
-						{!! Form::number('capacity')	!!}
-					</div>
-				</div>
-				<div class="row">
 					<div class="input-field col m5 s12">
 						{!! Form::label('latitude','Latitude')	!!}
 						{!! Form::number('latitude')	!!}
@@ -29,7 +23,12 @@
 						{!! Form::label('longitude','Longitude')	!!}
 						{!! Form::number('longitude')	!!}
 					</div>
+					<div class="input-field col m2 s12">
+						{!! Form::label('capacity','Capacity')	!!}
+						{!! Form::number('capacity')	!!}
+					</div>
 				</div>
+
 				<div class="row">
 					<div class="file-field input-field col s12">
 						<div class="btn">
