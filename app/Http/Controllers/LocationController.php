@@ -17,8 +17,8 @@ use Crypt;
 class LocationController extends Controller
 {
 	private $errorMessages = [
-		'incorrect_permissions' => _t('You do not have permission to edit locations.'),
-		'incorrect_permissions_news' => _t('You do not have permission to edit news.'),
+		'incorrect_permissions' => 'You do not have permission to edit locations.',
+		'incorrect_permissions_news' => 'You do not have permission to edit news.',
 
 	];
 
