@@ -20,7 +20,7 @@ class PartnersController extends Controller
 {
 	private $errorMessages = [
 		'incorrect_permissions' => 'You do not have permission to edit partners.',
-		'partner_creation_failed' => _'We\'re sorry but partner creation failed, please try again later.',
+		'partner_creation_failed' => 'We\'re sorry but partner creation failed, please try again later.',
 		'incorrect_permissions_partners' => 'You do not have permission to edit partners',
 	];
 
