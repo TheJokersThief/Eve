@@ -135,7 +135,11 @@
 				@if(count($users))
 					<div class="divider"></div>
 					<ul class="collection with-header">
-						<li class="collection-header"><h4> {{_t('Attendees:')}}</h4></li>
+						@if($friends)
+							<li class="collection-header"><h4> {{_t('Friends attending this event:')}}</h4></li>
+						@else
+							<li class="collection-header"><h4> {{_t('Attendees:')}}</h4></li>
+						@endif
 						@foreach( $users as $user )
 							<li class="collection-item avatar">
 								<img src="{{ $user->profile_picture }}" alt="" class="circle">

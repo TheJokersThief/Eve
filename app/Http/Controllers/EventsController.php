@@ -62,14 +62,10 @@ class EventsController extends Controller
 			$data['ticket'] = false;
 		}
 
-        $userIds = DB::table('tickets')
-                     ->where('event_id', $data['event']->id)
-                     ->take(10)
-                     ->pluck('user_id');
+		$userIds = DB::table('tickets')
+			->where('event_id', $data['event']->id)
+			->pluck('user_id');
 
-        $data['users'] = DB::table('users')
-                   ->whereIn('id', $userIds)
-                   ->get();
 		$token = Session::get('fb_user_access_token');
 		if($token){
 			$fb->setDefaultAccessToken($token);
@@ -82,9 +78,25 @@ class EventsController extends Controller
 			} catch (Facebook\Exceptions\FacebookSDKException $e) {
 				return Redirect::back()->withErrors([$e->getMessage()]);
 			}
+
+			$data['users'] = DB::table('users')
+				->whereIn('id', $userIds)
+				->whereIn('facebook_id', $friendIds)
+				->take(10)
+				->get();
+			$data["friends"] = true;
 		}
 
-        $data = array_merge( $data, MediaController::uploadFiles( Crypt::encrypt($data['event']->id) ) );
+		if(!$token || empty($data["users"])){
+			$data['users'] = DB::table('users')
+				->whereIn('id', $userIds)
+				->take(10)
+				->get();
+
+			$data["friends"] = false;
+		}
+
+		$data = array_merge( $data, MediaController::uploadFiles( Crypt::encrypt($data['event']->id) ) );
 
         // Return a view of the event
 		return view('events.show')->with($data);
