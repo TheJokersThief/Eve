@@ -73,6 +73,7 @@
 						<a href="{{ URL::to('register') }}" class="btn">{{_t('Signup')}}</a>
 					</li>
 			  	@endif
+			  	<li><a href="#language-modal" class="modal-trigger" alt="{{_t('Language Preferences')}}"><i class="material-icons">language</i></a></li>
 			  </ul>
 			  <ul class="side-nav" id="mobile-demo">
 			  <div class="input-field">
@@ -97,6 +98,7 @@
 						<a href="{{ URL::to('register') }}" class="btn">{{_t('Signup')}}</a>
 					</li>
 			  	@endif
+			  	<li><a href="#language-modal" class="modal-trigger" alt="{{_t('Language Preferences')}}"><i class="material-icons">language</i></a></li>
 
 			  </ul>
 			  <div class="hide">

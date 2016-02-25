@@ -23,6 +23,7 @@ class HomeController extends Controller
 	 */
 	public function index()
 	{
+		dd( getTranslationLocales( ) );
 		try {
 			$isInstalled = Setting::where('name', 'is_installed')->firstOrFail();
 		} catch (ModelNotFoundException $e) {
