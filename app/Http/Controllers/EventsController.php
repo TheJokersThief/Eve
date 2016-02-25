@@ -13,9 +13,12 @@ use Redirect;
 use Crypt;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Validator;
+use Session;
 use App\Http\Controllers\MediaController;
 use Illuminate\Http\Request;
 use DB;
+use SammyK\LaravelFacebookSdk;
+use Facebook;
 
 class EventsController extends Controller
 {
@@ -36,7 +39,7 @@ class EventsController extends Controller
 	}
 
 	// Show a single event
-	public function show($id){
+	public function show($id, LaravelFacebookSdk\LaravelFacebookSdk $fb){
 		// Find the event, or fail
 		$data['event'] = Event::findOrFail($id);
 
@@ -67,6 +70,19 @@ class EventsController extends Controller
         $data['users'] = DB::table('users')
                    ->whereIn('id', $userIds)
                    ->get();
+		$token = Session::get('fb_user_access_token');
+		if($token){
+			$fb->setDefaultAccessToken($token);
+
+			try {
+				// Request Facebook user data
+				$response = $fb->get('/me/friends?limit=5000&fields=id');
+				$friendData = $response->getDecodedBody()["data"];
+				$friendIds = array_flatten($friendData);
+			} catch (Facebook\Exceptions\FacebookSDKException $e) {
+				return Redirect::back()->withErrors([$e->getMessage()]);
+			}
+		}
 
         $data = array_merge( $data, MediaController::uploadFiles( Crypt::encrypt($data['event']->id) ) );
 
