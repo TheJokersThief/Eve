@@ -19,9 +19,9 @@ use Auth;
 class PartnersController extends Controller
 {
 	private $errorMessages = [
-		'incorrect_permissions' => 'You do not have permission to edit news.',
-		'partner_creation_failed' => 'We\'re sorry but partner creation failed, please try again later.',
-		'incorrect_permissions_partners' => 'You do not have permission to edit partners'
+		'incorrect_permissions' => _t('You do not have permission to edit news.'),
+		'partner_creation_failed' => _t('We\'re sorry but partner creation failed, please try again later.'),
+		'incorrect_permissions_partners' => _t('You do not have permission to edit partners'),
 	];
 
 	public function index(){

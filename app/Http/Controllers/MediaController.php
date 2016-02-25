@@ -24,7 +24,7 @@ class MediaController extends Controller
 {
 
 	private static $errorMessages = [
-		'no_permission' => 'You do not have permission to edit media.'
+		'no_permission' => _t('You do not have permission to edit media.')
 	];
 
 	/**
@@ -49,7 +49,7 @@ class MediaController extends Controller
 	public static function uploadFiles( $encryptedEventID ){
 		$data['eventID'] = Crypt::decrypt( $encryptedEventID );
 		$data['event'] = Event::find( $data['eventID'] );
-		
+
 		if( Auth::check() ){
 			$data['images'] = Auth::user()->media->where('event_id', $data['eventID'])->sortBy('id');
 		}
