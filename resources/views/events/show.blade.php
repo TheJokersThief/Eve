@@ -210,4 +210,5 @@
 	</main>
 	@if( Auth::check() )
 		@include('media.upload')
+	@endif
 @endsection
