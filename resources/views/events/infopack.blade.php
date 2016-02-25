@@ -101,6 +101,7 @@
 	        <div class="card-content white-text">
 	          <span class="card-title">{!! $partner->name !!}</span>
 	          <p>{!! $partner->description !!}</p>
+	          <p>Distance: {!! $partner->pivot->distance !!}m</p>
 	        </div>
 	      </div>
 	    </div>
