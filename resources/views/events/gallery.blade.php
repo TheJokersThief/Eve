@@ -3,7 +3,7 @@
 		{{-- <div class="row"> --}}
 		<div class="grid-sizer col s6 m3"></div>
 		@foreach( $event->media as $item )
-			<a class="col s6 m3 grid-item no-padding" id="{{ 'media_'.$item->id }}" href="{{ $item->file_location }}" title="{{ $item->name }}">
+			<a class="col s6 m3 grid-item no-padding" id="{{ 'media_'.$item->id }}" href="{{ $item->file_location }}" title="{{ _t($item->name) }}">
 				<img src="{{ $item->file_location }}">
 			</a>
 		@endforeach
@@ -36,7 +36,7 @@ jQuery(document).ready(function($){
         type: 'image',
         closeOnContentClick: true,
         fixedContentPos: true,
-        tLoading: 'Loading image #%curr%...',
+        tLoading: '{{_t('Loading image')}} #%curr%...',
         mainClass: 'mfp-img-mobile mfp-no-margins mfp-with-zoom',
         gallery: {
           enabled: true,
@@ -45,7 +45,7 @@ jQuery(document).ready(function($){
         },
         image: {
           verticalFit: true,
-          tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+          tError: '<a href="%url%">{{_t('The image #%curr%</a> could not be loaded.')}}',
           titleSrc: function(item) {
             return item.el.attr('title');
           },

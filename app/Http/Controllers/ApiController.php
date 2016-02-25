@@ -25,9 +25,9 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class ApiController extends Controller
 {
 	private $errorMessages = [
-		'incorrect_permissions' => 'You do not have permission to edit this image',
-		'not_an_image' => 'File isn\'t an image!',
-		'no_file' => 'No file was received',
+		'incorrect_permissions' => _t('You do not have permission to edit this image'),
+		'not_an_image' => _t('File isn\'t an image!'),
+		'no_file' => _t('No file was received'),
 	];
 
 	///////////////////////////////

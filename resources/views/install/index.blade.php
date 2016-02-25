@@ -44,16 +44,16 @@
 			<div class="col s12">
 				<ul class="tabs">
 					<li class="tab col s3" onclick="moveToSection('info', 1, 4, false );">
-						<a href="#info">Info</a>
+						<a href="#info">{{_t('Info')}}</a>
 					</li>
 					<li class="tab col s3" onclick="moveToSection('personalDetails', 2, 4, false );">
-						<a href="#personalDetails">Your Details</a>
+						<a href="#personalDetails">{{_t('Your Details')}}</a>
 					</li>
 					<li class="tab col s3" onclick="moveToSection('companyDetails', 3, 4, false );">
-						<a href="#companyDetails">Company Details</a>
+						<a href="#companyDetails">{{_t('Company Details')}}</a>
 					</li>
 					<li class="tab col s3" onclick="moveToSection('firstEvent', 4, 4, false );">
-						<a href="#firstEvent">Your First Event</a>
+						<a href="#firstEvent">{{_t('Your First Event')}}</a>
 					</li>
 				</ul>
 				<div class="progress">
@@ -62,16 +62,16 @@
 			</div>
 			<div id="info" class="col s12">
 				<div class="row">
-					<h2>Welcome To Project Eve!</h2>
-					<p class="flow-text">This is the installation process we need to go through before you can start advertising your events. First, we'll get details about your new Administrator account. Next, we'll setup some information about your company. Then, finally, we'll show you how to create your first event!</p>
-					
+					<h2>{{_t('Welcome To Project Eve!')}}</h2>
+					<p class="flow-text">{{_t("This is the installation process we need to go through before you can start advertising your events. First, we'll get details about your new Administrator account. Next, we'll setup some information about your company. Then, finally, we'll show you how to create your first event!")}}</p>
+
 					<div class="row col s12 red lighten-3">
 						<figure class="col s12 m6 offset-m3">
 							<img src="/images/logo_full.png"/>
 						</figure>
 					</div>
 
-					<button class="btn waves-effect waves-light right" type="button" onclick="moveToSection('personalDetails', 2, 4, false);">Next
+					<button class="btn waves-effect waves-light right" type="button" onclick="moveToSection('personalDetails', 2, 4, false);">{{_t('Next')}}
 						<i class="mdi-content-send right"></i>
 					</button>
 				</div>
@@ -86,27 +86,27 @@
 
 				<div class="row">
 					<div class="input-field col m6 s12">
-						{!! Form::label('email','Email')									!!}
+						{!! Form::label('email',_t('Email'))									!!}
 						{!! Form::text('email')	!!}
 					</div>
 
 					<div class="input-field col m6 s12">
-						{!! Form::label('username', 'Username') !!}
+						{!! Form::label('username', _t('Username')) !!}
 						{!! Form::text('username' ) !!}
 					</div>
 
 					<div class="input-field col m6 s12">
-						{!! Form::label('name','Full Name')									!!}
+						{!! Form::label('name',_t('Full N)ame')									!!}
 						{!! Form::text('name')	!!}
 					</div>
 
 					<div class="input-field col m6 s12">
-						{!! Form::label('password','Password')								!!}
+						{!! Form::label('password',_t('Password'))								!!}
 						{!! Form::password('password')	!!}
 					</div>
 
 					<div class="input-field col m6 s12">
-						{!! Form::label('password_confirmation', 'Confirm Password') !!}
+						{!! Form::label('password_confirmation', _t('Confirm Password')) !!}
 						{!! Form::password('password_confirmation' ) !!}
 					</div>
 
@@ -116,7 +116,7 @@
 
 					<div class="file-field input-field col m9 s12">
 						<div class="btn">
-							<span>Upload A Profile Picture</span>
+							<span>{{_t('Upload A Profile Picture')}}</span>
 							{!! Form::file('profile_picture')	!!}
 						</div>
 						<div class="file-path-wrapper">
@@ -133,7 +133,7 @@
 				{!! Form::close() 													!!}
 			</div>
 			<div id="companyDetails" class="col s12">
-				<h3>Company Details</h3>
+				<h3>{{_t('Company Details')}}</h3>
 
 				<ul id="company-details-errors" class="errors-list red-text">
 
@@ -143,7 +143,7 @@
 
 				<div class="row">
 					<div class="input-field col s12">
-						{!! Form::label('company_name','Company Name') !!}
+						{!! Form::label('company_name',_t('Company Name')) !!}
 						{!! Form::text('company_name')	!!}
 					</div>
 				</div>
@@ -151,10 +151,10 @@
 				<div class="row">
 					<div class="input-field col s12">
 						{!! Form::textarea('description', null, ['class' => 'materialize-textarea', 'length' => '250'] ) !!}
-						{!! Form::label('description', 'Description') !!}
+						{!! Form::label('description', _t('Description')) !!}
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col s12 m3">
 						<img src="{{ App\Setting::where('name', 'default_profile_picture')->first()->setting }}" id="company-logo-preview">
@@ -162,7 +162,7 @@
 
 					<div class="file-field input-field col m9 s12">
 						<div class="btn">
-							<span>Upload A Company Logo</span>
+							<span>{{_t('Upload A Company Logo')}}</span>
 							{!! Form::file('company_logo')	!!}
 						</div>
 						<div class="file-path-wrapper">
@@ -172,14 +172,14 @@
 				</div>
 
 
-				<button class="btn waves-effect waves-light right" type="button" name="next" onclick='createCompany();'>Next 
+				<button class="btn waves-effect waves-light right" type="button" name="next" onclick='createCompany();'>Next
 					<i class="mdi-content-send right"></i>
 				</button>
 
 				{!! Form::close() !!}
 			</div>
 			<div id="firstEvent" class="col s12">
-				<a href="{{ URL::route('events.create') }}" id="first-event-link">Go create your first event!</a>
+				<a href="{{ URL::route('events.create') }}" id="first-event-link">{{_t('Go create your first event!')}}</a>
 			</div>
 		</div>
 	</main>
