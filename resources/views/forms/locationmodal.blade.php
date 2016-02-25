@@ -12,14 +12,6 @@
 				{!! Form::label('capacity','Location Capacity')	!!}
 				{!! Form::number('capacity') !!}
 			</div>
-			<div class="input-field col m5 s12">
-				{!! Form::label('latitude','Latitude')	!!}
-				{!! Form::number('latitude')	!!}
-			</div>
-			<div class="input-field col m5 s12">
-				{!! Form::label('longitude','Longitude')	!!}
-				{!! Form::number('longitude')	!!}
-			</div>
 			<div class="file-field input-field col m6 s12">
 				<div class="btn">
 					<span>Feature Image</span>
@@ -28,6 +20,14 @@
 				<div class="file-path-wrapper">
 					<input class="file-path validate" type="text">
 				</div>
+			</div>
+			<div class="input-field col m5 s12">
+				{!! Form::label('latitude','Latitude')	!!}
+				{!! Form::number('latitude')	!!}
+			</div>
+			<div class="input-field col m5 s12">
+				{!! Form::label('longitude','Longitude')	!!}
+				{!! Form::number('longitude')	!!}
 			</div>
 		</div>
 		{!! Form::close() !!}
