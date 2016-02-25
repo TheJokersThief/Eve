@@ -81,8 +81,8 @@
 			{!! Form::open( ['route' => ['locations.update', $item->id], 'files' => true, 'method' => 'PUT'] ) !!}
 				<div class="row">
 					<div class="input-field col m5 s12">
-						{!! Form::label('name',_t('Location Title)')	!!}
-						{!! Form::text('name', $item->name)	!!}
+						{!! Form::label( 'name', _t( 'Location Title' ) ) !!}
+						{!! Form::text( 'name', $item->name ) !!}
 					</div>
 				</div>
 

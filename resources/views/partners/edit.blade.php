@@ -27,7 +27,7 @@
 		<div class="row">
 			<div class="input-field col s12">
 				{!! Form::text('name', $partner->name, ['placeholder' => _t('Partner Name'), 'id' => 'name']) !!}
-				{!! Form::label('name', _t('Partner Name:')) !!}
+				{!! Form::label( 'name', _t( 'Partner Name:' ) ) !!}
 			</div>
 		</div>
 
@@ -45,7 +45,7 @@
 		<div class="row">
 			<div class="input-field col s12">
 				<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();}">
-					<option value="" disabled selected>{{_t('Choose location')}}</option>
+					<option value="" disabled selected>{{ _t( 'Choose location' ) }}</option>
 					@foreach($locations as $location)
 						<option value="{{$location->id}}"
 @if($location->id == $partner->location->id)

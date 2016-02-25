@@ -5,11 +5,11 @@
 		{!! Form::open( ['route' => 'events.store', 'files' => true] ) !!}
 		<div class="row">
 			<div class="input-field col m6 s12">
-				{!! Form::label('name',_t('Location Name)')	!!}
+				{!! Form::label('name',_t('Location Name'))	!!}
 				{!! Form::text('name')	!!}
 			</div>
 			<div class="input-field col m6 s12">
-				{!! Form::label('capacity',_t('Location Capacity)')	!!}
+				{!! Form::label('capacity',_t('Location Capacity'))	!!}
 				{!! Form::number('capacity') !!}
 			</div>
 			<div class="input-field col m5 s12">

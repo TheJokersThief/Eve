@@ -68,9 +68,9 @@
 					</li>
 					<li class="collection-item"><strong>{{_t('Language:')}}</strong>
 						<div class="secondary-content">
-							<i class="fa fa-pencil teal-text"></i>
+							<i class="material-icons">language</i>
 						</div>
-						{!! Form::text('language', $me->language, ["class" => "example validate"])!!}
+						{!! Form::select('language', getTranslationLocales( ), Request::cookie('locale'), ['class' => "validate"]) !!}
 					</li>
 					<li class="collection-item"><strong>{{_t('City:')}}</strong>
 						<div class="secondary-content">
