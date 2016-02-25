@@ -69,7 +69,7 @@ class FacebookController extends Controller
 		$facebook_user = $response->getGraphUser();
 
 		try{
-			$user = User::where('facebook_id', $facebook_user["id"])->first();
+			$user = User::where('facebook_id', $facebook_user["id"])->firstOrFail();
 		} catch (ModelNotFoundException $e){
 			$facebook_user["username"] = $facebook_user["id"];
 			$user = User::createOrUpdateGraphNode($facebook_user);
