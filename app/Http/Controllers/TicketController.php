@@ -25,17 +25,17 @@ class TicketController extends Controller
 {
 
 	private $errorMessages = [
-		'event_not_found' => _t('We can\'t find the event that you requested.'),
-		'ticket_exists' => _t("It appears you already have a ticket"),
-		'card_declined' => _t("Your card has been declined."),
-		'server_error' => _t("We're having some issues with our server. Try again later."),
-		'dev_mistake' => _t("It seems the developers have made a mistake; they have been notified. This will be fixed."),
-		'dev_mistake_auth' => _t("It seems the developers have made a mistake with authentication; this will be fixed."),
-		'network_error' => _t("We're having some network errors right now. Try again later."),
-		'something_wrong' => _t("Something went wrong here."),
-		'ticket_invalid' => _t('Ticket is invalid'),
-		'not_logged_in' => _t('Are you logged in?'),
-		'ticket_not_found' => _t("Not found!"),
+		'event_not_found' => 'We can\'t find the event that you requested.',
+		'ticket_exists' => "It appears you already have a ticket",
+		'card_declined' => "Your card has been declined.",
+		'server_error' => "We're having some issues with our server. Try again later.",
+		'dev_mistake' => "It seems the developers have made a mistake; they have been notified. This will be fixed.",
+		'dev_mistake_auth' => "It seems the developers have made a mistake with authentication; this will be fixed.",
+		'network_error' => "We're having some network errors right now. Try again later.",
+		'something_wrong' => "Something went wrong here.",
+		'ticket_invalid' => 'Ticket is invalid',
+		'not_logged_in' => 'Are you logged in?',
+		'ticket_not_found' => "Not found!",
 	];
 
 	/**
