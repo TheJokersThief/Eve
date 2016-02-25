@@ -31,14 +31,16 @@
 		]) !!}
     	<nav>
 			<div class="nav-wrapper container">
-			  <div class="left input-field hide-on-med-and-down">
+
+				<!-- User Search Box -->
+				<div class="left input-field hide-on-med-and-down">
 				  {!! Form::text('search',
 						null,
 						['id' => 'search',
-			            'placeholder'=> _t('Search for a user') ])
+				        'placeholder'=> str_limit( _t('Search for a user'), 100 ) ])
 				  !!}
 				  <label for="search"><i class="material-icons">search</i></label>
-			  </div>
+				</div>
 			  <a href="{{ URL::to('/home') }}" class="brand-logo">
 
 			  	@if( ($logo = App\Setting::where('name', 'company_logo')->first()->setting) != '' )
