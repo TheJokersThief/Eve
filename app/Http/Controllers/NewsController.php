@@ -17,7 +17,7 @@ use Crypt;
 class NewsController extends Controller
 {
 	private $errorMessages = [
-		'incorrect_permissions' => _t('You do not have permission to edit news.')
+		'incorrect_permissions' => 'You do not have permission to edit news.'
 	];
 
 	public function index(){

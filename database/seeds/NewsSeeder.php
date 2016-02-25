@@ -17,9 +17,8 @@ class NewsSeeder extends Seeder
         	'title' => "Our Awesome News!",
 	        'featured_image' => "/images/sample_images/news/1.jpg",
 	        'content' => "<p>Lorem Khaled Ipsum is a major key to success. Give thanks to the most high. Watch your back, but more importantly when you get out the shower, dry your back, it’s a cold world out there. They don’t want us to win. In life you have to take the trash out, if you have trash in your life, take it out, throw it away, get rid of it, major key. Lion! Eliptical talk. Congratulations, you played yourself. Cloth talk. To be successful you’ve got to work hard, to make history, simple, you’ve got to make it. Another one.</p>
-
-                <p>In life there will be road blocks but we will over come it. Lion! You smart, you loyal, you a genius. To succeed you must believe. Life is what you make it, so let’s make it. Put it this way, it took me twenty five years to get these plants, twenty five years of blood sweat and tears, and I’m never giving up, I’m just getting started. Congratulations, you played yourself. Special cloth alert. Let’s see what Chef Dee got that they don’t want us to eat.",
-			'tags' => "blog,post,news,event,something,amazing</p>"
+	        <p>In life there will be road blocks but we will over come it. Lion! You smart, you loyal, you a genius. To succeed you must believe. Life is what you make it, so let’s make it. Put it this way, it took me twenty five years to get these plants, twenty five years of blood sweat and tears, and I’m never giving up, I’m just getting started. Congratulations, you played yourself. Special cloth alert. Let’s see what Chef Dee got that they don’t want us to eat.</p>",
+			'tags' => "blog,post,news,event,something,amazing"
         ]);
 
         News::firstOrCreate([
