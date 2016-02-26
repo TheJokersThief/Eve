@@ -68,6 +68,8 @@ class TicketController extends Controller
 
 	/**
 	 * Return a printable view of the ticket
+	 * Deprecated, kept just in case, likely to be removed before publishing
+	 *
 	 * @param  Integer  $eventId    ID of the ticket to be printed
 	 * @return View                 Printable ticket view
 	 */
