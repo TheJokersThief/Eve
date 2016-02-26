@@ -81,7 +81,7 @@
 			{!! Form::open( ['route' => ['locations.update', $item->id], 'files' => true, 'method' => 'PUT'] ) !!}
 				<div class="row">
 					<div class="input-field col m5 s12">
-						{!! Form::label( 'name', _t( 'Location Title' ) ) !!}
+						{!! Form::label( 'name', _t( 'Location Name' ) ) !!}
 						{!! Form::text( 'name', $item->name ) !!}
 					</div>
 				</div>
@@ -89,11 +89,11 @@
 				<div class="row">
 					<div class="input-field  form-control col m5 s12">
 						{!! Form::label('latitude',_t('Latitude'))	!!}
-						{!! Form::number('latitude', $item->latitude) !!}
+						{!! Form::text('latitude', $item->latitude) !!}
 					</div>
 					<div class="input-field col m5 s12">
 						{!! Form::label('longitude',_t('Longitude'))	!!}
-						{!! Form::number('longitude', $item->longitude)	!!}
+						{!! Form::text('longitude', $item->longitude)	!!}
 					</div>
 					<div class="input-field col m2 s12">
 						{!! Form::label('capacity',_t('Capacity'))	!!}
