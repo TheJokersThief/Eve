@@ -61,7 +61,10 @@ class PartnersController extends Controller
 					'url'
 				]);
 
-
+		//Get Distance from Google Distance Matrix API
+		$response = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=53.35,6.23&destinations=51.88,8.47&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o');
+		$response = json_decode($response, true, 512, JSON_BIGINT_AS_STRING);
+		$response["rows"][0]["elements"][0]["distance"]["value"];
 
 		// Validate all input
 		$validator = Validator::make( $data, [
@@ -125,7 +128,7 @@ class PartnersController extends Controller
 			// Attach events to model
 			$distance;
 			foreach($data['event_id'] as $event_id){
-				$distance = getDistance(Event::find($event_id)->location, $newPartner->location);
+				$distance = getMapsMatrixDistance(Event::find($event_id)->location, $newPartner->location);
 				$newPartner->events()->attach($event_id, ['distance' => $distance]);
 			}
 			return Redirect::to( 'partners' );
@@ -204,7 +207,7 @@ class PartnersController extends Controller
 
 		$distance;
 		foreach($data['event_id'] as $event_id){
-			$distance = getDistance(Event::find($event_id)->location, $partner->location);
+			$distance = getMapsMatrixDistance(Event::find($event_id)->location, $partner->location);
 			$partner->events()->attach($event_id, ['distance' => $distance]);
 		}
 
