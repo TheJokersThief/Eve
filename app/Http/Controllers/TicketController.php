@@ -71,6 +71,7 @@ class TicketController extends Controller
 	 * @param  Integer  $eventId    ID of the ticket to be printed
 	 * @return View                 Printable ticket view
 	 */
+	/*
 	public function printable($eventId){
 		$ticket = Ticket::where('user_id', Auth::user()->id)
 						->where('event_id', $eventId)
@@ -79,6 +80,7 @@ class TicketController extends Controller
 
 		return view( 'tickets.print', compact('ticket') );
 	}
+	*/
 
 	/**
 	 * Return a representation of a ticket.

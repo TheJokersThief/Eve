@@ -162,6 +162,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Cornford\Googlmapper\MapperServiceProvider::class,
 
     ],
 
@@ -215,6 +216,7 @@ return [
         'QrCode'    => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
 	    'FB' => SammyK\LaravelFacebookSdk\FacebookFacade::class,
 	    'Translation' => Stevebauman\Translation\Facades\Translation::class,
+	    'Mapper'	=>	Cornford\Googlmapper\Facades\MapperFacade::class,
     ],
 
 ];
