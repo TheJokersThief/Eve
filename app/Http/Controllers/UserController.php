@@ -202,6 +202,10 @@ class UserController extends Controller
 			$validatorData["username"] = "required|alpha_num";
 		}
 
+		if ( $data['username'] == '' ){
+			unset($data['username']);
+		}
+
 		$validator = Validator::make($data, $validatorData);
 
 		if( $validator->fails( ) ){
@@ -299,6 +303,7 @@ class UserController extends Controller
 		if(! Auth::check() || ( $encryptedID && ! (Auth::user()->id == $userID || Auth::user()->is_admin) ) ){
 			return response(view('errors.403', ['error' => 'You do not have permission to edit users.']), 403);
 		}
+
 		return view('user.edit')->with('me', $user);
 	}
 
@@ -357,6 +362,4 @@ class UserController extends Controller
 		$user->language = $languageCode;
 		$user->save();
 	}
-
-
 }
