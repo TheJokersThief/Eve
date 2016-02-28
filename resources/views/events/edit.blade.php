@@ -10,6 +10,7 @@
 
 @section('extra-js')
 	<script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKOjys2eW4gpc3KmoBlVOjQ-SqHWgyvwI&libraries=places"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.clockpicker').clockpicker({
@@ -28,6 +29,8 @@
 			  ],
 			  toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
 			});
+
+			initEvents();
 
 			if( $('input[name=description_content]').val() != '' ){
 				$('.content').html($('input[name=description_content]').val());
@@ -101,7 +104,7 @@
 
 	      	<div class="row">
 		      	<div class="input-field col s6">
-		    		<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();}">
+		    		<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();google.maps.event.trigger(map, 'resize');}">
 						@foreach($locations as $location)
 							@if( $location == $event->location )
 								<option value="{{$location->id}}" selected>{{$location->name}}</option>
@@ -173,10 +176,21 @@
 					{!! Form::label('capacity',_t('Location Capacity'))	!!}
 					{!! Form::number('capacity') !!}
 				</div>
-				<div class="input-field col m6 s12">
-					{!! Form::label('coordinates',_t('Location Coordinates'))	!!}
-					{!! Form::text('coordinates') !!}
+				<div class="input-field col m5 s12">
+				{!! Form::label('latitude',_t('Latitude'))	!!}
+				{!! Form::text('latitude')	!!}
 				</div>
+				<div class="input-field col m5 s12">
+					{!! Form::label('longitude',_t('Longitude'))	!!}
+					{!! Form::text('longitude')	!!}
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field s12">
+					{!! Form::label('move-marker', 'Search map')!!}
+					{!! Form::text('move-marker')!!}
+				</div>
+				<div id="map" class="col s12 center-align" style="width: 40%; height: 300px;"></div>
 			</div>
 		{!! Form::close() !!}
 	</div>
