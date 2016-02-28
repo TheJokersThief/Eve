@@ -3,7 +3,12 @@
 @section('body-class') locations @endsection
 @section('title') {{_t('Creating a location')}} @endsection
 
-
+@section('extra-js')
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKOjys2eW4gpc3KmoBlVOjQ-SqHWgyvwI&libraries=places"></script>
+	<script type="text/javascript">
+			initEvents();
+	</script>
+@endsection
 @section('content')
 
 	<div class="row">
@@ -12,24 +17,33 @@
 			{!! Form::open( ['route' => 'locations.store', 'files' => true] ) !!}
 				<div class="row">
 					<div class="input-field col m5 s12">
-						{!! Form::label('name',_t('Location Title)')	!!}
+						{!! Form::label('name',_t('Location Title'))!!}
 						{!! Form::text('name')	!!}
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col m5 s12">
 						{!! Form::label('latitude',_t('Latitude'))	!!}
-						{!! Form::number('latitude')	!!}
+						{!! Form::text('latitude')	!!}
 					</div>
 					<div class="input-field col m5 s12">
 						{!! Form::label('longitude',_t('Longitude'))	!!}
-						{!! Form::number('longitude')	!!}
+						{!! Form::text('longitude')	!!}
 					</div>
 					<div class="input-field col m2 s12">
 						{!! Form::label('capacity',_t('Capacity'))	!!}
 						{!! Form::number('capacity')	!!}
 					</div>
 				</div>
+
+				<div class="row">
+					<div class="input-field col s12">
+						{!! Form::label('move-marker', 'Search map')!!}
+						{!! Form::text('move-marker')!!}
+					</div>
+					<div id="map" class="row col s12 center-align" style="width: 65%; height: 400px;"></div>
+				</div>
+
 				<div class="row">
 					<div class="file-field input-field col s12">
 						<div class="btn">
