@@ -49,6 +49,9 @@
 								@endif
 								<br /><small>({{ date('d M, Y', strtotime($event->start_datetime)) }} &rarr; {{ date('d M, Y', strtotime($event->end_datetime)) }})</small>
 								<div class="secondary-content">
+									<a href="{{ URL::route( 'events.show', [ 'id'=>$event->id ] ) }}">
+										<i class="fa fa-eye teal-text" alt="View News"></i> &nbsp;
+									</a>
 									<a href="{{ URL::route('events.edit', ['event'=>$event->id]) }}">
 										<i class="fa fa-pencil teal-text" alt="{{_t('Edit Event')}}"></i> &nbsp;
 									</a>
@@ -76,6 +79,9 @@
 								<strong>{{ $partner->name }}</strong>
 								<br /><small>({{ $partner->location->name }})</small>
 								<div class="secondary-content">
+									<a href="{{ URL::route( 'locations.show', $partner->id ) }}">
+										<i class="fa fa-eye teal-text" alt="View News"></i> &nbsp;
+									</a>
 									<a href="{{ URL::route('partners.edit', ['partner'=>$partner->id]) }}">
 										<i class="fa fa-pencil teal-text" alt="{{_t('Edit Partner')}}"></i> &nbsp;
 									</a>
