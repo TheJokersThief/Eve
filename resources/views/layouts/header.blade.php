@@ -33,7 +33,7 @@
 			<div class="nav-wrapper container">
 
 				<!-- User Search Box -->
-				<div class="left input-field hide-on-med-and-down">
+				<div id="searchBar" class="input-field">
 				  {!! Form::text('search',
 						null,
 						['id' => 'search',
