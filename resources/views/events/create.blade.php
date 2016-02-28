@@ -11,6 +11,7 @@
 
 @section('extra-js')
 	<script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKOjys2eW4gpc3KmoBlVOjQ-SqHWgyvwI&libraries=places"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.clockpicker').clockpicker({
@@ -29,6 +30,8 @@
 			  ],
 			  toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
 			});
+
+			initEvents();
 		});
 	</script>
 @endsection
@@ -103,7 +106,7 @@
 						@foreach($locations as $location)
 							<option value="{{$location->id}}">{{ $location->name }}</option>
 						@endforeach
-						<option value="-1">{{_t('Create New Location')}}</option>
+						<option value="-1" >{{_t('Create New Location')}}</option>
 		    		</select>
 		    		<label>{{_t('Location Select')}}</label>
 		  		</div>
