@@ -101,7 +101,7 @@
 
 	      	<div class="row">
 		      	<div class="input-field col s6">
-		    		<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();}">
+		    		<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();google.maps.event.trigger(map, 'resize');}">
 		      			<option value="" disabled selected>{{_t('Choose location')}}</option>
 						@foreach($locations as $location)
 							<option value="{{$location->id}}">{{ $location->name }}</option>
