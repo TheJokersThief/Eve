@@ -3,6 +3,10 @@
 @section('body-class') locations @endsection
 @section('title') {{_t('Edit:')}} {{$item->name}} @endsection
 @section('extra-js')
+<script
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKOjys2eW4gpc3KmoBlVOjQ-SqHWgyvwI
+    &libraries=places">
+</script>
 <script type="text/javascript">
   $(document).ready(function(){
   	  //initialise map
@@ -138,8 +142,5 @@
 			{!! Form::close() !!}
 		</div>
 	</div>
-	<script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKOjys2eW4gpc3KmoBlVOjQ-SqHWgyvwI
-        &libraries=places">
-	</script>
+
 @endsection
