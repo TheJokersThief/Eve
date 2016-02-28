@@ -1,10 +1,10 @@
 @section('extra-js')
 <script type="text/javascript">
-  $(document).ready(function(){
+$(document).ready(function(){
   	  //initialise map
 	  var map = new google.maps.Map(document.getElementById('map'), {
-	    center: {lat: 53.3442, lng: 6.2675},
-	    zoom: 13,
+	    center: {lat: 53.2812223, lng: -8.3740124},
+	    zoom: 6,
 	    styles: [{
 	      featureType: 'poi',
 	      stylers: [{ visibility: 'off' }]  // Turn off points of interest.
@@ -16,7 +16,7 @@
 	  });
 
 	  //get latitude and longitude
-	  var myLatLng = {lat: 53.3442, lng: 6.2675};
+	  var myLatLng = {lat: 53.2812223, lng: -7.3740124};
 
 	  //create a draggable marker
 	  var marker = new google.maps.Marker({
@@ -58,6 +58,7 @@
    });
 </script>
 @endsection
+
 <div id="locationForm" class="modal bottom-sheet">
 	<div class="modal-content">
 		<h4>{{_t('Create New Location')}}</h4>
@@ -98,14 +99,6 @@
 					<input class="file-path validate" type="text">
 				</div>
 			</div>
-			<div class="input-field col m5 s12">
-				{!! Form::label('latitude','Latitude')	!!}
-				{!! Form::number('latitude')	!!}
-			</div>
-			<div class="input-field col m5 s12">
-				{!! Form::label('longitude','Longitude')	!!}
-				{!! Form::number('longitude')	!!}
-			</div>
 		</div>
 		{!! Form::close() !!}
 	</div>
@@ -114,7 +107,8 @@
 		<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" onClick="$('#location-select').val('');$('#location-select').material_select();">{{_t('Cancel')}}</a>
 	</div>
 </div>
-	<script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKOjys2eW4gpc3KmoBlVOjQ-SqHWgyvwI
-        &libraries=places">
-	</script>
+
+<script
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKOjys2eW4gpc3KmoBlVOjQ-SqHWgyvwI
+    &libraries=places">
+</script>
