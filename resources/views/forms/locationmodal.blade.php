@@ -22,11 +22,11 @@
 			</div>
 
 			<div class="row">
-				<div class="input-field col m5 s12">
+				<div class="input-field col s12">
 					{!! Form::label('move-marker', 'Search map')!!}
 					{!! Form::text('move-marker')!!}
 				</div>
-				<div id="map" class="col s12 center-align" style="width: 65%; height: 400px;"></div>
+				<div id="map" class="row col s12 center-align" style="width: 40%; height: 300px;"></div>
 			</div>
 
 			<div class="file-field input-field col m6 s12">
