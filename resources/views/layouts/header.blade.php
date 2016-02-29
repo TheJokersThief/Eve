@@ -89,9 +89,9 @@
 						<li><a href="{{ URL::route('staff.home') }}">{{_t('Staff')}}</a></li>
 			  		@endif
 			  		<li><a href="{{ URL::to( 'home' ) }}">{{_t('Home')}}</a></li>
-			  		<li><a href="{{ URL::route('me') }}"><i class="material-icons">perm_identity</i> {{_t('User Account')}}</a></li>
-			  		<li><a href="{{ URL::route('myEvents') }}"><i class="material-icons">today</i> {{_t('My Events')}}</a></li>
-			  		<li><a href="{{ URL::route('logout') }}"><i class="material-icons">input</i> {{_t('Logout')}}</a></li>
+			  		<li><a href="{{ URL::route('me') }}"><i class="material-icons left">perm_identity</i> {{_t('User Account')}}</a></li>
+			  		<li><a href="{{ URL::route('myEvents') }}"><i class="material-icons left">today</i> {{_t('My Events')}}</a></li>
+			  		<li><a href="{{ URL::route('logout') }}"><i class="material-icons left">input</i> {{_t('Logout')}}</a></li>
 			  	@else
 					<li class="login">
 						<a class=" waves-effect waves-light modal-trigger" href="#login-modal">{{_t('Login')}}</a>
