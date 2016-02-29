@@ -55,6 +55,7 @@ class PartnersController extends Controller
 					'price',
 					'description',
 					'location_id',
+					'event_id',
 					'email',
 					'logo',
 					'url'
@@ -68,6 +69,7 @@ class PartnersController extends Controller
 					'price' => 'required',
 					'description' => 'required',
 					'location_id' => 'required',
+					'event_id'	=> 'required',
 					'email' => 'required',
 					'logo' => 'required|image',
 					'url' => 'required'
@@ -117,11 +119,11 @@ class PartnersController extends Controller
 
 		if( $newPartner ){
 			// Attach events to model
-			/*$distance;
+			$distance;
 			foreach($data['event_id'] as $event_id){
 				$distance = getMapsMatrixDistance(Event::find($event_id)->location, $newPartner->location);
 				$newPartner->events()->attach($event_id, ['distance' => $distance]);
-			}*/
+			}
 			return Redirect::to( 'partners' );
 		}
 
