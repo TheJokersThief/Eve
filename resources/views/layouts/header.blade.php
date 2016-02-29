@@ -78,9 +78,6 @@
 			  	<li><a href="#language-modal" class="modal-trigger" alt="{{_t('Language Preferences')}}"><i class="material-icons">language</i></a></li>
 			  </ul>
 			  <ul class="side-nav" id="mobile-demo">
-			  <div class="input-field">
-				  <label for="search"><i class="material-icons">search</i></label>
-			  </div>
 			  	@if( Auth::check( ) )
 			  		@if( Auth::user()->is_admin )
 						<li><a href="{{ URL::route('admin.home') }}">{{_t('Admin')}}</a></li>
