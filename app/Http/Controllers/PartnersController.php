@@ -11,6 +11,7 @@ use App\Location;
 use App\Event;
 use Redirect;
 use DB;
+use LocationController;
 
 use Crypt;
 use Validator;
@@ -54,8 +55,6 @@ class PartnersController extends Controller
 					'price',
 					'description',
 					'location_id',
-					'event_id',
-					'distance',
 					'email',
 					'logo',
 					'url'
@@ -69,8 +68,6 @@ class PartnersController extends Controller
 					'price' => 'required',
 					'description' => 'required',
 					'location_id' => 'required',
-					'event_id'	=> 'required',
-					'distance' => 'required',
 					'email' => 'required',
 					'logo' => 'required|image',
 					'url' => 'required'
@@ -109,7 +106,6 @@ class PartnersController extends Controller
 				"type" => $data["type"],
 				"price" => $data["price"],
 				"location_id" => $data["location_id"],
-				"distance" => $data["distance"],
 				"email" => $data["email"],
 				"featured_image" => $data["picture"],
 				"url" => $data["url"],
@@ -121,11 +117,11 @@ class PartnersController extends Controller
 
 		if( $newPartner ){
 			// Attach events to model
-			$distance;
+			/*$distance;
 			foreach($data['event_id'] as $event_id){
 				$distance = getMapsMatrixDistance(Event::find($event_id)->location, $newPartner->location);
 				$newPartner->events()->attach($event_id, ['distance' => $distance]);
-			}
+			}*/
 			return Redirect::to( 'partners' );
 		}
 
@@ -159,7 +155,6 @@ class PartnersController extends Controller
 				'price',
 				'location_id',
 				'description',
-				'distance',
 				'email',
 				'featured_image'
 			]);
@@ -213,6 +208,31 @@ class PartnersController extends Controller
 		DB::delete('delete from event_partners where partner_id = ?', [$partnerID]);
 		Partner::destroy($partnerID);
 		return Redirect::route('partners.index');
+	}
+
+	public function addSuggestedPartner( $encryptedPlaceID ){
+		//decrypt place id
+		$placeID = Crypt::decrypt($encryptedPlaceID);
+
+		//Find from google places
+		$result = file_get_contents('https://maps.googleapis.com/maps/api/place/details/json?placeid='
+									. $placeID
+									. '&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o');
+
+		//store the location (call location.createLocationForPlace( $longitude, $latitude, $title ))
+
+		$result = json_decode($result, true);
+		$longitude = $result['result']['geometry']['location']['lng'];
+		$latitude = $result['result']['geometry']['location']['lat'];
+		$title = $result['result']['name'];
+
+		$locationID = LocationController::createLocationForPlace( $longitude, $latitude, $title );
+
+		//Create new partner in db
+
+
+
+		//associate partner with event
 	}
 
 	// Returns the argument in radians

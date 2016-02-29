@@ -25,15 +25,11 @@
 	  		</div>
 	  		<div class="row">
 		  		<div class="divider"></div>
-		  		<div class="col s6"><h5>{{_t('Distance:')}}</h5></div>
+		  		<div class="col s6"><h5>{{_t('Location:')}}</h5></div>
 				<div class="col s6"><h5>{{_t('Email:')}}</h5></div>
-		  		<div class="col s6">{{ $partner->distance }}</div>
+		  		<div class="col s6">{{ $partner->location->name }}</div>
 		  		<div class="col s6">{{ $partner->email }}</div>
 	      	</div>
-		      	<div class="divider"></div>
-		  		<div class="col s2"><h5>{{_t('Location:')}}<h5></div>
-		    	<div class="col s10">{{ $partner->location->name }}</div>
-			</div>
 		</div>
 	</div>
 
