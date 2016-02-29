@@ -50,16 +50,20 @@
 		</div>
 
 		</hr>
+		<!-- Open a form, filling it with data from the existing model, allowing file uploads -->
 		{!! Form::model($event, ['method' => 'PUT', 'action' => ['EventsController@update', $event->id], 'files' => true]) !!}
 			<div class="row">
+				<!-- Input a title -->
 				<div class="input-field col m6 s12">
 					{!! Form::label('title',_t('Event Title'))	!!}
 					{!! Form::text('title')	!!}
 				</div>
+				<!-- Input a tagline -->
 				<div class="input-field col m6 s12">
 					{!! Form::label('tagline',_t('Event Tagline'))	!!}
 					{!! Form::text('tagline') !!}
 				</div>
+				<!-- Input a description -->
 				<div class="input-field col m12 s12">
 					<h5>{{_t('Description:')}}</h5>
 					<div class="editable content" id="description">
@@ -72,22 +76,22 @@
 			</div>
 
 			<div class="row">
-
+				<!-- Input a start date -->
 				<div class="col m6 s6">
 					<label for="start_date">{{_t('Start Date')}}</label>
 					<input name="start_date" id="start_date" value="{{$startDate}}" type="date" class="datepicker">
 				</div>
-
+				<!-- Input an end date -->
 				<div class="col m6 s6">
 					<label for="input_enddate">{{_t('End Date')}}</label>
 					<input name="end_date" id="input_enddate" value="{{$endDate}}" type="date" class="datepicker">
 				</div>
-
+				<!-- Input a price for tickets -->
 				<div class="input-field col m6 s6">
 					{!! Form::label('price',_t('Price')) !!}
 					{!! Form::number('price', $event->price, ['step' => 0.01]) !!}
 				</div>
-
+				<!-- Upload a photo -->
 				<div class="col m6 s6">
 					<div class="file-field input-field">
 						<div class="btn">
@@ -103,6 +107,7 @@
 			</div>
 
 	      	<div class="row">
+	      		<!-- Select a location, or create a new one -->
 		      	<div class="input-field col s6">
 		    		<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();google.maps.event.trigger(map, 'resize');}">
 						@foreach($locations as $location)
@@ -116,6 +121,7 @@
 		    		</select>
 		    		<label>{{_t('Location Select')}}</label>
 		  		</div>
+		  		<!-- Sleect partner(s) for this event -->
 		  		<div class="input-field col s6">
 		    		<select multiple name="partner_id[]" id="partner-select">
 		      			<option value="" disabled selected>{{_t('Choose partner')}}</option>
@@ -129,6 +135,7 @@
 			</div>
 
 			<div class="row">
+				<!-- Select a start time -->
 				<div class="col s4">
 					<label for="start_time">{{_t('Start Time')}}</label>
 					<div id="start_time" class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
@@ -138,6 +145,7 @@
 					    </span>
 					</div>
 				</div>
+				<!-- Select and end time -->
 				<div class="col s4">
 					<label for="end_time">{{_t('End Time')}}</label>
 					<div id="end_time" class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
@@ -149,6 +157,7 @@
 				</div>
 			</div>
 			<div class="row">
+				<!-- Submit button for edited event -->
 				<div class="col s2">
 					<a href="{{ action('EventsController@show', [$event->id]) }}" class="waves-effect waves-light btn">{{_t('Cancel')}}</a>
 				</div>
@@ -162,6 +171,7 @@
 	</div>
 </div>
 
+<!-- Modal for creating a new location -->
 <div id="locationForm" class="modal bottom-sheet">
 	<div class="modal-content">
 	  <h4>{{_t('Create New Location')}}</h4>

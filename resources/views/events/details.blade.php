@@ -6,11 +6,13 @@
 		<img src="{{ $event->featured_image }}">
 	</div>
 </div>
+<!-- Event description -->
 <div class="section">
     {!! _t($event->description )!!}
 </div>
 	<div class="divider"></div>
 <div class="section">
+    <!-- Event start and end time -->
 		<div class="row">
 			<div class="col s6"><h5>{{_t('Start:')}}</h5></div>
   		<div class="col s6"><h5>{{_t('End:')}}</h5></div>
@@ -20,6 +22,7 @@
 </div>
 <div class="divider"></div>
 <div class="section">
+    <!-- Event location -->
 		<div class="row">
 			<div class="col s2"><h5>{{_t('Location:')}}</h5></div>
 	    <div class="col s10"><p>{{ $event->location->name }}</p></div>
@@ -27,6 +30,7 @@
 </div>
 <div class="divider"></div>
 <div class="section">
+    <!-- Show all partners for this event -->
     <h5>{{_t('Event Partners')}}</h5>
     <div class="row">
         @foreach($event->partners as $partner)

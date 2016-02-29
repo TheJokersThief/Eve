@@ -16,12 +16,14 @@
 		<section class="event-image valign-wrapper" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('{{ $event->featured_image }}');;">
 			<div class="row container valign">
 				<div id="event-details" class="col s12 m4 l4 right-align valign-wrapper">
+					<!-- Show event start-time, end-time and name -->
 					<div class="valign">
 						<h5>{{ _t($event->hrStartTime( )) }}</h5>
 						<h5>{{ _t($event->hrEndTime( )) }}</h5>
 						<h5>{{ $event->location->name }}</h5>
 					</div>
 				</div>
+				<!-- Show event title and tagline -->
 				<div class="col s12 m8 l8" id="event-title">
 					<h1>{{ _T($event->title) }}</h1>
 					<h4>{{ _T($event->tagline) }}</h4>
@@ -49,6 +51,7 @@
 						@endif
 					</div>
 				</div>
+				<!-- Show description of event -->
 				<div class="card-content">
 					{!! _t($event->description) !!}
 				</div>
@@ -59,6 +62,7 @@
 			<div id="ticket" class="col s12 m4 l4">
 				<div id="ticket-card" class="card">
 					<div class="card-header amber darken-2">
+						<!-- Show event title and location name -->
 						<div class="card-title">
 							<h4 class="ticket-card-title truncate">{{ _t($event->title) }}</h4>
 							<p class="ticket-card-date">{{ $event->location->name }}</p>
@@ -67,6 +71,7 @@
 					<div class="card-content-bg white-text" style="background-image: url('{{ $event->featured_image }}')">
 						<div class="card-content">
 							<div class="row ticket-state-wrapper">
+								<!-- If the user doesn't have a ticket, display a button to buy a ticket -->
 								@if(! $ticket)
 									{!! Form::open( ['action' => 'TicketController@store', "class" => "col s12 center-align get_ticket_button"] ) !!}
 										{!! Form::hidden('event_id', $event->id) !!}
@@ -97,6 +102,7 @@
 											</a>
 										@endif
 									{!! Form::close() !!}
+								<!-- If the user has a ticket, display the qr code -->
 								@else
 									<div class="col s12 center-align">
 										{!! $ticket->qr() !!}
@@ -132,6 +138,7 @@
 						</div>
 					</div>
 				</div>
+				<!-- Display what friends are attending event. along with information about event -->
 				@if(count($users))
 					<div class="divider"></div>
 					<ul class="collection with-header">
@@ -153,7 +160,7 @@
 					</ul>
 				@endif
 			</div>
-
+			<!-- Show information about partners -->
 			<div id="partners" class="col s12 m8 l8">
 				@foreach( $partners as $partner )
 				<div class="col s12 m6 l6">
@@ -205,7 +212,7 @@
 				@endforeach
 			</div>
 		</section>
-
+		<!-- Display media associated with event -->
 		<section class="row container">
 			<div classs="col s12">
 				@include('events.gallery')
