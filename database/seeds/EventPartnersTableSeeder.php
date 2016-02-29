@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 use App\Event;
 use App\Partner;
+use App\Http\Controllers\LocationController;
 
 class EventPartnersTableSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class EventPartnersTableSeeder extends Seeder
         for ($i=1; $i <= 3; $i++) {
         	$partner = Partner::find( $i );
         	$event = Event::find(1);
-            $distance = getMapsMatrixDistance($event->location, $partner->location);
+            $distance = LocationController::getMapsMatrixDistance($event->location, $partner->location);
         	$event->partners()->save($partner, ['distance'=>$distance]);
         }
     }
