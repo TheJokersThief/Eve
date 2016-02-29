@@ -157,11 +157,11 @@ class LocationController extends Controller
 		return Redirect::back();
 	}
 
-	function rad( $x ){
+	public function rad( $x ){
 		return $x * pi() / 180;
 	}
 
-	function getDistance($p1, $p2){
+	public function getDistance($p1, $p2){
 		$radius = 6378137;
 		$dLat = rad($p2->latitude - $p1->latitude);
 		$dLong = rad($p2->longitude - $p1->longitude);
@@ -181,7 +181,7 @@ class LocationController extends Controller
 	 * @param  App\Location $destination	The destination, as above
 	 * @return int              			The distance returned by the Google Maps Distance Matrix API
 	 */
-	function getMapsMatrixDistance($origin, $destination){
+	public function getMapsMatrixDistance($origin, $destination){
 
 		//Try to get Distance from Google Distance Matrix API
 		$response = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins='
@@ -190,7 +190,7 @@ class LocationController extends Controller
 					. $destination->longitude . ',' . $destination->latitude
 					. '&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o');
 					//TODO: Update key to be fetched dynamically from the .env
-		$response = json_decode($response, true, 512, JSON_BIGINT_AS_STRING);
+		$response = json_decode($response, true, 512);
 
 		//WOO Debug code! Documenting my approach tbh
 		//If we're all cool with the functional code, I'll get rid of these comments
