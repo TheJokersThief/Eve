@@ -105,10 +105,10 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('logout', ['as' => 'logout', 'uses' => 'UserController@logout']);
 
-            Route::get('search', ['as' => 'search', 'uses' => 'UserController@search']);
-            Route::get('autocomplete', 'UserController@autocomplete');
         });
-        Route::get('show/{nameOrId}', ['as' => 'user/show', 'uses' => 'UserController@show']);
+		Route::get('search', ['as' => 'search', 'uses' => 'UserController@search']);
+		Route::get('autocomplete', 'UserController@autocomplete');
+		Route::get('show/{nameOrId}', ['as' => 'user/show', 'uses' => 'UserController@show']);
 	});
 
 	//////////////////////
