@@ -373,7 +373,7 @@ class UserController extends Controller
 			$user->is_admin = 1;
 			$user->save();
 
-			Redirect::back()->with('message', 'User has been made admin!');
+			return Redirect::back()->with('message', 'User has been made admin!');
 		} else {
 			abort(403);
 		}
@@ -385,7 +385,7 @@ class UserController extends Controller
 			$user->is_admin = 0;
 			$user->save();
 
-			Redirect::back()->with('message', 'User has been demoted!');
+			return Redirect::back()->with('message', 'User has been demoted!');
 		} else {
 			abort(403);
 		}
@@ -397,7 +397,7 @@ class UserController extends Controller
 			$user->is_staff = 1;
 			$user->save();
 
-			Redirect::back()->with('message', 'User has been made staff!');
+			return Redirect::back()->with('message', 'User has been made staff!');
 		} else {
 			abort(403);
 		}
@@ -409,7 +409,7 @@ class UserController extends Controller
 			$user->is_staff = 0;
 			$user->save();
 
-			Redirect::back()->with('message', 'User has been demoted!');
+			return Redirect::back()->with('message', 'User has been demoted!');
 		} else {
 			abort(403);
 		}
