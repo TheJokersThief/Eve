@@ -33,7 +33,7 @@
 					<div class="card">
 						<div class="card-image">
 							<img src="{{ $item->file_location }}">
-							<span class="card-title">{{ {{_t('$item->name')}} }}
+							<span class="card-title">{{ _t('$item->name')}}
 
 								<div class="col s12 valign-wrapper">
 									<a href="#!" class="valign btn-floating green lighten-4">
