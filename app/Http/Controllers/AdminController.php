@@ -43,7 +43,7 @@ class AdminController extends Controller
 			"partners" 	=> Partner::all()->take( $totalNumber ),
 			"news" 		=> News::all()->take( $totalNumber ),
 			"media"		=> Media::where('processed', 0)->get()->take( $totalNumber*2 )->chunk(3),
-			"staffs"	=> User::where('is_staff', 1)->get()->take( $totalNumber ),
+			"staffs"	=> User::where('is_staff', 1)->get(),
 			"locations" => Location::all()->take( $totalNumber )
 		];
 

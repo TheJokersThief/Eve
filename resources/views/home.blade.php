@@ -75,6 +75,7 @@
 	</div>
 </div>
 
+<!-- News Section -->
 <div class="row" id="latest">
 	<div class="parallax-container">
 		<div class="parallax"><img src="{{ URL::to('/') . '/images/gray-geometric-background.jpg'}}"></div>
@@ -83,7 +84,7 @@
 			<h3 class="card">{{_t('Latest News')}}</h3>
 
 			@foreach($news as $item)
-				<div class="col s6 m4">
+				<div class="col s12 m4">
 					<div class="card">
 						<div class="card-content">
 							<h5>{{ _t($item->title) }}</h5>
@@ -98,6 +99,7 @@
 
 	</div>
 </div>
+<!-- End News Section -->
 
 <div class="row remove-col-padding" id="photos">
 	@foreach($media as $item)

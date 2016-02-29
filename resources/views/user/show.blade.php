@@ -20,12 +20,30 @@
 	                    <div class="row col s12">
 	                        <p class="flow-text">{{ _t($user->bio) }}</p>
 	                    </div>
-                    </div>
-                    @unless(!Auth::check() || ! (Auth::user()->id == $user->id || Auth::user()->is_admin))
-                    	<div class="col s12">
-							<a href="{{ URL::route('user/edit', Crypt::encrypt($user->id)) }}"class="waves-effect waves-light btn">{{_t('Edit profile')}}</a>
-						</div>
-                    @endunless
+						@unless(!Auth::check() || ! (Auth::user()->id == $user->id || Auth::user()->is_admin))
+							<div class="col s12 m6 l3">
+								<a href="{{ URL::route('user/edit', Crypt::encrypt($user->id)) }}"class="waves-effect waves-light btn">{{_t('Edit profile')}}</a>
+							</div>
+							@if($user->is_admin)
+								<div class="col s12 m6 l3">
+									<a href="{{ URL::action('UserController@unsetUserAdmin', $user->id) }}"class="waves-effect waves-light red btn">{{_t('Demote Admin')}}</a>
+								</div>
+							@else
+								<div class="col s12 m6 l3">
+									<a href="{{ URL::action('UserController@makeUserAdmin', $user->id) }}"class="waves-effect waves-light green darken-2 btn">{{_t('Make Admin')}}</a>
+								</div>
+							@endif
+							@if($user->is_staff)
+								<div class="col s12 m6 l3">
+									<a href="{{ URL::action('UserController@unsetUserStaff', $user->id) }}"class="waves-effect waves-light red btn">{{_t('Demote Staff')}}</a>
+								</div>
+							@else
+								<div class="col s12 m6 l3">
+									<a href="{{ URL::action('UserController@makeUserStaff', $user->id) }}"class="waves-effect waves-light green darken-2 btn">{{_t('Make Staff')}}</a>
+								</div>
+							@endif
+						@endunless
+					</div>
                 </div>
             </div>
 			<div class="divider"></div>

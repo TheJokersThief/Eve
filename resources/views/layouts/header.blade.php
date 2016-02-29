@@ -36,7 +36,7 @@
 				<div class="left input-field hide-on-med-and-down">
 				  {!! Form::text('search',
 						null,
-						['id' => '',
+						['id' => 'search',
 				        'placeholder'=> str_limit( _t('Search for a user'), 20 ) ])
 				  !!}
 				  <label for="search"><i class="material-icons">search</i></label>
@@ -78,9 +78,6 @@
 			  	<li><a href="#language-modal" class="modal-trigger" alt="{{_t('Language Preferences')}}"><i class="material-icons">language</i></a></li>
 			  </ul>
 			  <ul class="side-nav" id="mobile-demo">
-			  <div class="input-field">
-				  <label for="search"><i class="material-icons">search</i></label>
-			  </div>
 			  	@if( Auth::check( ) )
 			  		@if( Auth::user()->is_admin )
 						<li><a href="{{ URL::route('admin.home') }}">{{_t('Admin')}}</a></li>
@@ -88,19 +85,19 @@
 			  		@if( Auth::user()->is_staff )
 						<li><a href="{{ URL::route('staff.home') }}">{{_t('Staff')}}</a></li>
 			  		@endif
-			  		<li><a href="{{ URL::to( 'home' ) }}">Home</a></li>
-			  		<li><a href="{{ URL::route('me') }}"><i class="material-icons">perm_identity</i></a></li>
-			  		<li><a href="{{ URL::route('myEvents') }}"><i class="material-icons">today</i></a></li>
-			  		<li><a href="{{ URL::route('logout') }}"><i class="material-icons">input</i></a></li>
+			  		<li><a href="{{ URL::to( 'home' ) }}">{{_t('Home')}}</a></li>
+			  		<li><a href="{{ URL::route('me') }}"><i class="material-icons left">perm_identity</i> {{_t('User Account')}}</a></li>
+			  		<li><a href="{{ URL::route('myEvents') }}"><i class="material-icons left">today</i> {{_t('My Events')}}</a></li>
+			  		<li><a href="{{ URL::route('logout') }}"><i class="material-icons left">input</i> {{_t('Logout')}}</a></li>
 			  	@else
 					<li class="login">
-						<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">{{_t('Login')}}</a>
+						<a class=" waves-effect waves-light modal-trigger" href="#login-modal">{{_t('Login')}}</a>
 					</li>
 					<li class="register">
-						<a href="{{ URL::to('register') }}" class="btn">{{_t('Signup')}}</a>
+						<a href="{{ URL::to('register') }}" class="">{{_t('Signup')}}</a>
 					</li>
 			  	@endif
-			  	<li><a href="#language-modal" class="modal-trigger" alt="{{_t('Language Preferences')}}"><i class="material-icons">language</i></a></li>
+			  	<li><a href="#language-modal" class="modal-trigger" alt="{{_t('Language Preferences')}}"><i class="material-icons left">language</i> {{_t('Language')}} </a></li>
 
 			  </ul>
 			  <div class="hide">

@@ -14,7 +14,7 @@
 	</div>
 </div>
 
-<button class="btn waves-effect waves-light" type="submit" name="action">{{_t('Login')}}
+<button class="btn waves-effect waves-light login-button" type="submit" name="action">{{_t('Login')}}
 	<i class="mdi-content-send right"></i>
 </button>
 

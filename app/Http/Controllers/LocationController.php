@@ -179,16 +179,16 @@ class LocationController extends Controller
 		return $location->id;
 	}
 
-	function rad( $x ){
+	public static function rad( $x ){
 		return $x * pi() / 180;
 	}
 
-	function getDistance($p1, $p2){
+	public static function getDistance($p1, $p2){
 		$radius = 6378137;
-		$dLat = rad($p2->latitude - $p1->latitude);
-		$dLong = rad($p2->longitude - $p1->longitude);
+		$dLat =  LocationController::rad($p2->latitude - $p1->latitude);
+		$dLong =  LocationController::rad($p2->longitude - $p1->longitude);
 		$a = sin($dLat/2) * sin($dLat/2) +
-				cos(rad($p1->latitude)) * cos(rad($p2->latitude)) *
+				cos( LocationController::rad($p1->latitude)) * cos( LocationController::rad($p2->latitude)) *
 				sin($dLong / 2) * sin($dLong / 2);
 		$c = 2 * atan2(sqrt($a), sqrt(1 - $a));
 		$d = $radius * $c;
@@ -203,7 +203,7 @@ class LocationController extends Controller
 	 * @param  App\Location $destination	The destination, as above
 	 * @return int              			The distance returned by the Google Maps Distance Matrix API
 	 */
-	function getMapsMatrixDistance($origin, $destination){
+	public static function getMapsMatrixDistance($origin, $destination){
 
 		//Try to get Distance from Google Distance Matrix API
 		$response = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins='
@@ -212,7 +212,7 @@ class LocationController extends Controller
 					. $destination->longitude . ',' . $destination->latitude
 					. '&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o');
 					//TODO: Update key to be fetched dynamically from the .env
-		$response = json_decode($response, true, 512, JSON_BIGINT_AS_STRING);
+		$response = json_decode($response, true, 512);
 
 		//WOO Debug code! Documenting my approach tbh
 		//If we're all cool with the functional code, I'll get rid of these comments
@@ -228,7 +228,7 @@ class LocationController extends Controller
 		if( isset($response["rows"][0]["elements"][0]["distance"]["value"]) ){
 			return $response["rows"][0]["elements"][0]["distance"]["value"];
 		} else {
-			return getDistance($origin, $destination);
+			return LocationController::getDistance($origin, $destination);
 		}
 
 	}
