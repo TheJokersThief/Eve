@@ -152,10 +152,10 @@
 
 			<div class="row">
 				<!-- Button for submitting the new event -->
-				<div class="col s2">
+				<div class="col s6">
 					<a href="{{ action('EventsController@index') }}" class="waves-effect waves-light btn">{{_t('Cancel')}}</a>
 				</div>
-				<div class="col s2 push-s8">
+				<div class="col s6">
 					<div class='form-group'>
 					{!! Form::submit( _t('Create Event'), ['class' => 'btn btn-primary form-control']) !!}
 					</div>
