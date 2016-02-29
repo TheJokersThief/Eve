@@ -33,10 +33,10 @@
 			<div class="nav-wrapper container">
 
 				<!-- User Search Box -->
-				<div id="searchBar" class="input-field">
+				<div class="left input-field hide-on-med-and-down">
 				  {!! Form::text('search',
 						null,
-						['id' => 'search',
+						['id' => '',
 				        'placeholder'=> str_limit( _t('Search for a user'), 20 ) ])
 				  !!}
 				  <label for="search"><i class="material-icons">search</i></label>
