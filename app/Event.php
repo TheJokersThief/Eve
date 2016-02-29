@@ -16,18 +16,30 @@ class Event extends Model
 		'description', 'tagline', 'location_id', 'start_datetime', 'end_datetime', 'title', 'featured_image', 'price'
 	];
 
+	/**
+	 * Returns the location the event is in
+	 */
 	public function location(){
 		return $this->belongsTo('App\Location');
 	}
 
+	/**
+	 * Returns the partners associated with the event
+	 */
 	public function partners(){
 		return $this->belongsToMany('App\Partner', 'event_partners', 'event_id', 'partner_id')->withPivot('distance');
 	}
 
+	/**
+	 * Returns the ticket for this event
+	 */
 	public function tickets(){
 		return $this->hasMany('App\Ticket');
 	}
 
+	/**
+	 * Returns the media associated with this event
+	 */
 	public function media(){
 		return $this->hasMany('App\Media');
 	}

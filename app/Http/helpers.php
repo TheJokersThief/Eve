@@ -1,8 +1,10 @@
 <?php
+// Returns the argument in radians
 function rad( $x ){
 	return $x * pi() / 180;
 }
 
+// Gets the distance as the crow flies between two points
 function getDistance($p1, $p2){
 	$radius = 6378137;
 	$dLat = rad($p2->latitude - $p1->latitude);

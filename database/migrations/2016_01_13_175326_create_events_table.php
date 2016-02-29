@@ -12,6 +12,7 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
+        // Create the events table
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->text('description');
@@ -31,6 +32,7 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
+        // Drop the events table
         Schema::drop('events');
     }
 }
