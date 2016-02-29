@@ -19,7 +19,7 @@ class MailController extends Controller
 		$this->sendTicket( Ticket::find(1) );
 	}
 
-	public function sendTicket( Ticket $ticket ){
+	public static function sendTicket( Ticket $ticket ){
 		$this->dispatch( new SendEmail( $ticket ) );
 	}
 
