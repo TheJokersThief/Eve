@@ -9,6 +9,7 @@ use Validator;
 use Crypt;
 use DB;
 use App\Jobs\SendEmail;
+use Illuminate\Support\Facades\Bus;
 
 use App\Ticket;
 
@@ -20,7 +21,7 @@ class MailController extends Controller
 	}
 
 	public static function sendTicket( Ticket $ticket ){
-		$this->dispatch( new SendEmail( $ticket ) );
+		Bus::dispatch( new SendEmail( $ticket ) );
 	}
 
 }
