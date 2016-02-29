@@ -187,11 +187,11 @@
 			</div>
 
 
-			<div class="row scrollspy" id="staffs" name="staffs">
+			<div class="row scrollspy" id="staff" name="staff">
 				<ul class="collection with-header">
 					<li class="collection-header">
 						<a href="#!" class="waves-effect waves-light btn right add-new-button"><i class="fa fa-plus left"></i>{{_t('Add New Staff')}}</a>
-						<h4>{{_t('Staffs')}}</h4>
+						<h4>{{_t('Staff')}}</h4>
 					</li>
 
 					@foreach( $staffs as $staff )
@@ -200,14 +200,12 @@
 								<strong>{{ $staff->name }}</strong>
 								<br /><small>({{ str_limit($staff->bio, 150) }})</small>
 								<a href="#!" class="secondary-content">
-									<i class="fa fa-pencil"></i> &nbsp;
-									<i class="fa fa-times red-text"></i>
+									<a href="{{URL::action('UserController@unsetUserStaff', $staff->id)}}"><i class="fa fa-times red-text"></i></a>
 								</a>
 							</div>
 						</li>
 					@endforeach
 				</ul>
-				<a href="#!" class="waves-effect waves-light btn right">{{_t('View All Staffs')}} &rarr;</a>
 			</div>
 
 		</div>

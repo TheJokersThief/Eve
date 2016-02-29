@@ -362,4 +362,57 @@ class UserController extends Controller
 		$user->language = $languageCode;
 		$user->save();
 	}
+
+	/**
+	 * Functions for promoting/demoting users
+	 */
+	public static function makeUserAdmin($id){
+		if(Auth::check() && Auth::user()->is_admin){
+			$user = User::findOrFail($id);
+
+			$user->is_admin = 1;
+			$user->save();
+
+			Redirect::back()->with('message', 'User has been made admin!');
+		} else {
+			abort(403);
+		}
+	}
+	public static function unsetUserAdmin($id){
+		if(Auth::check() && Auth::user()->is_admin){
+			$user = User::findOrFail($id);
+
+			$user->is_admin = 0;
+			$user->save();
+
+			Redirect::back()->with('message', 'User has been demoted!');
+		} else {
+			abort(403);
+		}
+	}
+	public static function makeUserStaff($id){
+		if(Auth::check() && Auth::user()->is_admin){
+			$user = User::findOrFail($id);
+
+			$user->is_staff = 1;
+			$user->save();
+
+			Redirect::back()->with('message', 'User has been made staff!');
+		} else {
+			abort(403);
+		}
+	}
+	public static function unsetUserStaff($id){
+		if(Auth::check() && Auth::user()->is_admin){
+			$user = User::findOrFail($id);
+
+			$user->is_staff = 0;
+			$user->save();
+
+			Redirect::back()->with('message', 'User has been demoted!');
+		} else {
+			abort(403);
+		}
+	}
+
 }

@@ -106,6 +106,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('logout', ['as' => 'logout', 'uses' => 'UserController@logout']);
 
         });
+		Route::group(['middleware' => 'admin'], function(){
+			Route::get('makeAdmin/{id}', 'UserController@makeUserAdmin');
+			Route::get('makeStaff/{id}', 'UserController@makeUserStaff');
+			Route::get('unsetAdmin/{id}', 'UserController@unsetUserAdmin');
+			Route::get('unsetStaff/{id}', 'UserController@unsetUserStaff');
+		});
 		Route::get('search', ['as' => 'search', 'uses' => 'UserController@search']);
 		Route::get('autocomplete', 'UserController@autocomplete');
 		Route::get('show/{nameOrId}', ['as' => 'user/show', 'uses' => 'UserController@show']);
