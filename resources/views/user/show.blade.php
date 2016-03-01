@@ -24,23 +24,25 @@
 							<div class="col s12 m6 l3">
 								<a href="{{ URL::route('user/edit', Crypt::encrypt($user->id)) }}"class="waves-effect waves-light btn">{{_t('Edit profile')}}</a>
 							</div>
-							@if($user->is_admin)
-								<div class="col s12 m6 l3">
-									<a href="{{ URL::action('UserController@unsetUserAdmin', $user->id) }}"class="waves-effect waves-light red btn">{{_t('Demote Admin')}}</a>
-								</div>
-							@else
-								<div class="col s12 m6 l3">
-									<a href="{{ URL::action('UserController@makeUserAdmin', $user->id) }}"class="waves-effect waves-light green darken-2 btn">{{_t('Make Admin')}}</a>
-								</div>
-							@endif
-							@if($user->is_staff)
-								<div class="col s12 m6 l3">
-									<a href="{{ URL::action('UserController@unsetUserStaff', $user->id) }}"class="waves-effect waves-light red btn">{{_t('Demote Staff')}}</a>
-								</div>
-							@else
-								<div class="col s12 m6 l3">
-									<a href="{{ URL::action('UserController@makeUserStaff', $user->id) }}"class="waves-effect waves-light green darken-2 btn">{{_t('Make Staff')}}</a>
-								</div>
+							@if(Auth::user()->is_admin)
+								@if($user->is_admin)
+									<div class="col s12 m6 l3">
+										<a href="{{ URL::action('UserController@unsetUserAdmin', $user->id) }}"class="waves-effect waves-light red btn">{{_t('Demote Admin')}}</a>
+									</div>
+								@else
+									<div class="col s12 m6 l3">
+										<a href="{{ URL::action('UserController@makeUserAdmin', $user->id) }}"class="waves-effect waves-light green darken-2 btn">{{_t('Make Admin')}}</a>
+									</div>
+								@endif
+								@if($user->is_staff)
+									<div class="col s12 m6 l3">
+										<a href="{{ URL::action('UserController@unsetUserStaff', $user->id) }}"class="waves-effect waves-light red btn">{{_t('Demote Staff')}}</a>
+									</div>
+								@else
+									<div class="col s12 m6 l3">
+										<a href="{{ URL::action('UserController@makeUserStaff', $user->id) }}"class="waves-effect waves-light green darken-2 btn">{{_t('Make Staff')}}</a>
+									</div>
+								@endif
 							@endif
 						@endunless
 					</div>
