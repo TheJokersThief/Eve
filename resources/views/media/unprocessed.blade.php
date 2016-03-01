@@ -6,34 +6,36 @@
 
 @section('extra-js')
 	<script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			var $grid = $('.grid').masonry({
-				itemSelector: '.grid-item',
-				// percentPosition: true,
-				gutter:0,
-				fitWidth: true,
-				// containerStyle: null
-			});
 
-			setInterval(function(){
-				$grid.masonry();
-			}, 500);
-		});
-	</script>
+	@if( count($media) > 1 )
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var $grid = $('.grid').masonry({
+					itemSelector: '.grid-item',
+					// percentPosition: true,
+					gutter:0,
+					fitWidth: true,
+					// containerStyle: null
+				});
+
+				setInterval(function(){
+					$grid.masonry();
+				}, 500);
+			});
+		</script>
+	@endif
 @endsection
 
 @section('content')
 	<main class="grid row">
 		@foreach($media as $row)
-			{{-- <div class="row"> --}}
 			<div class="grid-sizer col s6 m3"></div>
 			@foreach( $row as $item )
 				<div class="col s6 m3 grid-item" id="{{ 'media_'.$item->id }}">
 					<div class="card">
 						<div class="card-image">
 							<img src="{{ $item->file_location }}">
-							<span class="card-title">{{ {{_t('$item->name')}} }}
+							<span class="card-title">{{ _t('$item->name')}}
 
 								<div class="col s12 valign-wrapper">
 									<a href="#!" class="valign btn-floating green lighten-4">
@@ -48,7 +50,6 @@
 					</div>
 				</div>
 			@endforeach
-			{{-- </div> --}}
 		@endforeach
 	</main>
 @endsection

@@ -11,6 +11,7 @@ use App\Location;
 use App\Event;
 use Redirect;
 use DB;
+use LocationController;
 
 use Crypt;
 use Validator;
@@ -55,7 +56,6 @@ class PartnersController extends Controller
 					'description',
 					'location_id',
 					'event_id',
-					'distance',
 					'email',
 					'logo',
 					'url'
@@ -70,7 +70,6 @@ class PartnersController extends Controller
 					'description' => 'required',
 					'location_id' => 'required',
 					'event_id'	=> 'required',
-					'distance' => 'required',
 					'email' => 'required',
 					'logo' => 'required|image',
 					'url' => 'required'
@@ -109,7 +108,6 @@ class PartnersController extends Controller
 				"type" => $data["type"],
 				"price" => $data["price"],
 				"location_id" => $data["location_id"],
-				"distance" => $data["distance"],
 				"email" => $data["email"],
 				"featured_image" => $data["picture"],
 				"url" => $data["url"],
@@ -159,7 +157,6 @@ class PartnersController extends Controller
 				'price',
 				'location_id',
 				'description',
-				'distance',
 				'email',
 				'featured_image'
 			]);
@@ -213,6 +210,56 @@ class PartnersController extends Controller
 		DB::delete('delete from event_partners where partner_id = ?', [$partnerID]);
 		Partner::destroy($partnerID);
 		return Redirect::route('partners.index');
+	}
+
+	public function addSuggestedPartner( $encryptedPlaceID ){
+		//decrypt place id
+		$placeID = Crypt::decrypt($encryptedPlaceID);
+
+		//Find from google places
+		$result = file_get_contents('https://maps.googleapis.com/maps/api/place/details/json?placeid='
+									. $placeID
+									. '&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o');
+
+		//store the location (call location.createLocationForPlace( $longitude, $latitude, $title ))
+
+		$result = json_decode($result, true);
+		$longitude = $result['result']['geometry']['location']['lng'];
+		$latitude = $result['result']['geometry']['location']['lat'];
+		$title = $result['result']['name'];
+
+		$locationID = LocationController::createLocationForPlace( $longitude, $latitude, $title );
+
+		//Create new partner in db
+		$price = 0;
+		if( isset($result['result']['price_level']) ){
+			$price = 5 * $result['result']['price_level'];
+		}
+
+		//Create new photo?
+		//https://maps.googleapis.com/maps/api/place/photo?photoreference=CmRcAAAAZw9XPwA2umHBbeRdWLRYE8LzOuqZ6fvLdMayjX6JDZ3NMH3YZ0GvSYX-ONy6m2-J-NG9C05OfZHQBMyJoiVSXEEyjoKsBauT23e8-S9REhdogQgP3MLfYRaRZPIpLr2iEhAoculQNM5RaF_9lTHoM5htGhS022Frq-fLwPlLIRbk_UaBLwS6QA&maxwidth=1600&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o
+		//$photo = file_get_contents('https://maps.googleapis.com/maps/api/place/photo?photoreference='
+		//							. $result['result']['photos']['photo_reference']
+		//							. '&maxwidth=1600'
+		//							. '&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o');
+		//file_put_contents( URL::to('/').'partner_image'.$placeID, $photo); //plz help, @colm2
+
+		$newData = array(
+				"name" => $title,
+				"description" => $title,
+				"type" => $result['result']['types'][0],
+				"price" => $price,
+				"location_id" => $locationID,
+				"email" => " ",
+				"featured_image" => "",
+				"url" => $result['result']['website'],
+				"logo" => ""
+			);
+
+		// Create the new partner
+		$newPartner = Partner::create( $newData );
+
+		//associate partner with event
 	}
 
 	// Returns the argument in radians

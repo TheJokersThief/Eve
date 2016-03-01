@@ -157,6 +157,28 @@ class LocationController extends Controller
 		return Redirect::back();
 	}
 
+	/**
+	 * This function helps create a location for a venue when it's added via suggested partners
+	 * as supplied by Google Places API
+	 * @param  string $longitude	The longitude provided by the Google Places API
+	 * @param  string $latitude		The latitude provided by the Google Places API
+	 * @param  string $title		The title of the venue from the Google Place API
+	 * @return int					The id of the newly created location
+	 */
+	public function createLocationForPlace( $longitude, $latitude, $title ){
+		//Capacity isn't specified by Google Places so I default it to zero
+		//Given that these are places like restaurants etc. it doesn't really matter
+		if(! Auth::check() || ! Auth::user()->is_admin ){
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
+		}
+
+		$location = Location::create([ 'name' => $title,
+										'latitude' => $latitude,
+										'longitude' => $longitude,
+										'capacity' => 0 ]);
+		return $location->id;
+	}
+
 	public static function rad( $x ){
 		return $x * pi() / 180;
 	}
