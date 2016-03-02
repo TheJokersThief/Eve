@@ -220,7 +220,7 @@ class PartnersController extends Controller
 		$restult = file_get_contents('https://maps.googleapis.com/maps/api/place/nearbysearch/output?json&location='
 									. $latitude . ','
 									. $longitude
-									. '&radius=500&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o')
+									. '&radius=500&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o');
 
 	}
 
