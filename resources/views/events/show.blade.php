@@ -59,7 +59,7 @@
 		</section>
 
 		<section id="event-actions" class="container row">
-			<div id="ticket" class="col s12 m4 l4">
+			<div id="ticket" class="col s12 m5">
 				<div id="ticket-card" class="card">
 					<div class="card-header amber darken-2">
 						<!-- Show event title and location name -->
@@ -161,7 +161,7 @@
 				@endif
 			</div>
 			<!-- Show information about partners -->
-			<div id="partners" class="col s12 m8 l8">
+			<div id="partners" class="col s12 m7">
 				@foreach( $partners as $partner )
 				<div class="col s12 m6 l6">
 					<div class="product-card">
