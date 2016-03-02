@@ -347,4 +347,19 @@ class EventsController extends Controller
 		// Return to the events index
 		return Redirect::route('events.show', $event->id);
 	}
+
+
+	/**
+	 * @param  int 		$encryptedPartnerId	The encrypted value of the Partner ID to be destroyed
+	 * @return Redirect 	Back to the previous page
+	 */
+	public function destroy( $eventID ){
+		if(! Auth::check() || ! Auth::user()->is_admin ){
+			return response( view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403 );
+		}
+		DB::delete('delete from media where event_id = ?', [$eventID]);
+		DB::delete('delete from tickets where event_id = ?', [$eventID]);
+		Event::destroy($eventID);
+		return Redirect::back();
+	}
 }
