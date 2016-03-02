@@ -221,7 +221,7 @@ class TicketController extends Controller
 	 * @return View       		Name badge for the user corresponding to the ticket.
 	 */
 	public function verify($code){
-		if( Auth::user()->is_staff || Auth::user()->is_admin ){
+		if( Auth::check() && Auth::user()->is_staff || Auth::user()->is_admin ){
 			try{
 			  $ticket = Ticket::hasCode($code)->firstOrFail();
 			} catch (ModelNotFoundException $e) {

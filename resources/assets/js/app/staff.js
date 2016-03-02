@@ -40,6 +40,8 @@ $(document).ready(function(){
 			};
 
 			self.update();
+
+			setInterval(self.update, 2000); // Auto-update while this view is open.
 		}
 		
 		ko.applyBindings(new TicketViewModel());
