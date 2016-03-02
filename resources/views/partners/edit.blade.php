@@ -7,8 +7,10 @@
 @endsection
 
 @section('extra-js')
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKOjys2eW4gpc3KmoBlVOjQ-SqHWgyvwI&libraries=places"></script>
 	<script type="text/javascript">
 		fillInfo();
+		initEvents();
 	</script>
 @endsection
 
@@ -44,7 +46,7 @@
 
 		<div class="row">
 			<div class="input-field col s12">
-				<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();}">
+				<select name="location_id" id="location-select" onChange="if(this.value==-1){$('#locationForm').openModal();google.maps.event.trigger(map, 'resize');}">
 					<option value="" disabled selected>{{ _t( 'Choose location' ) }}</option>
 					@foreach($locations as $location)
 						<option value="{{$location->id}}"
@@ -113,7 +115,7 @@ selected
 			</div>
 		{!! Form::close() !!}
 		{{ Form::open(['route' => ['partners.destroy', Crypt::encrypt($partner->id)], 'method' => 'delete', 'class' => 'inline-form']) }}
-		<button type="submit" class="waves-effect waves-light btn deep-orange accent-4 tooltipped" data-position="top" data-tooltip="{{_t("Be careful! This action can't be undone!")}}" >{{_t("Delete Partner")}}</button>
+		<button type="submit" class="waves-effect waves-light btn deep-orange accent-4 tooltipped" data-position="top" data-tooltip="{{_t('Be careful! This action can't be undone!')}}" >{{_t("Delete Partner")}}</button>
 		{{ Form::close() }}
 	</div>
 </main>
