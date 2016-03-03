@@ -247,6 +247,11 @@ class PartnersController extends Controller
 		return $returnResult;
 	}
 
+	/**
+	 * Adds the suggested partner to the database using the details
+	 * returned from the Google Places API
+	 * @param $encryptedPlaceID The encrypted place ID, of the place to be added to the database
+	 */
 	public function addSuggestedPartner( $encryptedPlaceID ){
 		//decrypt place id
 		$placeID = Crypt::decrypt($encryptedPlaceID);
@@ -297,7 +302,7 @@ class PartnersController extends Controller
 		// Create the new partner
 		$newPartner = Partner::create( $newData );
 
-		//associate partner with event
+		//associate partner with event //TODO
 	}
 
 	// Returns the argument in radians
