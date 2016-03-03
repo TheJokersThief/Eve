@@ -5,7 +5,7 @@
 
 @section('content')
 <main>
-	<div class="z-depth-1">
+	<div class="z-depth-1 white">
 		<div class="container">
 			<div class="section">
 				<div class="row">
@@ -22,25 +22,25 @@
 	                    </div>
 						@unless(!Auth::check() || ! (Auth::user()->id == $user->id || Auth::user()->is_admin))
 							<div class="col s12 m6 l3">
-								<a href="{{ URL::route('user/edit', Crypt::encrypt($user->id)) }}"class="waves-effect waves-light btn">{{_t('Edit profile')}}</a>
+								<a href="{{ URL::route('user/edit', Crypt::encrypt($user->id)) }}"class="waves-effect waves-light btn col s12 m6 l3">{{_t('Edit profile')}}</a>
 							</div>
 							@if(Auth::user()->is_admin)
 								@if($user->is_admin)
-									<div class="col s12 m6 l3">
-										<a href="{{ URL::action('UserController@unsetUserAdmin', $user->id) }}"class="waves-effect waves-light red btn">{{_t('Demote Admin')}}</a>
+									<div class="col s12 m4 l3">
+										<a href="{{ URL::action('UserController@unsetUserAdmin', $user->id) }}"class="waves-effect waves-light red btn col s12 m4 l3">{{_t('Demote Admin')}}</a>
 									</div>
 								@else
-									<div class="col s12 m6 l3">
-										<a href="{{ URL::action('UserController@makeUserAdmin', $user->id) }}"class="waves-effect waves-light green darken-2 btn">{{_t('Make Admin')}}</a>
+									<div class="col s12 m4 l3">
+										<a href="{{ URL::action('UserController@makeUserAdmin', $user->id) }}"class="waves-effect waves-light green darken-2 btn col s12 m4 l3">{{_t('Make Admin')}}</a>
 									</div>
 								@endif
 								@if($user->is_staff)
-									<div class="col s12 m6 l3">
-										<a href="{{ URL::action('UserController@unsetUserStaff', $user->id) }}"class="waves-effect waves-light red btn">{{_t('Demote Staff')}}</a>
+									<div class="col s12 m4 l3">
+										<a href="{{ URL::action('UserController@unsetUserStaff', $user->id) }}"class="waves-effect waves-light red btn col s12 m4 l3">{{_t('Demote Staff')}}</a>
 									</div>
 								@else
-									<div class="col s12 m6 l3">
-										<a href="{{ URL::action('UserController@makeUserStaff', $user->id) }}"class="waves-effect waves-light green darken-2 btn">{{_t('Make Staff')}}</a>
+									<div class="col s12 m4 l3">
+										<a href="{{ URL::action('UserController@makeUserStaff', $user->id) }}"class="waves-effect waves-light green darken-2 btn col s12 m4 l3">{{_t('Make Staff')}}</a>
 									</div>
 								@endif
 							@endif
