@@ -216,12 +216,27 @@ class PartnersController extends Controller
 		$longitude = $location->longitude;
 		$latitude = $location->latitude;
 		//Make API Request
-		//https://maps.googleapis.com/maps/api/place/nearbysearch/output?json&location=$latitude,$longitude&radius=500&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o
-		$restult = file_get_contents('https://maps.googleapis.com/maps/api/place/nearbysearch/output?json&location='
+
+		//we need to return the name, approx location and unique ID
+		$result = json_decode( file_get_contents('https://maps.googleapis.com/maps/api/place/nearbysearch/output?json&location='
 									. $latitude . ','
 									. $longitude
-									. '&radius=500&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o')
+									. '&radius=500&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o'), true );
 
+		$returnResult = [];
+
+		$result = $result['results'];
+
+		$i = 0;
+
+		//name, vicinity, id
+		foreach( $result as $value ){
+			$tempArray = array( $value['name'], $value['vicinity'], $value['id'] );
+			$returnResult[$i] = $tempArray;
+			$i++;
+		}
+
+		return $returnResult;
 	}
 
 	public function addSuggestedPartner( $encryptedPlaceID ){
@@ -248,6 +263,9 @@ class PartnersController extends Controller
 			$price = 5 * $result['result']['price_level'];
 		}
 
+		$url = isset($result['result']['website']) ? $result['result']['website'] : "";
+		$type = isset($result['result']['types'][0]) ? $result['result']['types'][0] : "";
+
 		//Create new photo?
 		//https://maps.googleapis.com/maps/api/place/photo?photoreference=CmRcAAAAZw9XPwA2umHBbeRdWLRYE8LzOuqZ6fvLdMayjX6JDZ3NMH3YZ0GvSYX-ONy6m2-J-NG9C05OfZHQBMyJoiVSXEEyjoKsBauT23e8-S9REhdogQgP3MLfYRaRZPIpLr2iEhAoculQNM5RaF_9lTHoM5htGhS022Frq-fLwPlLIRbk_UaBLwS6QA&maxwidth=1600&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o
 		//$photo = file_get_contents('https://maps.googleapis.com/maps/api/place/photo?photoreference='
@@ -259,13 +277,13 @@ class PartnersController extends Controller
 		$newData = array(
 				"name" => $title,
 				"description" => $title,
-				"type" => $result['result']['types'][0],
+				"type" => $type,
 				"price" => $price,
 				"location_id" => $locationID,
-				"email" => " ",
-				"featured_image" => "",
-				"url" => $result['result']['website'],
-				"logo" => ""
+				"email" => "",
+				"featured_image" => "/images/red-geometric-background.png",
+				"url" => $url,
+				"logo" => "/images/default_profile_image.png"
 			);
 
 		// Create the new partner
