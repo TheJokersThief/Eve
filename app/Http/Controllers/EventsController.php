@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\PartnersController;
+use App\Http\Controllers\LocationController;
 use App\Event;
 use App\Ticket;
 use App\Location;
@@ -193,7 +193,7 @@ class EventsController extends Controller
 			// Attach partners to model
 			$distance;
 			foreach($data['partner_id'] as $partner_id){
-				$distance = PartnersController::getMapsMatrixDistance(Partner::find($partner_id)->location, $newEvent->location);
+				$distance = LocationController::getMapsMatrixDistance(Partner::find($partner_id)->location, $newEvent->location);
 				$newEvent->partners()->attach($partner_id, ['distance' => $distance]);
 			}
 			return Redirect::to( 'events' );
@@ -336,7 +336,7 @@ class EventsController extends Controller
 
 		$distance;
 		foreach($data['partner_id'] as $partner_id){
-			$distance = PartnersController::getMapsMatrixDistance(Partner::find($partner_id)->location, $event->location);
+			$distance = LocationController::getMapsMatrixDistance(Partner::find($partner_id)->location, $event->location);
 			$event->partners()->attach($partner_id, ['distance' => $distance]);
 		}
 
