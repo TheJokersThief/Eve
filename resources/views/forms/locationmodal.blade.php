@@ -14,11 +14,11 @@
 			</div>
 			<div class="input-field col m5 s12">
 				{!! Form::label('latitude',_t('Latitude'))	!!}
-				{!! Form::text('latitude')	!!}
+				{!! Form::text('latitude', '53.2812223')	!!}
 			</div>
 			<div class="input-field col m5 s12">
 				{!! Form::label('longitude',_t('Longitude'))	!!}
-				{!! Form::text('longitude')	!!}
+				{!! Form::text('longitude', '-7.3740124')	!!}
 			</div>
 
 			<div class="row">
