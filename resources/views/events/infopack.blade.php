@@ -102,10 +102,10 @@
 				</div>
 			</div>
 		</div>
-		<div id="map" class="col s12 center-align" style="width: 65%; height: 400px;"></div>
+		<div id="map" class="col s12 center-align"></div>
 		<!-- Show name, description and distance for each partner -->
 		@foreach($ticket->event->partners as $partner)
-			<div class="col s4">
+			<div class="col s12 m4">
 		      <div class="card blue-grey darken-1">
 		        <div class="card-content white-text">
 		          <span class="card-title">{!! $partner->name !!}</span>
@@ -118,7 +118,9 @@
 	</div>
 </div>
 <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKOjys2eW4gpc3KmoBlVOjQ-SqHWgyvwI
-        &libraries=visualization&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}
+        &libraries=visualization">
+    }
+    }
 </script>
 @endsection
