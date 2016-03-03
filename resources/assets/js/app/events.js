@@ -56,3 +56,43 @@ function initEvents( ){
 
 	   });
 }
+
+function initGallery( loading_image_error, loading_image_text ){
+	var $grid = $('.grid').masonry({
+		itemSelector: '.grid-item',
+		// percentPosition: true,
+		gutter:0,
+		fitWidth: true,
+		// containerStyle: null
+	});
+
+	setInterval(function(){
+		$grid.masonry();
+	}, 500);
+
+      //popup-gallery
+      $('.popup-gallery').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+        closeOnContentClick: true,
+        fixedContentPos: true,
+        tLoading: loading_image_text + ' #%curr%...',
+        mainClass: 'mfp-img-mobile mfp-no-margins mfp-with-zoom',
+        gallery: {
+          enabled: true,
+          navigateByImgClick: true,
+          preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+        },
+        image: {
+          verticalFit: true,
+          tError: '<a href="%url%">'+loading_image_error+' #%curr%</a>',
+          titleSrc: function(item) {
+            return item.el.attr('title');
+          },
+        zoom: {
+          enabled: true,
+          duration: 300 // don't foget to change the duration also in CSS
+        }
+        }
+      });
+}
