@@ -4,59 +4,17 @@
 @section('title') {{_t($event->title)}} @endsection
 
 @section('extra-js')
+	<script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function( ){
 			initDropzone( );
-			initGallery( '{{_t('The image could not be loaded.')}}' , '{{_t('Loading image')}}');
+
+			{{-- If there's only 1 image, masonry freaks out --}}
+			@if( count( $event->media ) > 1 )
+				initGallery( '{{_t('The image could not be loaded.')}}' , '{{_t('Loading image')}}');
+			@endif
 		});
 	</script>
-
-	<script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
-	<script type="text/javascript">
-
-jQuery(document).ready(function($){
-	$(document).ready(function(){
-			var $grid = $('.grid').masonry({
-				itemSelector: '.grid-item',
-				// percentPosition: true,
-				gutter:0,
-				fitWidth: true,
-				// containerStyle: null
-			});
-
-			setInterval(function(){
-				$grid.masonry();
-			}, 500);
-		});
-
-      //popup-gallery
-      $('.popup-gallery').magnificPopup({
-        delegate: 'a',
-        type: 'image',
-        closeOnContentClick: true,
-        fixedContentPos: true,
-        tLoading: '{{_t('Loading image')}} #%curr%...',
-        mainClass: 'mfp-img-mobile mfp-no-margins mfp-with-zoom',
-        gallery: {
-          enabled: true,
-          navigateByImgClick: true,
-          preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-        },
-        image: {
-          verticalFit: true,
-          tError: '<a href="%url%">{{_t('The image #%curr%</a> could not be loaded.')}}',
-          titleSrc: function(item) {
-            return item.el.attr('title');
-          },
-        zoom: {
-          enabled: true,
-          duration: 300 // don't foget to change the duration also in CSS
-        }
-        }
-      });
-});
-
-</script>
 @endsection
 
 @section('content')
