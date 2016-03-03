@@ -69,7 +69,7 @@
 								<div class="col s12 center-align">
 									{!! $ticket->qr() !!}
 								</div>
-								<div class=" col s12 row center-align">
+								<div class=" col s12 row center-align hide-on-small-only">
 									<a class="btn red lighten-2" target="_blank" href="{{ URL::route( 'tickets/print', [ 'id' => Crypt::encrypt( $ticket->id ) ] ) }}"><i class="fa fa-print left"></i> {{_t('Print ticket')}}</a>
 								</div>
 								<div class=" col s12 row center-align">
