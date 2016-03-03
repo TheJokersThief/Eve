@@ -209,7 +209,7 @@ class PartnersController extends Controller
 		$partnerID = Crypt::decrypt($encryptedPartnerID);
 		DB::delete('delete from event_partners where partner_id = ?', [$partnerID]);
 		Partner::destroy($partnerID);
-		return Redirect::route('partners.index');
+		return Redirect::back();
 	}
 
 	public function getSuggestedPartners( Location $location ){

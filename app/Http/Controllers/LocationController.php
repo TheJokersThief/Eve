@@ -13,6 +13,7 @@ use Redirect;
 use Auth;
 use Validator;
 use Crypt;
+use DB;
 
 class LocationController extends Controller
 {
