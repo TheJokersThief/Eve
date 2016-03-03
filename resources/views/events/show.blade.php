@@ -7,14 +7,145 @@
 	<script type="text/javascript">
 		$(document).ready(function( ){
 			initDropzone( );
+			initGallery( '{{_t('The image could not be loaded.')}}' , '{{_t('Loading image')}}');
 		});
 	</script>
+
+	<script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
+	<script type="text/javascript">
+
+jQuery(document).ready(function($){
+	$(document).ready(function(){
+			var $grid = $('.grid').masonry({
+				itemSelector: '.grid-item',
+				// percentPosition: true,
+				gutter:0,
+				fitWidth: true,
+				// containerStyle: null
+			});
+
+			setInterval(function(){
+				$grid.masonry();
+			}, 500);
+		});
+
+      //popup-gallery
+      $('.popup-gallery').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+        closeOnContentClick: true,
+        fixedContentPos: true,
+        tLoading: '{{_t('Loading image')}} #%curr%...',
+        mainClass: 'mfp-img-mobile mfp-no-margins mfp-with-zoom',
+        gallery: {
+          enabled: true,
+          navigateByImgClick: true,
+          preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+        },
+        image: {
+          verticalFit: true,
+          tError: '<a href="%url%">{{_t('The image #%curr%</a> could not be loaded.')}}',
+          titleSrc: function(item) {
+            return item.el.attr('title');
+          },
+        zoom: {
+          enabled: true,
+          duration: 300 // don't foget to change the duration also in CSS
+        }
+        }
+      });
+});
+
+</script>
 @endsection
 
 @section('content')
 	<main class="row">
+
+	@if( $ticket )
+		<div id="ticket" class="col s12 m5 hide-on-med-and-up">
+			<div id="ticket-card" class="card">
+				<div class="card-header amber darken-2">
+					<!-- Show event title and location name -->
+					<div class="card-title">
+						<h4 class="ticket-card-title truncate">{{ _t($event->title) }}</h4>
+						<p class="ticket-card-date">{{ $event->location->name }}</p>
+					</div>
+				</div>
+				<div class="card-content-bg white-text" style="background-image: url('{{ $event->featured_image }}')">
+					<div class="card-content">
+						<div class="row ticket-state-wrapper">
+							<!-- If the user doesn't have a ticket, display a button to buy a ticket -->
+							@if(! $ticket)
+								{!! Form::open( ['action' => 'TicketController@store', "class" => "col s12 center-align get_ticket_button"] ) !!}
+									{!! Form::hidden('event_id', $event->id) !!}
+									@if(!$event->price )
+										<h2 id="price">
+											{{_t('FREE')}}
+										</h2>
+										{!! Form::submit('Get Ticket', ['class' => 'btn btn-primary red lighten-2 form-control']) !!}
+									@elseif( Auth::check() ) {{-- This is the Stripe embed and is used to
+											   generate the token we use to verify payments --}}
+										<h2 id="price">
+											&euro;{{ $event->price }}
+										</h2>
+										<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+												data-key="{{env('STRIPE_KEY')}}"
+												data-image="{{URL::to('/images/logo.png')}}"
+												data-description="{{$event->title}}"
+												data-amount="{{$event->price * 100}}"
+												data-locale="auto"
+												data-currency="EUR"
+												data-email="{{Auth::user()->email}}"></script>
+									@else
+										<h2 id="price">
+											&euro;{{ $event->price }}
+										</h2>
+										<a class="btn btn-primary red lighten-2 modal-trigger" href="#login-modal">
+											{{_t('Buy Ticket')}}
+										</a>
+									@endif
+								{!! Form::close() !!}
+							<!-- If the user has a ticket, display the qr code -->
+							@else
+								<div class="col s12 center-align">
+									{!! $ticket->qr() !!}
+								</div>
+								<div class=" col s12 row center-align">
+									<a class="btn red lighten-2" target="_blank" href="{{ URL::route( 'tickets/print', [ 'id' => Crypt::encrypt( $ticket->id ) ] ) }}"><i class="fa fa-print left"></i> {{_t('Print ticket')}}</a>
+								</div>
+								<div class=" col s12 row center-align">
+									<a class="btn red lighten-2" target="_blank" href="{{ URL::route( 'events/info', ['ticket' => $ticket]) }}"><i class="fa fa-print left"></i> {{_t('Info Pack')}}</a>
+								</div>
+								<div class=" col s12 row center-align">
+									<a class="btn red lighten-2 ical" target="_blank" href="{{ URL::action( 'TicketController@iCal', ['code' => $ticket->code()]) }}"><i class="fa fa-calendar left"></i> {{_t('Add To Calendar')}}</a>
+								</div>
+
+							@endif
+						</div>
+						<div class="row">
+							<div class="col s6 m6 l6 center-align">
+								<div class="ticket-info">
+									<p class="small center-align">{{_t('Start')}}</p>
+									<p class="small"><span class="grey-text text-lighten-2">{{_t('Time:')}}</span> {{ date('h:i A', strtotime( $event->start_datetime ) ) }}</p>
+									<p class="small"><span class="grey-text text-lighten-2">{{_t('Date:')}}</span> {{ date('d/m/Y', strtotime( $event->start_datetime ) ) }}</p>
+								</div>
+							</div>
+							<div class="col s6 m6 l6 center-align ticket-state-two">
+								<div class="ticket-info">
+									<p class="small center-align">{{_t('End')}}</p>
+									<p class="small"><span class="grey-text text-lighten-2">{{_t('Time:')}}</span> {{ date('h:i A', strtotime( $event->end_datetime ) ) }}</p>
+									<p class="small"><span class="grey-text text-lighten-2">{{_t('Date:')}}</span> {{ date('d/m/Y', strtotime( $event->end_datetime ) ) }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		@endif
+
 		<section class="event-image valign-wrapper" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('{{ $event->featured_image }}');;">
-			<div class="row container valign">
+			<div class="row container valign hide-on-small-only">
 				<div id="event-details" class="col s12 m4 l4 right-align valign-wrapper">
 					<!-- Show event start-time, end-time and name -->
 					<div class="valign">
@@ -27,6 +158,22 @@
 				<div class="col s12 m8 l8" id="event-title">
 					<h1>{{ _T($event->title) }}</h1>
 					<h4>{{ _T($event->tagline) }}</h4>
+				</div>
+			</div>
+
+			<div class="row container valign hide-on-med-and-up">
+				<!-- Show event title and tagline -->
+				<div class="row col s12" id="event-title">
+					<h1>{{ _T($event->title) }}</h1>
+					<h4>{{ _T($event->tagline) }}</h4>
+				</div>
+
+				<div id="event-details" class="row col s12 valign-wrapper">
+					<!-- Show event start-time, end-time and name -->
+					<div class="valign">
+						<h5>{{ _t($event->hrStartTime( )) }} &rarr; {{ _t($event->hrEndTime( )) }}</h5>
+						<h5>{{ $event->location->name }}</h5>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -59,7 +206,7 @@
 		</section>
 
 		<section id="event-actions" class="container row">
-			<div id="ticket" class="col s12 m5">
+			<div id="ticket" class="col s12 m5 @if($ticket) hide-on-small-only @endif">
 				<div id="ticket-card" class="card">
 					<div class="card-header amber darken-2">
 						<!-- Show event title and location name -->

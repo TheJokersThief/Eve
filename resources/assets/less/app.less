@@ -234,10 +234,27 @@ body{
 
 			.row.container{
 				color: @off-white;
-				display: -webkit-flex;
-				display: -ms-flexbox;
-				display: flex;
 				overflow: hidden;
+
+				/* Medium + large-only styles */
+				&.hide-on-small-only{
+					display: -webkit-flex;
+					display: -ms-flexbox;
+					display: flex;
+				}
+
+				/* Mobile-only styles */
+				&.hide-on-med-and-up{
+					#event-title{
+						margin-bottom: 0;
+					}
+
+					#event-details{
+						border-left: 1px solid rgba(255, 255, 255, 0.4);
+					    border-top: 1px solid rgba(255, 255, 255, 0.4);
+					    margin-top: 0;
+					}
+				}
 
 				#event-title{
 					border-left: 1px solid rgba(255, 255, 255, 0.4);

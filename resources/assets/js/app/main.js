@@ -29,6 +29,14 @@ $( document ).ready(function($){
 			$(this).attr('href', link);
 		});
 	}
+
+	$( "#search" ).autocomplete({
+	  source: "/user/autocomplete",
+	  minLength: 1,
+	  select: function(event, ui) {
+	  	$('#search').val(ui.item.value);
+	  }
+	});
 });
 
 function updateProgressBar( elementId, newValue ){
@@ -60,15 +68,4 @@ function createLocation( ){
 		}
 	});
 }
-
-$(function()
-{
-	 $( "#search" ).autocomplete({
-	  source: "/user/autocomplete",
-	  minLength: 1,
-	  select: function(event, ui) {
-	  	$('#search').val(ui.item.value);
-	  }
-	});
-});
 
