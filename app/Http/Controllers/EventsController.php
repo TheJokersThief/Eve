@@ -105,6 +105,9 @@ class EventsController extends Controller
 
 	// Return a view for creating an event
 	public function create(){
+		if(! Auth::check() || ! Auth::user()->is_admin ){
+			return response(view('errors.403', ['error' => $this->errorMessages['incorrect_permissions']]), 403);
+		}
 		return view('events.create', ['locations' => Location::all(), 'partners' => Partner::all()]);
 	}
 

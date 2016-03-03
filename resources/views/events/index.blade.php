@@ -8,12 +8,18 @@
 <div class="container">
 	<div class="row">
 		<div class="valign-wrapper">
-			<div class="col s10 m10">
+			@if (  Auth::check() && Auth::user()->is_admin )
+			<div class="col s10 m10 left-align">
 				<h4>{{_t('Events')}}</h4>
 			</div>
 			<div class="col s2 m2">
 				<a href="{{ action('EventsController@create') }}" class="waves-effect waves-light btn">{{_t('Create')}}</a>
 			</div>
+			@else
+			<div class="col s12 m12">
+				<h4>{{_t('Events')}}</h4>
+			</div>
+			@endif
 		</div>
 		<!-- Show all events -->
 	    @foreach($events as $event)
