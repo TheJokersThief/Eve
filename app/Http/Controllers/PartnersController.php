@@ -212,6 +212,14 @@ class PartnersController extends Controller
 		return Redirect::back();
 	}
 
+	/**
+	 * This function returns up to 20 nearby locations in a 2-dimensional array in the format
+	 * [index_of_location_in_array][name,address,unique_id]
+	 * The unique ID can be used to query the Google Places API for further information on the location
+	 * @param  Location $location A location model, as described in the project
+	 * @return array[][]             A 2-dimensional array containing up to 20 results, the first
+	 *                               dimension being the index (0-19), the second being the details
+	 */
 	public function getSuggestedPartners( Location $location ){
 		$longitude = $location->longitude;
 		$latitude = $location->latitude;
