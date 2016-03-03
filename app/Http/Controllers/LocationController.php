@@ -211,8 +211,8 @@ class LocationController extends Controller
 					. $origin->longitude . ',' . $origin->latitude
 					. '&destinations='
 					. $destination->longitude . ',' . $destination->latitude
-					. '&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o');
-					//TODO: Update key to be fetched dynamically from the .env
+					. '&key=' . env('GOOGLE_API_KEY'));
+
 		$response = json_decode($response, true, 512);
 
 		//WOO Debug code! Documenting my approach tbh
