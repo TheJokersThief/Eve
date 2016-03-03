@@ -6,7 +6,7 @@ return [
     | Google application name
     |----------------------------------------------------------------------------
     */
-    'application_name' => '',
+    'application_name' => env('SITE_TITLE'),
 
     /*
     |----------------------------------------------------------------------------
@@ -33,7 +33,7 @@ return [
     | a Server key, and not a Browser key.
     |
     */
-    'developer_key' => '',
+    'developer_key' => env('GOOGLE_API_KEY'),
 
     /*
     |----------------------------------------------------------------------------
