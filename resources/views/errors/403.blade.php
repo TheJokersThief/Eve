@@ -45,9 +45,9 @@
         <div class="container">
             <div class="content">
                 @if(!isset($error))
-                    <div class="title">You don't have permission to access this.</div>
+                    <div class="title">{{_t("You don't have permission to access this.")}}</div>
                 @else
-                    <div class="title">{{$error}}</div>
+                    <div class="title">{{_t($error)}}</div>
                 @endif
             </div>
         </div>

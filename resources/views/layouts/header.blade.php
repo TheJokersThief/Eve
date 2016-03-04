@@ -69,10 +69,10 @@
 			  		<li><a href="{{ URL::route('logout') }}"><i class="material-icons">input</i></a></li>
 			  	@else
 					<li class="login">
-						<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">{{_t('Login')}}</a>
+						<a class="btn waves-effect waves-light modal-trigger" href="#login-modal">{{_t('Log in')}}</a>
 					</li>
 					<li class="register">
-						<a href="{{ URL::to('register') }}" class="btn">{{_t('Signup')}}</a>
+						<a href="{{ URL::to('register') }}" class="btn">{{_t('Sign up')}}</a>
 					</li>
 			  	@endif
 			  	<li><a href="#language-modal" class="modal-trigger" alt="{{_t('Language Preferences')}}"><i class="material-icons">language</i></a></li>
@@ -88,13 +88,13 @@
 			  		<li><a href="{{ URL::to( 'home' ) }}">{{_t('Home')}}</a></li>
 			  		<li><a href="{{ URL::route('me') }}"><i class="material-icons left">perm_identity</i> {{_t('User Account')}}</a></li>
 			  		<li><a href="{{ URL::route('myEvents') }}"><i class="material-icons left">today</i> {{_t('My Events')}}</a></li>
-			  		<li><a href="{{ URL::route('logout') }}"><i class="material-icons left">input</i> {{_t('Logout')}}</a></li>
+			  		<li><a href="{{ URL::route('logout') }}"><i class="material-icons left">input</i> {{_t('Log out')}}</a></li>
 			  	@else
 					<li class="login">
-						<a class=" waves-effect waves-light modal-trigger" href="#login-modal">{{_t('Login')}}</a>
+						<a class=" waves-effect waves-light modal-trigger" href="#login-modal">{{_t('Log in')}}</a>
 					</li>
 					<li class="register">
-						<a href="{{ URL::to('register') }}" class="">{{_t('Signup')}}</a>
+						<a href="{{ URL::to('register') }}" class="">{{_t('Sign up')}}</a>
 					</li>
 			  	@endif
 			  	<li><a href="#language-modal" class="modal-trigger" alt="{{_t('Language Preferences')}}"><i class="material-icons left">language</i> {{_t('Language')}} </a></li>

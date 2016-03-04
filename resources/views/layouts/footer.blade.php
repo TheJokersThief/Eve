@@ -13,7 +13,7 @@
 			<div id="login-modal" class="col s12 m4 offset-m4 modal">
 			    <div class="modal-content">
 			        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat right">&times;</a>
-			        <h3> {{_t('Login')}}</h3>
+			        <h3> {{_t('Log in')}}</h3>
 			        @include('forms.login')
 			    </div>
 			</div>
