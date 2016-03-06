@@ -149,7 +149,7 @@ class EventsController extends Controller
 					'start_time'  => 'required',
 					'end_time' => 'required',
 					'location_id'  => 'required',
-					'price'        => 'required|numeric'
+					'price'        => 'required|numeric|min:0'
 				]);
 
 		// If validation fails;
@@ -287,7 +287,7 @@ class EventsController extends Controller
 					'start_time'  => 'required',
 					'end_time' => 'required',
 					'location_id'  => 'required',
-					'price' => 'required|numeric'
+					'price' => 'required|numeric|min:0'
 				]);
 
 		// If validation fails;
