@@ -78,12 +78,12 @@
 				<!-- Select start date -->
 				<div class="col m6 s6">
 					<label for="start_date">{{_t('Start Date')}}</label>
-					<input name="start_date" id="start_date" type="date" value="Start Date" class="datepicker">
+					<input name="start_date" id="start_date" type="date" value="" class="datepicker">
 				</div>
 				<!-- Select end date -->
 				<div class="col m6 s6">
 					<label for="input_enddate">{{_t('End Date')}}</label>
-					<input name="end_date" id="input_enddate" type="date" value="End Date" class="datepicker">
+					<input name="end_date" id="input_enddate" type="date" value="" class="datepicker">
 				</div>
 				<!-- Input price if ticket -->
 				<div class="input-field col m6 s6">
