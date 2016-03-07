@@ -69,3 +69,19 @@ function createLocation( ){
 	});
 }
 
+function emailFormSubmit( ){
+	var formData = new FormData($('#mail-modal form')[0]);
+	var formUrl = $('#mail-modal form').attr('action')
+	$.ajax({
+		url: formUrl,
+		type: 'post',
+		data: formData,
+		contentType: false,
+		processData: false,
+		dataType: 'json',
+		success: function() {
+			$('#mail-modal').closeModal();
+			Materialize.toast("Your mail has been sent!", 2000);
+		}
+	});
+}
