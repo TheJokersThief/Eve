@@ -56,8 +56,8 @@ class LocationController extends Controller
 		// Validate all input
 		$validator = Validator::make( $data, [
 					'name' => 'required',
-					'latitude' => 'required',
-					'longitude' => 'required',
+					'latitude' => 'required|numeric|between:-85.05,85.05',
+					'longitude' => 'required|numeric|between:-180,180',
 					'capacity' => 'required|numeric',
 					'featured_image' => 'image|sometimes'
 				]);
@@ -117,8 +117,8 @@ class LocationController extends Controller
 		// Validate all input
 		$validator = Validator::make( $data, [
 					'name' => 'required',
-					'latitude' => 'required',
-					'longitude' => 'required',
+					'latitude' => 'required|numeric|between:-85.05,85.05',
+					'longitude' => 'required|numeric|between:-180,180',
 					'capacity' => 'required',
 					'featured_image' => 'image|sometimes'
 				]);
