@@ -132,7 +132,7 @@
 				<div class="col s4">
 					<label for="start_time">{{_t('Start Time')}}</label>
 					<div id="start_time" class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-					    <input name="start_time" type="text" class="form-control" value="08:30">
+					    <input name="start_time" type="text" class="form-control" readonly>
 					    <span class="input-group-addon">
 					        <span class="glyphicon glyphicon-time"></span>
 					    </span>
@@ -142,7 +142,7 @@
 				<div class="col s4">
 					<label for="end_time">{{_t('End Time')}}</label>
 					<div id="end_time" class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-					    <input name="end_time" type="text" class="form-control" value="16:00">
+					    <input name="end_time" type="text" class="form-control" readonly>
 					    <span class="input-group-addon">
 					        <span class="glyphicon glyphicon-time"></span>
 					    </span>
