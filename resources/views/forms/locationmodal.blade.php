@@ -21,14 +21,6 @@
 				{!! Form::text('longitude', '-7.3740124')	!!}
 			</div>
 
-			<div class="row">
-				<div class="input-field col s12">
-					{!! Form::label('move-marker', 'Search map')!!}
-					{!! Form::text('move-marker')!!}
-				</div>
-				<div id="map" class="row col s12 center-align" style="width: 40%; height: 300px;"></div>
-			</div>
-
 			<div class="file-field input-field col m6 s12">
 				<div class="btn">
 					<span>{{_t('Feature Image')}}</span>
@@ -37,6 +29,14 @@
 				<div class="file-path-wrapper">
 					<input class="file-path validate" type="text">
 				</div>
+			</div>
+
+			<div class="row">
+				<div class="input-field col s12">
+					{!! Form::label('move-marker', 'Search map')!!}
+					{!! Form::text('move-marker')!!}
+				</div>
+				<div id="map" class="row col s12 center-align" style="width: 40%; height: 300px;"></div>
 			</div>
 		</div>
 		{!! Form::close() !!}
