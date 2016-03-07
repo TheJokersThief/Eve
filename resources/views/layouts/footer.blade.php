@@ -64,5 +64,12 @@
 	@if(session('message'))
 		<script>Materialize.toast('{!! session('message') !!}', 3000);</script>
 	@endif
-	</body>
+
+	<!-- Side Nav activation in the footer because it's not being included from the main javascript file -->
+	<script>
+		$(document).ready(function(){
+			$('.button-collapse').sideNav();
+		});
+	</script>
+</body>
 </html>
