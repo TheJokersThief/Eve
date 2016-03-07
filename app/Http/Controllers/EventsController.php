@@ -142,7 +142,6 @@ class EventsController extends Controller
 					'title'  => 'required',
 					'tagline'  => 'required',
 					'description'  => 'required',
-					'partner_id' => 'required',
 					'start_date'  => 'required',
 					'end_date'  => 'required',
 					'featured_image' => 'image',
@@ -195,9 +194,11 @@ class EventsController extends Controller
 		if( $newEvent ){
 			// Attach partners to model
 			$distance;
-			foreach($data['partner_id'] as $partner_id){
-				$distance = LocationController::getMapsMatrixDistance(Partner::find($partner_id)->location, $newEvent->location);
-				$newEvent->partners()->attach($partner_id, ['distance' => $distance]);
+			if(isset($data['partner_id']) && $data['partner_id'] != ''){
+				foreach($data['partner_id'] as $partner_id){
+					$distance = LocationController::getMapsMatrixDistance(Partner::find($partner_id)->location, $newEvent->location);
+					$newEvent->partners()->attach($partner_id, ['distance' => $distance]);
+				}
 			}
 			return Redirect::to( 'events' );
 		}
@@ -281,7 +282,6 @@ class EventsController extends Controller
 					'title'  => 'required',
 					'tagline' => 'required',
 					'description'  => 'required',
-					'partner_id' => 'required',
 					'start_date'  => 'required',
 					'end_date'  => 'required',
 					'start_time'  => 'required',
@@ -338,11 +338,12 @@ class EventsController extends Controller
 		$event->partners()->detach();
 
 		$distance;
-		foreach($data['partner_id'] as $partner_id){
-			$distance = LocationController::getMapsMatrixDistance(Partner::find($partner_id)->location, $event->location);
-			$event->partners()->attach($partner_id, ['distance' => $distance]);
+		if(isset($data['partner_id']) && $data['partner_id'] != ''){
+			foreach($data['partner_id'] as $partner_id){
+				$distance = LocationController::getMapsMatrixDistance(Partner::find($partner_id)->location, $event->location);
+				$event->partners()->attach($partner_id, ['distance' => $distance]);
+			}
 		}
-
 
 		// Save the event to the database
 		$event->save();
