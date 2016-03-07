@@ -9,38 +9,42 @@
 		<div class="container">
 			<div class="section">
 				<div class="row">
-					<div class="col s6 m4 l3">
-						<img class="responsive-img circle hide-on-small-only" src="{{$user->profile_picture}}">
-					</div>
-					<div class="col s12 m7 l8 offset-m1 offset-l1">
-						<div class="row">
-							<h3 class="col s12">{{$user->username}}</h3>
-	                        <h5 class="col s12">({{$user->name}})</h5>
-	                    </div>
-	                    <div class="row col s12">
-	                        <p class="flow-text">{{ _t($user->bio) }}</p>
-	                    </div>
+					<div class="row">
+						<div class="col s6 m4 l3">
+							<img class="responsive-img circle hide-on-small-only" src="{{$user->profile_picture}}">
+						</div>
+						<div class="col s12 m7 l8 offset-m1 offset-l1">
+							<div class="row">
+								<h3 class="col s12">{{$user->username}}</h3>
+		                        <h5 class="col s12">({{$user->name}})</h5>
+		                    </div>
+		                    <div class="row col s12">
+		                        <p class="flow-text">{{ _t($user->bio) }}</p>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="row col s12 offset-m4">
 						@unless(!Auth::check() || ! (Auth::user()->id == $user->id || Auth::user()->is_admin))
-							<div class="col s12 m6 l3">
-								<a href="{{ URL::route('user/edit', Crypt::encrypt($user->id)) }}"class="waves-effect waves-light btn col s12 m6 l3">{{_t('Edit profile')}}</a>
+							<div class="col s12 m3">
+								<a href="{{ URL::route('user/edit', Crypt::encrypt($user->id)) }}"class="waves-effect waves-light btn col s12 l10">{{_t('Edit profile')}}</a>
 							</div>
 							@if(Auth::user()->is_admin)
 								@if($user->is_admin)
-									<div class="col s12 m4 l3">
-										<a href="{{ URL::action('UserController@unsetUserAdmin', $user->id) }}"class="waves-effect waves-light red btn col s12 m4 l3">{{_t('Demote Admin')}}</a>
+									<div class="col s12 m3">
+										<a href="{{ URL::action('UserController@unsetUserAdmin', $user->id) }}"class="waves-effect waves-light red btn col s12 l10">{{_t('Demote Admin')}}</a>
 									</div>
 								@else
-									<div class="col s12 m4 l3">
-										<a href="{{ URL::action('UserController@makeUserAdmin', $user->id) }}"class="waves-effect waves-light green darken-2 btn col s12 m4 l3">{{_t('Make Admin')}}</a>
+									<div class="col s12 m3">
+										<a href="{{ URL::action('UserController@makeUserAdmin', $user->id) }}"class="waves-effect waves-light green darken-2 btn col s12 l10">{{_t('Make Admin')}}</a>
 									</div>
 								@endif
 								@if($user->is_staff)
-									<div class="col s12 m4 l3">
-										<a href="{{ URL::action('UserController@unsetUserStaff', $user->id) }}"class="waves-effect waves-light red btn col s12 m4 l3">{{_t('Demote Staff')}}</a>
+									<div class="col s12 m3">
+										<a href="{{ URL::action('UserController@unsetUserStaff', $user->id) }}"class="waves-effect waves-light red btn col s12 l10">{{_t('Demote Staff')}}</a>
 									</div>
 								@else
-									<div class="col s12 m4 l3">
-										<a href="{{ URL::action('UserController@makeUserStaff', $user->id) }}"class="waves-effect waves-light green darken-2 btn col s12 m4 l3">{{_t('Make Staff')}}</a>
+									<div class="col s12 m3">
+										<a href="{{ URL::action('UserController@makeUserStaff', $user->id) }}"class="waves-effect waves-light green darken-2 btn col s12 l10">{{_t('Make Staff')}}</a>
 									</div>
 								@endif
 							@endif
