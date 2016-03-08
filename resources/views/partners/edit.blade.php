@@ -115,7 +115,7 @@ selected
 			</div>
 		{!! Form::close() !!}
 		{{ Form::open(['route' => ['partners.destroy', Crypt::encrypt($partner->id)], 'method' => 'delete', 'class' => 'inline-form']) }}
-		<button type="submit" class="waves-effect waves-light btn deep-orange accent-4 tooltipped" data-position="top" data-tooltip="{{_t('Be careful! This action can't be undone!')}}" >{{_t("Delete Partner")}}</button>
+		<button type="submit" class="waves-effect waves-light btn deep-orange accent-4 tooltipped" data-position="top" data-tooltip="{{_t('Be careful! This action can\'t be undone!')}}" >{{_t("Delete Partner")}}</button>
 		{{ Form::close() }}
 	</div>
 </main>
