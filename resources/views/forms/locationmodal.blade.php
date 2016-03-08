@@ -42,7 +42,7 @@
 		{!! Form::close() !!}
 	</div>
 	<div class="modal-footer">
-		<a href="#!" class="orange-text modal-action waves-effect waves-green btn-flat" onClick="createLocation()">{{_t('Create')}}</a>
+		<a href="#!" id="submitButton" class="orange-text modal-action waves-effect waves-green btn-flat" onClick="createLocation()">{{_t('Create')}}</a>
 		<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" onClick="$('#location-select').val('');$('#location-select').material_select();">{{_t('Cancel')}}</a>
 	</div>
 </div>
