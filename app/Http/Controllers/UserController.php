@@ -44,7 +44,7 @@ class UserController extends Controller
 	 * 	Data should be POSTed to this function only
 	 * @return REDIRECT home
 	 */
-	public function store( ){
+	public function store( Request $request ){
 		// Only allow following fields to be submitted
 		$data = Request::only( [
 					'name',
@@ -72,7 +72,7 @@ class UserController extends Controller
 					'name'  => 'required',
 					'email'     => 'email|required|unique:users',
 					'password'  => 'required|confirmed|min:5',
-                    'username'  => 'required|min:4'
+                    'username'  => 'required|unique:users|min:4'
 				]);
 
 		if( $validator->fails( ) ){
@@ -82,6 +82,9 @@ class UserController extends Controller
 					->withErrors( $validator )
 					->withInput( );
 		}
+
+		$data['language'] = $request->hasCookie( 'locale' ) ? $request->cookie('locale') : 'en';
+
 
 		$newUser = createUser( $data );
 
