@@ -1,7 +1,7 @@
 <div id="locationForm" class="modal bottom-sheet">
 	<div class="modal-content">
 		<h4>{{_t('Create New Location')}}</h4>
-		<ul id="location-errors"></ul>
+		<ul id="location-errors" class="red white-text"></ul>
 		{!! Form::open( ['route' => 'events.store', 'files' => true] ) !!}
 		<div class="row">
 			<div class="input-field col m6 s12">
