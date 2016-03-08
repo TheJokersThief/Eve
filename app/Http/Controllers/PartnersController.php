@@ -12,7 +12,7 @@ use App\Location;
 use App\Event;
 use Redirect;
 use DB;
-use LocationController;
+// use LocationController;
 
 use Crypt;
 use Validator;
