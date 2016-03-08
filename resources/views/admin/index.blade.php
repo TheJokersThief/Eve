@@ -193,7 +193,7 @@
 			<div class="row scrollspy" id="staff" name="staff">
 				<ul class="collection with-header">
 					<li class="collection-header">
-						<a href="#!" class="waves-effect waves-light btn right add-new-button col s12 m6 l4"><i class="fa fa-plus left"></i>{{_t('Add New Staff')}}</a>
+						<!-- <a href="#!" class="waves-effect waves-light btn right add-new-button col s12 m6 l4"><i class="fa fa-plus left"></i>{{_t('Add New Staff')}}</a> -->
 						<h4>{{_t('Staff')}}</h4>
 					</li>
 
