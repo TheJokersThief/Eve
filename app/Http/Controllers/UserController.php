@@ -202,7 +202,7 @@ class UserController extends Controller
 		];
 
 		if( $user->facebook_id == $user->username ){
-			$validatorData["username"] = "required|alpha_num";
+			$validatorData["username"] = "required|alpha_num|unique:users";
 		}
 
 		if ( $data['username'] == '' ){
