@@ -53,6 +53,8 @@ function createLocation( ){
         data: formData,
 		success: function(data) {
 			if( data.errors ){
+				// Clear any previous errors
+				$('#location-errors li').remove();
 				// If we have validation errors, display them
 				data.errors.forEach( function( error ){
 					$('#location-errors').append('<li>'+error+'</li>');

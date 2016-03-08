@@ -32,6 +32,13 @@
 			});
 
 			initEvents();
+
+			// Scroll to top of modal to view errors
+			$("#submitButton").click(function(){
+				setTimeout(function(){
+					$('#locationForm').scrollTop(0);
+				}, 1000);
+			});
 		});
 	</script>
 @endsection

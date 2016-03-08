@@ -1,7 +1,7 @@
 <div id="locationForm" class="modal bottom-sheet">
 	<div class="modal-content">
 		<h4>{{_t('Create New Location')}}</h4>
-		<ul id="location-errors"></ul>
+		<ul id="location-errors" class="red white-text"></ul>
 		{!! Form::open( ['route' => 'events.store', 'files' => true] ) !!}
 		<div class="row">
 			<div class="input-field col m6 s12">
@@ -42,7 +42,7 @@
 		{!! Form::close() !!}
 	</div>
 	<div class="modal-footer">
-		<a href="#!" class="orange-text modal-action waves-effect waves-green btn-flat" onClick="createLocation()">{{_t('Create')}}</a>
+		<a href="#!" id="submitButton" class="orange-text modal-action waves-effect waves-green btn-flat" onClick="createLocation()">{{_t('Create')}}</a>
 		<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" onClick="$('#location-select').val('');$('#location-select').material_select();">{{_t('Cancel')}}</a>
 	</div>
 </div>
