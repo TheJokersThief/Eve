@@ -193,7 +193,7 @@
 											</h2>
 											<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 													data-key="{{env('STRIPE_KEY')}}"
-													data-image="{{URL::to('/images/logo.png')}}"
+													data-image="{{URL::to('/images/logo_apple.png')}}"
 													data-description="{{$event->title}}"
 													data-amount="{{$event->price * 100}}"
 													data-locale="auto"
