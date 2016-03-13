@@ -23,6 +23,9 @@ rm index.html
 
 # Install the application
 composer install
+# Generate a unique application key
+php artisan key:generate
+# Install our NPM dependencies locally
 npm install gulp laravel-elixir
 
 if [ ! -d "/var/www/vendor" ]; then
