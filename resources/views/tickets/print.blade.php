@@ -127,7 +127,7 @@
 				<p>{{ strip_tags(str_limit( _t($ticket->event->description), 300 ))}}</p>
 			</div>
 			<div id="map">
-				<img src="https://maps.googleapis.com/maps/api/staticmap?center={{ $ticket->event->location->latitude }},{{ $ticket->event->location->longitude }}&zoom=15&size=300x300&markers=color:red%7C{{ $ticket->event->location->latitude }},{{ $ticket->event->location->longitude }}&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o">{{-- Update this in a later commit to use the key in the env, Possibly a secured key that is usable by only one server --}}
+				<img src="https://maps.googleapis.com/maps/api/staticmap?center={{ $ticket->event->location->latitude }},{{ $ticket->event->location->longitude }}&zoom=15&size=300x300&markers=color:red%7C{{ $ticket->event->location->latitude }},{{ $ticket->event->location->longitude }}&key={{ env('GOOGLE_API_KEY') }}">{{-- TODO --}}
 			</div>
 			<div id="qr">
 				{!! $ticket->qr() !!}

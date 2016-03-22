@@ -8,10 +8,7 @@
   </head>
   <body>
     <div id="map"></div>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKOjys2eW4gpc3KmoBlVOjQ-SqHWgyvwI
-        &libraries=visualization&callback=initMap">
-    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=visualization&callback=initMap"></script>{{-- TODO --}}
     <script src="map.js"> </script>
   </body>
 </html>
