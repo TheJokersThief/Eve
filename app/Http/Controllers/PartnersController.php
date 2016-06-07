@@ -229,7 +229,8 @@ class PartnersController extends Controller
 		$result = json_decode( file_get_contents('https://maps.googleapis.com/maps/api/place/nearbysearch/output?json&location='
 									. $latitude . ','
 									. $longitude
-									. '&radius=500&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o'), true );
+									. '&radius=500&key='
+									. env('GOOGLE_API_KEY') ), true );
 
 		$returnResult = [];
 
@@ -259,7 +260,8 @@ class PartnersController extends Controller
 		//Find from google places
 		$result = file_get_contents('https://maps.googleapis.com/maps/api/place/details/json?placeid='
 									. $placeID
-									. '&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o');
+									. '&key='
+									. env('GOOGLE_API_KEY') );
 
 		//store the location (call location.createLocationForPlace( $longitude, $latitude, $title ))
 
@@ -278,14 +280,6 @@ class PartnersController extends Controller
 
 		$url = isset($result['result']['website']) ? $result['result']['website'] : "";
 		$type = isset($result['result']['types'][0]) ? $result['result']['types'][0] : "";
-
-		//Create new photo?
-		//https://maps.googleapis.com/maps/api/place/photo?photoreference=CmRcAAAAZw9XPwA2umHBbeRdWLRYE8LzOuqZ6fvLdMayjX6JDZ3NMH3YZ0GvSYX-ONy6m2-J-NG9C05OfZHQBMyJoiVSXEEyjoKsBauT23e8-S9REhdogQgP3MLfYRaRZPIpLr2iEhAoculQNM5RaF_9lTHoM5htGhS022Frq-fLwPlLIRbk_UaBLwS6QA&maxwidth=1600&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o
-		//$photo = file_get_contents('https://maps.googleapis.com/maps/api/place/photo?photoreference='
-		//							. $result['result']['photos']['photo_reference']
-		//							. '&maxwidth=1600'
-		//							. '&key=AIzaSyB17PgysQ3erA1N2uSJ-xaj7bS9dxyOW9o');
-		//file_put_contents( URL::to('/').'partner_image'.$placeID, $photo); //plz help, @colm2
 
 		$newData = array(
 				"name" => $title,
