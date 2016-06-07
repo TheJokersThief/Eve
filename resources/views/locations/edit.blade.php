@@ -3,7 +3,7 @@
 @section('body-class') locations @endsection
 @section('title') {{_t('Edit:')}} {{$item->name}} @endsection
 @section('extra-js')
-<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places"></script> {{-- TODO --}}
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places"></script> 
 <script type="text/javascript">
   $(document).ready(function(){
   	  //initialise map

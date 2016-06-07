@@ -11,7 +11,7 @@
 
 @section('extra-js')
 	<script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places"></script> {{!! Can't test this at the moment, a little worried about this line !!}} {{-- TODO --}}
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.clockpicker').clockpicker({

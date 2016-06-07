@@ -127,7 +127,7 @@
 				<p>{{ strip_tags(str_limit( _t($ticket->event->description), 300 ))}}</p>
 			</div>
 			<div id="map">
-				<img src="https://maps.googleapis.com/maps/api/staticmap?center={{ $ticket->event->location->latitude }},{{ $ticket->event->location->longitude }}&zoom=15&size=300x300&markers=color:red%7C{{ $ticket->event->location->latitude }},{{ $ticket->event->location->longitude }}&key={{ env('GOOGLE_API_KEY') }}">{{-- TODO --}}
+				<img src="https://maps.googleapis.com/maps/api/staticmap?center={{ $ticket->event->location->latitude }},{{ $ticket->event->location->longitude }}&zoom=15&size=300x300&markers=color:red%7C{{ $ticket->event->location->latitude }},{{ $ticket->event->location->longitude }}&key={{ env('GOOGLE_API_KEY') }}">
 			</div>
 			<div id="qr">
 				{!! $ticket->qr() !!}
