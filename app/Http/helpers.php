@@ -44,6 +44,6 @@ function signMapsRequest( $URL, $signingSecret ){
 	$signature = hash_hmac("sha1", $pathAndQuery, $base64Secret);
 	$urlSafeSignature = str_replace($b64Array, $urlArray, $signature);
 
-	return $URL . "&signature=" . $urlSafeSignature
+	return $URL . "&signature=" . $urlSafeSignature;
 }
 ?>
