@@ -96,7 +96,7 @@
 					</div>
 
 					<div class="input-field col m6 s12">
-						{!! Form::label('name',_t('Full N)ame')									!!}
+						{!! Form::label('name',_t('Full Name'))									!!}
 						{!! Form::text('name')	!!}
 					</div>
 
