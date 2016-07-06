@@ -42,8 +42,8 @@ Vagrant.configure(2) do |config|
     sudo service mysql restart
 
     # Update laravel and create all the DB tables
-    sudo chmod +x /var/www/install/install.sh
-    sudo /var/www/install/install.sh
+    sudo chmod +x /var/www/install.sh
+    sudo /var/www/install.sh
 
   SHELL
 end
