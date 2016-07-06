@@ -118,9 +118,6 @@
 	</div>
 </div>
 <script
-    src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}
-        &libraries=visualization">
-    }
-    }
+    src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}">
 </script>
 @endsection
