@@ -4,7 +4,7 @@
 @section('title') {{_t($event->title)}} @endsection
 
 @section('extra-js')
-	<script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
+	<script src="https://unpkg.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function( ){
 			initDropzone( );
